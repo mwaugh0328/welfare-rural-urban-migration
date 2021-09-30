@@ -166,11 +166,7 @@ for zzz = 1:n_shocks
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     policy_assets_rural_not(:,zzz,:) = [ p_asset_stay_rural_not , p_asset_move_seasn_not , p_asset_move_rural_not ];
-           
-    %[v_expr_rural_not(:,zzz), policy_move_rural_not(:,zzz)] = max([ v_stay_rural_not , v_move_seasn_not, v_move_rural_not],[],2) ;
-
-    %policy_assets_rural_not(:,zzz) = diag(p_asset_stay_rural_all_not(:, policy_move_rural_not(:,zzz)));
-    
+               
     vfoo = max([v_stay_rural_not, v_move_seasn_not, v_move_rural_not],[],2);
     
     pi_rural_not = exp(([v_stay_rural_not, v_move_seasn_not, v_move_rural_not] - vfoo)./sigma_nu_not);
@@ -181,19 +177,6 @@ for zzz = 1:n_shocks
     
     policy_move_rural_not(:,zzz,:) = cumsum(pi_rural_not./pi_denom_rural_not,2);
     
-%     problem = isinf(v_expr_rural_not(:,zzz));
-%     
-%     if sum(problem) > 0
-%         %disp('yes')
-%         [v_expr_rural_not(problem,zzz), policy] = max([ v_stay_rural_not(problem) , v_move_seasn_not(problem) , v_move_rural_not(problem)],[],2) ;
-%     
-%       pi_rural_not(problem,policy) = 1;
-%      
-%       pi_denom_rural_not = sum(pi_rural_not,2);
-%     end
-    
-    
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This part asks, what is the value IF EXPERINCE WAS GIVEN, holding fixed
@@ -262,8 +245,6 @@ for zzz = 1:n_shocks
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     policy_assets_rural_exp(:,zzz,:) = [ p_asset_stay_rural_exp , p_asset_move_seasn_exp , p_asset_move_rural_exp ];
-           
-    %[v_expr_rural_exp(:,zzz), policy_move_rural_exp(:,zzz)] = max([ v_stay_rural_exp , v_move_seasn_exp, v_move_rural_exp],[],2) ;
     
     vfoo = max([v_stay_rural_exp, v_move_seasn_exp, v_move_rural_exp], [], 2);
     
@@ -275,19 +256,6 @@ for zzz = 1:n_shocks
     
     policy_move_rural_exp(:,zzz,:)  = cumsum(pi_rural_exp./pi_denom_rural_exp, 2);
     
-%     problem = isinf(v_expr_rural_exp(:,zzz));
-%     
-%     if sum(problem) > 0
-%         %disp('yes')
-%         [v_expr_rural_not(problem,zzz), policy] = max([ v_stay_rural_exp(problem) , v_move_seasn_exp(problem) , v_move_rural_exp(problem)],[],2) ;
-%     
-%       pi_rural_exp(problem,policy) = 1;
-%      
-%       pi_denom_rural_exp = sum(pi_rural_exp,2);
-%     end
-    
-    %v_expr_rural_exp(:,zzz) = (1./pi_denom_rural_exp).*(pi_stay_rural_exp.*v_stay_rural_exp + pi_move_seasn_exp.*v_move_seasn_exp + pi_move_rural_exp.*v_move_rural_exp);
-
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
