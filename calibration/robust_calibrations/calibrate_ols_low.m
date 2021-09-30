@@ -8,23 +8,22 @@ warning('off','stats:regress:RankDefDesignMat');
 aggregate_moments = [1.89, 0.61, 0.625, 0.47];
 
 %%% Description:
-% Wage gap
-% The rural share
-% The urban variance... note that this is position number 3 (see below)
-% Fraction with no liquid assets
+% (1) Wage gap
+% (2) The rural share
+% (3) The urban variance... note that this is position number 3 (see below)
+% (4) Fraction with no liquid assets
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Experiment Moments...
 
-experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.15, 0.40];
-% The experiment hybrid is a combination of conrol and experiment...
-% seasonal migration in control
-% increase in r1 (22 percent)
-% increase in r2 (9.2 percent)
-% LATE estiamte
-% **************** OLS = 0.15 *********************************************
-% Standard deviation of consumption growth. See line 400 in
-% ``compute_outcomes.``
+experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.15, 0.25/0.36, 0.40];
+% (6) seasonal migration in control
+% (7) increase in r1 (22 percent)
+% (8) increase in r2 (9.2 percent)
+% (9) LATE estiamte
+% (10) OLS estimate
+% (11) Control repeat migration rate 
+% (12) Standard deviation of consumption growth. 
 
 moments = [aggregate_moments, experiment_hybrid];
 

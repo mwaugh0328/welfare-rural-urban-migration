@@ -430,17 +430,23 @@ frac_no_assets = 0.95*(sum(control_data(:,3,1) == params.asset_space(1)))/sum(ru
 
 aggregate_moments = [m_income(2)./m_income(1), avg_rural, var_income(2), frac_no_assets];
 
-experiment_hybrid = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, std_cons_growth];
+experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, control_migration_cont_y2./temp_migration, std_cons_growth];
 
-targets = [aggregate_moments, experiment_hybrid] ;
+% (1) Wage gap
+% (2) The rural share
+% (3) The urban variance... note that this is position number 3 (see below)
+% (4) Fraction with no liquid assets
+% (6) seasonal migration in control
+% (7) increase in r1 (22 percent)
+% (8) increase in r2 (9.2 percent)
+% (9) LATE estiamte
+% (10) OLS estimate
+% (11) Control repeat migration rate 
+% (12) Standard deviation of consumption growth. 
 
-% experiment_moments = [migration_elasticity, migration_elasticity_y2, LATE];
-% 
-% control_moments = [temp_migration, control_migration_cont_y2, control_migration_cont_y3, OLS, var_consumption_no_migrate_control];
-% 
-% experiment_hybrid_v2 = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS,...
-%     control_migration_cont_y2./temp_migration, var_cons_growth];
-%
+
+targets = [aggregate_moments, experiment_moments] ;
+
 % experiment_hybrid_v3 = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, params.m_season./mean(AVG_C), var_cons_growth];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
