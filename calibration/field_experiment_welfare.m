@@ -177,7 +177,9 @@ for zzz = 1:n_shocks
         
     pi_denom_rural_not = sum(pi_rural_not,2);
     
-    v_expr_rural_not(:,zzz) = sigma_nu_not.*log(pi_denom_rural_not.*exp(vfoo./sigma_nu_not));
+    v_expr_rural_not(:,zzz) = sigma_nu_not.*log(pi_denom_rural_not) + vfoo;
+    
+    policy_move_rural_not(:,zzz,:) = cumsum(pi_rural_not./pi_denom_rural_not,2);
     
 %     problem = isinf(v_expr_rural_not(:,zzz));
 %     
@@ -190,7 +192,7 @@ for zzz = 1:n_shocks
 %       pi_denom_rural_not = sum(pi_rural_not,2);
 %     end
     
-    policy_move_rural_not(:,zzz,:) = cumsum(pi_rural_not./pi_denom_rural_not,2);
+    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -267,11 +269,11 @@ for zzz = 1:n_shocks
     
     pi_rural_exp = exp(([v_stay_rural_exp, v_move_seasn_exp, v_move_rural_exp] - vfoo)./sigma_nu_exp);
         
-    pi_denom_rural_exp = sum(pi_rural_exp,2);
+    pi_denom_rural_exp = sum(pi_rural_exp, 2);
     
-    v_expr_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp.*exp(vfoo./sigma_nu_exp));
+    v_expr_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp) + vfoo;
     
-    policy_move_rural_exp(:,zzz,:)  = cumsum(pi_rural_exp./pi_denom_rural_exp,2);
+    policy_move_rural_exp(:,zzz,:)  = cumsum(pi_rural_exp./pi_denom_rural_exp, 2);
     
 %     problem = isinf(v_expr_rural_exp(:,zzz));
 %     

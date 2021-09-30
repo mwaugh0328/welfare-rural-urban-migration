@@ -152,7 +152,7 @@ for zzz = 1:n_shocks
 end
 
     
-v_old_rural_not = -1.0.*ones(size(v_prime_rural_not))/(1-beta);
+v_old_rural_not = 0.*ones(size(v_prime_rural_not))/(1-beta);
 v_old_rural_exp = v_old_rural_not;
 
 v_old_seasn_not = v_old_rural_not;
@@ -333,13 +333,14 @@ for iter = 1:n_iterations
     
     % Then you compute the sum across this.
     
-    pi_denom_rural_not = sum(pi_rural_not,2).*exp(vfoo./sigma_nu_not);
+    pi_denom_rural_not = sum(pi_rural_not, 2);
     
     % Here is the deal. The expected value function, is sigma*log( sum
     % exp(v/sigma)). Why? This is the expected value over the best option
     % and with the logit shocks it takes a simple form.
     
-    v_prime_rural_not(:,zzz) = sigma_nu_not.*log(pi_denom_rural_not);
+    v_prime_rural_not(:,zzz) = sigma_nu_not.*log(pi_denom_rural_not) + vfoo;
+    % this comes from the normalization on probabilities above
     
     %Sometimes there is an issue here the value above is not well
     %defined...then the seleciton is just on the best. IT handles
@@ -358,9 +359,9 @@ for iter = 1:n_iterations
     
     pi_rural_exp = exp(([v_stay_rural_exp, v_move_seasn_exp, v_move_rural_exp] - vfoo)./sigma_nu_exp);
         
-    pi_denom_rural_exp = sum(pi_rural_exp,2).*exp(vfoo./sigma_nu_not);
+    pi_denom_rural_exp = sum(pi_rural_exp, 2);
     
-    v_prime_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp);
+    v_prime_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp) + vfoo;
     
 %     problem = isinf(v_prime_rural_exp(:,zzz));
 %     
@@ -376,9 +377,9 @@ for iter = 1:n_iterations
     
     pi_urban_new = exp(([v_stay_urban_new, v_move_urban_new] - vfoo)./sigma_nu_not);
    
-    pi_denom_urban_new = sum(pi_urban_new,2).*exp(vfoo./sigma_nu_not);
+    pi_denom_urban_new = sum(pi_urban_new, 2, 'omitnan');
     
-    v_prime_urban_new(:,zzz) = sigma_nu_not.*log(pi_denom_urban_new);
+    v_prime_urban_new(:,zzz) = sigma_nu_not.*log(pi_denom_urban_new) + vfoo;
     
 %     problem = isinf(v_prime_urban_new(:,zzz));
 %     
@@ -394,9 +395,9 @@ for iter = 1:n_iterations
     
     pi_urban_old = exp(([v_stay_urban_old, v_move_urban_old] - vfoo)./sigma_nu_exp);
        
-    pi_denom_urban_old = sum(pi_urban_old, 2).*exp(vfoo./sigma_nu_exp);
+    pi_denom_urban_old = sum(pi_urban_old, 2, 'omitnan');
     
-    v_prime_urban_old(:,zzz) = sigma_nu_exp.*log(pi_denom_urban_old);
+    v_prime_urban_old(:,zzz) = sigma_nu_exp.*log(pi_denom_urban_old) + vfoo;
     
 %     problem = isinf(v_prime_urban_old(:,zzz));
     
@@ -431,10 +432,9 @@ for iter = 1:n_iterations
     
     urban_old = norm(v_old_urban_old - v_prime_urban_old,Inf);
     
-    if rural_not && ...
-       rural_exp && ...     
-       urban_new && ...
-       urban_old < tol
+    mxtol = max([rural_not, rural_exp, urban_new, urban_old]);
+    
+    if mxtol < tol
 %         disp('value function converged')
 %         disp(toc)
 %         disp(iter)
@@ -458,10 +458,7 @@ for iter = 1:n_iterations
 
 end
 
-if rural_not && ...
-       rural_exp  && ...     
-       urban_new && ...
-       urban_old > tol
+if mxtol > tol
     disp('value function did not converge')
 end
 
@@ -628,13 +625,11 @@ for zzz = 1:n_shocks
     
     % Then you compute the sum across this.
     
-    pi_denom_rural_not = sum(pi_rural_not,2);
+    pi_denom_rural_not = sum(pi_rural_not, 2, 'omitnan');
     
-    v_prime_rural_not(:,zzz) = sigma_nu_not.*log(pi_denom_rural_not.*exp(vfoo./sigma_nu_not));
+    v_prime_rural_not(:,zzz) = sigma_nu_not.*log(pi_denom_rural_not) + vfoo;
     
-    policy_move_rural_not(:,zzz,:) = cumsum(pi_rural_not./pi_denom_rural_not,2);
-    
-    policy_move_rural_not(:,zzz,:) = cumsum(pi_rural_not./pi_denom_rural_not,2);
+    policy_move_rural_not(:,zzz,:) = cumsum(pi_rural_not./pi_denom_rural_not, 2, 'omitnan');
     
 %     pi_rural_not = exp([v_stay_rural_not, v_move_seasn_not, v_move_rural_not]./sigma_nu_not);
 %         
@@ -659,11 +654,11 @@ for zzz = 1:n_shocks
     
     pi_rural_exp = exp(([v_stay_rural_exp, v_move_seasn_exp, v_move_rural_exp] - vfoo)./sigma_nu_exp);
         
-    pi_denom_rural_exp = sum(pi_rural_exp,2);
+    pi_denom_rural_exp = sum(pi_rural_exp, 2, 'omitnan');
     
-    v_prime_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp.*exp(vfoo./sigma_nu_not));
+    v_prime_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp) + vfoo;
     
-    policy_move_rural_exp(:,zzz,:)  = cumsum(pi_rural_exp./pi_denom_rural_exp,2);
+    policy_move_rural_exp(:,zzz,:)  = cumsum(pi_rural_exp./pi_denom_rural_exp, 2, 'omitnan');
                   
 %     pi_rural_exp = exp([v_stay_rural_exp, v_move_seasn_exp, v_move_rural_exp]./sigma_nu_exp);
 %         
@@ -690,9 +685,9 @@ for zzz = 1:n_shocks
    
     pi_denom_urban_new = sum(pi_urban_new,2);
     
-    v_prime_urban_new(:,zzz) = sigma_nu_not.*log(pi_denom_urban_new.*exp(vfoo./sigma_nu_not));
+    v_prime_urban_new(:,zzz) = sigma_nu_not.*log(pi_denom_urban_new) + vfoo;
     
-    policy_move_urban_new(:,zzz,:) = cumsum(pi_urban_new./pi_denom_urban_new,2);
+    policy_move_urban_new(:,zzz,:) = cumsum(pi_urban_new./pi_denom_urban_new, 2, 'omitnan');
     
 %     pi_urban_new = exp([v_stay_urban_new, v_move_urban_new]./sigma_nu_not);
 %    
@@ -719,11 +714,11 @@ for zzz = 1:n_shocks
     
     pi_urban_old = exp(([v_stay_urban_old, v_move_urban_old] - vfoo)./sigma_nu_exp);
        
-    pi_denom_urban_old = sum(pi_urban_old, 2);
+    pi_denom_urban_old = sum(pi_urban_old, 2, 'omitnan');
     
-    v_prime_urban_old(:,zzz) = sigma_nu_exp.*log(pi_denom_urban_old.*exp(vfoo./sigma_nu_exp));
+    v_prime_urban_old(:,zzz) = sigma_nu_exp.*log(pi_denom_urban_old) + vfoo;
     
-    policy_move_urban_old(:,zzz,:) = cumsum(pi_urban_old./pi_denom_urban_old, 2);
+    policy_move_urban_old(:,zzz,:) = cumsum(pi_urban_old./pi_denom_urban_old, 2, 'omitnan');
     
 %     pi_urban_old = exp([v_stay_urban_old, v_move_urban_old]./sigma_nu_exp);
 %        
