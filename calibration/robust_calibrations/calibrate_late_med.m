@@ -4,6 +4,7 @@ addpath('../../utils')
 warning('off','stats:regress:RankDefDesignMat');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % these are the baseline moments:
 aggregate_moments = [1.89, 0.61, 0.625, 0.47];
 
@@ -16,15 +17,19 @@ aggregate_moments = [1.89, 0.61, 0.625, 0.47];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Experiment Moments...
 
-experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.15, 0.40];
+experiment_hybrid = [0.36, 0.22, 0.092, 0.20, 0.10, 0.40];
 % The experiment hybrid is a combination of conrol and experiment...
 % seasonal migration in control
 % increase in r1 (22 percent)
 % increase in r2 (9.2 percent)
-% LATE estiamte
-% **************** OLS = 0.15 *********************************************
+% ************************* LATE = 0.20 ***********************************
+% OLS estimate
 % Standard deviation of consumption growth. See line 400 in
 % ``compute_outcomes.``
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 moments = [aggregate_moments, experiment_hybrid];
 

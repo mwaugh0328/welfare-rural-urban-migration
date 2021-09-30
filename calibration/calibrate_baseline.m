@@ -2,6 +2,7 @@ clc; clear;
 close all
 
 warning('off','stats:regress:RankDefDesignMat');
+addpath('../utils')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % these are the baseline moments:

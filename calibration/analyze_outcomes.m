@@ -11,6 +11,8 @@ function [targets, wages] = analyze_outcomes(cal_params, specs, wages, meanstest
 % be common to all code. So one place is changed all other code will
 % inherti the change...
 
+addpath('../utils')
+
 if isempty(specs)
     [cal_params, specs] = preamble(cal_params, [],R);
 else
