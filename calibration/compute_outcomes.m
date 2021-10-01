@@ -430,7 +430,7 @@ frac_no_assets = 0.95*(sum(control_data(:,3,1) == params.asset_space(1)))/sum(ru
 
 aggregate_moments = [m_income(2)./m_income(1), avg_rural, var_income(2), frac_no_assets];
 
-experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, control_migration_cont_y2./temp_migration, std_cons_growth];
+experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, control_migration_cont_y2./temp_migration, params.m_season./mean(AVG_C), std_cons_growth];
 
 % (1) Wage gap
 % (2) The rural share
