@@ -13,9 +13,9 @@ function [cal_params, specs] = preamble(cal_params, specs, R)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Then there are some pre-determined, hand calibrated values...
 
-cal_params(10) = 0.08; % this is the moving cost. It was hand calibrated to 
-% deliver it being approx 10% of half yearly consumption. Did try internal
-% calibration...does provide better fit actually.
+% cal_params(10) = 0.08; % this is the moving cost. It was hand calibrated to 
+% % deliver it being approx 10% of half yearly consumption. Did try internal
+% % calibration...does provide better fit actually.
 
 cal_params(11) = 0.55; % This is the seasonal shock. Again, hand calibrated
 % to approx match the large drop in income and consumption in Monga from
@@ -53,9 +53,10 @@ if isempty(specs)
     %specs.asset_space = linspace(0,2,100); % this is the equally spaced grid
 
     specs.n_perm_shocks = 24;
-    specs.n_trans_shocks = 7;
+    specs.n_trans_shocks = 5;
 
     specs.time_series = 100000; % length of the time series for each perm type
     specs.N_obs = 25000; % grab last number of observations
     specs.n_sims = 10000; % given the pannel above how many times to sample for experiment
+    
 end
