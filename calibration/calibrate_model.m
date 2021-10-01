@@ -10,6 +10,7 @@ function theta = calibrate_model(cal_params,moments,specs,flag)
 % 7: Losing it. (TO DO, veryify the 6 and 7 is correct rel. paper)
 % 8: Gamma parameter in shock process
 % 9: Logit shocks
+% 10: Seasonal migration cost
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [yyy] = compute_outcomes(cal_params, specs,0);
