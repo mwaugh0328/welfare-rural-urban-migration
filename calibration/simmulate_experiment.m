@@ -183,6 +183,10 @@ if location(xxx) == 3 % in rural area
         location(xxx+1) = location(xxx);
                     
         if expr_shock(xxx) < (1-pi_prob)
+            
+            location(xxx+1) = 1; % loose experince
+            % then check if they are moving and adjust. 
+            
             if move_seasn(xxx,1) == 1 
                 location(xxx+1,1) = 2;  
                 move_cost(xxx,1) = 0; % Mushfiq paid this!
@@ -279,6 +283,10 @@ for xxx = 2:length(shock_states)
         location(xxx+1) = location(xxx);
         
         if expr_shock(xxx) < (1-pi_prob)
+            
+            location(xxx+1) = 1; % loose experince
+            % then check if they are moving and adjust. 
+            
             if move_seasn(xxx,1) == 1 
                 location(xxx+1,1) = 2;  
                 move_cost(xxx,1) = m_seasn;

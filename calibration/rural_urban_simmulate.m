@@ -21,7 +21,7 @@ move_fiscal_cost = m_seasn - mtest_move_cost;
 
 lambda = params.lambda;
 
-pi = params.pi_prob;
+pi_prob = params.pi_prob;
 
 r_shocks = params.trans_shocks(:,1);
 u_shocks = params.trans_shocks(:,2);
@@ -161,20 +161,27 @@ for xxx = 1:time_series
         
         location(xxx+1) = location(xxx);
         
-        if expr_shock(xxx) < (1-pi)
+        if expr_shock(xxx) < (1-pi_prob)
+            
+            location(xxx+1) = 1; % loose experince
+            % then check if they are moving and adjust. 
+            
             if move_seasn(xxx,1) == 1 
                 location(xxx+1,1) = 2; %Non experinced season (you lost it)
                 move_cost(xxx,1) = mtest_move_cost(asset_state);
                 fiscal_cost(xxx,1) = move_fiscal_cost(asset_state);
+                
             elseif move(xxx,1) == 1
                 location(xxx+1) = 5; % non experinces perm moves (you lost it)
                 move_cost(xxx,1) = m;
             end
+            
         else 
             if move_seasn(xxx,1) == 1 
                 location(xxx+1,1) = 4; % retain experince, season move
                 move_cost(xxx,1) = mtest_move_cost(asset_state);
                 fiscal_cost(xxx,1) = move_fiscal_cost(asset_state);
+                
             elseif move(xxx,1) == 1
                 location(xxx+1) = 6; % retain experince perm move.
                 move_cost(xxx,1) = m;

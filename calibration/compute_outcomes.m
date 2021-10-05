@@ -139,7 +139,7 @@ N_obs = specs.N_obs; %25000;
 
 params.N_obs = N_obs;
 
-rng(03281978)
+rng(03281978 + specs.seed)
 
 [~, shock_states_p] = hmmgenerate(time_series,params.trans_mat,ones(params.n_shocks));
 
@@ -228,6 +228,8 @@ monga = periods(rem(periods,2)==0)-1;
 pref_shocks = pref_shocks((N_obs+1):end,:);
 move_shocks = move_shocks((N_obs+1):end,:);
 
+fooseed = specs.seed;
+
 parfor xxx = 1:n_types     
        
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -239,7 +241,7 @@ parfor xxx = 1:n_types
     % provides the asset policy conditional on a temporary move. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 
-    rng(02071983+xxx)
+    rng(02071983 + fooseed + xxx)
     
     monga_index = monga(randi(length(monga),1,n_sims))';
 
@@ -430,7 +432,7 @@ frac_no_assets = 0.95*(sum(control_data(:,3,1) == params.asset_space(1)))/sum(ru
 
 aggregate_moments = [m_income(2)./m_income(1), avg_rural, var_income(2), frac_no_assets];
 
-experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, LATE - OLS, control_migration_cont_y2./temp_migration, params.m_season./mean(AVG_C), std_cons_growth];
+experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, control_migration_cont_y2./temp_migration, params.m_season./mean(AVG_C), std_cons_growth];
 
 % (1) Wage gap
 % (2) The rural share

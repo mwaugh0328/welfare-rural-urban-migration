@@ -60,4 +60,6 @@ if isempty(specs)
     specs.N_obs = 25000; % grab last number of observations
     specs.n_sims = 10000; % given the pannel above how many times to sample for experiment
     
+    specs.seed = 0;
+    
 end

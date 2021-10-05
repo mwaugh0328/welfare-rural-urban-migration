@@ -297,6 +297,7 @@ for iter = 1:n_iterations
 
     value_fun = bsxfun(@plus, (utility_urban(:,:,zzz).*ubar) , ...
         (lambda.*expected_value_urban_new + (1-lambda).*expected_value_urban_old) );
+   
         
     [v_stay_urban_new, ~] = max(value_fun,[],2);
     
@@ -565,8 +566,6 @@ for zzz = 1:n_shocks
 % urban area because I'm moving out the rural area and I become a OLD
 % GUY...because I have EXPERIENCE
 
-% SETTING THIS TO CHECK IF COLLAPSES
-
     value_fun = bsxfun(@plus, utility_move_rural(:,:,zzz) , ...
         pi_prob.*expected_value_urban_old + (1-pi_prob).*expected_value_urban_new);
 
@@ -601,6 +600,8 @@ for zzz = 1:n_shocks
     value_fun = bsxfun(@plus,utility_move_urban(:,:,zzz), expected_value_rural_exp);
 
     [v_move_urban_old, p_asset_move_urban_old] = max(value_fun,[],2);
+    
+    
     
     value_fun = bsxfun(@plus,utility_move_urban(:,:,zzz).*ubar, expected_value_rural_not);
            
