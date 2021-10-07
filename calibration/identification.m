@@ -11,11 +11,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-clear
+%clear
 
-load('calibration_highgrid.mat')
+load('cal_baseline.mat')
 
-params = exp(new_val);
+params = new_cal;
 
 n_params = length(params); % how many paramters we need to do...
 
@@ -23,7 +23,7 @@ eps = 1+0.005; % This is the change. One issue is that some of this stuff was
 % not changing that much, this is a question of how accuratly we are
 % solving it, here is an area of investigation.
 
-els_moments = zeros(9,9);
+els_moments = zeros(10,10);
 
 for xxx = 1:n_params
     
@@ -37,8 +37,8 @@ for xxx = 1:n_params
         
     change_cal = log(cal_eps_for(xxx))-log(cal_eps_bak(xxx));
     
-    moments_for = calibrate_model(cal_eps_for,2); % moments forward
-    moments_bak = calibrate_model(cal_eps_bak,2); % moments backward
+    moments_for = calibrate_model(cal_eps_for,[],[],2); % moments forward
+    moments_bak = calibrate_model(cal_eps_bak,[],[],2); % moments backward
     
     change_moments = log(moments_for) - log(moments_bak);
     
@@ -53,7 +53,7 @@ end
 % experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.10,  0.40];
 % 
 
-order_table = [2,5,6,7,8,3,1,4];
-order_moments = [5, 6, 7, 9, 8, 1, 2, 4];
-test = els_moments(order_table,order_moments);
-round(test,2)';
+% order_table = [2,5,6,7,8,3,1,4];
+% order_moments = [5, 6, 7, 9, 8, 1, 2, 4];
+% test = els_moments(order_table,order_moments);
+% round(test,2)';

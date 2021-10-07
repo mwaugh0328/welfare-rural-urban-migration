@@ -29,7 +29,7 @@ m_seasn = params.m_season;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 n_iterations = 5000;
-tol = 10^-4; 
+tol = 10^-6; 
 %It's loose here...tighten for welfare, but does not seem matter for
 %quantities
 

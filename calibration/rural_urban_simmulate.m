@@ -59,7 +59,6 @@ fiscal_cost = zeros(time_series,1);
 labor_income = zeros(time_series,1);
 production = zeros(time_series,1);
 tax = zeros(time_series,1);
-compr_advntg = zeros(time_series,1);
 
 consumption = zeros(time_series,1);
 net_asset = zeros(time_series,1);
@@ -93,14 +92,12 @@ for xxx = 1:time_series
         % first figure out where they are going        
         choice = hard_rural_choice(move_policy.rural_not(asset_state,shock_states(xxx),:) > logit_shock);
         choice = choice(1);
-        %choice = -(sum((move_policy_rural_not(asset_state,shock_states(xxx),:)) > logit_shock)-4);
         % given the logit shock above, we just find which choice this guy
         % will make. 
         
         move(xxx,1) = (choice == 3); % move if choice above is 3
         move_seasn(xxx,1) = (choice == 2); % seasonal move if choice above is 2.
-                
-        
+
         [labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
             labor_income_tax(z_rural.*r_shocks(shock_states(xxx)), params.tax, 'rural');
         
@@ -123,7 +120,7 @@ for xxx = 1:time_series
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% these are the seasonal moves. 
+% these are the seasonal moves with no experince.
         
     elseif location(xxx) == 2 % seasonal movers....
        
@@ -135,9 +132,11 @@ for xxx = 1:time_series
         asset_state_p = assets_policy.seasn_not(asset_state,shock_states(xxx));
                 
        if pref_shock(xxx) < (1-lambda)
-            location(xxx+1,1) = 3; % get experince
+           
+            location(xxx+1,1) = 3; % back in rural, but get experince, 
+            
        else 
-            location(xxx+1,1) = 1; 
+            location(xxx+1,1) = 1; % go back to rural, no experince
        end
                
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
@@ -227,8 +226,12 @@ for xxx = 1:time_series
         if move(xxx,1) == 1 
             location(xxx+1,1) = 1; % Return to being rural...
             move_cost(xxx,1) = m;
-        elseif pref_shock(xxx) < (1-lambda)
+        end
+        
+        if pref_shock(xxx) < (1-lambda)
+            
             location(xxx+1,1) = 6; % Lose the aversion to urban area
+        
         end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
@@ -269,8 +272,6 @@ for xxx = 1:time_series
     rec_asset_states(xxx+1,1) = asset_state_p;
         
     consumption(xxx,1) = labor_income(xxx,1) + R.*assets(xxx,1) - assets(xxx+1,1) - move_cost(xxx,1);
-    
-    compr_advntg(xxx,1) = (z_urban.*u_shocks(shock_states(xxx)))./(z_rural.*r_shocks(shock_states(xxx)));
     
     net_asset(xxx,1) = R.*assets(xxx,1) - assets(xxx+1,1);
         

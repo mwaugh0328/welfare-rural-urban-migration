@@ -9,14 +9,12 @@ Nsims = length(monga_index);
 % 11 = how long we want to run this out.
 
 panel_size = 13;
-follow_hh_expr = 11;
+follow_hh_expr = params.follow_hh_expr;
 
-sim_expr = zeros(Nsims,panel_size,follow_hh_expr);
+sim_expr = zeros(Nsims, panel_size, follow_hh_expr);
 % sim_surv = zeros(Nsims,10,2);
 
-[~, sc] = size(sim_data);
-
-sim_cntr = zeros(Nsims,sc,follow_hh_expr);
+sim_cntr = zeros(Nsims, size(sim_data,2), follow_hh_expr);
 
 % This will implement the experiment in the monga season.
 
@@ -26,7 +24,7 @@ for xxx = 1:Nsims
     
     state_at_expr = states(index,1:3);
     
-    shock_states = states(index:index + (follow_hh_expr-1),4);
+    shock_states = states(index:index + (follow_hh_expr-1), 4);
     
     p_shocks = pref_shocks(index:index + (follow_hh_expr-1),1);
     

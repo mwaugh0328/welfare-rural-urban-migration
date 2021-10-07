@@ -5,13 +5,9 @@ function [panel_expr] = simmulate_experiment...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set up grid for asset holdings. 
 
-%grid = params.grid;
-
 means_test = params.means_test;
 
 asset_space = params.asset_space;
-%asset_space = linspace(grid(2),grid(3),grid(1));
-% asset_space = [0, logspace(log10(grid(2)),log10(grid(3)),n_asset_states-1)];
 
 R = params.R; 
 z_rural = perm_type(1); z_urban = perm_type(2);
@@ -24,6 +20,7 @@ pi_prob = params.pi_prob;
 
 r_shocks = params.trans_shocks(:,1);
 u_shocks = params.trans_shocks(:,2);
+
 expr_shock = pref_shock;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -388,5 +385,3 @@ urban_skill = z_urban.*ones(length(labor_income),1);
  panel_expr = [labor_income, consumption, assets, live_rural, work_urban, move,...
      move_seasn, move_cost, season, welfare, urban_skill, experince, experiment_flag];
 
-%panel_expr = [labor_income, consumption, assets, live_rural, work_urban, move,...
- %   move_seasn, move_cost, season, welfare, experiment_flag];

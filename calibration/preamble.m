@@ -1,4 +1,4 @@
-function [cal_params, specs] = preamble(cal_params, specs, R)
+function [cal_params, specs] = preamble(cal_params, specs, seed, R)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % cal_params should have the following order
 % 1: standard Deviation of shocks (todo, veryfy its stand dev or variance)
@@ -43,6 +43,8 @@ cal_params(16) = 0.0; % this is the tax progresivity
 cal_params(17) = 0.845; % this is the extent of decreasing returns in rural area
                         % it was hand calibrated to mach the AKM experiment
                         % 0.845
+                        
+cal_params(18) = 3; % how long to follow a household...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if isempty(specs)
@@ -58,8 +60,20 @@ if isempty(specs)
 
     specs.time_series = 100000; % length of the time series for each perm type
     specs.N_obs = 25000; % grab last number of observations
-    specs.n_sims = 10000; % given the pannel above how many times to sample for experiment
+    specs.n_sims = 5000; % given the pannel above how many times to sample for experiment
     
-    specs.seed = 0;
+    specs.follow_hh_expr = 3;  % number of time periods to follow a guy, historical was 11;
+    specs.exp_index = [1,2,3]; % places to capture data (historical code was [1,2,3,4,5,7,11];
     
+    specs.Nmontecarlo = 30;
+        
 end
+
+if isempty(seed)
+    specs.seed = 777;
+else
+    specs.seed = seed;
+end
+    
+    
+    
