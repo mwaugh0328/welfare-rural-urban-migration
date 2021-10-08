@@ -41,6 +41,7 @@ for xxx = 1:Nsims
         sim_expr(xxx,:,zzz) = panel_expr(zzz,:);
         
         sim_cntr(xxx,:,zzz) = sim_data(index + (zzz-1),:); 
+        
     end
  
 end

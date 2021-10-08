@@ -13,9 +13,11 @@ function theta = calibrate_model(cal_params,moments,specs,flag)
 % 10: Seasonal migration cost
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-yyy = compute_outcomes(cal_params, specs,0);
+model_moments = compute_outcomes(cal_params, specs,0);
 
-yyy = mean(yyy,1);
+model_moments(:, [3,end]) = []; % this takes out the varince moments per desciption above
+
+mean_model_moments = mean(model_moments,1);
 
 % Note there is currently an inconsistency between the numbers in the table
 % and what I have here. 0.40 corresponds with a variance of 0.16, note 0.18
@@ -31,8 +33,6 @@ yyy = mean(yyy,1);
 % % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % g_theta = (moments'-yyy')./moments';
 
-yyy([3,end]) = []; % this takes out the varince moments per desciption above
-
 if flag == 1
     moments([3,end]) = [];
 
@@ -40,7 +40,7 @@ g_theta = zeros(length(moments),1);
 
 %g_theta(1) = log(moments(1)'./yyy(1)');
 
-g_theta(1:end) = (moments(1:end)')-(yyy(1:end)');
+g_theta(1:end) = (moments(1:end)')-(mean_model_moments(1:end)');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,6 +50,6 @@ theta = g_theta'*W*g_theta;
 
 elseif flag == 2
     
-theta = yyy;
+theta = mean_model_moments;
 
 end

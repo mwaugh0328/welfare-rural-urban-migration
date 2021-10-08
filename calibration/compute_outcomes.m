@@ -23,6 +23,9 @@ end
 params.rural_options = 3;
 params.urban_options = 2;
 
+params.hard_rural_choice = cast([1,2,3], 'uint8');
+params.hard_urban_choice = cast([1,2], 'uint8');
+
 params.tax.rate = cal_params(15);
 params.tax.prog = cal_params(16);
 params.tax.location = 'all';
@@ -151,8 +154,20 @@ parfor xxx = 1:n_types
 
     [assets(xxx), move(xxx), vguess(xxx)] = ...
         rural_urban_value(params, solve_types(xxx,:),[]);
-
+    
 end
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%perform the field experiment...
+parfor xxx = 1:n_types 
+    
+    [assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx)] = field_experiment_welfare(params, solve_types(xxx,:), vguess(xxx));
+    % This generates an alternative policy function for rural households associated with a
+    % the field experiment of paying for a temporary move. The asset_temp
+    % provides the asset policy conditional on a temporary move. 
+
+end  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,7 +187,8 @@ for nmc = 1:Nmontecarlo
 
     sim_panel = zeros(N_obs,15,n_types);
     states_panel = zeros(N_obs,4,n_types);
-
+    
+    
     parfor xxx = 1:n_types 
 
             [sim_panel(:,:,xxx), states_panel(:,:,xxx)] = rural_urban_simmulate(...
@@ -180,7 +196,7 @@ for nmc = 1:Nmontecarlo
                 pref_shocks(:,xxx), move_shocks(:,xxx),vguess(xxx));
 
     end 
-
+    
 % Now record the data. What we are doing here is creating a
 % cross-section/pannel of guys that are taken in porportion to their
 % distributed weights. 
@@ -230,23 +246,14 @@ for nmc = 1:Nmontecarlo
 
     parfor xxx = 1:n_types     
        
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% First, perform the field experiment...
-
-        [assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx)] = field_experiment_welfare(params, solve_types(xxx,:), vguess(xxx));
-    % This generates an alternative policy function for rural households associated with a
-    % the field experiment of paying for a temporary move. The asset_temp
-    % provides the asset policy conditional on a temporary move. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-
         rng(02071983 + fooseed + xxx + nmc)
-    
+        
         monga_index = monga(randi(length(monga),1,n_sims))';
-
+                
         [sim_expr_panel(:,:,:,xxx), sim_cntr_panel(:,:,:,xxx)]...
         = experiment_driver(assets(xxx), move(xxx), assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx),...
           params, solve_types(xxx,:), monga_index, states_panel(:,:,xxx), pref_shocks((N_obs+1):end,xxx), move_shocks((N_obs+1):end,xxx), sim_panel(:,:,xxx));
-         
+        
     % This then takes the policy functions, simmulates the model, then
     % after a period of time, implements the experirment.     
     end
@@ -279,19 +286,12 @@ for nmc = 1:Nmontecarlo
     end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now we are done. Everything else below is accounting and measurment. 
-% TODO: setup simmilar to GE, TAX, Effecient, accounting framework.
-
 % panel = [labor_income, consumption, assets, live_rural, work_urban, move, move_seasn, move_cost, expected_urban, season];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % First devine some indicator variables...
 
     rural = data_panel(:,4)==1;
-% rural_monga = data_panel(:,4)==1 & data_panel(:,9)==1;
-% rural_not_monga = data_panel(:,4)==1 & data_panel(:,9)~=1;
-
-% urban_monga = data_panel(:,4)~=1 & data_panel(:,end)==1;
-% urban_not_monga = data_panel(:,4)~=1 & data_panel(:,end)~=1;
-
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This part just focuses on the entire sample...
 
@@ -399,7 +399,7 @@ for nmc = 1:Nmontecarlo
 
     aggregate_moments = [m_income(2)./m_income(1), avg_rural, var_income(2), frac_no_assets];
 
-    experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, control_migration_cont_y2./temp_migration, params.m_season./mean(AVG_C), std_cons_growth];
+    experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, LATE-OLS, control_migration_cont_y2, params.m_season./mean(AVG_C), std_cons_growth];
 
 % (1) Wage gap
 % (2) The rural share
