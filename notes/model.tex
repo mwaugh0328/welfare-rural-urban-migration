@@ -61,19 +61,17 @@ This is a outline of stuff that I learned over the past couple of weeks.
 
 First, I learned several things. In trying to recalibrate the model a different LATE, things would simply not move. We might want to revisit why exactly (or develop intuition about it), but then I returned back to the elasticity matrix. This is not the Andrews matrix, but perturbing the parameters by a small amount...seeing how things change etc.
 
-The problem with this approach was it seemed to give inconsistent, not clear answers about things. And it changed a lot as we changed the $\Delta$  over changes in parameters. As I tracked this down, the problem basically is  that the elasticity matrix was awash in simulation error. I think the root cause was that while we were simulating a lot of households to construct the stationary equilibrium, when the experiment is performed, the sample selection reduces the number of people that show up in our moments. 
+The problem with this approach was it seemed to give inconsistent, not clear answers about things. And it changed a lot as we changed the $\Delta$  over changes in parameters. As I tracked this down, the problem basically is  that the elasticity matrix was awash in simulation error. I think the root cause was that while we were simulating a lot of households to construct the stationary equilibrium, when the experiment is performed, the sample selection reduces the number of people that show up in our moments.
 
 The solution was to change our algorithm. So (i) solve for optimal policies and then (ii) simulate outcomes, but do (ii) like 30 times and average over outcomes. It's more costly, but at this point getting it right is more important.
 
-Once we do this the elasticity matrix gives more consistent answers across several dimensions. If we change the seed on the random number generator, same answer. If we change the $\Delta$ in the change of the parameters, essentially the same answer (the correlation between outcomes is $> 0.90$). As we increase the number of simulations across outcomes the numbers converge. All good. 
+Once we do this the elasticity matrix gives more consistent answers across several dimensions. If we change the seed on the random number generator, same answer. If we change the $\Delta$ in the change of the parameters, essentially the same answer (the correlation between outcomes is $> 0.90$). As we increase the number of simulations across outcomes the numbers converge. All good.
 
 My view. We should revisit the Andrews matrix. Need to redo the standard errors as well with this approach. I've also been re-calibrating, though this does not change that much.  Below I'll talk about three things. LATE, $\bar u$, $OLS$.
 
 \subsection{What does LATE pickup}
 
-My claim is that LATE is essentially picking up properties of the consumption function, i.e. households consumption-savings motives. There are two pieces of evidence in support of this. First, the elasticities are qualitatively similar when comparing the fraction with no assets and LATE. Second, the one exercise where we could meaningfully change LATE was when $R$ increased (or $\beta$ is increased). 
-
-Finally, there is not a simple answer regarding $\bar u$. I would say that it does play a role in shaping LATE and in a way consistent with the evidence above, it's affecting the marginal utility of consumption in the urban area. The problem, as I discuss in the next section, is that $\bar u$ shapes the migration moments very forcefully, so it's not as simple to say $\bar u$ is identified off of LATE.
+My claim is that LATE is essentially picking up properties of the consumption function, i.e. households consumption-savings motives. There are two pieces of evidence in support of this. First, the elasticities are qualitatively similar when comparing the fraction with no assets and LATE. Second, the one exercise where we could meaningfully change LATE was when $R$ increased. Finally, there is not a simple answer regarding $\bar u$. I would say that it does play a role in shaping LATE and in a way consistent with the evidence above, it's affecting the marginal utility of consumption in the urban area. The problem, as I discuss in the next section, is that $\bar u$ shapes the migration moments forcefully, so it's not as simple to say $\bar u$ is identified off of LATE.
 
 Here is my argument. First, let's look at the fraction of households with zero assets and how it depends upon parameter values. This is the first column one in the following table.
 
@@ -96,23 +94,23 @@ Here is my argument. First, let's look at the fraction of households with zero a
 7: Losing it &                               -0.04   &  0.25  \\
 8: Gamma parameter in shock process &         0.11   &  0.85  \\
 9: Logit shocks &                             0.05   & -0.20  \\
-\hline                                       
+\hline
 \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Notice how the key things determining how much people are saving (or not) are the transitory shocks. Row 1 says, if there is more variability in the transitory shocks, the fraction of hh with zero assets decreases. Why? There is more to insure against, so the hh are saving more in response to this.  Row 4 says, if the shocks are more persistent, then the fraction of hh with zero assets increases. Why? There is less to insure against since the shocks are becoming more permanent (if your confused about this, think about a world were there is only permanent shocks, there would be no motive to hold assets since I always know my type and it is always the same). All of this is consistent with standard consumption theory. 
+Notice how the key things determining how much people are saving (or not) are the transitory shocks. Row 1 says, if there is more variability in the transitory shocks, the fraction of hh with zero assets decreases. Why? There is more to insure against, so the hh are saving more in response to this.  Row 4 says, if the shocks are more persistent, then the fraction of hh with zero assets increases. Why? There is less to insure against since the shocks are becoming more permanent (if your confused about this, think about a world were there is only permanent shocks, there would be no motive to hold assets since I always know my type and it is always the same). All of this is consistent with standard consumption theory.
 
 Now look in the second column with LATE. The places where LATE is big are the same places where fraction of no assets are big (except $\bar u$). So what is happening here, from a mechanical perspective, the same forces that are shaping consumption-savings are the same forces that are shaping LATE.
 
 Think about what LATE is. It's trying to measure the change in consumption from a windfall opportunity to get income from the urban area relative to some control group (need to make this more precise). So this makes total sense to me now...the a hh incentives to consume out of this windfall opportunity should be the same that shape that hh's motives to consume and save. Let's walk through the logic here. If the transitory shocks are very variable, then the hh will want to consume less of the windfall migration opportunity, so LATE goes down. If the transitory shocks are very persistent, then the hh will want to consume more of the windfall opportunity, so LATE goes up.
 
-Here is a second piece of evidence. When have we seen LATE move around. Well we looked at changes in the real intrust rate $R$ and what we found that in those LATE declines as $R$ increases. In other words, as we gave households a better technology to store their wealth, their incentives to consume out of the windfall migration opportunity decline, and LATE declines. I also did the increase in $\beta$ and saw the same effect on LATE as well. 
+Here is a second piece of evidence. When have we seen LATE move around? When we changed the real intrust rate $R$ and what we found that in those LATE declines as $R$ increases. In other words, as we gave households a better technology to store their wealth, their incentives to consume out of the windfall migration opportunity decline, and LATE declines. I also did the increase in $\beta$ and saw the same effect on LATE as well.
 
 What about the $\bar u$? This is the other big component in LATE, but does not appear in the asset column. Remember, our original thinking about LATE was the following. So the household want's to equate marginal utility of consumption across time periods (and locations). When inexperienced guys move, the $\bar u$ affect the marginal utility of consumption in the urban area. So the logic goes, that the hh will want to increase it's consumption in the urban area to offset the negative affect the $\bar u$ is having on the marginal utility of consumption. And, thus, a higher $\bar u$ should correspond with a higher LATE. And that's what the table shows.
 
-So far so good. Two minor puzzles regard how the Pareto shape parameter and urban TFP are showing up here. Note how they nearly offset, suggesting that the selection margin (who is actually treated) is moving around. 
+So far so good. Two minor puzzles regard how the Pareto shape parameter and urban TFP are showing up here. Note how they nearly offset, suggesting that the selection margin (who is actually treated) is moving around.
 
 \subsection{Ok, so LATE ``identifies'' $\bar u$? Not quite...}
 
@@ -138,13 +136,13 @@ The tension is that $\bar u$ plays an important role in shaping other moments, s
 
 What is happening is $\bar u$ is moving around to get the overall level of migration correct (-5.62). So a larger $\bar u$ reduces the amount of migration in the control group. This shows up, similarly powerful for the repeat migration (-6.44) and to some extent the amount of migration in experiment.
 
-This, I think, is the problem with the change LATE idea and recalibrate. If we were just looking at the asset/LATE table above, my expectation would be that we would see a higher/lower $\bar u$ as we moved LATE. The problem is that the migration moments get messed up, so it goes no where. Second, this is consistent with the old table ($\bar u = 1$ and recalibrate) with the migration rates all messed up (in addition to LATE and OLS). 
+This, I think, is the problem with the change LATE idea and recalibrate. If we were just looking at the asset/LATE table above, my expectation would be that we would see a higher/lower $\bar u$ as we moved LATE. The problem is that the migration moments get messed up, so it goes no where. Second, this is consistent with the old table ($\bar u = 1$ and recalibrate) with the migration rates all messed up (in addition to LATE and OLS).
 
 Final point, the $\bar u$ has a huge effect on OLS. This is next.
 
 \subsection{What about OLS?}
 
-This is partly less clear, partly so. First, we need to remember that OLS + covariance = LATE. Let's write this out...
+This is partly less clear, partly so. First, we need to remember that OLS = LATE + covariance. Let's write this out...
 \begin{align}
 c(z,s',a',x) = \alpha + \beta^{OLS} \iota(z,s,a,x) + \epsilon(z,s',a',x)
 \end{align}
@@ -154,18 +152,18 @@ Now LATE/IV solves this problem by identifying based on the idea that some other
 \begin{align}
 \beta^{OLS} = \beta^{LATE} + \frac{\mathrm{cov}( \epsilon(z,s',a',x), \iota(z,s,a,x))} {\mathrm{var}(\iota(z,s,a,x))}
 \end{align}
-And then if we see that $\beta^{LATE} > \beta^{OLS}$, this tells us that $\mathrm{cov}( \epsilon(z,s',a',x), \iota(z,s,a,x))$ that the covariance between these unobserved components needs to be negative. 
+And then if we see that $\beta^{LATE} > \beta^{OLS}$, this tells us that $\mathrm{cov}( \epsilon(z,s',a',x), \iota(z,s,a,x))$ that the covariance between these unobserved components needs to be negative.
 
-\textbf{Important!} I walk through some stories below, but per the discussion above it is important to remember $\beta^{LATE}$ is not a parameter, but depends upon the economic environment and, hence, the parameters of the model. This is the benefit of $LATE - OLS$ because any direct effect of the parameter on $\beta^{LATE}$ is difference out. 
+\textbf{Important!} I walk through some stories below, but per the discussion above it is important to remember $\beta^{LATE}$ is not a parameter, but depends upon the economic environment and, hence, the parameters of the model. This is the benefit of $LATE - OLS$ because any direct effect of the parameter on $\beta^{LATE}$ is difference out.
 
 
 
 \begin{itemize}
 \item \textbf{Permanent ability.} One would suspect, if $z$ where the only unobserved state variable, then  $\mathrm{cov}( \epsilon(z), \iota(z)) > 0$. So that guys with a comparative advantage are more likely to more. So what that means is this is a force working against having a negative covariance that we see in the data. So as let's imagine you strengthen how much $z$ heterogeneity there is (increase the shape parameter), then LATE - OLS, should get smaller as your strengthening this positive covariance part, which is what the second column in \ref{tb:ols-LATE} shows.
-    
+
 \item \textbf{Ubar.} I think it's the same argument. Firs, we should expect that $\mathrm{cov}( \epsilon(x), \iota(x))$, so if you have experience, you are more likely to go, if not less likely to go. Again, a positive covariance just through this channel. So as you increase $\bar u$, your just making this stronger because the guys less likely to go are now even more likely not to go. So then LATE - OLS, should get smaller as your strengthening this positive covariance part, which is what the second column in \ref{tb:ols-LATE} shows.
-    
-    The first column with the (8.51) number is consistent with $\beta^{LATE}$ increasing per the discussion above and the covariance term becoming less negative. 
+
+    The first column with the (8.51) number is consistent with $\beta^{LATE}$ increasing per the discussion above and the covariance term becoming less negative.
 
 \end{itemize}
 
@@ -190,7 +188,7 @@ So for this purpose, I'll present the difference as well. I think the problem is
 7: Losing it &                                -0.43    & 0.47     \\
 8: Gamma parameter in shock process &           3.45   &-0.67     \\
 9: Logit shocks &                              -0.35   &-0.01     \\
-\hline                                                 
+\hline
 \hline
 \end{tabular}
 \end{center}
