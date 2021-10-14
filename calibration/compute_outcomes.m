@@ -185,13 +185,13 @@ for nmc = 1:Nmontecarlo
     pref_shocks = rand(time_series,n_perm_shocks);
     move_shocks = rand(time_series,n_perm_shocks);
 
-    sim_panel = zeros(N_obs,15,n_types);
+    sim_panel = zeros(N_obs,7,n_types);
     states_panel = zeros(N_obs,4,n_types);
     
     
     parfor xxx = 1:n_types 
 
-            [sim_panel(:,:,xxx), states_panel(:,:,xxx)] = rural_urban_simmulate(...
+            [sim_panel(:,:,xxx), states_panel(:,:,xxx)] = cal_rural_urban_simmulate(...
                 assets(xxx), move(xxx), params, solve_types(xxx,:), shock_states_p,...
                 pref_shocks(:,xxx), move_shocks(:,xxx),vguess(xxx));
 
@@ -221,10 +221,11 @@ for nmc = 1:Nmontecarlo
     end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [labor_income, consumption, assets, live_rural, move_seasn, season, experince, experiment_flag]
 % Here is the means test for Mushfiq's expr...the latter is to smooth
 % things
 
-    rural_not_monga = data_panel(:,4)==1 & data_panel(:,9)~=1;
+    rural_not_monga = data_panel(:,4)==1 & data_panel(:,6)~=1;
 %params.means_test = median(data_panel(rural_not_monga,3));
 
 
@@ -233,8 +234,8 @@ for nmc = 1:Nmontecarlo
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % This section of the code now performs the expirements. 
  
-    sim_expr_panel = zeros(n_sims,13,params.follow_hh_expr,n_types);
-    sim_cntr_panel = zeros(n_sims,15,params.follow_hh_expr,n_types);
+    sim_expr_panel = zeros(n_sims,size(data_panel,2) + 1,params.follow_hh_expr,n_types);
+    sim_cntr_panel = zeros(n_sims,size(data_panel,2),params.follow_hh_expr,n_types);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -251,7 +252,7 @@ for nmc = 1:Nmontecarlo
         monga_index = monga(randi(length(monga),1,n_sims))';
                 
         [sim_expr_panel(:,:,:,xxx), sim_cntr_panel(:,:,:,xxx)]...
-        = experiment_driver(assets(xxx), move(xxx), assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx),...
+        = cal_experiment_driver(assets(xxx), move(xxx), assets_temp(xxx), move_temp(xxx), ...
           params, solve_types(xxx,:), monga_index, states_panel(:,:,xxx), pref_shocks((N_obs+1):end,xxx), move_shocks((N_obs+1):end,xxx), sim_panel(:,:,xxx));
         
     % This then takes the policy functions, simmulates the model, then
@@ -286,7 +287,7 @@ for nmc = 1:Nmontecarlo
     end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now we are done. Everything else below is accounting and measurment. 
-% panel = [labor_income, consumption, assets, live_rural, work_urban, move, move_seasn, move_cost, expected_urban, season];
+% panel = [labor_income, consumption, assets, live_rural, move_seasn, season, experince, experiment_flag]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % First devine some indicator variables...
 
@@ -317,8 +318,8 @@ for nmc = 1:Nmontecarlo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Migration Elasticity
 
-    temp_migrate_cntr = control_data(:,7,1) == 1;
-    temp_migrate_expr = expermt_data(:,7,1) == 1;
+    temp_migrate_cntr = control_data(:,5,1) == 1;
+    temp_migrate_expr = expermt_data(:,5,1) == 1;
 
     temp_migration = sum(temp_migrate_cntr)./sum(rural_cntr);
 
@@ -329,8 +330,8 @@ for nmc = 1:Nmontecarlo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Migration Elasticity Year 2
 
-    temp_migrate_cntr_y2 = control_data(:,7,3) == 1;
-    temp_migrate_expr_y2 = expermt_data(:,7,3) == 1;
+    temp_migrate_cntr_y2 = control_data(:,5,3) == 1;
+    temp_migrate_expr_y2 = expermt_data(:,5,3) == 1;
 
     temp_migration_y2 = sum(temp_migrate_cntr_y2)./sum(rural_cntr);
 
@@ -338,7 +339,8 @@ for nmc = 1:Nmontecarlo
 
     migration_elasticity_y2 = temp_expr_migration_y2 - temp_migration_y2;
 
-    cont_y2 = control_data(:,7,1) == 1 & control_data(:,7,3) == 1;
+    cont_y2 = control_data(:,5,1) == 1 & control_data(:,5,3) == 1;
+    
     control_migration_cont_y2 = sum(cont_y2)./sum(rural_cntr);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
