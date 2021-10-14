@@ -67,9 +67,9 @@ The solution was to change our algorithm. So (i) solve for optimal policies and 
 
 Once we do this the elasticity matrix gives more consistent answers across several dimensions. If we change the seed on the random number generator, same answer. If we change the $\Delta$ in the change of the parameters, essentially the same answer (the correlation between outcomes is $> 0.90$). As we increase the number of simulations across outcomes the numbers converge. All good.
 
-My view. We should revisit the Andrews matrix. Need to redo the standard errors as well with this approach. I've also been re-calibrating, though this does not change that much.  Below I'll talk about three things. LATE, $\bar u$, $OLS$.
+My view. We should revisit the Andrews matrix. Need to redo the standard errors as well with this approach. I've also been re-calibrating, though this does not change that much. The other issue is to change one of the moments from OLS, to LATE - OLS. The reasoning is below.  Below I'll talk about three things. LATE, $\bar u$, $OLS$.
 
-\subsection{What does LATE pickup}
+\subsection{What does LATE pickup: Properties of the HH consumption function.}
 
 My claim is that LATE is essentially picking up properties of the consumption function, i.e. households consumption-savings motives. There are two pieces of evidence in support of this. First, the elasticities are qualitatively similar when comparing the fraction with no assets and LATE. Second, the one exercise where we could meaningfully change LATE was when $R$ increased. Finally, there is not a simple answer regarding $\bar u$. I would say that it does play a role in shaping LATE and in a way consistent with the evidence above, it's affecting the marginal utility of consumption in the urban area. The problem, as I discuss in the next section, is that $\bar u$ shapes the migration moments forcefully, so it's not as simple to say $\bar u$ is identified off of LATE.
 
@@ -104,17 +104,21 @@ Notice how the key things determining how much people are saving (or not) are th
 
 Now look in the second column with LATE. The places where LATE is big are the same places where fraction of no assets are big (except $\bar u$). So what is happening here, from a mechanical perspective, the same forces that are shaping consumption-savings are the same forces that are shaping LATE.
 
-Think about what LATE is. It's trying to measure the change in consumption from a windfall opportunity to get income from the urban area relative to some control group (need to make this more precise). So this makes total sense to me now...the a hh incentives to consume out of this windfall opportunity should be the same that shape that hh's motives to consume and save. Let's walk through the logic here. If the transitory shocks are very variable, then the hh will want to consume less of the windfall migration opportunity, so LATE goes down. If the transitory shocks are very persistent, then the hh will want to consume more of the windfall opportunity, so LATE goes up.
+Think about what LATE is. It's trying to measure the change in consumption from a opportunity to get income from the urban area relative to some control group (need to make this more precise). So this makes total sense to me now...the a hh incentives to consume out of this opportunity should be the same that shape that hh's motives to consume and save as if they were given some money.
 
-Here is a second piece of evidence. When have we seen LATE move around? When we changed the real intrust rate $R$ and what we found that in those LATE declines as $R$ increases. In other words, as we gave households a better technology to store their wealth, their incentives to consume out of the windfall migration opportunity decline, and LATE declines. I also did the increase in $\beta$ and saw the same effect on LATE as well.
+Let's walk through the logic here. If the transitory shocks are very variable, then the hh will want to consume less of the windfall migration opportunity, so LATE goes down. If the transitory shocks are very persistent, then the hh will want to consume more of the windfall opportunity, so LATE goes up.
 
-What about the $\bar u$? This is the other big component in LATE, but does not appear in the asset column. Remember, our original thinking about LATE was the following. So the household want's to equate marginal utility of consumption across time periods (and locations). When inexperienced guys move, the $\bar u$ affect the marginal utility of consumption in the urban area. So the logic goes, that the hh will want to increase it's consumption in the urban area to offset the negative affect the $\bar u$ is having on the marginal utility of consumption. And, thus, a higher $\bar u$ should correspond with a higher LATE. And that's what the table shows.
+Here is a second piece of evidence. When have we seen LATE move around? When we changed the real intrust rate $R$. What we found that in those LATE declines as $R$ increases. In other words, as we gave households a better technology to store their wealth, their incentives to consume out of the migration opportunity decline, and LATE declines. I also did the increase in $\beta$ and saw the same effect on LATE as well. Another check...increase risk aversion, IES and the prediction should be that LATE declines...
+
+What about the $\bar u$? This is the other big component in LATE, but does not appear in the asset column. Our original thinking about LATE was the following. So the household want's to equate marginal utility of consumption across time periods (and locations). When inexperienced guys move, the $\bar u$ affects the marginal utility of consumption in the urban area. So the logic goes, that the hh will want to increase it's consumption in the urban area to offset the negative affect the $\bar u$ is having on the marginal utility of consumption to equate marginal utility across time periods. And, thus, a higher $\bar u$ should correspond with a higher LATE. And that's what the table shows.
 
 So far so good. Two minor puzzles regard how the Pareto shape parameter and urban TFP are showing up here. Note how they nearly offset, suggesting that the selection margin (who is actually treated) is moving around.
 
+One final thought. LATE is the ``average'' treatment. This is relevant here because given a households states, their propensity to consume will differ, so LATE will pick up some average across households with different consumption functions.
+
 \subsection{Ok, so LATE ``identifies'' $\bar u$? Not quite...}
 
-The tension is that $\bar u$ plays an important role in shaping other moments, specifically how much migration occurs. Let's look at the what $\bar u$.
+The tension is that $\bar u$ plays an important role in shaping other moments, specifically how much migration occurs. Let's look at the what $\bar u$ affects.
 
 \begin{table}[!h]
 \footnotesize
@@ -142,28 +146,42 @@ Final point, the $\bar u$ has a huge effect on OLS. This is next.
 
 \subsection{What about OLS?}
 
-This is partly less clear, partly so. First, we need to remember that OLS = LATE + covariance. Let's write this out...
+First, I think it makes more sense to talk about LATE - OLS. Let me expand on this point...remember that OLS = LATE + covariance. Let's write this out...
 \begin{align}
 c(z,s',a',x) = \alpha + \beta^{OLS} \iota(z,s,a,x) + \epsilon(z,s',a',x)
 \end{align}
-so consumption depends upon the household's states: permanent ability, transitory ability (at date $t+1$), asset holdings (at date $t+1$), then experience indicator. And then the household Consumption is then regressed upon a migration indicator variable which also depends upon a households states at date $t$.  The $\epsilon$ is the error term that in unobserved to the econometrician and this depends upon the household states. Not sure about the timing here. The econometric issue is that this term is correlated with the migration decision and thus OLS does not provide the ``causal estimate'' of migration on consumption.
+so consumption depends upon the household's states: permanent ability, transitory ability (at date $t+1$), asset holdings (at date $t+1$), then experience indicator. And then the household Consumption is then regressed upon a migration indicator variable which also depends upon a households states at date $t$.  The $\epsilon$ is the error term that in unobserved to the econometrician and this depends upon the household states (at both $t$ and $t+1$?...not sure about the timing here. The econometric issue is that this term is correlated with the migration decision and thus OLS does not provide the ``causal estimate'' of migration on consumption. I also did not explicitly put in location as a state...this should only be working through migration. 
 
-Now LATE/IV solves this problem by identifying based on the idea that some other variable $z$ is uncorrelated with $\epsilon$. Here that other variable is the inclusion in the experiment which is supposed to be designed so that $z \bot  \epsilon$ (the exclusion restriction is satisfied) and then it obviously pushed guys to migrate so it's correlated with $\iota$. How does LATE relate to OLS:
+Now LATE/IV solves the econometric problem with the idea that some other variable $z$ is uncorrelated with $\epsilon$. Here that other variable is the inclusion in the experiment which is supposed to be designed so that $z \bot  \epsilon$ (the exclusion restriction is satisfied) and then it obviously pushed guys to migrate so it's correlated with $\iota$. How does LATE relate to OLS:
 \begin{align}
 \beta^{OLS} = \beta^{LATE} + \frac{\mathrm{cov}( \epsilon(z,s',a',x), \iota(z,s,a,x))} {\mathrm{var}(\iota(z,s,a,x))}
 \end{align}
-And then if we see that $\beta^{LATE} > \beta^{OLS}$, this tells us that $\mathrm{cov}( \epsilon(z,s',a',x), \iota(z,s,a,x))$ that the covariance between these unobserved components needs to be negative.
+And then if we see that $\beta^{LATE} > \beta^{OLS}$, this tells us that $\mathrm{cov}( \epsilon(z,s',a',x), \iota(z,s,a,x)) < 0$, i.e. that the covariance between these unobserved components needs to be negative. 
 
-\textbf{Important!} I walk through some stories below, but per the discussion above it is important to remember $\beta^{LATE}$ is not a parameter, but depends upon the economic environment and, hence, the parameters of the model. This is the benefit of $LATE - OLS$ because any direct effect of the parameter on $\beta^{LATE}$ is difference out.
+Now here the issue with just looking at OLS on it's own. As we change parameters, two things are changing: LATE and the covaraince term. So it's not obvious which is which. In fact, if you look at the table below, this is partly why OLS is a mess because a bunch of different things are moving around. When we look at LATE - OLS, we are only looking at the covariance of unobserved states with migration and, hence, has a cleaner interpretation. What is not clean is (i) the map from states to the error term and (ii) that hh states push this in different directions.
 
-
-
+Now, I'm going to walk through some stories (and a bit of evidence from the computer) about how this works.... 
 \begin{itemize}
-\item \textbf{Permanent ability.} One would suspect, if $z$ where the only unobserved state variable, then  $\mathrm{cov}( \epsilon(z), \iota(z)) > 0$. So that guys with a comparative advantage are more likely to more. So what that means is this is a force working against having a negative covariance that we see in the data. So as let's imagine you strengthen how much $z$ heterogeneity there is (increase the shape parameter), then LATE - OLS, should get smaller as your strengthening this positive covariance part, which is what the second column in \ref{tb:ols-LATE} shows.
+\item \textbf{Permanent ability.} Just imagine if $z$ where the only unobserved state variable, then  $\mathrm{cov}( \epsilon(z), \iota(z)) > 0$. So that guys with a permanent comparative advantage are more likely to migrate. And in the computer code, if you correlate $z$ with $\iota(z)$, once sees a very strong correlation/covariance. 
+    
+    What that means is this is a force working against having a negative covariance that we see in the data. Also this is kind of the ``standard'' case where one would suspect OLS - LATE > 0 ...because the best guys are moving, OLS is partly picking up this positive selection into migration. 
+    
+    Back to our identification table. So as let's imagine you strengthen how much $z$ heterogeneity there is (increase the shape parameter), this increases the (positive) covariance between migration and ability (computer shows this, intuitively imagine if there was no $z$ heterogeneity). So then LATE - OLS, should get \textbf{smaller} as you increase the positive covariance part, which is what the second column in \ref{tb:ols-LATE} shows (-1.55).
 
-\item \textbf{Ubar.} I think it's the same argument. Firs, we should expect that $\mathrm{cov}( \epsilon(x), \iota(x))$, so if you have experience, you are more likely to go, if not less likely to go. Again, a positive covariance just through this channel. So as you increase $\bar u$, your just making this stronger because the guys less likely to go are now even more likely not to go. So then LATE - OLS, should get smaller as your strengthening this positive covariance part, which is what the second column in \ref{tb:ols-LATE} shows.
+\item \textbf{Ubar.} Similar argument. And remember it works through the experience state variable $x$.  Imagine $x$ is the only state, then $\mathrm{cov}( \epsilon(x), \iota(x)) > 0 $, so if you have experience, you are more likely to go, if not less likely to go. Again, a positive covariance just through this channel and is a force working against having a negative covariance that we see in the data. In the computer, this is indeed positive. 
+    
+    Now let's increase $\bar u$ a little bit, your just making this stronger because the guys less likely to go are now even more likely not to go. So then LATE - OLS, should get smaller as your strengthening this positive covariance part, which is what the second column in \ref{tb:ols-LATE} shows. The computer confirms this that the $\mathrm{cov}(x, \iota(x))$ increases. 
 
-    The first column with the (8.51) number is consistent with $\beta^{LATE}$ increasing per the discussion above and the covariance term becoming less negative.
+    One more point about $\bar u$ and OLS. Notice the huge (8.51) number. This is consistent with discussion above because two things are happening: (i) LATE is increasing AND (ii) the covariance term becoming less negative.
+\end{itemize}
+
+Ok, so why is $\beta^{LATE} > \beta^{OLS}$? It's because of (i) $s$ and specifical the role that $\gamma$ plays and (ii) through $a$ the asset holdings. 
+\begin{itemize}
+\item \textbf{The role that $\gamma$ is playing.} Recall that if $\gamma < 1$  this means that the relative productivity gain on the transitory shock is $s^{\gamma - 1}$. So in our calibrated situation, lower $s$ individuals have (in a relative sense) more to gain from migration. So what this implies is that $\mathrm{cov}( \epsilon(s), \iota(s)) < 0$. And note the persistence of $s$ is important here because if I'm low $s$ today, I expect low $s$ tomorrow and, most importantly, a relatively better opportunity in the urban area tomorrow.
+    
+    Back to the identification table...note that as $\gamma$ increases, LATE - OLS decreases. So what is happening here is that the covariance between migration and the transitory productivity shocks is weakens. So low income hh's become less likely to migrate than in the baseline and, thus, we would find a smaller LATE - OLS.
+    
+    Let me provide an interpretation on this: In bad states of the world (low $s$), the expected value of the urban opportunity is relatively higher than in good states of the world. Thus, the opportunity to migrate to the urban area provides \textbf{insurance} because it's most valuable in states of the world where the household needs income the most. And this idea manifests itself in the negative convariance between transitory shocks and migration (much like a negative-beta asset). And this a key driving force why LATE - OLS is positive.
 
 \end{itemize}
 
@@ -232,16 +250,5 @@ The $\gamma$ parameter really only effects OLS with a larger $\gamma$ increasing
 %   -0.1000    0.0200    0.0500    0.1900   -0.0500   -0.5100   -0.2000   -0.3500   -0.1300   -0.0400
 %    0.0200   -0.0800   -0.0600   -1.1100    0.9800    0.5000    0.0400    0.9900   -1.2600    1.1100
 
-
-   -0.8600
-   -1.5500
-    0.3600
-    1.6300
-   -2.3200
-   -0.1000
-    0.4700
-   -0.6700
-   -0.0100
-   -1.0600
 
 \end{document} 

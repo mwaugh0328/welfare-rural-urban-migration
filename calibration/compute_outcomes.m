@@ -405,12 +405,13 @@ for nmc = 1:Nmontecarlo
 % (2) The rural share
 % (3) The urban variance... note that this is position number 3 (see below)
 % (4) Fraction with no liquid assets
-% (6) seasonal migration in control
-% (7) increase in r1 (22 percent)
-% (8) increase in r2 (9.2 percent)
-% (9) LATE estiamte
-% (10) LATE - OLS estimate
-% (11) Control repeat migration rate 
+% (5) seasonal migration in control
+% (6) increase in r1 (22 percent)
+% (7) increase in r2 (9.2 percent)
+% (8) LATE estiamte
+% (9) LATE - OLS estimate
+% (10) Control repeat migration rate 
+% (11) moving cost / average consumption
 % (12) Standard deviation of consumption growth. 
 
 
@@ -424,34 +425,20 @@ if flag == 1
     
 disp('')
 disp('')
-disp('Average Rural Population')
-disp(avg_rural)
-disp('Temporary Moving Cost Relative to Mean Consumption')
-disp(params.m_season./mean(AVG_C))
-disp('Fraction of Rural Who are Migrants')
-disp(temp_migration)
-disp('Expr Elasticity: Year One, Two, Four')
-disp([migration_elasticity, migration_elasticity_y2])
-disp('Control: Year One, Repeat Two, Four')
-disp([temp_migration, control_migration_cont_y2])
-disp('OLS Estimate')
-disp(OLS)
-disp('LATE Estimate')
-disp(LATE)
 disp('Wage Gap')
-disp(m_income(2)./m_income(1))
-disp('Mean Consumption Rural and Urban')
-disp(m_consumption)
-disp('Variance of Consumption Rural and Urban')
-disp(var_consumption)
-disp('Standard Deviation of Consumption Growth')
-disp(std_cons_growth)
-disp('Variance of Log Income Rural and Urban')
-disp(var_income)
+disp(mean(moments(:,1)))
+disp('Average Rural Population')
+disp(mean(moments(:,2)))
 disp('Fraction of Rural with No Assets')
-disp(frac_no_assets)
-disp('Permenant Moves')
-disp(perm_moves)
+disp(mean(moments(:,4)))
+disp('Expr Elasticity: Year One, Two')
+disp([mean(moments(:,6)), mean(moments(:,7))])
+disp('Control: Year One, Repeat Two')
+disp([mean(moments(:,5)), mean(moments(:,10))])
+disp('LATE Estimate')
+disp(mean(moments(:,8)))
+disp('LATE - OLS Estimate')
+disp(mean(moments(:,9)))
     
 end
 
