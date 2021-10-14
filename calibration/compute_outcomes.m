@@ -298,18 +298,11 @@ for nmc = 1:Nmontecarlo
 % Income earned by rural residents relative to urban...
     m_income = [mean((data_panel(rural,1))), mean((data_panel(~rural,1)))];
 
-% Consumption...
-    m_consumption = [mean((data_panel(rural,2))), mean((data_panel(~rural,2)))];
-
 % Fraction of residents residing in the rural area...
     avg_rural = sum(rural)./length(data_panel);
 
     var_income = [var(log(data_panel(rural,1))), var(log(data_panel(~rural,1)))];
 % No emasurment error here, we add it on expost. 
-
-    var_consumption = [var(log(data_panel(rural,2))), var(log(data_panel(~rural,2)))];
-
-    perm_moves = sum(data_panel(rural,6)==1)./length(data_panel);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now use the control and expirement stuff...
