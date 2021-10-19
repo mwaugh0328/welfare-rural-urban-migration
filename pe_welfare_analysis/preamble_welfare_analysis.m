@@ -70,7 +70,7 @@ if isempty(specs)
 end
 
 if isempty(seed)
-    specs.seed = 7;
+    specs.seed = 777;
 else
     specs.seed = seed;
 end
