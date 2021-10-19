@@ -324,7 +324,7 @@ for nmc = 1:Nmontecarlo
     end
     
     
-    [~, ~, ~, ~, aggstats] = just_aggregate(params,data_panel,[],[],0);
+    [~, ~, ~, wagestats(nmc), aggstats] = just_aggregate(params,data_panel,[],[],0);
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
