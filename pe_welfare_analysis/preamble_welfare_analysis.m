@@ -56,7 +56,7 @@ if isempty(specs)
     %specs.asset_space = linspace(0,2,100); % this is the equally spaced grid
 
     specs.n_perm_shocks = 24;
-    specs.n_trans_shocks = 5;
+    specs.n_trans_shocks = 7;
 
     specs.time_series = 100000; % length of the time series for each perm type
     specs.N_obs = 25000; % grab last number of observations
@@ -70,7 +70,7 @@ if isempty(specs)
 end
 
 if isempty(seed)
-    specs.seed = 777;
+    specs.seed = 7;
 else
     specs.seed = seed;
 end
