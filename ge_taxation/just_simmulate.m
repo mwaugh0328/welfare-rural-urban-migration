@@ -6,7 +6,7 @@ N_obs = specs.N_obs; %25000;
 
 params.N_obs = N_obs;
 
-rng(03281978)
+rng(03281978 + specs.seed)
 
 [~, shock_states_p] = hmmgenerate(time_series,params.trans_mat,ones(params.n_shocks));
 

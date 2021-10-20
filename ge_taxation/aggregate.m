@@ -173,8 +173,8 @@ iwage.rural = (mpl.rural.monga.*sum((1./(params.rural_tfp.*params.seasonal_facto
 
 iwage.urban = sum(urban(:,production)./number_workers)./(length(urban)./number_workers);
 
-disp('Implied Wage Gap')
-disp(iwage.urban./iwage.rural)
+%disp('Implied Wage Gap')
+%disp(iwage.urban./iwage.rural)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 rc_monga = (aggproduction.rural.monga + aggproduction.urban.monga) - (accounting.all.monga.consumption + accounting.all.monga.movingcosts);

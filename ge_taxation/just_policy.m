@@ -2,7 +2,7 @@ function [move, solve_types, assets, params, specs, vfun, ce] = just_policy...
     (cal_params, wages, vft_fun, meanstest, tax, policyfun)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[cal_params, specs] = preamble(cal_params, [], []);
+[cal_params, specs] = tax_eq_preamble(cal_params, [], [], []);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now everything below is just organization till around like 150 or so...

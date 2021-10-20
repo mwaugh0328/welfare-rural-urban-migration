@@ -1,10 +1,10 @@
 clear
 warning('off','stats:regress:RankDefDesignMat');
 
-addpath('../calibration')
+addpath('../utils')
 
-load calibration_final
-load wages
+load('../calibration/cal_baseline_s730.mat')
+load('../pe_welfare_analysis/wages.mat')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This code computes and presents the results from the GE reduction in
 % seasonal migraiton costs funded by a distrotionary tax on labor income.
@@ -18,11 +18,11 @@ load wages
 % The output here should look just like the results from say
 % ``analyze_outcomes''
 
-[move, solve_types, assets, params, specs, vfun, ce] = just_policy(exp(new_val), testwage, [], [], [], []);
+[move, solve_types, assets, params, specs, vfun, ce] = just_policy(x1, wages, [], [], [], []);
 
 [data_panel, params] = just_simmulate(params, move, solve_types, assets, specs, ce, []);
 
-[labor, govbc, tfp] = aggregate(params, data_panel, testwage, [], 1);
+[labor, govbc, tfp] = aggregate(params, data_panel, wages, [], 1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now let's add in the free money to move.
@@ -46,7 +46,7 @@ policyfun.assets = assets;
 % people eliglble should be the same as above...why? actions did not
 % change.
 
-compute_eq([testwage; 1.0], exp(new_val), tfp, cft, vfun, taxprog, policyfun, 1)
+compute_eq([wages, 1.0], x1, tfp, cft, vfun, taxprog, policyfun, 1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now we want to make sure we have the money to pay for things...so we are
@@ -57,26 +57,26 @@ options = optimoptions('fsolve', 'Display','iter','MaxFunEvals',2000,'MaxIter',2
 'TolX',1e-3,'Algorithm','trust-region-reflective','FiniteDifferenceType','central',...
 'FiniteDifferenceStepSize', 10^-3);
 
-guess = [testwage; 1.0];
+guess = [wages, 1.0];
 
 tic
-[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), exp(new_val), tfp, cft, [], taxprog, policyfun, 0), guess,options);
+[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, cft, [], taxprog, policyfun, 0), guess,options);
 toc
 
 disp(wageseq)
 
-compute_eq([wageseq], exp(new_val), tfp, cft, vfun, taxprog, policyfun, 1)
+compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, policyfun, 1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now we let everything change. Guys can change moving and asset choices,
 % the moving cost is financed, and rural labor markets clear
 
-guess = [testwage; 1.0];
+guess = [wages, 1.0];
 
 tic
-[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), exp(new_val), tfp, cft, [], taxprog,[], 0), guess,options);
+[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, cft, [], taxprog,[], 0), guess,options);
 toc
 
 disp(wageseq)
 
-compute_eq([wageseq], exp(new_val), tfp, cft, vfun, taxprog, [], 1)
+compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, [], 1)

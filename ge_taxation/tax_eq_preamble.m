@@ -1,4 +1,4 @@
-function [cal_params, specs] = preamble_welfare_analysis(cal_params, specs, seed, R)
+function [cal_params, specs] = tax_eq_preamble(cal_params, specs, seed, R)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % cal_params should have the following order
 % 1: standard Deviation of shocks (todo, veryfy its stand dev or variance)
@@ -62,8 +62,8 @@ if isempty(specs)
     specs.N_obs = 25000; % grab last number of observations
     specs.n_sims = 5000; % given the pannel above how many times to sample for experiment
     
-    specs.follow_hh_expr = 11;  % number of time periods to follow a guy, historical was 11;
-    specs.exp_index = [1,2,3,4,5,7,11]; % places to capture data (historical code was [1,2,3,4,5,7,11];
+    specs.follow_hh_expr = 3;  % number of time periods to follow a guy, historical was 11;
+    specs.exp_index = [1,2,3]; % places to capture data (historical code was [1,2,3,4,5,7,11];
     
     specs.Nmontecarlo = 15;
         
