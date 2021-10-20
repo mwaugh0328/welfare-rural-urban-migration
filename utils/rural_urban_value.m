@@ -241,8 +241,7 @@ for iter = 1:n_iterations
 % urban area because I'm moving out the rural area and I become a new guy.
 
     value_fun = bsxfun(@plus, utility_move_rural(:,:,zzz) , expected_value_urban_new);
-    
-       
+  
     [v_move_rural_not, ~] = max(value_fun,[],2);
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -378,7 +377,7 @@ for iter = 1:n_iterations
     
     pi_urban_new = exp(([v_stay_urban_new, v_move_urban_new] - vfoo)./sigma_nu_not);
    
-    pi_denom_urban_new = sum(pi_urban_new, 2, 'omitnan');
+    pi_denom_urban_new = sum(pi_urban_new, 2);
     
     v_prime_urban_new(:,zzz) = sigma_nu_not.*log(pi_denom_urban_new) + vfoo;
     
@@ -396,7 +395,7 @@ for iter = 1:n_iterations
     
     pi_urban_old = exp(([v_stay_urban_old, v_move_urban_old] - vfoo)./sigma_nu_exp);
        
-    pi_denom_urban_old = sum(pi_urban_old, 2, 'omitnan');
+    pi_denom_urban_old = sum(pi_urban_old, 2);
     
     v_prime_urban_old(:,zzz) = sigma_nu_exp.*log(pi_denom_urban_old) + vfoo;
     

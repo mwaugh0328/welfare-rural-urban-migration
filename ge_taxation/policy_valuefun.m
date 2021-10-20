@@ -32,8 +32,8 @@ trans_mat = params.trans_mat;
 m_seasn = params.m_season;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_iterations = 500;
-tol = 10^-2; 
+n_iterations = 5000;
+tol = 10^-6; 
 %It's loose here...tighten for welfare, but does not seem matter for
 %quantities
 
@@ -351,7 +351,8 @@ for iter = 1:n_iterations
     pitest = [move.rural_not(:,zzz,1), squeeze( diff(move.rural_not(:,zzz,:),1,3))];
     
     v_prime_rural_not(:,zzz) = sum(pitest.*(sigma_nu_not.*log(1./max(pitest, 10^-25))  + [v_stay_rural_not, v_move_seasn_not, v_move_rural_not]),2);
-    
+    % Note need to compute it this way...if fixes the migration
+    % probabilities and then computes EV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
     
     pitest = [move.rural_exp(:,zzz,1), squeeze( diff(move.rural_exp(:,zzz,:),1,3))];
@@ -390,10 +391,9 @@ for iter = 1:n_iterations
     urban_new = norm(v_old_urban_new-v_prime_urban_new,Inf);
     urban_old = norm(v_old_urban_old-v_prime_urban_old,Inf);
     
-    if rural_not && ...
-       rural_exp  && ...     
-       urban_new && ...
-       urban_old < tol
+    mxtol = max([rural_not, rural_exp, urban_new, urban_old]);
+    
+    if mxtol < tol
 %         disp('value function converged')
 %         disp(toc)
 %         disp(iter)
@@ -418,10 +418,7 @@ for iter = 1:n_iterations
 end
 
 
-if rural_not && ...
-       rural_exp  && ...     
-       urban_new && ...
-       urban_old > tol
+if mxtol > tol
     disp('value function did not converge')
 end
 
