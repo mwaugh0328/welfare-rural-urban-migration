@@ -359,7 +359,7 @@ for nmc = 1:Nmontecarlo
 
     [conditional_ticket_bin(nmc)] = report_welfare_quintiles(income_assets, urban_prd, expr_prd);
     
-    conditional_ticket_avg(nmc,:) = [mean(expermt_data(:,10,1)),mean(expermt_data(:,7,1)),mean(expr_prd(migration.experiment_indicator.y1))];
+    conditional_ticket_avg(nmc,:) = [mean(expermt_data(:,10,1)),mean(expermt_data(:,7,1)),mean(expr_prd)];
     
     income_assets = [control_data(:,1,1), control_data(:,3,1), cash_data(:,10,1), cash_data(:,7,1)];
 
@@ -384,11 +384,11 @@ targets = mean(moments, 1);
 
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('')
-disp('PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z, Experience')
-disp(round(100.*[mean([conditional_ticket_bin.welfare]')', mean([conditional_ticket_bin.migration]')', mean([conditional_ticket_bin.urban]')'./100,...
-    mean([conditional_ticket_bin.expr]')'],2))
+disp('PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z | Migrate, Experience | Migrate')
+disp(round(100.*[mean([conditional_ticket_bin.welfare],2), mean([conditional_ticket_bin.migration],2), mean([conditional_ticket_bin.urban],2)./100,...
+    mean([conditional_ticket_bin.expr],2)],2))
 disp('Averages: Welfare, Migration Rate, Experince')
-disp(round(100.*[mean(conditional_ticket_avg)],2))
+disp(round(100.*[mean(conditional_ticket_avg,1)],2))
 
 % 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -398,9 +398,9 @@ disp(round(100.*[mean(conditional_ticket_avg)],2))
 % 
 disp('')
 disp('PE Unconditional Cash Transfer: Welfare and Migration by Income Quintile ')
-disp(round(100.*[mean([unconditional_cash_bin.welfare]')', mean([unconditional_cash_bin.migration]')',],2))
+disp(round(100.*[mean([unconditional_cash_bin.welfare],2), mean([unconditional_cash_bin.migration],2),],2))
 disp('PE Unconditional Cash Transfer: Average Welfare Gain, Migration Rate')
-disp(round(100.*[mean(unconditional_cash_avg)],2))
+disp(round(100.*[mean(unconditional_cash_avg,1)],2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
