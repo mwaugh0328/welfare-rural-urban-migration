@@ -196,21 +196,21 @@ end
 
 seasont = repmat([0,1],1,n_tran_shocks);
 
-lowz = flipud(move(5).rural_not(:,seasont==1,1));
-medz = flipud(move(11).rural_not(:,seasont==1,1));
-lowz_exp = flipud(move(8).rural_exp(:,seasont==1,1));
+lowz = flipud(move(4).rural_not(:,seasont==1,1));
+medz = flipud(move(6).rural_not(:,seasont==1,1));
+lowz_exp = flipud(move(4).rural_exp(:,seasont==1,1));
 % visually, it's better to run this on the equally spaced grid.
 
 cd('..\plotting')
 
-save movepolicy.mat lowz medz lowz_exp
+save movepolicy_ols_late.mat lowz medz lowz_exp
 
 lowz_expr = flipud(move_temp(4).rural_not(:,seasont==1,1));
-medz_expr  = flipud(move_temp(11).rural_not(:,seasont==1,1));
-lowz_exp_expr  = flipud(move_temp(8).rural_exp(:,seasont==1,1));
+medz_expr  = flipud(move_temp(6).rural_not(:,seasont==1,1));
+lowz_exp_expr  = flipud(move_temp(4).rural_exp(:,seasont==1,1));
 % visually, it's better to run this on the equally spaced grid.
 
-save movepolicy_exp.mat lowz_expr medz_expr lowz_exp_expr 
+save movepolicy_exp_ols_late.mat lowz_expr medz_expr lowz_exp_expr 
 
 cd('..\pe_welfare_analysis')
 
