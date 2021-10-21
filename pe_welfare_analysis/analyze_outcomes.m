@@ -203,14 +203,16 @@ lowz_exp = flipud(move(4).rural_exp(:,seasont==1,1));
 
 cd('..\plotting')
 
-save movepolicy_ols_late.mat lowz medz lowz_exp
+%save movepolicy_ols_late.mat lowz medz lowz_exp
+save movepolicy.mat lowz medz lowz_exp
 
 lowz_expr = flipud(move_temp(4).rural_not(:,seasont==1,1));
 medz_expr  = flipud(move_temp(6).rural_not(:,seasont==1,1));
 lowz_exp_expr  = flipud(move_temp(4).rural_exp(:,seasont==1,1));
 % visually, it's better to run this on the equally spaced grid.
 
-save movepolicy_exp_ols_late.mat lowz_expr medz_expr lowz_exp_expr 
+%save movepolicy_exp_ols_late.mat lowz_expr medz_expr lowz_exp_expr 
+save movepolicy_exp.mat lowz_expr medz_expr lowz_exp_expr 
 
 cd('..\pe_welfare_analysis')
 
