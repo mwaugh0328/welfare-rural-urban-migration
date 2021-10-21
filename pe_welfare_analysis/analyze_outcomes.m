@@ -187,6 +187,8 @@ parfor xxx = 1:n_types
     [assets_temp_cash(xxx), move_temp_cash(xxx),... 
        cons_eqiv_cash(xxx)] = cash_experiment_welfare(params, solve_types(xxx,:), vguess(xxx));
    
+   [assets_fix(xxx), move_fix(xxx), cons_eqiv_fix(xxx)] = fix_allocations_experiment_welfare(assets(xxx), move(xxx), params, solve_types(xxx,:),  vguess(xxx));
+   
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -270,6 +272,7 @@ for nmc = 1:Nmontecarlo
 
     sim_expr_panel = zeros(n_sims,13,params.follow_hh_expr,n_types);
     sim_cash_panel = zeros(n_sims,13,params.follow_hh_expr,n_types);
+    sim_fix_panel = zeros(n_sims,13,params.follow_hh_expr,n_types);
     sim_cntr_panel = zeros(n_sims,15,params.follow_hh_expr,n_types);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -287,12 +290,17 @@ for nmc = 1:Nmontecarlo
         monga_index = monga(randi(length(monga),1,n_sims))';
 
         [sim_expr_panel(:,:,:,xxx), sim_cntr_panel(:,:,:,xxx)]...
-        = experiment_driver(assets(xxx), move(xxx), assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx),...
-          params, solve_types(xxx,:), monga_index, states_panel(:,:,xxx), pref_shocks((N_obs+1):end,xxx), move_shocks((N_obs+1):end,xxx), sim_panel(:,:,xxx));
+            = experiment_driver(assets(xxx), move(xxx), assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx),...
+            params, solve_types(xxx,:), monga_index, states_panel(:,:,xxx), pref_shocks((N_obs+1):end,xxx), move_shocks((N_obs+1):end,xxx), sim_panel(:,:,xxx));
       
         [sim_cash_panel(:,:,:,xxx), ~]...
-        = experiment_driver(assets(xxx), move(xxx), assets_temp_cash(xxx),move_temp_cash(xxx), cons_eqiv_cash(xxx),...
-        params, solve_types(xxx,:), monga_index, states_panel(:,:,xxx), pref_shocks((N_obs+1):end,xxx), move_shocks((N_obs+1):end,xxx), sim_panel(:,:,xxx));
+            = experiment_driver(assets(xxx), move(xxx), assets_temp_cash(xxx),move_temp_cash(xxx), cons_eqiv_cash(xxx),...
+            params, solve_types(xxx,:), monga_index, states_panel(:,:,xxx), pref_shocks((N_obs+1):end,xxx), move_shocks((N_obs+1):end,xxx), sim_panel(:,:,xxx));
+    
+    
+       [sim_fix_panel(:,:,:,xxx), ~]...
+            = experiment_driver(assets(xxx), move(xxx), assets_fix(xxx),move_fix(xxx), cons_eqiv_fix(xxx),...
+            params, solve_types(xxx,:), monga_index, states_panel(:,:,xxx), pref_shocks((N_obs+1):end,xxx), move_shocks((N_obs+1):end,xxx), sim_panel(:,:,xxx));
         
     end
 
@@ -317,6 +325,8 @@ for nmc = 1:Nmontecarlo
             data_panel_cntr(s_expr_count:e_expr_count,:,exp_index(zzz)) = sim_cntr_panel(n_sims-(sample_expr(xxx)-1):end,:,exp_index(zzz),xxx);
         
             data_panel_cash(s_expr_count:e_expr_count,:,exp_index(zzz)) = sim_cash_panel(n_sims-(sample_expr(xxx)-1):end,:,exp_index(zzz),xxx);
+            
+            data_panel_fix(s_expr_count:e_expr_count,:,exp_index(zzz)) = sim_fix_panel(n_sims-(sample_expr(xxx)-1):end,:,exp_index(zzz),xxx);
         end
                         
         s_expr_count = e_expr_count + 1;
@@ -333,6 +343,8 @@ for nmc = 1:Nmontecarlo
     control_data = data_panel_cntr(rural_cntr,:,:);
     expermt_data = data_panel_expr(rural_cntr,:,:);
     cash_data = data_panel_cash(rural_cntr,:,:);
+    fix_data = data_panel_fix(rural_cntr,:,:);
+    
     
     [migration] = report_experiment(control_data, expermt_data, 'bus');
     
@@ -351,7 +363,17 @@ for nmc = 1:Nmontecarlo
     m_rates(nmc,:) = [migration.elasticity.y1, migration.elasticity.y2, NaN, migration.elasticity.y4, NaN, migration.elasticity.y5];
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    income_assets = [fix_data(:,1,1), fix_data(:,3,1), fix_data(:,10,1), fix_data(:,7,1)];
+
+    urban_prd = expermt_data(:,11,2);
+    expr_prd = expermt_data(:,12,1);
+
+    [fix_policy_bin(nmc)] = report_welfare_quintiles(income_assets, urban_prd, expr_prd);
     
+    fix_policy_avg(nmc,:) = [mean(fix_data(:,10,1)),mean(fix_data(:,7,1)),mean(expr_prd)];
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     income_assets = [control_data(:,1,1), control_data(:,3,1), expermt_data(:,10,1), migration.experiment_indicator.y1];
 
     urban_prd = expermt_data(:,11,2);
@@ -360,6 +382,8 @@ for nmc = 1:Nmontecarlo
     [conditional_ticket_bin(nmc)] = report_welfare_quintiles(income_assets, urban_prd, expr_prd);
     
     conditional_ticket_avg(nmc,:) = [mean(expermt_data(:,10,1)),mean(expermt_data(:,7,1)),mean(expr_prd)];
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     income_assets = [control_data(:,1,1), control_data(:,3,1), cash_data(:,10,1), cash_data(:,7,1)];
 
@@ -381,10 +405,18 @@ wages = [mean([wagestats.monga]), mean([wagestats.notmonga])];
 
 targets = mean(moments, 1);
 
+% disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+disp('')
+disp('Policy : Welfare by Income Quintile: Welfare, Migration Rate, Z, Experience')
+disp(round(100.*[mean([fix_policy_bin.welfare],2), mean([fix_policy_bin.migration],2), mean([fix_policy_bin.urban],2)./100,...
+    mean([fix_policy_bin.expr],2)],2))
+disp('Averages: Welfare, Migration Rate, Experince')
+disp(round(100.*[mean(fix_policy_avg,1)],2))
+
 
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('')
-disp('PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z | Migrate, Experience | Migrate')
+disp('PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z , Experience ')
 disp(round(100.*[mean([conditional_ticket_bin.welfare],2), mean([conditional_ticket_bin.migration],2), mean([conditional_ticket_bin.urban],2)./100,...
     mean([conditional_ticket_bin.expr],2)],2))
 disp('Averages: Welfare, Migration Rate, Experince')
