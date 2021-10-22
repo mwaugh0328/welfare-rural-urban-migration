@@ -1,5 +1,5 @@
 function [bin] = report_welfare_quintiles(income_assets,urban_prd,expr_prd)
-
+rng(09212013)
 income_assets(:,[1,2]) = income_assets(:,[1,2]) + .0001.*randn(size(income_assets(:,[1,2])));
 % Add just a bit of noise to smooth stuf out...
 

@@ -1,7 +1,7 @@
 function [objective, social_welfare] = compute_fullinsurance(assets, move, cal, tfp, params, specs, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-nshocks = 5;
-ntypes = 24;
+nshocks = specs.n_trans_shocks;
+ntypes = specs.n_perm_shocks;
 ubar = cal(5);
 
 params.means_test = 0;
@@ -20,15 +20,27 @@ for xxx = 1:ntypes
     
 end 
 
-[solve_types, ~] = effecient_preamble(cal, tfp,[]); 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[zurban , ~] = pareto_approx(specs.n_perm_shocks, 1./params.perm_shock_u_std);
+
+types = [ones(specs.n_perm_shocks,1), zurban];
+
+solve_types = [params.rural_tfp.*types(:,1), types(:,2)];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%[solve_types, ~] = effecient_preamble(cal, tfp, []); 
 
 parfor xxx = 1:ntypes 
-      [~, ~, vfun(xxx), muc(xxx)] = policy_valuefun_fullinsurance(assets(xxx), move(xxx),...
+      
+    [~, ~, vfun(xxx), muc(xxx)] = policy_valuefun_fullinsurance(assets(xxx), move(xxx),...
           params, [], consumption(xxx));
 end
 
 
 [data_panel, params, state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, []);
+
 params.means_test = 0; % need to call this bc. in the simmulation call it kicks back the means test
                        % which if not rest, it will simmulate as if it was
                        % relavent. A quirk of using the calibration code in

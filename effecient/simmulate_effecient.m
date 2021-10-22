@@ -184,6 +184,10 @@ for xxx = 1:time_series
         location(xxx+1) = location(xxx);
         
         if expr_shock(xxx) < (1-pi)
+            
+            location(xxx+1) = 1; % loose experince
+            % then check if they are moving and adjust. 
+            
             if move_seasn(xxx,1) == 1 
                 location(xxx+1,1) = 2; %Non experinced season (you lost it)
                 move_cost(xxx,1) = m_seasn;

@@ -22,7 +22,7 @@ load('../pe_welfare_analysis/wages.mat')
 
 [data_panel, params] = just_simmulate(params, move, solve_types, assets, specs, ce, []);
 
-[labor, govbc, tfp] = aggregate(params, data_panel, wages, [], 1);
+[labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now let's add in the free money to move.

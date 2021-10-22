@@ -1,4 +1,4 @@
-function [cal_params, specs] = tax_eq_preamble(cal_params, specs, seed, R)
+function [cal_params, specs] = preamble(cal_params, specs, seed, R)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % cal_params should have the following order
 % 1: standard Deviation of shocks (todo, veryfy its stand dev or variance)
@@ -52,8 +52,8 @@ if isempty(specs)
                              % moving cost.
     grid2 = [70, 0.30, 2];
 
-    %specs.asset_space = [linspace(grid1(2),grid1(3),grid1(1)), linspace(grid2(2),grid2(3),grid2(1))];
-    specs.asset_space = linspace(0,2,200); % this is the equally spaced grid
+    specs.asset_space = [linspace(grid1(2),grid1(3),grid1(1)), linspace(grid2(2),grid2(3),grid2(1))];
+    %specs.asset_space = linspace(0,2,100); % this is the equally spaced grid
 
     specs.n_perm_shocks = 24;
     specs.n_trans_shocks = 30;
@@ -70,7 +70,7 @@ if isempty(specs)
 end
 
 if isempty(seed)
-    specs.seed = 555;
+    specs.seed = 777;
 else
     specs.seed = seed;
 end

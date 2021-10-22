@@ -1,4 +1,4 @@
-function [big_panel, params, state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, cft_params)
+function [big_panel, params, big_state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, cft_params)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 time_series = specs.time_series; %100000;
 N_obs = specs.N_obs; %25000;
@@ -6,6 +6,7 @@ N_obs = specs.N_obs; %25000;
 params.N_obs = N_obs;
 
 big_panel = [];
+big_state_panel = [];
 
 [~,type_weights] = pareto_approx(specs.n_perm_shocks, 1./params.perm_shock_u_std);
 
@@ -52,6 +53,7 @@ for nmc = 1:specs.Nmontecarlo
     end
 
     big_panel = [big_panel ; data_panel];
+    big_state_panel = [big_state_panel; state_panel];
 
 end
 

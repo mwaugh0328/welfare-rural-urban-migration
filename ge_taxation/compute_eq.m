@@ -13,7 +13,7 @@ tax = [taxrate, taxprog];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[labor, govbc] = aggregate(params, data_panel,wages, tfp, flag);
+[labor, govbc] = ge_aggregate(params, data_panel,wages, tfp, flag);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

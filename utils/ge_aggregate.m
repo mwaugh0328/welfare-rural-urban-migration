@@ -1,4 +1,4 @@
-function [labor, govbc, tfp, wages, welfare_stats] = aggregate(params,data_panel,wages,tfp,flag)
+function [labor, govbc, tfp, wages, welfare_stats] = ge_aggregate(params,data_panel,wages,tfp,flag)
 
 wage.monga = wages(1);
 wage.notmonga = wages(2);
@@ -16,6 +16,9 @@ welfare = 11; experince = 12; fiscalcost = 13; tax = 14; production = 15;
 rurual_ind = data_panel(:,live_rural)==1;
 rural = data_panel(data_panel(:,live_rural)==1, :);
 rural_not_monga = rural(rural(:,season)~=1, :);
+
+all_seasonal_migrants = rural_not_monga(rural_not_monga(:,move_season) ==1, :);
+all_seasonal_migrants = length(all_seasonal_migrants)./length(rural_not_monga);
 
 mushfiqs_sample = rural_not_monga(rural_not_monga(:,assets)<= params.means_test,:);
 
@@ -40,6 +43,8 @@ disp('Average Rural Population')
 disp(avg_rural)
 disp('Migrants, Control Group, Mushfiqs Sample')
 disp(musfiq_migrants)
+disp('Migrants, Whole Population')
+disp(all_seasonal_migrants)
 disp('Wage Gap')
 disp(wage_gap)
 disp('Fraction of Rural with Access to Migration Subsity')
@@ -48,8 +53,16 @@ disp('Experince, Control Group, Mushfiqs Sample')
 disp(avg_experince)
 disp('Consumption, Mushfiqs Sample')
 disp(mean(mushfiqs_sample(:,consumption)))
-disp('Control Group, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
-disp((100.*[bin.welfare', bin.migration', bin.experince', 0.01.*bin.consumption']))
+
+if min(bin.welfare) < -10
+    %I'm proably reporting the value function
+    
+    disp('Control Group, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
+    disp(([bin.welfare', 100.*bin.migration', 100.*bin.experince', 0.01.*bin.consumption']))
+else
+    disp('Control Group, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
+    disp((100.*[bin.welfare', bin.migration', bin.experince', 0.01.*bin.consumption']))
+end
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,8 +88,18 @@ if flag == 1
 welfare_stats.all = mean(data_panel(:, welfare));
 welfare_stats.rural = mean(data_panel(data_panel(:,live_rural)==1, welfare));
 welfare_stats.urban = mean(data_panel(data_panel(:,live_rural)~=1, welfare));
-disp('Social Welfare: All, Rural, Urban')
-disp(100.*[welfare_stats.all, welfare_stats.rural, welfare_stats.urban])
+
+if welfare_stats.all < -10
+    %I'm proably reporting the value function
+    disp('Social Welfare: All, Rural, Urban')
+    disp([welfare_stats.all, welfare_stats.rural, welfare_stats.urban])
+
+else
+    disp('Social Welfare: All, Rural, Urban')
+    disp([welfare_stats.all, welfare_stats.rural, welfare_stats.urban])
+    
+end
+    
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

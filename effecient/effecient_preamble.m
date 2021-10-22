@@ -1,9 +1,10 @@
 function [solve_types, params] = effecient_preamble(cal_params, tfp, specs) 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 if isempty(specs)
-    [cal_params, specs] = preamble(cal_params, [],[]);
+    [cal_params, specs] = preamble(cal_params, [],[],[]);
 else
-    [cal_params, ~] = preamble(cal_params, [],[]);
+    [cal_params, ~] = preamble(cal_params, [],[],[]);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

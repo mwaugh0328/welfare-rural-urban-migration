@@ -15,7 +15,6 @@ n_rural_options = params.rural_options; n_urban_options = params.urban_options;
 
 R = params.R;
 
-
 % These are the permanent shocks. 
 
 beta = params.beta; m = params.m; gamma = params.pref_gamma; abar = params.abar;
@@ -29,8 +28,8 @@ trans_mat = params.trans_mat;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_iterations = 500;
-tol = 10^-4; 
+n_iterations = 5000;
+tol = 10^-6; 
 %It's loose here...tighten for welfare, but does not seem matter for
 %quantities
 
@@ -361,14 +360,14 @@ for iter = 1:n_iterations
     urban_new = norm(v_old_urban_new-v_prime_urban_new,Inf);
     urban_old = norm(v_old_urban_old-v_prime_urban_old,Inf);
     
-    if rural_not && ...
-       rural_exp  && ...     
-       urban_new && ...
-       urban_old < tol
+    mxtol = max([rural_not, rural_exp, urban_new, urban_old]);
+    
+    if mxtol < tol
 %         disp('value function converged')
 %         disp(toc)
 %         disp(iter)
         break
+        
     else
         
     v_old_rural_not = v_prime_rural_not;
@@ -388,11 +387,7 @@ for iter = 1:n_iterations
  
 end
 
-
-if rural_not && ...
-       rural_exp  && ...     
-       urban_new && ...
-       urban_old > tol
+if mxtol > tol
     disp('value function did not converge')
 end
 

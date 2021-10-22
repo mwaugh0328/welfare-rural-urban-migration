@@ -7,6 +7,7 @@ welfare = 11; experince = 12; fiscalcost = 13; tax = 14; production = 15;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rng(09212013)
 data_panel(:,[income,assets]) = data_panel(:,[income,assets]) + .0001.*randn(size(data_panel(:,[income,assets])));
 % Add just a bit of noise to smooth stuf out...
 income_prct = 20:20:80;

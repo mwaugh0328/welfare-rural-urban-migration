@@ -1,4 +1,4 @@
-function [social_welfare] = compute_analytical_effecient(cal, tfp, seed)
+function [social_welfare, move] = compute_analytical_effecient(cal, tfp, seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [solve_types, params] = effecient_preamble(cal, tfp, []); 
@@ -18,9 +18,7 @@ tic
 [cons, ~, ~] = fsolve(@(xxx) onestep(xxx, params, tfp, solve_types, seed, 0), guess,options);
 toc
 
-
-
 [rc, social_welfare, move] = onestep(cons, params, tfp, solve_types, seed, 1.0);
 
-disp(cons)
-disp(rc)
+% disp(cons)
+% disp(rc)

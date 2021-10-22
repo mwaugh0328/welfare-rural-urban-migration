@@ -56,7 +56,7 @@ if isempty(specs)
     specs.asset_space = linspace(0,2,200); % this is the equally spaced grid
 
     specs.n_perm_shocks = 24;
-    specs.n_trans_shocks = 7;
+    specs.n_trans_shocks = 30;
 
     specs.time_series = 100000; % length of the time series for each perm type
     specs.N_obs = 25000; % grab last number of observations
@@ -65,7 +65,7 @@ if isempty(specs)
     specs.follow_hh_expr = 11;  % number of time periods to follow a guy, historical was 11;
     specs.exp_index = [1,2,3,4,5,7,11]; % places to capture data (historical code was [1,2,3,4,5,7,11];
     
-    specs.Nmontecarlo = 30;
+    specs.Nmontecarlo = 1;
         
 end
 

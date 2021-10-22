@@ -37,7 +37,7 @@ else
 
     [data_panel, params, state_panel] = effecient_simmulate(params, move, consumption, solve_types, [], [], seed);
     
-    [data_panel] = quick_sim(data_panel, state_panel, vfun, muc, consumption, params);
+    [data_panel] = quick_sim_effecient(data_panel, state_panel, vfun, muc, consumption, params);
 
     [social_welfare, rc, ~, mpl] = effecient_aggregate(params,tfp, data_panel, flag);
     

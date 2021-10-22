@@ -403,7 +403,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This part just focuses on the entire sample...
 
-wages = [mean([wagestats.monga]), mean([wagestats.notmonga])];
+wages.monga = mean([wagestats.monga]);
+wages.notmonga = mean([wagestats.notmonga]);
 
 targets = mean(moments, 1);
 
