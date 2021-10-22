@@ -75,20 +75,22 @@ disp("Welfare Gain in %: From Full Insurance to Centralized/Effecient Allocaiton
 disp(100.*(cons_eqiv_effecient.all -cons_eqiv.all))
 
 
-seasont = repmat([0,1],1,specs.n_trans_shocks);
-
-cd('..\plotting')
-
-%save movepolicy_ols_late.mat lowz medz lowz_exp
-
-lowz = flipud(repmat(move_policy(4).rural_not(seasont == 1, 1)',[length(specs.asset_space),1]));
-medz = flipud(repmat(move_policy(6).rural_not(seasont == 1, 1)',[length(specs.asset_space),1]));
-lowz_exp = flipud(repmat(move_policy(6).rural_exp(seasont == 1, 1)',[length(specs.asset_space),1]));
 
 
-save movepolicy_effecient.mat lowz medz lowz_exp
-
-cd('..\effecient')
+% cd('..\plotting')
+% 
+% seasont = repmat([0,1],1,specs.n_trans_shocks);
+% 
+% %save movepolicy_ols_late.mat lowz medz lowz_exp
+% 
+% lowz = flipud(repmat(move_policy(4).rural_not(seasont == 1, 1)',[length(specs.asset_space),1]));
+% medz = flipud(repmat(move_policy(6).rural_not(seasont == 1, 1)',[length(specs.asset_space),1]));
+% lowz_exp = flipud(repmat(move_policy(6).rural_exp(seasont == 1, 1)',[length(specs.asset_space),1]));
+% 
+% 
+% save movepolicy_effecient.mat lowz medz lowz_exp
+% 
+% cd('..\effecient')
 
 
 
