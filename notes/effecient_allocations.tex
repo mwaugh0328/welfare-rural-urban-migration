@@ -123,11 +123,11 @@ The Planning Problem maximizes (\ref{eq:sp-social_welfare2}) subject to the law 
 \lambda_{j}(z, s', x', t+1)  & =  \int\limits_{s} \int\limits_{x}  \mu_{j,j}(z, s,x,t)\pi(s',s) \varphi(x',x, j) \lambda_{j}(z, s, x, t)  \ ds \ dx  \  \label{eq:planner_law_motion} \\
 & +  \sum_{j' \neq j} \int\limits_{s} \int\limits_{x} \mu_{j,j'}(z, s,x,t) \pi(s',s) \varphi(x',x, j') \lambda_{j'}(z, s, x, t)  \ ds  \ dx. \nonumber
 \end{align}
-where $\pi(s',s)$ describes the transition across transitory states and $\varphi(x',x, j')$ describes the transition in experience. This equation says, given the current distribution  $\lambda_{j'}(z, s, x, t)$ in location $j'$, the measure of households in location $j$ with productivity shock state $s'$ and experience level $x'$ next period reflects the migration probabilities of households in each location (the $\mu$'s), how their productivity evolves over time ($\pi's$), and how their experience $\varphi(x',x, j)$ evolves. 
+where $\pi(s',s)$ describes the transition across transitory states and $\varphi(x',x, j')$ describes the transition in experience. This equation says, given the current distribution  $\lambda_{j'}(z, s, x, t)$ in location $j'$, the measure of households in location $j$ with productivity shock state $s'$ and experience level $x'$ next period reflects the migration probabilities of households in each location (the $\mu$'s), how their productivity evolves over time ($\pi's$), and how their experience $\varphi(x',x, j)$ evolves.
 
 \textbf{Labor Supply, Aggregate Production, and the Resource Constraint.} Given a distribution of households, the effective labor units in the urban and rural area are
 \begin{align}
-N_{u,t} =& \sum_{j = [\mbox{\tiny urban}, \mbox{\tiny seas}]}\int\limits_{z} \int\limits_{s} \int\limits_{x} \  z s^{\gamma} \ \lambda_j(z, s, x, t) \ dz \ ds \ dx, \nonumber 
+N_{u,t} =& \sum_{j = [\mbox{\tiny urban}, \mbox{\tiny seas}]}\int\limits_{z} \int\limits_{s} \int\limits_{x} \  z s^{\gamma} \ \lambda_j(z, s, x, t) \ dz \ ds \ dx, \nonumber
 \\
 \nonumber \\
 N_{r,t} =& \int\limits_{z} \int\limits_{s} \int\limits_{x} \ s \ \lambda_{\mbox{\tiny rural}}(z, s, x, t)\ dz \ ds \ dx \ .
@@ -189,29 +189,92 @@ There is, however, an important point of departure within the context of our mod
 
 Two observations follow from the fact that the level of consumption may be different across locations in the efficient allocation. First, when moving households across space, the planner must factor in the differential in the consumption cost associated with moving a non-experienced, rural household to the urban area, not just the moving cost. Second, and more broadly, it is a clear example where gaps in consumption (either in the cross-section or when households move as in the BCM experiment) arise in an efficient allocation because of differences in preferences. In other words, consumption gaps do not necessarily imply the allocation is inefficient or that there is scope for gains to reallocate households across space.
 
-While the migration probabilities (\ref{eq:migration_prob}) take on a familiar $\exp$ sum form that is facilitated by the Type 1 extreme value shocks, how the migration probabilities connect with fundamentals in (\ref{eq:dynamic_multiplier}) and (\ref{eq:kappa}) are novel. 
+While the migration probabilities (\ref{eq:migration_prob}) take on a familiar $\exp$ sum form that is facilitated by the Type 1 extreme value shocks, how the migration probabilities connect with fundamentals in (\ref{eq:dynamic_multiplier}) and (\ref{eq:kappa}) are novel.
 
-The migration probabilities reflect two components which reflect societies valuation of the cost and benefits of a move. First, is the cost and it's evaluated at the (common) marginal utility of consumption $-u'(t) \ m_{j',j}$. So if the migration cost from $j$ to $j'$ is high, less people move. If aggregate resources are scarce, then less people move. 
+The migration probabilities reflect two components which reflect the social cost and benefits of a move. First, is the cost and it's evaluated at the (common) marginal utility of consumption $-u'(t) \ m_{j',j}$. So if the migration cost from $j$ to $j'$ is high, less people move. If aggregate resources are scarce, then less people move.
 
-The benefit of migration is a forward-looking, dynamic component which reflects societies valuation of a household with shock states $z,s$ and experience in location $j'$. Let's upack this a bit more. The second component is the expected value of the multiplier for a given destination $\chi_{3j'}(z, t+1)$ with the expectation taken across the shock states and experience. This multiplier (\ref{eq:dynamic_multiplier}) takes on a recursive formulation where the multiplier today equals utility, the $\kappa$ term (more on this below), and then the expected, discounted multiplier tomorrow taking into account all the different possible moving options out of location $j'$. What this is says is if the social value of an household is, in expectation, high in location $j'$ the Social Planner wants more households to move there.
+The benefit of migration is a forward-looking, dynamic component which reflects society's valuation of a household with shock states $z,s$ and experience in location $j'$. Let's unpack this a bit more. The second component is the expected value of the multiplier for a given destination $\chi_{3j'}(z, t+1)$ with the expectation taken across the shock states and experience. This multiplier (\ref{eq:dynamic_multiplier}) takes on a recursive formulation where the multiplier today equals utility, the $\kappa$ term (more on this below), and then the expected, discounted multiplier tomorrow taking into account all the different possible moving options out of location $j'$. What this is says is if the social value of an household is, in expectation, high in location $j'$ the Social Planner wants more households to move there.
 
-What determines the social value of a location? It's about what a household with those states receives from the Planner vs. what is produced in return. What it receives is the first term in (\ref{eq:dynamic_multiplier}): a households level of utility evaluated at the optimal (full insurance) consumption allocation and the expected preference shock. Then the $\kappa$ term in (\ref{eq:kappa}) reflects the net resources produced by the household, i.e. it's marginal product of labor net of consumption received and net expected moving costs|all evaluated at the marginal utility of consumption. 
+What determines the social value of a location? It's what a household receives from the planner versus what is produced in return. What it receives is the first term in (\ref{eq:dynamic_multiplier}): utility evaluated at the optimal (full insurance) consumption allocation and the expected preference shock. Then the $\kappa$ term in (\ref{eq:kappa}) reflects the net resources produced by the household, i.e. it's marginal product of labor net of consumption received and net expected moving costs|all evaluated at the marginal utility of consumption.
 
-All of this gives rise to intuitive features of the allocation. If a household is expected to be have a high marginal product of labor in location $j$ it moves them. If a household requires relatively more consumption in that location and properly equate the marginal utility of consumption (which would arise when the household is inexperienced) the Planner is likely to move that the household. The planner also thinks through the moving cost associated with that location as well through this term $\sum_{j'}  m_{j',j} \ \mu_{j',j}(z, s, x, t+1)$ which is a migration weighted average of the moving costs. So it indexes how hard (or not) it is to move a household out of that location in the future. So if a location is ``expensive'' move out, less people move in.
+All of this gives rise to intuitive features of the allocation. The planner moves households expected to be have a high marginal product of labor in location $j$. The planner is unlikely to move a household if it requires relatively more consumption in that location (which would arise when the household is inexperienced). The planner also thinks through the moving cost associated with that location as well through this term $\sum_{j'}  m_{j',j} \ \mu_{j',j}(z, s, x, t+1)$ which is a migration weighted average of the moving costs. So it indexes how hard (or not) it is to move a household out of that location in the future. So if a location is ``expensive'' to move out of out, the planner moves less people in. 
 
 How does this allocation relate to the competitive equilibrium? This is less obvious, but some general thoughts can be arrived at. A key theme is that in the Planning Problem there is a common, societal valuation on the costs and benefits of moving and these valuations induce the efficient allocation. In the competitive equilibrium, incomplete markets gives rise to differences in the marginal utility of consumption and, hence, different valuations on the costs and benefits of a move. This could give rise to situations in which there is either too much migration or too little. And policy interventions such as migration subsidies could push the allocation towards or away from the socially optimal outcome. We explore these issues next.
 
 
 \subsection{The Efficient Allocation}
 
-This section computes the efficient allocation given the calibrated parameters from section. Like in our competitive equilibrium, we focus on stationary equilibria which give rise to time invariant consumption allocations and migration probabilities. Appendix ??? describes the computational details and various robustness checks.\footnote{At a high-level, we first guess consumption allocations and marginal product of labor per efficiency unit. Given this guess, we recursively compute the multipliers $\chi_{3j'}$ and the migration probabilities via fixed point iteration. Then we construct aggregates and check if the initial guesses were consistent with feasibility. If not, update the guess until feasibility is satisfied. This approach worked well.}
+\begin{table}[t!]
+\small
+\setlength {\tabcolsep}{1.5mm}
+\renewcommand{\arraystretch}{2.30}
+\refstepcounter{table}
+\begin{center}\label{tb:effecient}
+\begin{tabular}{l c c c }
+\multicolumn{4}{c}{\normalsize \textbf{Table \ref{tb:sum_stat}: Baseline vs. the Efficient Allocation}}\\
+\hline
+\hline
+\footnotesize   & \footnotesize  \textbf{Baseline} & \footnotesize   \textbf{Full Insurance, Fix Migration} &  \footnotesize \textbf{Efficient Allocation} \\
+\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4}
+\footnotesize  Rural Population  & 60.0  & 60.0   & 53.4      \\
+\footnotesize  Seasonal Migration & 30.5   & 30.5 & 26.6 \\
+\footnotesize  Wage Gap  & 1.88  & 1.88  & 1.56     \\
+\footnotesize Welfare Gain & --- & 46.5 & 48.0 \\
+\hline
+\end{tabular}
+\parbox[c]{6.75in}{\vspace{.1cm}
+{\footnotesize \textbf{Note:} }}
+\end{center}
+\end{table}
 
-Table XX reports the results and comparisons to various benchmarks. 
+This section computes the efficient allocation given the calibrated parameters from section. Like in our competitive equilibrium, we focus on stationary equilibria which give rise to time invariant consumption allocations and migration probabilities. Appendix ??? describes the computational details and various robustness checks.\footnote{At a high-level, we first guess consumption allocations and marginal product of labor per efficiency unit. Given this guess, we recursively compute the multipliers $\chi_{3j'}$ and the migration probabilities via fixed point iteration. Then we construct aggregates and check if the initial guesses were consistent with feasibility. If not, update the guess until feasibility is satisfied. This approach worked well.} Welfare here is the percent increase in consumption a household would require to be indifferent between the stationary decentralized allocation and the stationary centralized allocation, behind the veil of ignorance.
+
+Table \ref{tb:effecient} reports the results and comparisons to various benchmarks. The first column reproduces the aggregate results from the baseline economy.\footnote{Seasonal Migration is for the entire population in our model, not just the BCM sample which is selected on the basis of wealth which has no content in the efficient allocation.} The second column in Table \ref{tb:effecient} is an intermediate step towards the efficient allocation. Here we fix the migration policy functions, but redistribute the total amount of resources in the economy to equalize the marginal utility of consumption across households. In other words, the size of the pie is held fix; all we are changeling is how the pie is distributed across. The gains are large here, but this not our focus as the large gains are a consequence known sources of gains from the redistribution across permanent types and imperfect insurance.
+
+\begin{figure}[!t]
+\centering{\includegraphics[scale = 0.50]{../figures/effecient_migration_policy_low_z_both.pdf}}
+\textbf{\caption{Migration Probabilities: Baseline vs. Efficient Allocation}\label{fig:efficient_policy_function}}
+\end{figure}
+
+The interesting question is the following: How much better can the planner do by changing how households migrate and move across rural and urban areas? The third column answers this question by computing the efficient allocation. Interestingly, the planner chooses an allocation that induces a smaller rural population, has less seasonal migration and a smaller, but non-zero wage gap (as implied by the marginal product of labor) between rural and urban areas. The incremental welfare gains from changes in migration relative to the full insurance allocation, however, are modest; about one and a half percent. 
+
+The these results connect with the nature of those who move in the data and the calibrated model. Figure \ref{fig:efficient_policy_function} reproduces the plot of the migration policy function by transitory shock and asset holdings for low $z$ households on the left hand side. On the right hand side are the migration probabilities chosen by the planner  In the baseline, competitive equilibrium many migrants move out of ``desperation'' with low transitory shocks and low assets to avoid the borrowing constraint. From the planners perspective, these moves are socially wasteful as the right-hand plane show they are virtually eliminated. From the planners perspective, directly given these households insurance and keeping them in the rural area is the efficient thing to do. In aggregate, by eliminating these desperation moves, seasonal migration is lower than in the baseline allocation. 
+
+
+
+\textbf{Discuss GE tax.} The issue here is that (i) it is clearly a second best policy as it pushes migration in the wrong direction, however, it is still welfare enhancing because the costs of distorting migration is small relative to the gains from providing insurance even indirectly via migration. So we see sizeable gains from the GE policy. And that is in fact what Table \ref{tb:effecient} shows. The big ``wedge'' is on insurance.
+
+\textbf{discuss that the RCT is telling us about if we have too much or too little migration.} There is a linear map from RCT to a normative statement. One of the key things shaping ``too much'' migration is LATE vs. OLS and how it influences $\gamma$. When LATE = OLS, these desperation moves don't take place. So then, what I would call more traditional forces are taking place. Risk aversion prevents high productive guys from migrating as much along with the credit constraint. Then the planner has these guys move more and that is in fact what we see. This should be one paragraph.
+
+NOT for paper. BUT FOR YOU TO SEE
+
+\begin{table}[t!]
+\small
+\setlength {\tabcolsep}{1.5mm}
+\renewcommand{\arraystretch}{2.30}
+\refstepcounter{table}
+\begin{center}\label{tb:effecient}
+\begin{tabular}{l c c c }
+\multicolumn{4}{c}{\normalsize \textbf{Table \ref{tb:sum_stat}: LATE = OLS vs. the Efficient Allocation}}\\
+\hline
+\hline
+\footnotesize   & \footnotesize  \textbf{Baseline} & \footnotesize   \textbf{Full Insurance, Fix Migration} &  \footnotesize \textbf{Efficient Allocation} \\
+\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4}
+\footnotesize  Rural Population  & 60.0  & 60.0   & 56.9      \\
+\footnotesize  Seasonal Migration & 42.5   & 42.5 & 52.6 \\
+\footnotesize  Wage Gap  & 1.88  & 1.88  & 1.67     \\
+\footnotesize Welfare Gain & --- & 43.2 & 44.37 \\
+\hline
+\end{tabular}
+\parbox[c]{6.75in}{\vspace{.1cm}
+{\footnotesize \textbf{Note:} }}
+\end{center}
+\end{table}
 
 
 \newpage
 
-\bibliography{./migration_refs}
+\bibliography{./bib/migration_refs}
 
 \newpage
 
