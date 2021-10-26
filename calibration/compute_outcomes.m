@@ -174,7 +174,7 @@ end
 % Now simulate the model...
 
 Nmontecarlo = specs.Nmontecarlo;
-moments = zeros(Nmontecarlo,12);
+moments = zeros(Nmontecarlo,specs.nmoments);
 
 for nmc = 1:Nmontecarlo
 
@@ -302,7 +302,7 @@ for nmc = 1:Nmontecarlo
 % Fraction of residents residing in the rural area...
     avg_rural = sum(rural)./length(data_panel);
 
-    var_income = [var(log(data_panel(rural,1))), var(log(data_panel(~rural,1)))];
+   std_income = [std(log(data_panel(rural,1))), std(log(data_panel(~rural,1)))];
 % No emasurment error here, we add it on expost. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -392,9 +392,9 @@ for nmc = 1:Nmontecarlo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    aggregate_moments = [m_income(2)./m_income(1), avg_rural, var_income(2), frac_no_assets];
+    aggregate_moments = [m_income(2)./m_income(1), avg_rural, std_income(2), frac_no_assets];
 
-    experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, LATE-OLS, control_migration_cont_y2, params.m_season./mean(AVG_C), std_cons_growth];
+    experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, control_migration_cont_y2./temp_migration, std_cons_growth];
 
 % (1) Wage gap
 % (2) The rural share
@@ -406,9 +406,10 @@ for nmc = 1:Nmontecarlo
 % (8) LATE estiamte
 % (9) LATE - OLS estimate
 % (10) Control repeat migration rate 
-% (11) moving cost / average consumption
 % (12) Standard deviation of consumption growth. 
 
+
+% (11) moving cost / average consumption params.m_season./mean(AVG_C)
 
     moments(nmc,:)  = [aggregate_moments, experiment_moments] ;
 
