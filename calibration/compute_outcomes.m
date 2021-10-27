@@ -26,26 +26,26 @@ params.urban_options = 2;
 params.hard_rural_choice = cast([1,2,3], 'uint8');
 params.hard_urban_choice = cast([1,2], 'uint8');
 
-params.tax.rate = cal_params(15);
-params.tax.prog = cal_params(16);
+params.tax.rate = cal_params(14);
+params.tax.prog = cal_params(15);
 params.tax.location = 'all';
 
 params.means_test = 0;
 %Preferences
-params.sigma_nu_not = cal_params(9); %These are the logit shocks
-params.sigma_nu_exp = cal_params(9);
+params.sigma_nu_not = cal_params(8); %These are the logit shocks
+params.sigma_nu_exp = cal_params(8);
 
-params.R = cal_params(12);  %The storage technology
+params.R = cal_params(11);  %The storage technology
 
-params.beta = cal_params(13);  % The discount factor
+params.beta = cal_params(12);  % The discount factor
 
-params.abar = cal_params(14); % The discount factor
+params.abar = cal_params(13); % The discount factor
 
 params.ubar = cal_params(5);   % ubar, disutility of being in urban area
 
 params.lambda = cal_params(6); % getting experince and losing it
 
-params.pi_prob = cal_params(7);
+params.pi_prob = 0.6587; %setting pi and gamma
 
 params.pref_gamma = 2; % Riskaversion (need to look at paper and change name)
 
@@ -65,13 +65,13 @@ urban_tfp = cal_params(3);
 
 rural_tfp = 1./urban_tfp; % Urban TFP
 
-params.seasonal_factor = cal_params(11); % The seasonal fluctuation part. 
+params.seasonal_factor = cal_params(10); % The seasonal fluctuation part. 
 
-params.m_season = cal_params(10); % This is the bus ticket
+params.m_season = cal_params(9); % This is the bus ticket
 
 params.m = 2*params.m_season; % This is the moving cost. 
 
-gamma_urban = cal_params(8); % Gamma parameter (set to 1?)
+gamma_urban = cal_params(7); % Gamma parameter (set to 1?)
 
 % Number of permenant and transitory types. 
 n_perm_shocks = specs.n_perm_shocks; %36; %48

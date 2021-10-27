@@ -14,37 +14,37 @@ function [cal_params, specs] = preamble(cal_params, specs, seed, R)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Then there are some pre-determined, hand calibrated values...
 
-cal_params(10) = 0.0878; % this is the moving cost. It was hand calibrated to 
+cal_params(9) = 0.0878; % this is the moving cost. It was hand calibrated to 
 % % deliver it being approx 10% of half yearly consumption. Did try internal
 % % calibration...does provide better fit actually.
 
-cal_params(11) = 0.55; % This is the seasonal shock. Again, hand calibrated
+cal_params(10) = 0.55; % This is the seasonal shock. Again, hand calibrated
 % to approx match the large drop in income and consumption in Monga from
 % the Khandeker paper.
 
 if isempty(R)
-    cal_params(12) = 0.95; % This is the gross real interest rate on the riskfree
+    cal_params(11) = 0.95; % This is the gross real interest rate on the riskfree
     %asset/storage technology. Consistent with their primary asset being cash and
     % an annual 10% inflation rate
 else
-    cal_params(12) = R;
+    cal_params(11) = R;
 end
 
-cal_params(13) = 0.95; % This is the discount factor. Would be something worth 
+cal_params(12) = 0.95; % This is the discount factor. Would be something worth 
 %trying to calibratate in the future. 
 
-cal_params(14) = 0.0; % This is the abar...it's set to zero. We are able to 
+cal_params(13) = 0.0; % This is the abar...it's set to zero. We are able to 
 % to have it be positive. 
 
-cal_params(15) = 1.0; % this value is 1 - the average tax rate
+cal_params(14) = 1.0; % this value is 1 - the average tax rate
 
-cal_params(16) = 0.0; % this is the tax progresivity
+cal_params(15) = 0.0; % this is the tax progresivity
 
-cal_params(17) = 0.845; % this is the extent of decreasing returns in rural area
+cal_params(16) = 0.845; % this is the extent of decreasing returns in rural area
                         % it was hand calibrated to mach the AKM experiment
                         % 0.845
                         
-cal_params(18) = 3; % how long to follow a household...
+cal_params(17) = 3; % how long to follow a household...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if isempty(specs)
