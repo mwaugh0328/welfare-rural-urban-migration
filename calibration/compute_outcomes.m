@@ -45,7 +45,8 @@ params.ubar = cal_params(5);   % ubar, disutility of being in urban area
 
 params.lambda = cal_params(6); % getting experince and losing it
 
-params.pi_prob = 0.658653898908759; %setting pi and gamma
+params.pi_prob = cal_params(6);
+%0.658653898908759; %setting pi and gamma
 
 params.pref_gamma = 2; % Riskaversion (need to look at paper and change name)
 
