@@ -13,16 +13,16 @@
 
 %clear
 
-load('cal_baseline_s730.mat')
-params = x1(1:end-1); % currently has moving cost in there
+load('lambda_pi_cal_baseline_s5_1.mat')
+params = x1; % currently has moving cost in there
 n_params = length(params); % how many paramters we need to do...
 
-eps = 1 + 0.001; % This is the change. One issue is that some of this stuff was
+eps = 1 + 0.005; % This is the change. One issue is that some of this stuff was
 % not changing that much, this is a question of how accuratly we are
 % solving it, here is an area of investigation.
 
-els_moments = zeros(9,9);
-jacobian_moments = zeros(9,9);
+els_moments = zeros(n_params,n_params);
+jacobian_moments = zeros(n_params,n_params);
 
 for xxx = 1:n_params
     
@@ -44,6 +44,8 @@ for xxx = 1:n_params
 % So each row is a parameter, the each column is the moment
     
 end
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % old_jac = [    1.3491    0.7596   -0.3048   -3.4347   -0.3967   -1.9827   -0.5888    4.8902    0.3078

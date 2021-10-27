@@ -18,14 +18,12 @@ aggregate_moments = [1.89, 0.61, 0.625, 0.47];
 % Experiment Moments...
 
 experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.10, 0.40];
-% (6) seasonal migration in control
-% (7) increase in r1 (22 percent)
-% (8) increase in r2 (9.2 percent)
-% (9) LATE estiamte
-% (10) OLS estimate
-% (11) Control repeat migration rate 
-% (12) Temp Moving cost relative to rural average consumption
-% (13) Standard deviation of consumption growth. 
+% (5) seasonal migration in control
+% (6) increase in r1 (22 percent)
+% (7) increase in r2 (9.2 percent)
+% (8) LATE estiamte
+% (9) OLS estimate
+% (10) Standard deviation of consumption growth. 
 
 moments = [aggregate_moments, experiment_hybrid];
 
