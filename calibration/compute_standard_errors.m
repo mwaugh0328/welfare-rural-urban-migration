@@ -27,7 +27,7 @@ for xxx = 1:n_params
         cal_eps_for(xxx) = params(xxx).*eps; % forward
         cal_eps_bak(xxx) = params(xxx)./eps; % backward
 
-        change_cal = (cal_eps_for(xxx))-(cal_eps_bak(xxx));
+        
 
         moments_for = calibrate_model(cal_eps_for,[],[],3);
         moments_bak = calibrate_model(cal_eps_bak,[],[],3); % moments backward
@@ -40,10 +40,11 @@ for xxx = 1:n_params
         
         moments_for(3) = moments_for(3)^2 + me_wage_var; % use measurement error
         moments_bak(3) = moments_bak(3)^2 + me_wage_var; % use measurement error
-
+        
+        change_cal = cal_eps_for(xxx)- cal_eps_bak(xxx);
         change_moments = moments_for - moments_bak;
 
-        jacobian_moments(xxx,:) = change_moments'./change_cal; % compute change.
+        jacobian_moments(xxx,:) = change_moments ./change_cal; % compute change.
         els_moments(xxx,:)= (log(moments_for) - log(moments_bak)) ./ (log(cal_eps_for(xxx))-log(cal_eps_bak(xxx)))';
 
     % So each row is a parameter, then each column is the moment
@@ -82,7 +83,7 @@ V=[experiment_var_cov  zeros_8x3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% Weighting Matrix
 
-W= eye( 11 );
+W = eye( 11 );
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% Gamma Matrix
@@ -92,11 +93,42 @@ g=[ones(1,8)*1/g ones(1,3)];
 GAM=eye(11).*g;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-M=Matrix_M;
+M = Matrix_M;
 
 SD_mat= inv(M'*W*M) * M' * W * GAM * V * GAM * W * M * inv(M'*W*M);
 
-SD=diag(SD_mat)';
+SD = diag(SD_mat)';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 disp([params(order_table) me_consumption_var me_wage_var; SD])
+
+%5
+%     0.5520    1.5368    0.6074    0.6587    0.5176    1.5528    1.3046    0.7465    0.1265    0.1543    0.1500
+%     0.0075    0.4679    2.2733    2.6631    0.0368    0.0307    1.2997    0.0052    0.0262    0.0028    0.0780
+
+%15
+%     0.5520    1.5368    0.6074    0.6587    0.5176    1.5528    1.3046    0.7465    0.1265    0.1543    0.1500
+%     0.0031    0.2472    1.1756    1.0485    0.1596    0.0116    0.2628    0.0040    0.0030    0.0014    0.0091
+
+%30
+%     0.5520    1.5368    0.6074    0.6587    0.5176    1.5528    1.3046    0.7465    0.1265    0.1543    0.1500
+%     0.0071    0.3004    1.1599    1.2667    0.2111    0.0134    0.5708    0.0106    0.0031    0.0014    0.0174
+
+%45
+%     0.5520    1.5368    0.6074    0.6587    0.5176    1.5528    1.3046    0.7465    0.1265    0.1543    0.1500
+%     0.0402    1.4500    3.6025    5.4714    0.8235    0.0302    3.7594    0.0800    0.0137    0.0020    0.0968
+
+%55
+%     0.5520    1.5368    0.6074    0.6587    0.5176    1.5528    1.3046    0.7465    0.1265    0.1543    0.1500
+%     0.3329    8.9811   19.9759   34.2256    5.3082    0.1715   30.9671    0.8355    0.0870    0.0043    0.8887
+
+%     0.5520    1.5368    0.6074    0.6587    0.5176    1.5528    1.3046    0.7465    0.1265    0.1543    0.1500
+%     4.0639  104.5804  188.8443  375.4030   57.7842    2.4968  355.1551    9.7712    1.1052    0.0394   11.1587
+
+
+
+
+
+
+
+
