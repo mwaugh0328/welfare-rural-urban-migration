@@ -1,0 +1,142 @@
+\documentclass[pdftex,11pt]{article}
+\usepackage[pdftex]{graphicx,color}
+\usepackage{setspace}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{lscape}
+\usepackage[longnamesfirst]{natbib}
+\usepackage{cite}
+\usepackage[paperwidth=8.5in,
+left=0.5in,right=0.5in,paperheight=11.0in,textheight=9.5in,centering]{geometry}
+
+\bibliographystyle{ecta}
+\definecolor{nblue}{RGB}{0,0,128}
+
+\usepackage[colorlinks=true, linkcolor=nblue,
+citecolor=black, urlcolor=nblue, bookmarks=false,
+pdfstartview={XYZ null null 0.70},
+pdftitle={Notes Durable Demand},
+pdfauthor={Michael E. Waugh},
+pdfkeywords={}
+]{hyperref}
+
+\usepackage{setspace}
+
+\onehalfspace
+
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\arraystretch}{.7}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{.1in}
+\renewcommand\familydefault{\sfdefault}
+
+\titleformat{\section}{\large\bf}{\thesection.}{.5em}{}
+\titleformat{\subsection}{\normalsize\bf}{\thesubsection.}{.5em}{}
+\titleformat{\subsubsection}{\normalsize\bf}{\thesubsubsection.}{.5em}{}
+
+\def\thesection{\arabic{section}}
+\def\thesubsection{\Alph{subsection}}
+\def\thesubsubsection{\Roman{subsubsection}}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+
+\pagestyle{fancy}
+\rhead{}
+\lhead{}
+\cfoot{\thepage}
+\lfoot{}
+\lfoot{Revised: \today}
+\renewcommand{\headrulewidth}{0pt}
+
+
+\begin{document}
+
+\section{Identification in the model}
+
+
+\newpage
+
+\begin{landscape}
+\centering
+\begin{table}
+\footnotesize
+\setlength {\tabcolsep}{3.5mm}
+\renewcommand{\arraystretch}{2.25}
+\refstepcounter{table}
+\begin{center}\label{tb:employment}
+\begin{tabular}{l c c c c c c c c c}  
+\multicolumn{10}{c}{dlog(M) / dlog(parameter)} \\
+\hline
+\hline
+&  Wage gap & rural share &  Frac no assets & control & r1 & r2 & LATE & OLS & Repeat \\
+1: Standard Deviation of transitory shocks&    -0.48   &  -0.39   &  -1.05  &   0.11  &   1.21 &   1.56  &   -1.13  & -3.04 &   -0.13\\
+2: Pareto parameter permanent shock       &     1.58   &   0.95   &  -0.99  &  -3.45  &  -1.54 &  -2.40  &   -0.58  &  5.07 &   -0.08\\
+3: Urban TFP                              &    -0.25   &  -1.34   &   0.52  &   1.85  &   2.16 &   3.64  &    0.13  & -3.32 &    0.22\\
+4: Persistence of transitory shocks       &     0.47   &   0.53   &   4.17  &  -0.23  &  -1.36 &  -1.50  &    1.85  &  4.57 &    0.04\\
+5: Ubar                                   &    -0.04   &  -0.52   &  -0.98  &  -5.37  &  -1.27 &  -0.78  &    0.66  &  7.86 &   -0.74\\
+6: Getting experience                     &     0.10   &  -0.05   &   0.09  &  -0.88  &   0.41 &  -1.42  &   -0.02  &  0.09 &   -0.30\\
+7: Losing it                              &     0.01   &   0.24   &   0.13  &   1.82  &  -0.37 &   1.51  &    0.35  & -0.10 &    0.60\\
+8: Gamma parameter in shock process       &     0.17   &   0.11   &  -0.20  &  -0.77  &  -0.11 &  -0.03  &    0.04  &  2.74 &    0.13\\
+9: Logit shocks                           &    -0.07   &   0.03   &   0.02  &   0.17  &  -0.12 &  -0.07  &   -0.12  & -0.22 &   -0.29\\ 
+\hline
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\end{landscape}
+
+% this is with average over 60 sims
+%   -0.4672   -0.3745   -1.1707    0.0722    1.1778    1.6338   -1.1920   -3.1818   -0.1556
+%    1.5530    0.9299   -0.9385   -3.5060   -1.4775   -2.1982   -0.5502    4.9462   -0.0803
+%   -0.2396   -1.3261    0.5447    1.8177    2.1153    3.5435    0.0639   -3.3408    0.2356
+%    0.4734    0.5138    4.3937   -0.2102   -1.3051   -1.5634    1.9365    4.3958    0.0960
+%   -0.0325   -0.5023   -1.0528   -5.3991   -1.2748   -0.3574    0.5996    8.0466   -0.7746
+%    0.0994   -0.0443    0.1127   -0.8302    0.3515   -1.4656    0.0210    0.1884   -0.3252
+%    0.0123    0.2386    0.1433    1.8154   -0.3364    0.9657    0.3262   -0.1500    0.6319
+%    0.1638    0.1104   -0.2107   -0.7567   -0.1636   -0.2182    0.0597    2.7101    0.1181
+%   -0.0753    0.0195   -0.0228    0.1354   -0.0688   -0.0901   -0.1151   -0.2192   -0.2818
+
+\newpage
+
+\begin{landscape}
+\centering
+
+\begin{table}
+\footnotesize
+\setlength {\tabcolsep}{1.5mm}
+\renewcommand{\arraystretch}{2.25}
+\refstepcounter{table}
+\begin{center}\label{tb:employment}
+\begin{tabular}{l c c c c c c c c c}
+\multicolumn{10}{c}{OLD ELASTICITY MATRIX} \\
+\hline
+\hline
+&  Wage gap & rural share &  Frac no assets & control & r1 & r2 & LATE & OLS & Repeat \\
+1: Standard Deviation of transitory shocks& -0.32   &  -0.27   &  -13.02  &  -1.60  &  -2.14 &  -4.74  &   -3.46  & -5.61 &   -1.52\\ 
+2: Pareto parameter permanent shock       &  1.35   &   0.76   &   -0.30  &  -3.43  &  -0.40 &  -1.98  &   -0.59  &  4.89 &    0.31\\ 
+3: Urban TFP                              & -0.17   &  -1.25   &   -1.38  &   1.12  &   1.53 &   3.22  &   -0.80  & -3.78 &   -0.20\\ 
+4: Persistence of transitory shocks       &  0.42   &   0.43   &   14.52  &   0.61  &   2.58 &   7.16  &    3.17  &  8.22 &    2.14\\ 
+5: Ubar                                   &  0.0    &  -0.52   &   -6.91  &  -8.27  &  -1.31 &  -6.97  &   -0.52  &  2.45 &   -1.07\\ 
+6: Getting experience                     &  0.17   &  -0.03   &    0.01  &  -1.38  &   1.17 &  -1.48  &   -0.14  & -0.67 &   -0.08\\ 
+7: Losing it                              &  0.02   &   0.20   &   -0.04  &   1.91  &  -1.18 &   4.08  &    0.52  &  1.55 &   -0.06\\ 
+8: Gamma parameter in shock process       &  0.14   &   0.08   &   -0.20  &  -0.92  &   0.25 &  -5.29  &   -0.10  &  3.86 &    0.51\\ 
+9: Logit shocks                           & -0.04   &   0.02   &    0.0   &   0.62  &  -0.46 &  -0.72  &    0.12  &  0.27 &   -0.09\\ 
+\hline
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\end{landscape}
+
+
+
+
+\end{document}
