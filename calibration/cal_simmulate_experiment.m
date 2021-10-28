@@ -70,7 +70,7 @@ assets = assets(1:end-1,1);
 % % held at date t (not chosen). So one can construce the budget constraint.
 
 live_rural = location == 1 | location == 2 | location == 3 | location == 4;
-experince = location == 3;
+
 
 experiment_flag(1) = 0;
 
@@ -79,7 +79,7 @@ experiment_flag(1) = 0;
 %     panel_expr = [labor_income, consumption, assets, live_rural, work_urban,...
 %         move, move_seasn, move_cost, season, welfare, experiment_flag];
     
-    panel_expr = [labor_income, consumption, assets, live_rural, move_seasn, season, experince, experiment_flag];
+    panel_expr = [labor_income, consumption, assets, live_rural, move_seasn, season, experiment_flag];
     return
 end
 
@@ -93,7 +93,6 @@ if assets(1,1) > means_test
 % % held at date t (not chosen). So one can construce the budget constraint.
 
     live_rural = location == 1 | location == 2 | location == 3 | location == 4;
-    experince = location == 3;
 
     experiment_flag(1) = 0;
     
@@ -103,7 +102,7 @@ if assets(1,1) > means_test
 %     panel_expr = [labor_income, consumption, assets, live_rural, work_urban,...
 %         move, move_seasn, move_cost, season, welfare, experiment_flag];
     
-    panel_expr = [labor_income, consumption, assets, live_rural, move_seasn, season, experince, experiment_flag];
+    panel_expr = [labor_income, consumption, assets, live_rural, move_seasn, season, experiment_flag];
     return
 end    
 
@@ -367,9 +366,9 @@ assets = assets(1:end-1,1);
 % % held at date t (not chosen). So one can construce the budget constraint.
 
 live_rural = location == 1 | location == 2 | location == 3 | location == 4;
-experince = location == 3;
+
 
 %urban_skill = z_urban.*ones(length(labor_income),1);
 
- panel_expr = [labor_income, consumption, assets, live_rural, move_seasn, season, experince, experiment_flag];
+ panel_expr = [labor_income, consumption, assets, live_rural, move_seasn, season, experiment_flag];
 

@@ -57,15 +57,11 @@ move_cost = zeros(time_series,1);
 fiscal_cost = zeros(time_series,1);
 
 labor_income = zeros(time_series,1);
-production = zeros(time_series,1);
-tax = zeros(time_series,1);
 
 consumption = zeros(time_series,1);
 net_asset = zeros(time_series,1);
 assets = zeros(time_series+1,1);
 season = zeros(time_series,1);
-
-welfare = zeros(time_series,1);
 
 assets(1,1) = asset_space(asset_state);
 
@@ -98,11 +94,10 @@ for xxx = 1:time_series
         move(xxx,1) = (choice == 3); % move if choice above is 3
         move_seasn(xxx,1) = (choice == 2); % seasonal move if choice above is 2.
 
-        [labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
-            labor_income_tax(z_rural.*r_shocks(shock_states(xxx)), params.tax, 'rural');
-        
-        welfare(xxx,1) = vfun.rural_not(asset_state,shock_states(xxx));
-        
+        %[labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
+        %    labor_income_tax(z_rural.*r_shocks(shock_states(xxx)), params.tax, 'rural');
+        labor_income(xxx,1) = z_rural.*r_shocks(shock_states(xxx));
+   
         asset_state_p = assets_policy.rural_not(asset_state,shock_states(xxx),choice);
         % asset state is policy, location (rural, not experinced), asset
         % state, shock state, then the choice from above. 
@@ -123,12 +118,13 @@ for xxx = 1:time_series
 % these are the seasonal moves with no experince.
         
     elseif location(xxx) == 2 % seasonal movers....
+
        
-        welfare(xxx,1) = vfun.seasn_not(asset_state,shock_states(xxx));
-       
-        [labor_income(xxx,1), tax(xxx,1), production(xxx,1)] ...
-            = labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
- 
+        %[labor_income(xxx,1), tax(xxx,1), production(xxx,1)] ...
+        %    = labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
+        
+        labor_income(xxx,1) = z_urban.*u_shocks(shock_states(xxx));
+        
         asset_state_p = assets_policy.seasn_not(asset_state,shock_states(xxx));
                 
        if pref_shock(xxx) < (1-lambda)
@@ -150,11 +146,10 @@ for xxx = 1:time_series
                 
         move(xxx,1) = (choice == 3); % move if choice above is 3
         move_seasn(xxx,1) = (choice == 2); % seasonal move if choice above is 2.
-        
-        welfare(xxx,1) = vfun.rural_exp(asset_state,shock_states(xxx));
-                
-        [labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
-            labor_income_tax(z_rural.*r_shocks(shock_states(xxx)), params.tax, 'rural');
+
+        %[labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
+        %    labor_income_tax(z_rural.*r_shocks(shock_states(xxx)), params.tax, 'rural');
+        labor_income(xxx,1) = z_rural.*r_shocks(shock_states(xxx));
         
         asset_state_p = assets_policy.rural_exp(asset_state,shock_states(xxx),choice);
         
@@ -193,11 +188,11 @@ for xxx = 1:time_series
 
     elseif location(xxx) == 4
         
-        welfare(xxx,1) = vfun.seasn_exp(asset_state,shock_states(xxx));
+        %[labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
+        %    labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
         
-        [labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
-            labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
- 
+        labor_income(xxx,1) = z_urban.*u_shocks(shock_states(xxx));
+        
         asset_state_p = assets_policy.seasn_exp(asset_state,shock_states(xxx));
         
         location(xxx+1) = 3;
@@ -213,12 +208,12 @@ for xxx = 1:time_series
        
         move(xxx,1) = (choice == 2);
         % If choice equals 2, then move back.
-        
-        welfare(xxx,1) = vfun.urban_new(asset_state,shock_states(xxx));
 
-        [labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
-            labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
- 
+        %[labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
+        %    labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
+        
+        labor_income(xxx,1) = z_urban.*u_shocks(shock_states(xxx));
+        
         asset_state_p = assets_policy.urban_new(asset_state,shock_states(xxx),choice);
 
         location(xxx+1) = location(xxx);
@@ -244,12 +239,12 @@ for xxx = 1:time_series
 
         move(xxx,1) = (choice == 2);
         % If choice equals 2, then move back.
+
+        %[labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
+        %    labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
         
-        welfare(xxx,1) = vfun.urban_old(asset_state,shock_states(xxx));
-   
-        [labor_income(xxx,1), tax(xxx,1), production(xxx,1)] =...
-            labor_income_tax(z_urban.*u_shocks(shock_states(xxx)), params.tax, 'urban');
- 
+        labor_income(xxx,1) = z_urban.*u_shocks(shock_states(xxx));
+        
         asset_state_p = assets_policy.urban_old(asset_state,shock_states(xxx),choice);
         % asset state is policy, location (urban, EXPERINCE), asset
         % state, shock state, then the choice from above. 
@@ -290,7 +285,7 @@ rec_asset_states = rec_asset_states(1:end-1,1);
 % held at date t (not chosen). So one can construce the budget constraint.
 
 live_rural = location == 1 | location == 2 | location == 3 | location == 4;
-experince  = location == 3;
+
 % live_rural asksi, if anyof these situations are true, then you live in
 % the rural area, note 1-4 are rural guys who litterally are their or are
 % out on a seaonsal move. 
@@ -299,7 +294,7 @@ experince  = location == 3;
 % in the urban area. Note location 2 and 4, these are rural guys on
 % seasonal moves. 
 
-panel = [labor_income, consumption, assets, live_rural, move_seasn, season, experince];
+panel = [labor_income, consumption, assets, live_rural, move_seasn, season];
 
 states = [rec_asset_states, location, season, shock_states'];
 

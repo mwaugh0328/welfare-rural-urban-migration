@@ -1,4 +1,4 @@
-function [moments] = compute_outcomes(cal_params, specs, flag)
+function [moments] = compute_outcomes(cal_params, specs, seed, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is the driver file for the code which is consistent with RR2 paper at
 % Econometrica (late 2020-on)
@@ -12,9 +12,9 @@ function [moments] = compute_outcomes(cal_params, specs, flag)
 % inherti the change...
 
 if isempty(specs)
-    [cal_params, specs] = preamble(cal_params, [], [],[]);
+    [cal_params, specs] = preamble(cal_params, [], seed,[]);
 else
-    [cal_params, ~] = preamble(cal_params, [], [],[]);
+    [cal_params, ~] = preamble(cal_params, [], seed,[]);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -150,6 +150,8 @@ params.follow_hh_expr = specs.follow_hh_expr;
 
 solve_types = [rural_tfp.*types(:,1), types(:,2)];
 
+tic
+
 parfor xxx = 1:n_types 
 
     [assets(xxx), move(xxx), vguess(xxx)] = ...
@@ -157,6 +159,7 @@ parfor xxx = 1:n_types
     
 end
 
+toc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %perform the field experiment...
@@ -176,6 +179,7 @@ end
 Nmontecarlo = specs.Nmontecarlo;
 moments = zeros(Nmontecarlo,specs.nmoments);
 
+tic
 for nmc = 1:Nmontecarlo
 
     rng(03281978 + specs.seed + nmc)
@@ -185,7 +189,7 @@ for nmc = 1:Nmontecarlo
     pref_shocks = rand(time_series,n_perm_shocks);
     move_shocks = rand(time_series,n_perm_shocks);
 
-    sim_panel = zeros(N_obs,7,n_types);
+    sim_panel = zeros(N_obs,6,n_types);
     states_panel = zeros(N_obs,4,n_types);
     
     
@@ -234,8 +238,8 @@ for nmc = 1:Nmontecarlo
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % This section of the code now performs the expirements. 
  
-    sim_expr_panel = zeros(n_sims,size(data_panel,2) + 1,params.follow_hh_expr,n_types);
-    sim_cntr_panel = zeros(n_sims,size(data_panel,2),params.follow_hh_expr,n_types);
+    sim_expr_panel = zeros(n_sims, size(data_panel,2) + 1, params.follow_hh_expr,n_types);
+    sim_cntr_panel = zeros(n_sims, size(data_panel,2), params.follow_hh_expr,n_types);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -416,7 +420,8 @@ for nmc = 1:Nmontecarlo
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-       
+toc
+
 if flag == 1
     
 disp('')
