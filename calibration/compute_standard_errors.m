@@ -9,7 +9,7 @@ me_consumption_var =0.19-0.189^2; %0.189^2+me_mom1_var=0.19
 
 
 load('lambda_pi_cal_baseline_s5_1.mat')
-params = x1; % currently has moving cost in there
+params = x1; 
 n_params = length(params); % how many paramters we need to do...
 
 eps = 1.005; % This is the change. 1% around parameter (0.5 back and for)

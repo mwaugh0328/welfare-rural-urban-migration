@@ -395,7 +395,7 @@ for nmc = 1:Nmontecarlo
 
     aggregate_moments = [m_income(2)./m_income(1), avg_rural, std_income(2), frac_no_assets];
 
-    experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, OLS, std_cons_growth];
+    experiment_moments = [temp_migration, migration_elasticity, migration_elasticity_y2, LATE, LATE - OLS, std_cons_growth];
 
 % (1) Wage gap
 % (2) The rural share

@@ -17,7 +17,7 @@ aggregate_moments = [1.89, 0.61, 0.625, 0.47];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Experiment Moments...
 
-experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.10, 0.40];
+experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.30 - 0.10, 0.40];
 % (5) seasonal migration in control
 % (6) increase in r1 (22 percent)
 % (7) increase in r2 (9.2 percent)
@@ -41,7 +41,7 @@ LB = [0.75, 0.40, 1.20, 0.25, 1.0, 0.15, 0.15, 0.05];
 obj_old = calibrate_model(x1, moments, [],1);
 disp(obj_old)
 
-for xxx = 1:1
+for xxx = 1:3
     
     x1 = x1.*exp(0.02.*randn(size(x1)));
 
@@ -58,7 +58,7 @@ if obj_new < obj_old
     
     x1 = x1_new;
     
-    save lambda_pi_cal_baseline_s5_1 x1
+    save lambda_pi_cal_baseline_s715 x1
     
 end
     
