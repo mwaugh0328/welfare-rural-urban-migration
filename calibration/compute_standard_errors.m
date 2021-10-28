@@ -48,6 +48,7 @@ for xxx = 1:n_params
         els_moments(xxx,:)= (log(moments_for) - log(moments_bak)) ./ (log(cal_eps_for(xxx))-log(cal_eps_bak(xxx)))';
         
         disp(els_moments(xxx,:))
+        disp(jacobian_moments(xxx,:))
 
     % So each row is a parameter, then each column is the moment
 
@@ -60,7 +61,7 @@ test = jacobian_moments(:,order_moments);
 elasticities=els_moments(:,order_moments);
 
 Matrix_E = [elasticities' zeros(10,2)];
-Matrix_E(1,10)=1;
+Matrix_E(1,9)=1;
 Matrix_E(10,10)=1;
 
 Matrix_M = [test' zeros(10,2)];
