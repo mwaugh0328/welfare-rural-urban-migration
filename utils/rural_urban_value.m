@@ -1,4 +1,4 @@
-function [assets, move, vfinal, cons_eqiv] = rural_urban_value(params,perm_types,vcft)
+function [assets, move, vfinal, cons_eqiv] = rural_urban_value(params,perm_types,vcft,vguess)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This solves for value and policy function for the rural-urban location problem
 % described in the Paper
@@ -151,15 +151,33 @@ for zzz = 1:n_shocks
          
 end
 
+
+if isempty(vguess)
     
-v_old_rural_not = 0.*ones(size(v_prime_rural_not))/(1-beta);
-v_old_rural_exp = v_old_rural_not;
+    v_old_rural_not = -1.*ones(size(v_prime_rural_not))/(1-beta);
+    v_old_rural_exp = v_old_rural_not;
 
-v_old_seasn_not = v_old_rural_not;
-v_old_seasn_exp = v_old_rural_not;
+    v_old_seasn_not = v_old_rural_not;
+    v_old_seasn_exp = v_old_rural_not;
 
-v_old_urban_new = v_old_rural_not;
-v_old_urban_old = v_old_rural_not;
+    v_old_urban_new = v_old_rural_not;
+    v_old_urban_old = v_old_rural_not;
+    
+else
+    
+    v_old_rural_not = vguess.rural_not;
+    v_old_rural_exp = vguess.rural_exp;
+
+    v_old_seasn_not = vguess.seasn_not;
+    v_old_seasn_exp = vguess.seasn_exp;
+
+    v_old_urban_new = vguess.urban_new;
+    v_old_urban_old = vguess.urban_old;
+    
+end
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Commence value function itteration.
@@ -436,8 +454,8 @@ for iter = 1:n_iterations
     
     if mxtol < tol
 %         disp('value function converged')
-%         disp(toc)
-%         disp(iter)
+        % disp(iter)
+         %disp(mxtol)
         break
     else
         

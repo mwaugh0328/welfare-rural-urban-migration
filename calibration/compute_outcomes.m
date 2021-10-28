@@ -1,4 +1,4 @@
-function [moments] = compute_outcomes(cal_params, specs, seed, flag)
+function [moments] = compute_outcomes(cal_params, specs, seed, vguess, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is the driver file for the code which is consistent with RR2 paper at
 % Econometrica (late 2020-on)
@@ -150,22 +150,37 @@ params.follow_hh_expr = specs.follow_hh_expr;
 
 solve_types = [rural_tfp.*types(:,1), types(:,2)];
 
-tic
 
-parfor xxx = 1:n_types 
 
-    [assets(xxx), move(xxx), vguess(xxx)] = ...
-        rural_urban_value(params, solve_types(xxx,:),[]);
+if isempty(vguess)
+    
+    parfor xxx = 1:n_types 
+
+        [assets(xxx), move(xxx), value_function(xxx)] = ...
+        rural_urban_value(params, solve_types(xxx,:),[],[]);
+    
+    end
+else
+    
+    parfor xxx = 1:n_types 
+
+        [assets(xxx), move(xxx), value_function(xxx)] = ...
+        rural_urban_value(params, solve_types(xxx,:),[],vguess(xxx));
+    
+    end
     
 end
 
-toc
+
+%save calibrated_valuefunction_guess vguess
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %perform the field experiment...
 parfor xxx = 1:n_types 
     
-    [assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx)] = field_experiment_welfare(params, solve_types(xxx,:), vguess(xxx));
+    [assets_temp(xxx), move_temp(xxx), ~] = field_experiment_welfare(params, solve_types(xxx,:), value_function(xxx));
     % This generates an alternative policy function for rural households associated with a
     % the field experiment of paying for a temporary move. The asset_temp
     % provides the asset policy conditional on a temporary move. 
@@ -179,7 +194,7 @@ end
 Nmontecarlo = specs.Nmontecarlo;
 moments = zeros(Nmontecarlo,specs.nmoments);
 
-tic
+
 for nmc = 1:Nmontecarlo
 
     rng(03281978 + specs.seed + nmc)
@@ -197,7 +212,7 @@ for nmc = 1:Nmontecarlo
 
             [sim_panel(:,:,xxx), states_panel(:,:,xxx)] = cal_rural_urban_simmulate(...
                 assets(xxx), move(xxx), params, solve_types(xxx,:), shock_states_p,...
-                pref_shocks(:,xxx), move_shocks(:,xxx),vguess(xxx));
+                pref_shocks(:,xxx), move_shocks(:,xxx));
 
     end 
     
@@ -420,7 +435,7 @@ for nmc = 1:Nmontecarlo
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-toc
+
 
 if flag == 1
     

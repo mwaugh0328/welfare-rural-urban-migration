@@ -1,5 +1,5 @@
 function [panel, states] = cal_rural_urban_simmulate(assets_policy, move_policy, ...
-                    params, perm_types, shock_states, pref_shock, moveshock, vfun)
+                    params, perm_types, shock_states, pref_shock, moveshock)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This simmulates a time series/cross section of variables that we can map
 % to data. 
