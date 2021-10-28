@@ -433,7 +433,7 @@ disp('Control: Year One, Repeat Two')
 disp([mean(moments(:,5)), mean(moments(:,10))])
 disp('LATE Estimate')
 disp(mean(moments(:,8)))
-disp('LATE - OLS Estimate')
+disp('OLS Estimate')
 disp(mean(moments(:,9)))
     
 end
