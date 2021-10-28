@@ -17,7 +17,7 @@ aggregate_moments = [1.89, 0.61, 0.625, 0.47];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Experiment Moments...
 
-experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.30 - 0.10, 0.40];
+experiment_hybrid = [0.36, 0.22, 0.092, 0.30,  0.10, 0.40];
 % (5) seasonal migration in control
 % (6) increase in r1 (22 percent)
 % (7) increase in r2 (9.2 percent)
@@ -28,8 +28,8 @@ experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.30 - 0.10, 0.40];
 moments = [aggregate_moments, experiment_hybrid];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load('lambda_pi_cal_baseline_s730.mat')
-x1 = adj_x1;
+load('lambda_pi_cal_baseline_s715.mat')
+%x1 = adj_x1;
 
 opts = optimset('Display','iter','UseParallel',true,'MaxFunEvals',500,'TolFun',10^-3,'TolX',10^-3);
 ObjectiveFunction = @(xxx) calibrate_model((xxx), moments, [],1);
@@ -41,7 +41,7 @@ LB = [0.75, 0.40, 1.20, 0.25, 1.0, 0.15, 0.15, 0.05];
 obj_old = calibrate_model(x1, moments, [],1);
 disp(obj_old)
 
-for xxx = 1:3
+for xxx = 1:1
     
     x1 = x1.*exp(0.02.*randn(size(x1)));
 

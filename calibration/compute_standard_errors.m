@@ -8,8 +8,8 @@ me_wage_var = 0.15;
 me_consumption_var =0.19-0.189^2; %0.189^2+me_mom1_var=0.19
 
 
-load('lambda_pi_cal_baseline_s5_1.mat')
-params = x1; 
+load('lambda_pi_cal_baseline_s715.mat')
+params = x1_new; % currently has moving cost in there
 n_params = length(params); % how many paramters we need to do...
 
 eps = 1.005; % This is the change. 1% around parameter (0.5 back and for)
@@ -46,6 +46,8 @@ for xxx = 1:n_params
 
         jacobian_moments(xxx,:) = change_moments ./change_cal; % compute change.
         els_moments(xxx,:)= (log(moments_for) - log(moments_bak)) ./ (log(cal_eps_for(xxx))-log(cal_eps_bak(xxx)))';
+        
+        disp(els_moments(xxx,:))
 
     % So each row is a parameter, then each column is the moment
 
