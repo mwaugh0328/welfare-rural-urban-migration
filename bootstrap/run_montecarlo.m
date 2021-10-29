@@ -8,7 +8,7 @@ addpath('../calibration')
 
 load('fake_data.mat')
 
-Nruns = 3;
+Nruns = 2;
 %size(fake_data,1);
 
 estimate = zeros(Nruns,9);
@@ -28,6 +28,7 @@ for xxx = 1:Nruns
     save montecarlo_fed estimate fval exitflag
     save('montecarlo_fed_estimate.csv', 'estimate', '-ascii')
     save('montecarlo_fed_fval.csv', 'fval', '-ascii')
+    save('montecarlo_fed_exitflag.csv', 'exitflag', '-ascii')
     
     system('git add montecarlo_fed.mat')
     system('git add montecarlo_fed*.csv')
