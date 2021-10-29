@@ -23,6 +23,9 @@ for xxx = 1:Nruns
     disp(estimate(xxx,:))
     disp(fval(xxx,1))
     
-    save montecarlo_test_altstart estimate fval
+    save montecarlo_test_git estimate fval
+    
+    system('git commit -am "test of matlab/git')
+    system('git push')
     
 end
