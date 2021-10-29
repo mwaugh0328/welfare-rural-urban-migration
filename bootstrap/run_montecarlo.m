@@ -8,7 +8,7 @@ addpath('../calibration')
 
 load('fake_data.mat')
 
-Nruns = 1;
+Nruns = 3;
 %size(fake_data,1);
 
 estimate = zeros(Nruns,9);
