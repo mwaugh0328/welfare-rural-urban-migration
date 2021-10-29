@@ -8,7 +8,6 @@ addpath('../calibration')
 
 load('fake_data.mat')
 
-Nruns = 3;
 Nruns = size(fake_data,1);
 disp(Nruns)
 
@@ -37,7 +36,7 @@ for xxx = 1:Nruns
     
     system('git add montecarlo_fed.mat')
     system('git add montecarlo_fed*.csv')
-    system('git commit -am "test of matlab/git"')
+    system('git commit -am "fed computer"')
     system('git push')
     
 end
