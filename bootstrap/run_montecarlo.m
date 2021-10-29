@@ -27,7 +27,7 @@ for xxx = 1:Nruns
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     save montecarlo_fed estimate fval exitflag
     save('montecarlo_fed_estimate.csv', 'estimate', '-ascii')
-    save('montecarlo_fed_fval.csv', 'estimate', '-ascii')
+    save('montecarlo_fed_fval.csv', 'fval', '-ascii')
     
     system('git add montecarlo_fed.mat')
     system('git add montecarlo_fed*.csv')
