@@ -8,8 +8,8 @@ addpath('../calibration')
 
 load('fake_data.mat')
 
-Nruns = 2;
-%size(fake_data,1);
+%Nruns = 2;
+size(fake_data,1);
 
 estimate = zeros(Nruns,9);
 fval = zeros(Nruns,1);
