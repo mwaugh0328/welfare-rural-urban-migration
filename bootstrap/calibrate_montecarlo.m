@@ -1,4 +1,4 @@
-function [estimate, fval] = calibrate_montecarlo(moments)
+function [estimate, fval, exitflag] = calibrate_montecarlo(moments)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %load('..\calibration\robust_calibrations\cal_ols_same.mat')
@@ -19,7 +19,7 @@ LB = [0.75, 0.40, 1.10, 0.15, 1.0, 0.10, 0.10, 0.15, 0.01];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-[estimate, fval] = fminsearchcon(ObjectiveFunction, x1, LB, UB,[],[],[],opts);
+[estimate, fval, exitflag] = fminsearchcon(ObjectiveFunction, x1, LB, UB,[],[],[],opts);
 
 
 
