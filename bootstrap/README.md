@@ -18,8 +18,6 @@ This section describes code in folder. It uses code from [calibration](https://g
 
 TODO:
 
-- We will need a naming convention e.g. ``bu_computer.mat`` as we save the files.
-
-- Need a output flag, did it stop or stall.
+- We will need a naming convention e.g. ``bu_computer.csv`` as we save the files. 
 
 - Tik-Tak thing or not.
