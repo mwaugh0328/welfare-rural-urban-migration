@@ -25,7 +25,7 @@ for xxx = 1:Nruns
     
     save montecarlo_test_git estimate fval
     
-    system('git add bootstrap/montecarlo_test_git.mat')
+    system('git add montecarlo_test_git.mat')
     system('git commit -am "test of matlab/git"')
     system('git push')
     
