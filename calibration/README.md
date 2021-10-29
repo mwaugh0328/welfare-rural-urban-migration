@@ -1,6 +1,6 @@
 ### Calibration
 
-This section describes basic computations, the calibration approach, and then describes the computational elements behind the computation of the model. Much of the code in this section exploits bespoke elements to speed up the that do not work in other folders.
+This section describes basic computations, the calibration approach, and then describes the computational elements behind the computation of the model. M
 
 ### Basic Computations
 ---
@@ -9,19 +9,46 @@ This section describes basic computations, the calibration approach, and then de
 ```
 >> load('calibrated_baseline.mat')
 
->> analyze_outcomes_prefshock(exp(new_val), 1)
+>> compute_outcomes(x1, [], [], vguess, 1)
 ```
-Then it should compute everything and then spit out the moments.
-
-The results should mimic (or come very close) to those in Table 2, 6, and 8 in the January 2020 version of the paper.
-
-The ``calibrated_baseline.mat`` contains the final, calibrated parameter values reported in the paper as the array ``new_val``. They are in log units, so to convert to levels take ``exp``. The mapping from the values to their description is given by the structure ``labels`` which, for example,
+Then it should compute everything and then spit out the moments. The output should look something like this (**note** this is from my fed computer which has R2018 and is different from the version with R2021)
 ```
->> labels(3)
+Wage Gap
+    1.8893
 
-ans = "urban TFP"
+Average Rural Population
+    0.6001
+
+Fraction of Rural with No Assets
+    0.4691
+
+Expr Elasticity: Year One, Two
+    0.2081    0.0471
+
+Control: Year One, Repeat Two
+    0.3621    0.7073
+
+LATE Estimate
+    0.2906
+
+OLS Estimate
+    0.0931
 ```
-tells us that in the third position of ``new_val`` is urban TFP.
+The two ``[]`` stand in for ``specs`` which is a structure defining grid, shocks, etc. if it is not specified, then a default is set in the ``preamble.m``. The next ``[]`` stands in for the seed on the random number generator. Again if nothing is given a default seed is set in ``preamble.m``. The  final value is a flag which can take on the value 0 and returns all moments across simulations, but displays no output. Or the flag 1 which displays the mean values across simulations.
+
+The ``calibrated_baseline.mat`` contains the final, calibrated parameter values reported in the paper as the array ``x1``. Stuff is ordered in the following way:
+
+1. Standard Deviation of transitory shocks
+2. 1 / pareto shape parameter permanent shock
+3. Urban TFP
+4. Persistence of transitory shocks
+5. Ubar
+6. Getting experience, $\lambda$
+7. Losing it, $\pi$
+8. Gamma parameter in shock process
+9. Logit shocks
+
+---
 
 **Calibrating the Model:** The calibration routine is implemented by starting inside the [``calibration``](https://github.com/mwaugh0328/final_migration/tree/main/calibration) folder and running
 ```
@@ -41,4 +68,14 @@ What is in this folder.
 
 - ``calibrate_baseline.m`` to implement the full calibration.
 
-- ``preamble.m`` specifies the
+- ``preamble.m`` specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change. Not ``coumpute_outcomes.m`` To speed up or better compute things, the main value to change is ``specs.Nmontecarlo`` which specifies how many simulations to perform on top of things. The baseline when the model is calibrated is 30. But as low as 5 seems ok.
+
+- ``identification.m`` computes the dlog(moments) / dlog(paramters) table.
+
+- ``cal_rural_urban_simmulate.m`` designed to simulate the economy. Stripped down to run fast and compute only what is needed for calibration.
+
+- ``cal_experiment_driver.m`` driver file to compute experiment many times given simulated sample paths from above. Calls the file below.
+
+- ``cal_simmulate_experiment.m`` designed to simulate the experiment just in the calibration folder. It's stripped down to run fast and compute only what we need for calibration.
+
+- ``compute_standard_errors.m`` and ``sd_calculation.m`` are new and old files to compute the jacobian and standard errors.  

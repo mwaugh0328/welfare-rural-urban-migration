@@ -45,7 +45,7 @@ for xxx = 1:n_params
 
     
     els_moments(xxx,:) = (log(moments_for) - log(moments_bak))' ./  ( log(cal_eps_for(xxx))-log(cal_eps_bak(xxx)) ); 
-    
+    disp(els_moments(xxx,:))
     
 % So each row is a parameter, the each column is the moment
     
