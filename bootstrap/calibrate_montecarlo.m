@@ -2,9 +2,10 @@ function [estimate, fval] = calibrate_montecarlo(moments)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %load('..\calibration\robust_calibrations\cal_ols_same.mat')
-%x1 = x1(1:end-1);
+%x1 = x1(1:end-1); % this is a not bad place to start away from 
 
-load('calibrated_baseline.mat')
+load('..\calibration\calibrated_baseline.mat')
+% initial guess is the best
 
 load('..\calibration\calibrated_valuefunction_guess.mat')
 

@@ -1,6 +1,6 @@
 ### Calibration
 
-This section describes basic computations, the calibration approach, and then describes the computational elements behind the computation of the model. M
+This section describes basic computations, the calibration approach, and then describes the computational elements behind the computation of the model. 
 
 ### Basic Computations
 ---
