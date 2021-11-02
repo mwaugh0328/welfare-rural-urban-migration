@@ -1,0 +1,466 @@
+\documentclass[12pt,pdftex]{article}
+\usepackage[pdftex]{graphicx,color}
+\usepackage{setspace,palatino,multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{lscape}
+%\usepackage{subfigure}
+\usepackage{threeparttable}
+\usepackage{natbib}
+\bibliographystyle{ecta}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\usepackage{xcolor}
+\usepackage{rotating}
+
+\definecolor{nblue}{RGB}{0,0,128}
+
+\usepackage[pdftex,colorlinks=true, bookmarks=false,
+pdfstartview={XYZ null null 0.65},
+pdftitle={},
+pdfauthor={ Michael E. Waugh},
+pdfkeywords={},
+colorlinks=true,linkcolor=darkgray,citecolor=darkgray,urlcolor=darkgray,
+breaklinks]{hyperref}
+
+\newcounter{saveeqni}%
+\newcounter{saveeqn01i}%
+\newcommand{\alpheqni}{\setcounter{saveeqni}{\value{section}}%
+%\setcounter{saveeqn01i}{\value{subsectioni}}%
+\renewcommand{\theequation}
+    {\alph{saveeqni}\mbox{.\arabic{equation}}}}%
+\newcommand{\reseteqni}{\setcounter{equation}{\value{saveeqni}}%
+\renewcommand{\theequation}{\arabic{equation}}}%
+
+\newtheorem{as}{Assumption}
+\newtheorem{reg}{Regularity Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corr}{Corollary}
+\newtheorem{df}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prp}{Proposition}
+\newtheorem{rmk}{Remark}
+\newenvironment{prf}{{\bf Proof}}{\hfill { }}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator*{\plim}{plim}
+\DeclareMathOperator*{\umax}{max}
+
+\special{papersize=8.5in,11in}
+\onehalfspacing
+\setlength{\parindent}{0.1em}
+\setlength{\parskip}{.09in}
+\textwidth15.75cm
+\evensidemargin 1.5in
+\oddsidemargin 1.5in
+\topmargin 8.5cm
+\textheight 10in
+\hyphenation{over-lapping}
+
+\titleformat{\section}{\color{black}\large\bf}{\color{black}{\thesection.}}{.25cm}{}
+\titleformat{\subsection}{\color{black}\normalsize\bf}{\thesubsection.}{.5em}{}
+\titleformat{\subsubsection}{\color{black}\normalsize\bf}{\thesubsubsection.}{.5em}{}
+
+\titlespacing{\section}{0pt}{*1.5}{*.5}
+\titlespacing{\subsection}{0pt}{*1.5}{*.5}
+\titlespacing{\subsubsection}{0pt}{*1.5}{*.5}
+
+\def\thesection{\arabic{section}}
+\def\thesubsection{\arabic{section}.\arabic{subsection}}
+\def\thesubsubsection{\arabic{section}.\arabic{subsection}.\Alph{subsubsection}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\renewcommand{\arraystretch}{1.1}
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+\begin{onehalfspacing}
+\newpage
+
+\normalsize
+
+This section solves and computes the efficient allocation in our model economy. Up to this point, we have measured the welfare gains from a particular policy intervention|a subsidy to induce more seasonal migration. In all the instances we studied (one-time partial equilibrium, permanent general equilibrium with distortionary taxes) the welfare gains from these interventions result from the provision of an opportunity to that allows households to better smooth their consumption by moving across space.
+
+However, all these experiments leave open the normative question about and how much households \emph{should} migrate when markets are complete and the economy is undistorted. In other words, what is the first-best allocation and how does it compare to the aforementioned policy interventions? This is what we study below.
+
+
+\newpage
+
+\begin{table}[!htb]
+\small
+\setlength {\tabcolsep}{2mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Targeted Moments in Data and Model with Different $R$ values \label{ta:alt_R}}
+\vspace{0.5cm}
+\begin{tabular}{l l c c c}
+\hline
+\hline
+Moments & Data  & \begin{tabular}[c]{@{}c@{}}Model\\ R=0.93\end{tabular} & \begin{tabular}[c]{@{}c@{}}Model\\ R=0.95\end{tabular} &\begin{tabular}[c]{@{}c@{}}Model\\ R=0.97\end{tabular} \\
+\hline
+Control: Variance of log consumption growth in rural & 0.19& 0.19 & 0.19  &0.19\\
+Control: Percent of rural households with no liquid assets & \phantom{0.}47& \phantom{0.}60 & \phantom{0.}48 & \phantom{0.}38\\
+Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}38 & \phantom{0.}36 & \phantom{0.}35\\
+Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}9 & \phantom{0.}10 & \phantom{0.}11\\
+Treatment: Seasonal migration relative to control & \phantom{0.}22 & \phantom{0.}20 & \phantom{0.}21 & \phantom{0.}21\\
+Treatment: Seasonal migration relative to control in year 2 &  \phantom{0.}9 & \phantom{0.}4 & \phantom{0.}4 & \phantom{0.}4 \\
+Treatment: Consumption of induced migrants (LATE)  &  \phantom{0.}30 & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}27 \\
+ Control: Probability of repeat migration &  \phantom{0.}68 &  \phantom{0.}71 & \phantom{0.}70 & \phantom{0.}70 \\
+
+\hline
+Urban-Rural wage gap & 1.89  & 1.88  & 1.89 & 1.90  \\
+Percent in rural & \phantom{0.}62 & \phantom{0.}59 & \phantom{0.}60 &  \phantom{0.} 60 \\
+Variance of log wages in urban & 0.56 & 0.56  &  0.56 &      0.56      \\
+\hline
+\hline
+\end{tabular}
+\parbox[c]{6.5in}{%
+{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $R$. The estimated model has $R=0.95$. The model is not re-estimated in the cases of $R=0.93$ and $R=0.97.$}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[!htb]
+\small
+\setlength {\tabcolsep}{2mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Targeted Moments in Data and Model with Different $\beta$ values \label{ta:alt_beta}}
+
+\vspace{0.3cm}
+
+\begin{tabular}{l l c c c}
+\hline
+\hline
+Moments & Data  & \begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.93\end{tabular} & \begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.95\end{tabular} &\begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.97\end{tabular} \\
+\hline
+Control: Variance of log consumption growth in rural & 0.19& 0.19  & 0.19  & 0.19 \\
+Control: Percent of rural households with no liquid assets & \phantom{0.}47& \phantom{0.}59 & \phantom{0.}48 & \phantom{0.}38\\
+Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}37 & \phantom{0.}36 & \phantom{0.}36\\
+Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}8 & \phantom{0.}10 & \phantom{0.}12\\
+Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}20 & \phantom{0.}21 & \phantom{0.}20\\
+Treatment: Seasonal migration relative to control in year 2 &  \phantom{0.}9 & \phantom{0.}4 & \phantom{0.}4 & \phantom{0.}4 \\
+Treatment: Consumption of induced migrants (LATE)  &  \phantom{0.}30 &\phantom{0.}29 & \phantom{0.}29 &  \phantom{0.}28 \\
+Control: Probability of repeat migration &  \phantom{0.}68 &  \phantom{0.}71 & \phantom{0.}70 & \phantom{0.}71 \\
+\hline
+Urban-Rural wage gap & 1.89  & 1.90  & 1.89 &  1.87  \\
+Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}60 & \phantom{0.}59   \\
+Variance of log wages in urban & 0.56 &  0.56 &  0.56 &   0.56       \\
+\hline
+\hline
+\end{tabular}
+\parbox[c]{6.5in}{%
+{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $\beta=0.95$. The estimated model has $\beta=0.95$. The model is not re-estimated in the cases of $\beta=0.93$ and $\beta=0.97.$}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[!htb]
+\small
+\setlength {\tabcolsep}{2mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Targeted Moments in Data and Models with no $\bar{u}$ and $\rho=0$}
+
+\vspace{0.3cm}
+
+\begin{tabular}{l l l l l l}
+\hline
+\hline
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\Full \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model\\ $\bar{u}=1$\end{tabular} &  \begin{tabular}[c]{@{}c@{}}Model\\ $\rho=0$\end{tabular}  \\
+\hline
+Control: Variance of log consumption growth in rural & 0.19 & 0.19 & 0.19 & 0.28\\
+Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48  & \phantom{0.}48  & \phantom{0.}2  \\
+Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}36& \phantom{0.}55& \phantom{0.}34  \\
+Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10 & \phantom{0.}-7& \phantom{0.}17\\
+Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21 & \phantom{0.}10 & \phantom{0.}22  \\
+Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& \phantom{0.}0& \phantom{0.}4  \\
+Treatment: Consumption of induced migrants (LATE)  & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}23  & \phantom{0.}21 \\
+Control: Probability of repeat migration &       \phantom{0.}68   &  \phantom{0.}70 &  \phantom{0.}56  &  \phantom{0.}71        \\
+\hline
+Urban-Rural wage gap & 1.89  & 1.89 & 1.86& 1.88 \\
+Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}73  & \phantom{0.}57\\
+Variance of log wages in urban & 0.56  &  0.56  &  0.65 &  1.54        \\ \hline
+\hline
+\end{tabular}
+\parbox[c]{6.5in}{%
+{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model.}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[t]
+\setlength {\tabcolsep}{1.45mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Welfare Under Alternative Models with no $\bar{u}$ and $\rho=0$}
+
+\vspace{0.3cm}
+
+\begin{tabular}{c c c c c c c c c c c c}
+\hline
+\hline
+& & \multicolumn{2}{c}{Full Model} && \multicolumn{2}{c}{$\bar{u}=1$} && \multicolumn{2}{c}{$\rho=0$} && \\
+\cmidrule(lr){3-4} \cmidrule(lr){6-7}  \cmidrule(lr){9-10}
+& & \small Welfare  &\small Migr. Rate  && \small Welfare & \small Migr. Rate && \small Welfare & \small Migr. Rate && \\
+\multirow{5}{*}{\rotatebox{90}{\small Income Quintile}} & 1 & 1.0  & 85 && 1.5 & 87 && 1.3 & 64 \\
+                                                        & 2 & 0.4  & 62 && 0.7 & 74 && 0.8 & 61\\
+                                                        & 3 & 0.2  & 53 && 0.4 & 64 && 0.5 & 57 \\
+                                                        & 4 & 0.1  & 43 && 0.3 & 54 && 0.3 & 52 \\
+                                                        & 5 & 0.1  & 39 && 0.3 & 49 && 0.1 & 48 \\
+\hline
+\multicolumn{2}{c}{\small Average} &0.4   & 57 && 0.6 &  65 && 0.6 &  56  \\
+\hline
+\end{tabular}
+\parbox[c]{6.0in}{%
+{\footnotesize  \vspace{0.5cm} Note: The table reports the (lifetime) consumption-equivalent welfare gains from the conditional migration transfers relative to an unconditional transfer program costing the same total amount and to a rural workfare program that costs the same amount. The numbers in the table are the average percent increase in consumption each period that would make the households indifferent between the consumption increase and the transfers, and the seasonal migration rates, by quintile of the rural income distribution.}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[!htb]
+\small
+\setlength {\tabcolsep}{2mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Targeted Moments in Data and Model with Subsistence}
+
+\vspace{0.3cm}
+
+\begin{tabular}{l c c c}
+\hline
+\hline
+& &  \multicolumn{2}{c}{Model} \\ \cline{3-4}
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Full \\Calibration \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Full Calibration \\ w/ Subsistence\end{tabular} \\
+\hline
+Control: Variance of log consumption growth in rural & 0.19 & 0.19 & 0.23 \\
+Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48  & \phantom{0.}0  \\
+Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}36& \phantom{0.}76  \\
+Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10 & \phantom{0.}5 \\
+Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21 & \phantom{0.}14 \\
+Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& \phantom{0.}4\\
+Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}46   \\
+Control: Probability of repeat migration &       \phantom{0.}68   &  \phantom{0.}70 &  \phantom{0.}80  \\
+\hline
+Urban-Rural wage gap & 1.89  & 1.89 & 1.66  \\
+Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}56  \\
+Variance of log wages in urban & 0.56  &  0.56  & 0.64           \\ \hline
+\hline
+\end{tabular}
+\parbox[c]{6.5in}{%
+{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model. The final calibration reports the moments when a subsistence consumption constraint is added and set to equal 25 percent of average rural consumption in the lean season.}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[h]
+\setlength {\tabcolsep}{1.45mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Welfare Effects of Migration Subsidies with Subsistence}
+
+\vspace{0.3cm}
+
+\begin{tabular}{c c c c c c c c c}
+\hline
+\hline
+& & \multicolumn{2}{c}{Benchmark Model} && \multicolumn{2}{c}{Subsistence} && \\
+\cmidrule(lr){3-4} \cmidrule(lr){6-7}
+& & \small Welfare  &\small Migr. Rate  && \small Welfare & \small Migr. Rate && \\
+\multirow{10}{*}{\rotatebox{90}{\small Income Decile}}
+&1  & 1.5 & 93 && 2.0 & 92  \\
+&2  & 0.6 & 76 && 1.0 & 82  \\
+&3  & 0.5 & 68 && 0.8 & 77  \\
+&4  & 0.3 & 57 && 0.6 & 71  \\
+&5  & 0.3 & 54 && 0.5 & 67  \\
+&6  & 0.2 & 51 && 0.4 & 61  \\
+&7  & 0.2 & 46 && 0.3 & 56  \\
+&8  & 0.2 & 42 && 0.3 & 53  \\
+&9  & 0.1 & 41 && 0.2 & 52  \\
+&10 & 0.1 & 38 && 0.3 & 45  \\
+\hline
+\multicolumn{2}{c}{\small Average} &0.4 & 57 && 0.6 & 65  \\
+\hline
+\end{tabular}
+\parbox[c]{6.0in}{%
+{\footnotesize  \vspace{0.5cm} Note: The table reports the (lifetime) consumption-equivalent welfare gains from the conditional migration transfers. The numbers in the table are the average percent increase in consumption each period that would make the households indifferent between the consumption increase and the transfers, and the seasonal migration rates, by declie of the rural income distribution. The first column is the benchmark model, and the second is a model with a subsistence constraint equal to 25 percent of average rural consumption in the lean season.}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+
+\begin{table}[!htb]
+\small
+\setlength {\tabcolsep}{2mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Targeted Moments in Data and Model and Migration Costs}
+\vspace{0.3cm}
+\begin{tabular}{l c c c}
+\hline
+\hline
+& &  \multicolumn{2}{c}{Model} \\ \cline{3-4}
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Full Cal \\ $m_p=2*m_t$\end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Full Cal \\ $m_p=m_t$\end{tabular} \\
+\hline
+Control: Variance of log consumption growth in rural & 0.19 & 0.19 & 0.18 \\
+Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48  & \phantom{0.}45  \\
+Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}36& \phantom{0.}32  \\
+Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10 & \phantom{0.}11 \\
+Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21 & \phantom{0.}23 \\
+Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& \phantom{0.}4\\
+Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}24   \\
+Control: Probability of repeat migration &       \phantom{0.}68   &  \phantom{0.}70 &  \phantom{0.}60  \\
+\hline
+Urban-Rural wage gap & 1.89  & 1.89 & 1.79  \\
+Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}59  \\
+Variance of log wages in urban & 0.56  &  0.56  & 0.59           \\ \hline
+\hline
+\end{tabular}
+\parbox[c]{6.5in}{%
+{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model in the benchmark calibration and under alternative assumptions about migration costs.}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[t]
+\setlength {\tabcolsep}{1.45mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Welfare Under Alternative Assumptions About Migration Costs}
+
+\vspace{0.5cm}
+
+\begin{tabular}{c c c c c c c c c}
+\hline
+\hline
+& & \multicolumn{2}{c}{Benchmark Model} && \multicolumn{2}{c}{$m_p=m_t$} && \\
+\cmidrule(lr){3-4} \cmidrule(lr){6-7}
+& & \small Welfare  &\small Migr. Rate  && \small Welfare & \small Migr. Rate && \\
+\multirow{5}{*}{\rotatebox{90}{\small Income Quintile}}
+&1  & 1.05 & 85 && 0.91 & 81  \\
+&2  & 0.40 & 62 && 0.36 & 60  \\
+&3  & 0.26 & 54 && 0.22 & 50  \\
+&4  & 0.16 & 43 && 0.15 & 43  \\
+&5  & 0.11 & 40 && 0.10 & 39 \\
+\hline
+\multicolumn{2}{c}{\small Average} &0.39 & 57 && 0.35 & 55  \\
+\hline
+\end{tabular}
+\parbox[c]{6.0in}{%
+{\footnotesize  \vspace{0.5cm} Note: The table reports the (lifetime) consumption-equivalent welfare gains from migration transfers by income quartile under alternative assumptions about migration costs.}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[t]
+\small
+\setlength {\tabcolsep}{1.5mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Alternative Estimation with Additive Migration Disutility}
+\vspace{0.3cm}
+\begin{tabular}{l c c c c}
+\hline
+\hline
+Moments & Data & Benchmark & Additive\\
+\hline
+Control: Variance of rural log consumption growth & 0.19 & 0.19 & 0.19  \\
+ & \footnotesize{(0.03)} & \\
+Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48 & \phantom{0.}50  \\
+ & \footnotesize{(1.13)} & \\
+Control: Seasonal migration rate & \phantom{0.}36& \phantom{0.}36& \phantom{0.}45  \\
+ & \footnotesize{(2.64)} & \\
+Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10& \phantom{0.}5  \\
+ & \footnotesize{(4.47)} & \\
+ Control: Probability of repeat migration &       0.68   &  0.70 &  0.60      \\
+            & \footnotesize{(0.46)} & \\
+Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21& \phantom{0.}30  \\
+ & \footnotesize{(2.39)} & \\
+Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& -1  \\
+ & \footnotesize{(2.44)} & \\
+Treatment: Consumption increase of induced migrants (LATE)  & \phantom{0.}30 & \phantom{0.}29& \phantom{0.}14\\
+ & (9.67) & \\
+\hline
+Urban-Rural wage gap & 1.89  & 1.89 & 1.89  \\
+ & \footnotesize{(0.18)} & \\
+Percent in rural area & \phantom{0.}62 & \phantom{0.}60 & 67  \\
+ & \footnotesize{(1.36)} & \\
+Variance of log urban wages  & 0.56 &  0.56 & 0.56         \\
+ & \footnotesize{(0.06)} & \\
+\hline
+\hline
+\end{tabular}
+\parbox[c]{6.25in}{%
+{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data, in the baseline model, in the model with additive disutility, and the standard errors of the empirical moments.}
+}
+\end{center}
+\end{table}
+
+\newpage
+
+\section{Welfare Under Alternative Parameterizations}
+
+In this section we consider alternative parameterizations of the model that yield higher welfare gains from migration subsidies. The goal is to illustrate how our model allows for an interpretation of the experiments of Section 2 based on spatial misallocation, with credit constraints and migration risk driving migration outcomes. As we show below, such an interpretation would give rise to substantially larger welfare gains from migration subsidies than found in this paper, but at the cost of making counterfactual predictions about important aspects of the experimental data.
+
+\begin{table}[h]
+\small
+\setlength {\tabcolsep}{3.75mm}
+\renewcommand{\arraystretch}{1.5}
+\centering
+
+\textbf{\caption{Welfare Gains Under Alternative Parameterizations}}
+\label{ta:welfare_alt}
+ \vspace{0.3cm}
+\begin{tabular}{lccccc} \hline \hline
+                                                                    & \begin{tabular}[c]{@{}c@{}}Average \\ Welfare\\ Gains\end{tabular} & \begin{tabular}[c]{@{}c@{}}LATE\\ (Cons.)\end{tabular} & \begin{tabular}[c]{@{}c@{}}OLS\\ (Cons.)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Treatment \\ Effect\\ (Migration)\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Seasonal \\ Migration \\ Control\end{tabular}} \\ \hline
+ Data
+  & - & 30 & 10 & 22& 36 \\
+ Benchmark calibration
+  & 0.39 & 29 & 10 & 21 & 36 \\
+  %\addlinespace
+\vspace{0.1cm}  \ \ + Higher urban risk
+ & 0.12 & 27 & 51 & 10  &  16\\
+\vspace{0.1cm}  \ \    + No migration disutility
+ & 0.51 & 9 & 29 & 28 &  55 \\
+\vspace{0.1cm}  \ \    + Higher urban TFP
+ & 1.29 & 33 & 51 & 15 &  84 \\
+\vspace{0.1cm}  \ \   + Higher migration cost
+ & 1.98 & 16 & 34  & 62 &  36 \\
+\hline \hline
+\end{tabular}
+\parbox[c]{6.5in}{%
+{\footnotesize  \vspace{0.1cm} Note: This table reports the average welfare gains implied by the model, the LATE and OLS effects of migration on consumption, seasonal migration in the control group, and the treatment effect on migration implied by the model for each specific calibration. Row 1 shows the data. Row 2 is the benchmark calibration that results from the simulated method of moments. Row 3 (``+ Higher urban risk'') changes the parameter shaping the urban relative shock by setting $\gamma=1.5$. Row 4 (``+ No migration disutility'') further removes the disutility of migration by setting $\bar{u}=1$. Row 5 (``+ Higher urban TFP'') further doubles the level of urban TFP of 3 (instead of $A_u=1.5$). Row 6  (``+ Higher migration cost'') sets $p_T$ to be 50 percent of rural consumption so that the model matches seasonal migrant rates in the control group.}
+}
+\end{table}
+
+Table \ref{ta:welfare_alt} summarizes the model's welfare predictions under these alternatives. The first row reproduces the main experimental moments on which we will focus, and the second row reports the model's predictions for the same moments plus the average welfare gain from the migration transfers. The third row raises $\gamma$ from the estimated value of 0.57 up to 1.5, meaning that shocks are now relatively larger in the urban area. By itself this leads welfare gains to fall to 0.12 percent consumption equivalent, the OLS coefficient of consumption on migration to rise to a counterfactual 51 percent, and the treatment effect on migration to fall to a counterfactually low level of 10 percent. The fourth row sets $\bar{u}=1$, which means there is no disutility from migration. Welfare gains raise substantially to 0.51 percent, but the LATE falls to a counterfactually low level of 9 percent, and the migration rate in the control group rises to 55 percent, well above the data. Clearly though, the lower value of $\bar{u}$ is an important driver of the model's welfare gains. The fifth column doubles $A_u$, the urban productivity, to a value of 3. The welfare gains now increase further to 1.29 percent, while other moments remain counterfactual, in particular the seasonal migration rate, which is now an implausible 84 percent.
+
+To lower the migration rate back to a level similar to the data, the last row increases the migration cost up to $m=0.19,$ which is the value that matches the 36 percent migration rate in the control group again. This change also raises the amount of the migration transfer, by construction, since the migration subsidies are intended to cover the migration cost and actually induce migration. Under this parameterization, the welfare gains from the transfers rise to 1.98 percent, or five times what they are in the benchmark calibration. The source of the welfare gains now become relaxing credit constraints, which keep risk-averse migrants from reaching a much more productive urban area, in the spirit of the model of \citet{brch14}. Yet the data do not support such an interpretation. As one example, the LATE effect of consumption on migration is counterfactually lower than the OLS coefficient, pointing to inaccurate sorting patterns for migrants. As another example, the treatment effect of migration is far too large, pointing to the counterfactually large migration costs in this calibration of the model.
+
+\bibliography{./bib/migration_refs}
+
+
+
+
+\end{onehalfspacing}
+\end{document}  
