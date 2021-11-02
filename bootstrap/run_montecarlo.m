@@ -7,6 +7,7 @@ addpath('../utils')
 addpath('../calibration')
 
 load('fake_data.mat')
+fake_data = flipud(fake_data);
 
 Nruns = size(fake_data,1);
 disp(Nruns)
@@ -29,14 +30,14 @@ for xxx = 1:Nruns
     temp_fval = fval(1:xxx,:);
     temp_exitflag = exitflag(1:xxx,:);
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-    save montecarlo_fed estimate fval exitflag
-    save('montecarlo_fed_estimate.csv', 'temp_estimate', '-ascii')
-    save('montecarlo_fed_fval.csv', 'temp_fval', '-ascii')
-    save('montecarlo_fed_exitflag.csv', 'temp_exitflag', '-ascii')
+    save montecarlo_edina estimate fval exitflag
+    save('montecarlo_edina_estimate.csv', 'temp_estimate', '-ascii')
+    save('montecarlo_edina_fval.csv', 'temp_fval', '-ascii')
+    save('montecarlo_edina_exitflag.csv', 'temp_exitflag', '-ascii')
     
-    system('git add montecarlo_fed.mat')
-    system('git add montecarlo_fed*.csv')
-    system('git commit -am "fed computer"')
+    system('git add montecarlo_edina.mat')
+    system('git add montecarlo_edina*.csv')
+    system('git commit -am "edina computer"')
     system('git push')
     
 end
