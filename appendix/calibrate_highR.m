@@ -1,5 +1,3 @@
-clc; clear;
-close all
 
 warning('off','stats:regress:RankDefDesignMat');
 addpath('../utils')
@@ -38,11 +36,11 @@ moments = [aggregate_moments, experiment_hybrid];
 load('../calibration/calibrated_baseline.mat')
 load('../calibration/calibrated_valuefunction_guess.mat')
 
-opts = optimset('Display','iter','UseParallel',true,'MaxFunEvals',20,'TolFun',10^-3,'TolX',10^-3);
+opts = optimset('Display','iter','UseParallel',true,'MaxFunEvals',300,'TolFun',10^-3,'TolX',10^-3);
 
 ObjectiveFunction = @(xxx) calibrate_model_appendix((xxx), moments, [], [], R, beta, vguess,1);
 
-UB = [2.25, 0.60, 1.70, 0.95, 1.9, 0.85, 0.85, 1.50, 0.30];
+UB = [5.25, 0.60, 5.70, 0.95, 5.9, 0.85, 0.85, 5.50, 1.00];
 LB = [0.25, 0.30, 1.00, 0.05, 1.0, 0.15, 0.15, 0.15, 0.01];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,7 +48,7 @@ obj_old = calibrate_model_appendix(x1, moments, [], [], R, beta, vguess,1);
 
 disp(obj_old)
 
-for xxx = 1:2
+for xxx = 1:5
     
     x1 = x1.*exp(0.02.*randn(size(x1)));
 
@@ -67,7 +65,7 @@ if obj_new < obj_old
     
     x1 = x1_new;
     
-    save appendix_cal_high_R x1 R
+    save appendix_cal_high_R x1 R obj_new
     
 end
     
