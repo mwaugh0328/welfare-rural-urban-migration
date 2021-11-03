@@ -1,4 +1,4 @@
-function theta = calibrate_model_appendix(cal_params,moments,specs, seed, R, beta, min_consumption, vguess, flag)
+function theta = calibrate_model_appendix(cal_params,moments,specs, seed, R, beta, min_consumption, perm_movecost, vguess, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % cal_params should have the following order
 % 1: standard Deviation of shocks (todo, veryfy its stand dev or variance)
@@ -13,7 +13,7 @@ function theta = calibrate_model_appendix(cal_params,moments,specs, seed, R, bet
 % 10: Seasonal migration cost
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-model_moments = compute_outcomes_appendix(cal_params, specs, seed, R, beta, min_consumption, vguess, 0);
+model_moments = compute_outcomes_appendix(cal_params, specs, seed, R, beta, min_consumption, perm_movecost, vguess, 0);
 
 % Note there is currently an inconsistency between the numbers in the table
 % and what I have here. 0.40 corresponds with a variance of 0.16, note 0.18

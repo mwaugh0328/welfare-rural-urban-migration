@@ -6,6 +6,7 @@ addpath('../calibration')
 R = 0.90;
 beta = [];
 min_consumption = [];
+perm_movecost = [];
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,13 +39,13 @@ load('../calibration/calibrated_valuefunction_guess.mat')
 
 opts = optimset('Display','iter','UseParallel',true,'MaxFunEvals',300,'TolFun',10^-3,'TolX',10^-3);
 
-ObjectiveFunction = @(xxx) calibrate_model_appendix((xxx), moments, [], [], R, beta, min_consumption,  vguess,1);
+ObjectiveFunction = @(xxx) calibrate_model_appendix((xxx), moments, [], [], R, beta, min_consumption, perm_movecost,  vguess,1);
 
 UB = [5.25, 0.60, 5.70, 0.95, 5.9, 0.85, 0.85, 5.50, 1.00];
 LB = [0.25, 0.30, 1.00, 0.05, 1.0, 0.15, 0.15, 0.15, 0.01];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-obj_old = calibrate_model_appendix(x1, moments, [], [], R, beta, min_consumption, vguess,1);
+obj_old = calibrate_model_appendix(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,1);
 
 disp(obj_old)
 
@@ -54,7 +55,7 @@ for xxx = 1:3
 
     x1_new = fminsearchcon(ObjectiveFunction, x1, LB, UB,[],[],[],opts);
 
-    obj_new = calibrate_model_appendix(x1_new, moments, [], [], R, beta, min_consumption, vguess,1);
+    obj_new = calibrate_model_appendix(x1_new, moments, [], [], R, beta, min_consumption, perm_movecost,  vguess,1);
     
     disp(obj_old)
     disp(obj_new)

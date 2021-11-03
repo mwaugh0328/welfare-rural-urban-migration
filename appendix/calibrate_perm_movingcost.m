@@ -1,12 +1,13 @@
+
 warning('off','stats:regress:RankDefDesignMat');
 addpath('../utils')
 addpath('../calibration')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IMPORTANT
 R = [];
-beta = 0.97;
+beta = [];
 min_consumption = [];
-perm_movecost = [];
+perm_movecost = 0.0878;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,7 +67,7 @@ if obj_new < obj_old
     
     x1 = x1_new;
     
-    save appendix_cal_high_beta x1 beta obj_new
+    save appendix_cal_perm_movingcost x1 perm_movecost obj_new
     
 end
     

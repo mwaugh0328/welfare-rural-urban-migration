@@ -1,4 +1,4 @@
-function [moments] = compute_outcomes_appendix(cal_params, specs, seed, R, beta, min_consumption, vguess, flag)
+function [moments] = compute_outcomes_appendix(cal_params, specs, seed, R, beta, min_consumption, perm_movecost, vguess, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is the driver file for the code which is consistent with RR2 paper at
 % Econometrica (late 2020-on)
@@ -69,7 +69,11 @@ params.seasonal_factor = cal_params(11); % The seasonal fluctuation part.
 
 params.m_season = cal_params(10); % This is the bus ticket
 
-params.m = 2*params.m_season; % This is the moving cost. 
+if isempty(perm_movecost)
+    params.m = 2*params.m_season; % This is the moving cost. 
+else
+    params.m = perm_movecost;
+end
 
 gamma_urban = cal_params(8); % Gamma parameter (set to 1?)
 
