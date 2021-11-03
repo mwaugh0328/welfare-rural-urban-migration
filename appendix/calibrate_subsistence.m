@@ -1,11 +1,12 @@
+
 warning('off','stats:regress:RankDefDesignMat');
 addpath('../utils')
 addpath('../calibration')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IMPORTANT
-R = 0.90;
+R = [];
 beta = [];
-min_consumption = [];
+min_consumption = 0.0878;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -65,7 +66,7 @@ if obj_new < obj_old
     
     x1 = x1_new;
     
-    save appendix_cal_low_R x1 R obj_new
+    save appendix_cal_subsistence x1 R obj_new
     
 end
     

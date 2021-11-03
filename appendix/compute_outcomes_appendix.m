@@ -1,4 +1,4 @@
-function [moments] = compute_outcomes_appendix(cal_params, specs, seed, R, beta, vguess, flag)
+function [moments] = compute_outcomes_appendix(cal_params, specs, seed, R, beta, min_consumption, vguess, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is the driver file for the code which is consistent with RR2 paper at
 % Econometrica (late 2020-on)
@@ -12,9 +12,9 @@ function [moments] = compute_outcomes_appendix(cal_params, specs, seed, R, beta,
 % inherti the change...
 
 if isempty(specs)
-    [cal_params, specs] = preamble_appendix(cal_params, [], seed, R, beta);
+    [cal_params, specs] = preamble_appendix(cal_params, [], seed, R, beta, min_consumption);
 else
-    [cal_params, ~] = preamble_appendix(cal_params, [], seed, R, beta);
+    [cal_params, ~] = preamble_appendix(cal_params, [], seed, R, beta, min_consumption);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

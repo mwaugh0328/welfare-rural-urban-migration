@@ -1,4 +1,4 @@
-function [cal_params, specs] = preamble_appendix(cal_params, specs, seed, R, beta)
+function [cal_params, specs] = preamble_appendix(cal_params, specs, seed, R, beta, min_consumption)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % cal_params should have the following order
 % 1: standard Deviation of shocks (todo, veryfy its stand dev or variance)
@@ -37,9 +37,12 @@ else
     cal_params(13) = beta;
 end
 
-
-cal_params(14) = 0.0; % This is the abar...it's set to zero. We are able to 
+if isempty(min_consumption)
+    cal_params(14) = 0.0; % This is the abar...it's set to zero. We are able to 
 % to have it be positive. 
+else
+    cal_params(14) = min_consumption;
+end
 
 cal_params(15) = 1.0; % this value is 1 - the average tax rate
 
