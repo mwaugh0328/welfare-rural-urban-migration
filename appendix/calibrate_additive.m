@@ -34,9 +34,9 @@ experiment_hybrid = [0.36, 0.22, 0.092, 0.30, 0.10, 0.25 ./ 0.36, 0.40];
 moments = [aggregate_moments, experiment_hybrid];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load('appendix_fix_ubar.mat')
+load('appendix_additive_cost.mat')
 load('../calibration/calibrated_valuefunction_guess.mat')
-x1 = [x1(1:4), 0 , x1(5:end)];
+%x1 = [x1(1:4), 0 , x1(5:end)];
 
 opts = optimset('Display','iter','UseParallel',true,'MaxFunEvals',300,'TolFun',10^-3,'TolX',10^-3);
 
@@ -52,7 +52,7 @@ disp(obj_old)
 
 for xxx = 1:3
     
-    x1 = x1.*exp(0.02.*randn(size(x1)));
+    x1 = x1.*exp(0.05.*randn(size(x1)));
 
     x1_new = fminsearchcon(ObjectiveFunction, x1, LB, UB,[],[],[],opts);
 
