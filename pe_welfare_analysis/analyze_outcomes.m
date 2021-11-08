@@ -161,16 +161,16 @@ if isempty(vft_fun)
     
     parfor xxx = 1:n_types 
         
-        [assets(xxx), move(xxx), vguess(xxx)] = ...
-            rural_urban_value(params, solve_types(xxx,:),[]);
+        [assets(xxx), move(xxx), value_function(xxx)] = ...
+            rural_urban_value(params, solve_types(xxx,:),[],[]);
     
     end
 else
     
     parfor xxx = 1:n_types 
         
-        [assets(xxx), move(xxx), vguess(xxx),~] = ...
-            rural_urban_value(params, solve_types(xxx,:), vft_fun(xxx));
+        [assets(xxx), move(xxx), value_function(xxx),~] = ...
+            rural_urban_value(params, solve_types(xxx,:), vft_fun(xxx),[]);
         
     end
 
@@ -182,12 +182,12 @@ parfor xxx = 1:n_types
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % First, perform the field experiment...
 
-    [assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx)] = field_experiment_welfare(params, solve_types(xxx,:),  vguess(xxx));
+    [assets_temp(xxx), move_temp(xxx), cons_eqiv(xxx)] = field_experiment_welfare(params, solve_types(xxx,:),  value_function(xxx));
 
     [assets_temp_cash(xxx), move_temp_cash(xxx),... 
-       cons_eqiv_cash(xxx)] = cash_experiment_welfare(params, solve_types(xxx,:), vguess(xxx));
+       cons_eqiv_cash(xxx)] = cash_experiment_welfare(params, solve_types(xxx,:), value_function(xxx));
    
-   [assets_fix(xxx), move_fix(xxx), cons_eqiv_fix(xxx)] = fix_allocations_experiment_welfare(assets(xxx), move(xxx), params, solve_types(xxx,:),  vguess(xxx));
+   [assets_fix(xxx), move_fix(xxx), cons_eqiv_fix(xxx)] = fix_allocations_experiment_welfare(assets(xxx), move(xxx), params, solve_types(xxx,:),  value_function(xxx));
    
 end
 
@@ -237,12 +237,10 @@ for nmc = 1:Nmontecarlo
 
 
     parfor xxx = 1:n_types 
-% Interestingly, this is not a good part of the code to use parfor... it
-% runs much faster with just a for loop.
        
     [sim_panel(:,:,xxx), states_panel(:,:,xxx)] = rural_urban_simmulate(...
         assets(xxx), move(xxx), params, solve_types(xxx,:), shock_states_p,...
-        pref_shocks(:,xxx),move_shocks(:,xxx),vguess(xxx));
+        pref_shocks(:,xxx),move_shocks(:,xxx),value_function(xxx));
     
     end 
 
