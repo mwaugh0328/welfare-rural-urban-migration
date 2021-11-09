@@ -42,8 +42,9 @@ opts = optimset('Display','iter','UseParallel',true,'MaxFunEvals',300,'TolFun',1
 
 ObjectiveFunction = @(xxx) calibrate_additive_appendix((xxx), moments, [], [], R, beta, min_consumption, perm_movecost,  vguess,1);
 
-UB = [5.25, 0.60, 5.70, 0.95, 100.0, 0.85, 0.85, 5.50, 1.00];
-LB = [0.25, 0.30, 1.00, 0.05,-100.0, 0.15, 0.15, 0.15, 0.01];
+UB = [5.25, 0.60, 5.70, 0.95, 100.0, 0.95, 0.95, 5.50, 1.00];
+LB = [0.25, 0.30, 1.00, 0.05,-100.0, 0.05, 0.05, 0.15, 0.01];
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 obj_old = calibrate_additive_appendix(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,1);
