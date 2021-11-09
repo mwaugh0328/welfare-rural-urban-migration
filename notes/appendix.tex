@@ -83,7 +83,7 @@ breaklinks]{hyperref}
 
 \section{Model Appendix}
 
-This appendix provides a generic description of our model with relatively compact notation. I will then discuss below how this maps into the specific model of LMW, aggregate law's of motion, National Income and Product Accounting in the model, and then our equilibrium concept.
+This appendix provides a generic description of our model with relatively compact notation. I will then discuss below how this maps into the specific model of LMW, aggregate law's of motion, National Income and Product Accounting in the model, and then our equilibrium concept. The generic description also clarifies the Centralized Planning Problem and facilitates arriving at a solution to it.
 
 \subsection{SpIM: The Spatial Incomplete Markets Model.}
 
@@ -93,9 +93,9 @@ The state variables for a household can be divided into objects that an individu
 
 \item \textbf{Endogenous state variables.} There are three endogenous (individual) state variables. The first is the household's asset holdings, $a$. The second is a variable that describes the household's location $j$. The third is whether or not the household is an inexperienced migrant, $x$, and, thus, whether or not it suffers disutility $\bar u$. As I describe below, this will evolve according to the transition probability function $\varphi(x',x, j)$ which may depend upon a households location.
 
-\item \textbf{Aggregate state variables.} There is an index $i$ which describes the aggregate state. 
+\item \textbf{Aggregate state variables.} There is an index $i$ which describes the aggregate state(s).
 
-\item \textbf{Transitory moving shock.} Each household is subject to i.i.d. moving shocks $\nu$ for each location $j$. Here these moving shocks are independently and identically distributed across time and is distributed Type 1 extreme value distribution with scale parameter $\sigma_{\nu}$.
+\item \textbf{Transitory moving shock.} Each household is subject to additive i.i.d. moving shocks $\nu$ for each location $j$. Here these moving shocks are independently and identically distributed across time and is distributed Type 1 extreme value distribution with scale parameter $\sigma_{\nu}$.
 \end{itemize}
 Given this representation, we can express the household's problem as
 \begin{align}
@@ -103,30 +103,31 @@ Given this representation, we can express the household's problem as
 v_j(a, s, x, i) = \max_{j'} \bigg\{ \ v_{j'j}(a, s, x, i) + \nu_{j'} \ \bigg \},
 \label{eq:value_fun}
 \end{align}
-and then the value functions associated with a move from $j$ to $j'$ is
+and then the value functions associated with a move from $j$ to $j'$ (here we are using right to left notation to denote the source $j$ and destination $j'$) is
 \begin{align}
-v_{j'j}(a, s, x, i) = \max_{a'\in \mathcal{A}}\bigg  \{ u(Ra + w_{j}(s, i) - a' - m_{j',j} \ , \  x)  + \beta \, \mathbb{E} [v_{j'}(a', s', x', i')]  \bigg\}
+v_{j'j}(a, s, x, i) = \max_{a'\in \mathcal{A}}\bigg  \{ u(Ra + w_{j}(s, i) - a' - m_{j',j} \ , \  x)  + \beta \, \mathbb{E} [v_{j'}(a', s', x', i')]  \bigg\},
 \label{eq:value_fun_locaiton}
 \end{align}
 which says that the household chooses future asset holdings to maximize the expected present discounted value of utility.  Utility depends upon consumption (the first argument) and experience status $x$ (second argument).  Given asset choices, a household's consumption equals the gross return on current asset holdings, $Ra$, plus labor income $w_{j}(s, i)$, minus future asset holdings and minus any moving costs incurred $m_{j',j}$ for going from $j$ to $j'$. The asset holdings must respect the borrowing constraint and, thus, must lie in the set $\mathcal{A}$. Next period's state variables are the new asset holdings, the individual productivity shock, the experience level, and the aggregate state.
 
-Associated with the this problem are the policy functions describing the optimal asset and migration choice. These will be denoted as: $g_{j',j}(a, s, x, i)$ and the indicator function $\iota_{j'j}(a, s, x, i, \nu)$. When integrating across the idiosyncratic preference shock in the migration choice gives rise to migration probabilities $\mu_{j',j}(a, s, x, i)$.
+Associated with the this problem are the policy functions describing the optimal asset and migration choice. These will be denoted as: $g_{j',j}(a, s, x, i)$ and a migration indicator function $\iota_{j'j}(a, s, x, i, \nu)$. When integrating across the idiosyncratic preference shock in the migration indicator function gives rise to migration probabilities $\mu_{j',j}(a, s, x, i)$.
 
 That's it. That's the household side of the model.
 
 \subsection{The LMW model.}
 
-The LMW model is a specific case of this representation.
+The LMW model is a specific case of the representation above.
 
-\textbf{Locations.} One way to think about the LMW model is that there are essentially three locations: rural, seasonal migration, and urban. Then there is a technological restriction on the migration choices depending upon the location. So a rural households can: stay, transition to seasonal migration, or migrate to the urban area. Seasonal migrants can \textbf{only} move to the rural area. Urban migrants can: stay or migrate to the rural location. What this implies is that the migration cost matrix would take the form:
-\begin{equation*}
+\textbf{Locations.} One way to think about the LMW model is that there are three locations $j$: rural, seasonal migration, and urban. Then there is a technological restriction on the migration choices depending upon the location. So a rural households can: stay, transition to seasonal migration, or migrate to the urban area. Seasonal migrants can \textbf{only} move to the rural area. Urban migrants can: stay or migrate to the rural location. This implies that the matrix of migration cost (with the row denoting the source, column denoting the destination) would take the form:
+\begin{equation}
 \renewcommand{\arraystretch}{1.5}
 \begin{pmatrix}
 m_{\mbox{\tiny rural}',\mbox{\tiny rural}} = 0 & m_{\mbox{\tiny seas}',\mbox{\tiny rural}} = m_{T} & m_{\mbox{\tiny urban}',\mbox{\tiny rural}} = m_{P} \\
 m_{\mbox{\tiny rural}',\mbox{\tiny seas}} = 0 & m_{\mbox{\tiny seas}',\mbox{\tiny seas}} = \infty & m_{\mbox{\tiny urban}',\mbox{\tiny seas}} = \infty \\
 m_{\mbox{\tiny rural}',\mbox{\tiny urban}} = m_{P} & m_{\mbox{\tiny seas}',\mbox{\tiny urban}} = \infty & m_{\mbox{\tiny urban}',\mbox{\tiny urban}} = 0\\
 \end{pmatrix}
-\end{equation*}
+\label{eq:matrix-cost}
+\end{equation}
 For example, households seasonally migrating can not remain seasonal migrants in out model, thus $ m_{\mbox{\tiny seas}',\mbox{\tiny seas}} = \infty$. And then the associated migration probabilities $\mu_{j',j}$ take the following form:
 \begin{equation*}
 \renewcommand{\arraystretch}{1.5}
@@ -138,13 +139,13 @@ For example, households seasonally migrating can not remain seasonal migrants in
 \end{equation*}
 
 
-\textbf{Individual Productivity Shocks.} One can always represent the state $s$ as a pair $(z,s)$ with $\pi(s',s)$ being non-zero for all $s' = (z,s')$ and zero for all $s' = (z',s')$ so that $z$ is a permanent state. And thus the problem above describes the problem for a particular $z$. In the LMW setting, we are then solving the problem many times for different $z$s. Below, we will explicitly carry around the dependence upon $z$ to be consistent with the body of the paper. 
+\textbf{Individual Productivity Shocks.} In the LMW model, we can represent the idiosyncratic state $s$ as a pair $(z,s)$ with $\pi(s',s)$ being non-zero for all $s' = (z,s')$ and zero for all $s' = (z',s')$ so that $z$ is a permanent state. And thus the generic problem above describes the problem for a particular $z$. In the LMW setting, we then solving the problem many times for different $z$s. Below, we will explicitly carry around the dependence upon $z$ to be consistent with the body of the paper.
 
 \textbf{Experience.} In the LMW model, we posited a particular process for the evolution of $x$ or experience that is indexed by the location and hence is influenced by the migration choices. To remind ourselves how this works, if a household in rural area does not have experience, it stays inexperienced; if the household is experienced, it stays experienced next period with probability $\pi$ and inexperienced with probability $1-\pi$.  If a household is in the urban area and has experience it stays experienced; inexperienced urban households stay inexperienced in the next period with probability $\lambda$ and become experienced with probability $1-\lambda$. If a household is a seasonal migrant and does not have experience, then it can acquire experience with probability $\lambda$ and become experienced with probability $1-\lambda$.
 
 The compact representation of this is as a location dependent Markov chain: $\varphi(x',x, j)$.
 
-\textbf{Aggregate State.} In the LMW model, things are simple in that $i = ( \ A_{r,i}, \ N_{r,i} \ )$ with $A_{r,i}$ deterministically transitions from a good and bad season to mimic seasonal crop cycles. $N_{r,i}$ is an endogenous, aggregate state variable that depends upon location choices. It matters because of the decreasing returns to production in the rural area and, hence, it feeds back into the prices faced. In the stationary equilibrium, this will deterministically move with seasonal productivity and thus the index $i$ is a sufficient statistic for the complete description of the aggregate states. 
+\textbf{Aggregate State.} In the LMW model, things are simple in that $i = ( \ A_{r,i}, \ N_{r,i} \ )$ with $A_{r,i}$ deterministically transitioning from a good and bad season to mimic seasonal crop cycles. $N_{r,i}$ is an endogenous, aggregate state variable that depends upon location choices. It matters because of the decreasing returns to production in the rural area and, hence, it feeds back into the prices faced. In the stationary equilibrium, this will deterministically move with seasonal productivity and thus the index $i$ is a sufficient statistic for the complete description of the aggregate states.
 
 \subsection{LMW Production}
 
@@ -178,13 +179,13 @@ w_{ri}(s) = s \omega_{ri} \ \ \ \ \mbox{and} \ \ \ \ w_{u}(z,s) = z s^{\gamma} \
 
 \subsection{Laws of Motion and Accounting}
 
-First, it's useful to define the migration probabilities for a given set of state variables as:
+First, define the migration probabilities for a given set of state variables as:
 \begin{align}
 \mu_{j',j}(a, z, s,  x, i) = \int_{\nu} \iota_{j',j}(a, z, s, x, i, \nu) d\nu,
 \end{align}
-where $\mu_{j',j}(a, z, s, x, i)$ is the probability mass of those moving from location $j$ (rural, seasonal, and urban) to location $j'$. And these probabilities must respect the technological restrictions discussed above.
+where $\mu_{j',j}(a, z, s, x, i)$ is the probability mass of those moving from location $j$ (rural, seasonal, and urban) to location $j'$. And these probabilities must respect the technological restrictions discussed around (\ref{eq:matrix-cost}).
 
-\textbf{The distribution of households across states.} Define the probability distribution of households across individual states in location $j$ as $\lambda_{j}(a, z, s, x, i)$. This is the probability measure of households in location $j$ with asset levels $a$, permanent shock $z$, individual shocks $s$, experience $x$, in season $i$. Furthermore, define the probability distribution of households in the next period as $\lambda_{j}(a, z, s, x, i')$ with the observation that the season deterministically changes with each time period.
+\textbf{The distribution of households across states.} Define the probability distribution of households across individual states in location $j$ as $\lambda_{j}(a, z, s, x, i)$. This is the measure of households in location $j$ with asset levels $a$, permanent shock $z$, individual shocks $s$, experience $x$, in season $i$. Furthermore, define the probability distribution of households in the next period as $\lambda_{j}(a, z, s, x, i')$ with the observation that the season deterministically changes with each time period.
 
 The probability distribution $\lambda_{j}(a, z, s, x, i)$ evolves via the following law of motion:
 \begin{align}
@@ -201,7 +202,7 @@ The second bracket is the flow into location $j$ from all other locations $j'$. 
 \lambda_j(i) = \int\limits_{x} \int\limits_{s} \int\limits_{z} \int\limits_{a}  \lambda_j(a, z, s, x, i)  \ da  \ dz \ ds \ dx.
 \label{eq:island_populaiton}
 \end{align}
-In words, the population is found integrating over the mass across asset holdings, shocks, experience levels, for a given season $i$. Another useful statistic is the measure of types of efficiency units in location and by season
+Another useful statistic is the measure of efficiency types in location and by season
 \begin{align}
 \lambda_j(z, s, i) = \int\limits_{x}  \int\limits_{a}  \lambda_j(a, z, s, x, i) \ da  \ dx.
 \end{align}
@@ -223,12 +224,12 @@ N_{ri} = \int\limits_{s} \int\limits_{z}  \  s \ \lambda_{\mbox{\tiny rural}}(z,
 \end{align}
 inside of the summation and integration this is the mass of households moving from $j$ to $j'$ (which is given by the migration rate $\mu_{j',j}(a, z, s, x, i)$)  multiplied by the measure of households in that location $\lambda_j(a, z, s, x, i)$) multiplied by the asset policy function associated with that migration choice $g_{j',j}(a, z, s, x, i)$. This is then integrated across current period asset holdings, individual shocks, experience levels and then summed across all location-destination pairs.
 
-\textbf{Connecting Consumption and National Income.} Start from the production side of our economy. The value of aggregate production must equal aggregate payments to labor and payment to land owners who own the fixed factor that is used in rural area production.
+\textbf{Connecting National Income and Consumption.} Start from the production side of our economy. The value of aggregate production must equal aggregate payments to labor and payment to land owners who own the fixed factor that is used in rural area production.
 \begin{align}
-Y_i = A_u N_{ui} + A_{ri}N_{ri}^{\phi} = \sum_{j} \int\limits_{z} \int_{s} w_{ji}(z, s)\lambda_j(z, s,i)\ dz \ ds + \mbox{rents}_{i}
+Y_i = A_u N_{ui} + A_{ri}N_{ri}^{\phi} = \sum_{j} \int\limits_{z} \int\limits_{s} w_{ji}(z, s)\lambda_j(z, s,i)\ dz \ ds + \mbox{rents}_{i}
 \label{eq:value_production}
 \end{align}
-where the first term on the right side integrates over wage payments for each location, each shock state. The second term are the payments to land that is associated with rural location. Now by integrating over the consumers budget constraint and substituting (\ref{eq:value_production}) into the aggregated budget constraint, we arrive at the following:
+where the first term on the right side integrates over wage payments for each location, each shock state. The second term are the payments to land that is associated with rural location. Now by integrating over the consumers budget constraint and substituting (\ref{eq:value_production}) into the resource constraint, we arrive at the following:
 \begin{align}
 Y_i - \mbox{rents}_{i} = C_i - R\mathcal{A}_i +  \mathcal{A'}_i  + \sum_{j}\sum_{j'} \int\limits_{x} \int\limits_{s} \int\limits_{a} m_{j',j} \ \mu_{j',j}(a, s, x, i) \lambda_j(a, s, x, i) \ da \ ds \ dx
 \label{eq:expenditure_side_gdp}
@@ -256,10 +257,10 @@ $\{\ g_{j',j}(a, z, s, x, i), \iota_{j',j}(a, z, s, x, i, \nu), \pi(s',s), \varp
 
 The final object we define is utilitarian social welfare function as
 \begin{align}
-\mathcal{W}^{\mbox{\tiny DCE}} = \sum_{j} \int_{a} \int_{x} \int_{s}  \int\limits_{z}  v_j(a, z, s, x, i)  \lambda_j(a, z, s, x, i) ds \ dx \ da.
+\mathcal{W}^{\mbox{\tiny DCE}} = \sum_{j} \int\limits_{a} \int\limits_{x} \int\limits_{s}  \int\limits_{z}  v_j(a, z, s, x, i)  \lambda_j(a, z, s, x, i) ds \ dx \ da.
 \label{eq:D-social_welfare}
 \end{align}
-here the social welfare function is the average value of households across locations, shock states, experience, assets, and preference states. Below we provide a fuller discussion of this social welfare function in the context of our welfare analysis. 
+here the social welfare function is the average value of households across locations, shock states, experience, assets, and preference states.
 
 %\subsection{Computing the Decentralized Equilibrium and Calibration Strategy}
 %
@@ -277,22 +278,22 @@ here the social welfare function is the average value of households across locat
 
 \section{The Decentralized Equilibrium with Government Intervention}
 
-This section describes the model with a Government who is implementing a means-tested migration subsidy similar to \citet{brch14} experiment and finances it through a tax on labor income. The households migration choice is the same as in (\ref{eq:value_fun}), but the value function associated across different location options is now:
-{\small
+This section describes the model with a Government who implements a means-tested migration subsidy similar to the \citet{brch14} experiment and finances it through a tax on labor income. The households migration choice is the same as in (\ref{eq:value_fun}), but the value function associated across different location options is:
 \begin{align}
-v_{j'j}(a, z, s, x, i) = \max_{a'\in \mathcal{A}}\bigg  \{ u(Ra + (1 - \tau)w_{j}(z, s, i) - a' - [m_{j',j} + \tilde{m}_{j',j}(a)] \ , \  x)  + \beta \, \mathbb{E} [v_{j'}(a', z, s', x', i')]  \bigg\}
+& v_{j'j}(a, z,  s, x, i) = \nonumber \\
+\nonumber \\
+& \max_{a'\in \mathcal{A}}\bigg  \{ u(Ra + (1 - \tau)w_{j}(z, s, i) - a' - [m_{j',j} + \tilde{m}_{j',j}(a)] \ , \  x)  + \beta \mathbb{E} [v_{j'}(a', z, s', x', i')]  \bigg\},
 \label{eq:value_fun_tax}
-\end{align}}
-where $\tau$ is the labor income tax rate and $\tilde{m}_{j',j}(a)$ is the migration subsidy that depends upon a households locatio-destination decision and asset holdings. In the context of \citet{brch14}, the value of migration subsidy is only positive for rural households seasonally migrating $(j = \mbox{rural}, j' = \mbox{seas})$ and when assets are below $\bar a$ where $\bar a$ corresponds with (approximately) the median level of assets in the rural village. For all other households the value of this subsidy is zero.
+\end{align}
+where $\tau$ is the labor income tax rate and $\tilde{m}_{j',j}(a)$ is the migration subsidy that depends upon a households locatio-destination decision and asset holdings. In the context of \citet{brch14}, the value of the migration subsidy is positive only for (i) rural households seasonally migrating $(j = \mbox{rural}, j' = \mbox{seas})$ and (ii) when assets are below $\bar a$ where $\bar a$ corresponds with a threshold chosen by \citet{brch14} which is (approximately) the median level of assets in the rural village. For all other households the value of this subsidy is zero.
 
-Define the Government's fiscal year budget constraint as:
+The Government's fiscal year budget constraint as:
 {\small
 \begin{align}
 G =& \sum_{i} \sum_{j} \int\limits_{s} \int\limits_{z} \tau  w_{j}(z,s,i)\lambda_j(z,s,i)  \nonumber \\
 & \ - \ \sum_{i} \sum_{j}\sum_{j'} \int\limits_{x} \int\limits_{s} \int\limits_{z} \int\limits_{a} \tilde{m}_{j',j}(a) \ \mu_{j',j}(a, z, s, x, i) \lambda_j(a, z, s, x, i) \ da \ dz \ ds \ dx  = 0
 \label{eq:gov_budget}
-\end{align}}
-where the first term are all labor income tax receipts and the second term are all the outlays of migration subsidies. We ask that the government balance it's budget, fiscal year by fiscal year. We are emphasizing fiscal year which is comprised of the lean and good season. Thus, we are allowing the Government to collect taxes and pay out subsidies that must balance across all seasons, but that may not balance within a season.
+\end{align}}where the first term are labor income tax receipts and the second term are the outlays of migration subsidies. We ask that the government balance its budget, fiscal year by fiscal year. We emphasize fiscal year which is comprised of the bad and good season. Thus, we are allowing the Government to collect taxes and pay out subsidies that must balance across all seasons, but that may not balance within a season. \textbf{CHECK EXACTLY HOW THIS WAS DONE IN CODE.}
 
 \textbf{A Stationary Decentralized Equilibrium with Government Intervention} A Stationary Decentralized Equilibrium with Government Intervention are asset and moving policy functions $\{\ g_{j',j}(a, z, s, x, i), \iota_{j',j}(a, z, s, x, i, \nu) \ \}$, a probability distribution $\lambda_{j}(a, z, s, x, i)$, and positive real numbers $N_{ri}, N_{ui},$ $w_{ri}(s), w_{u}(z, s))$ and government policy $\{\ \tilde{m}_{j',j}(a), \tau\}$ such that
 \begin{itemize}
@@ -302,11 +303,11 @@ where the first term are all labor income tax receipts and the second term are a
 \item[iv] The probability distribution $\lambda(a, j, z, s, x, i, \nu)$ induced by \\
 $\{\ g_{j',j}(a, z, s, x, i), \iota_{j',j}(a, z, s, x, i, \nu), \pi(s',s), \varphi(x',x,j), \phi(\nu) \ \}$ satisfies (\ref{eq:dce_law_motion}) and is a stationary distribution;
 \item[iv] Effective labor units in the rural and urban areas satisfy (\ref{eq:urban_units}, \ref{eq:rural_units}).
-\item[v] The Government's fiscal year budget constraint (\ref{eq:gov_budget}) is satisfied.
+\item[v] The Government's budget constraint (\ref{eq:gov_budget}) is satisfied.
 \end{itemize}
-The differences relative to the Decentralized Equilibrium are that the policy functions must satisfy the households problem with taxes and subsidies in (\ref{eq:value_fun_tax}) and that the Government's budget constraint is satisfied in (\ref{eq:gov_budget})
+The main differences relative to the Decentralized Equilibrium are that the policy functions must satisfy the households problem with taxes and subsidies in (\ref{eq:value_fun_tax}) and that the Government's budget constraint is satisfied in (\ref{eq:gov_budget}).
 
-\section{Appendix The Centralized Equilibrium}
+\section{The Centralized Equilibrium}
 
 \subsection{The Social Welfare Function}
 
@@ -322,7 +323,7 @@ We cast the Planners Problem in terms of the planner choosing consumption alloca
 u(c_{j',j}(z,s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'} ].
 \label{eq:utility-shocks}
 \end{align}
-where $\mu_{j',j}(z,s,x,t)$ is the migration probability going from location $j$ to location $j'$ and then $E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'} ]$ is the expected value of the preference shock conditional on the migration probabilities. So, for example, if all people migrate location $j$ to location $j'$, then this value is just the unconditional mean of a Type 1 extreme value shock. Now we can write the social welfare function as
+where $\mu_{j',j}(z,s,x,t)$ is the migration probability going from location $j$ to location $j'$ and then $E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'} ]$ is the expected value of the preference shock conditional on the migration probabilities. So, for example, if the Planner dictates that all people migrate location $j$ to location $j'$, then this value is just the unconditional mean of a Type 1 extreme value shock. Now we can write the social welfare function as
 \begin{align}
 \mathcal{W^{SP}} = \sum_{t=0}^{\infty}\sum_{j} \int\limits_{z} \int\limits_{s} \int\limits_{x} \beta^{t} \bigg \{ u(c_{j',j}(z, s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z, s,x,t)\big\}_{j'}] \bigg \} \lambda_{j}(z, s, x, t) dz \ ds \ dx.
 \label{eq:sp-social_welfare2}
@@ -358,11 +359,11 @@ Y_t\  \geq \ & \sum_{j}\sum_{j'} \int\limits_{z} \int\limits_{s} \int\limits_{x}
 & \ \ \ \ +  \ \  \sum_{j}\sum_{j'} \int\limits_{z} \int\limits_{s} \int\limits_{x}  m_{j',j} \ \mu_{j',j}(z,s, x, t) \lambda_{j}(z, s, x, t) \ dz \ ds \ dx.
 \label{eq:planner_income_side_gdp}
 \end{align}
-which says that production must be greater than or equal to consumption which is the first term on the righthand side of (\ref{eq:planner_income_side_gdp}) and the moving costs associated with the migration of households across locations which is the second term on the righthand side. Here we compactly sum across all $j'$ and $j$ location pairs with the notion that the moving cost for staying in a location is zero, i.e., $m_{j,j} = 0$.
+which says that production must be greater than or equal to consumption which is the first term on the righthand side of (\ref{eq:planner_income_side_gdp}) and the moving costs associated with the migration of households across locations which is the second term on the righthand side. Here we compactly sum across all $j'$ and $j$ location pairs and reminding ourselves that the moving cost for staying in a location is zero, i.e., $m_{j,j} = 0$.
 
 \subsection{The Centralized Planners Problem}
 
-Given everything defined above, the \textbf{Centralized Planner's Problem} is the following:
+The \textbf{Centralized Planner's Problem} is the following:
 {\small
 \begin{align}
 \mathcal{W}^{*} = & \max\limits_{c_{j',j}(z, s, x, t),\ \mu_{j',j}(z, s, x, t)} \ \sum_{t=0}^{\infty}\sum_{j} \int\limits_{s} \int\limits_{x} \beta^{t} \bigg \{ u(c_{j',j}(z, s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'}]  \bigg \} \lambda_{j}(z, s, x, t) \ dz \ ds \ dx \ \ \nonumber \\
@@ -370,7 +371,7 @@ Given everything defined above, the \textbf{Centralized Planner's Problem} is th
 & \ \ \mbox{subject to} \ \ (\ref{eq:planner_value_production}) \ \ (\ref{eq:planner_income_side_gdp}) \ \ \mbox{and} \ \ (\ref{eq:planner_law_motion}) \ \ \mbox{and an inital condition} \ \ \lambda_j(z, s, x,0).
 \label{eq:planner_problem}
 \end{align}}
-Then given this problem, define the following allocation:
+Given this problem, define the following allocation:
 
 \textbf{A Stationary Centralized Planner Allocation.}  A Stationary Centralized Planner Allocation are time invariant policy functions $\{\ c_{j}(z, s, x, i),\ \mu_{j',j}(z, s, x, i) \ \}$, a probability distribution $\lambda_{j}(z, s, x, i)$, and positive real numbers $N_{j,i}$ for rural and urban areas and season $i$ where:
 \begin{itemize}
@@ -381,7 +382,7 @@ Then given this problem, define the following allocation:
 
 \subsection{Solution to the Centralized Planner's Problem}
 
-The approach to solving the planning problem proceeds in the following way. First, we formulate the problem in (\ref{eq:planner_problem}) using Lagrangian methods under the operating assumption that these methods are usable. Second, we then derive the necessary conditions associated the planner's consumption allocation and migration probabilities.  
+The approach to solving the planning problem proceeds in the following way. First, we formulate the problem in (\ref{eq:planner_problem}) using Lagrangian methods under the operating assumption that these methods are usable. Second, we then derive the necessary first order conditions associated the planner's consumption allocation and migration probabilities.
 
 We express the \textbf{Centralized Planner's Problem} as:
 {\small
@@ -394,24 +395,27 @@ We express the \textbf{Centralized Planner's Problem} as:
 \nonumber \\
 & \ - \ \sum_{t=0}^{\infty} \sum_{j} \int\limits_{z} \int\limits_{s'} \int\limits_{x'} \beta^{t+1} \chi_{3j}(z, s', x', t+1) \bigg \{\lambda_{j}(z, s', x', t+1) - \nonumber \\
 \nonumber \\
-& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
  \sum_{j'} \int\limits_{z} \int\limits_{s} \int\limits_{x} \mu_{j,j'}(z,s,x,t) \pi(s',s) \varphi(x',x, j') \lambda_{j'}(z,s, x, t) \ dz \ ds  \ dx  \bigg \} \nonumber
-\end{align}}
-where the first term is the social welfare function and $\chi(t)$ is the lagrange multiplier on the resource constraint. The multipliers $\chi_{2j}(s, x, t)$ are on the constraint that the destination migration  probabilities leaving source $j$ must sum to one.
+\end{align}}where the first term is the social welfare function and then several constraints with the associated multipliers. Each contraint/multiplier are:
+\begin{enumerate}
+\item $\chi(t)$ is the lagrange multiplier on the resource constraint.
 
-And then the multipliers $\chi_{3j}(s', x', t+1)$ are on the law of motion for the probability distribution, that is migration flows into $j$ from all $j'$ must equal the probability mass in $j$ at date $t+1$. On this last multiplier, we do the following that will ease the algebra below: scale the multiplier $\chi_{3j}(s', x', t+1)$ by $-\beta^{t+1}$. This which does not change the problem, but only a scaling trick to see things quicker in the algebra below. 
+\item $\chi_{2j}(s, x, t)$ are multipliers on the constraint that the destination migration probabilities leaving source $j$ must sum to one.
 
+\item $\chi_{3j}(s', x', t+1)$ are multipliers on the law of motion for the probability distribution, that is migration flows into $j$ from all $j'$ must equal the probability mass in $j$ at date $t+1$. On this last multiplier, we do the following that will ease the algebra below: scale the multiplier $\chi_{3j}(s', x', t+1)$ by $-\beta^{t+1}$. This which does not change the problem, but only a scaling trick to see things quicker in the algebra below.
+\end{enumerate}
 \textbf{Consumption Allocations.} Takeing the first order condition of (\ref{eq:planner_L}) with respect to consumption gives:
 \begin{align}
-\beta^{t}u'(c_{j',j}(z, s, x, t)) = \chi(t) \ \forall \ j, j', \ s, \ x, \ \mbox{and} \ t.
+\beta^{t}u'(c_{j',j}(z, s, x, t)) = \chi(t) \ \ \ \forall \ j, j', \ s, \ x, \ \mbox{and} \ t.
 \label{eq:foc_planner}
 \end{align}
-which says set the marginal utility of consumption for every location, productivity state, and experience state equal its marginal cost at each date. In a time-invariant, stationary allocation, and implication of (\ref{eq:foc_planner}) is that for each season $i$:
+which says set the marginal utility of consumption for every location, productivity state, and experience state equal its marginal cost at each date. In a time-invariant, stationary allocation, an implication of (\ref{eq:foc_planner}) is that for each season $i$:
 \begin{align}
 u'(c_{j',j}(z, s, x, i)) = u'(c_{\tilde{j'},\tilde{j}}(z, s', x', i)) \ \forall \ j, \ s, \ x
 \label{eq:foc_planner2}
 \end{align}
-so that marginal utility is equated within each season and \textbf{all} households bear the aggregate consequences of seasonality. There are several observations to make about this result. First, the destination does not matter in how much consumption a household recipes. The source does matter indirectly because of how a household's experience status and location affect its marginal utility of consumption. In other words, the planner will not equate the \textbf{level} of consumption across households. For example, compare the marginal utility of a rural household with a seasonal migrant who does not have experience
+so that marginal utility is equated within each season and \textbf{all} households bear the aggregate consequences of seasonality. There are several observations to make about this result. First, the destination does not matter in how much consumption a household receives. The source does matter indirectly because of how a household's experience status and location affect its marginal utility of consumption. For example, compare the marginal utility of a rural household with a seasonal migrant who does not have experience
 \begin{align}
 c_{\mbox{\tiny rura1}}(s, x, i)^{-\alpha} = c_{\mbox{\tiny seas}}(s, x, i)^{-\alpha}\bar u.
 \end{align}
@@ -419,7 +423,7 @@ But because the disutility of migration affects the marginal utility of consumpt
 \begin{align}
 c_{\mbox{\tiny rura1}}(s, x, i) < c_{\mbox{\tiny seas}}(s, x, i)
 \end{align}
-so that non-experienced migrants must be compensated for migrating to equate the marginal utility of consumption across households. 
+so that non-experienced migrants must be compensated for migrating to equate the marginal utility of consumption across households. In other words, the planner will not equate the \textbf{level} of consumption across households.
 
 \textbf{Migration Probabilities.} First, let's take stock of the challenge here. The key issue is that when deriving the first order conditions, the planner understands that he has control of the distribution $\lambda$ next period via the migration probabilities chosen today. Thus, via the chain rule there are two effects. The direct effect arising from a small change in the migration rate and the indirect effect from how the distribution changes like this:
 \begin{align}
@@ -435,14 +439,13 @@ This is the first ``stuff'' component, holding fixed the distribution:
 \nonumber \\
 & - \chi_{2j}(z,s,x,t)  + \beta^{t+1}\underbrace{\int_{s'}\int_{x'}\chi_{3j'}(z,s',x',t+1) \pi(s',s) \varphi(x',x, j)}_{\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s, x \right]} \ \Bigg  \} \lambda_{j}(z,s,x,t)
 \label{eq:first_stuff_foc}
-\end{align}}
-Focusing on the right-hand side of the equation, the first term is how the expected value of the preference shocks change in that location. As the planner moves households more or less, the planner is affecting utility via the preference shock. The next the next term is the cost of moving evaluated at the marginal utility of consumption then minus a source multiplier $\chi_{2j}(s,t)$ and a discounted destination multiplier $\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s, x \right]$. This last term integrates across all future shock and experience states for a particular destination $j'$, conditional on a households current state. As we show below, this represents the \textbf{expected} social value of the destination $j'$.
+\end{align}}Focusing on the right-hand side of the equation, the first term is how the expected value of the preference shocks change in that location. As the planner moves households more or less, the planner is affecting utility via the preference shock. The next the next term is the cost of moving evaluated at the marginal utility of consumption then minus a source multiplier $\chi_{2j}(s,t)$ and a discounted destination multiplier $\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s, x \right]$. This last term integrates across all future shock and experience states for a particular destination $j'$, conditional on a households current state. As we show below, this represents the \textbf{expected} social value of the destination $j'$.
 
 Let's set the term inside the brackets of (\ref{eq:first_stuff_foc}) equal to zero by solving out for the migration rates as a function of the multipliers. The Type 1 extreme value assumption on the shocks implies that
 \begin{align}
 E[\ \nu \ | \ \mu_{j',j}(z,s,x,t)] = -\sigma \sum_{j'}\mu_{j'j}(z,s,x,t) \log \left(\mu_{j'j}(z,s,x,t)\right)
 \end{align}
-and then it's derivative with respect to the migration rate is:
+and then its derivative with respect to the migration rate is:
 \begin{align}
 \frac{\partial E[\ \nu \ | \ \mu_{j',j}(z,s,x,t)]}{\partial \mu_{j',j}(s,x,t)} = -\sigma \log \left(\mu_{j'j}(z,s,x,t)\right) - \sigma
 \end{align}
@@ -454,8 +457,7 @@ and with the proposed strategy to set things in the brackets equal to zero impli
 \mu_{j'j}(z,s,x,t) = &\exp \left( \frac{\sigma + \chi(t) m_{j',j} + \chi_{2j}(z,s,x,t) - \beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s,x \right]}{-\sigma \beta^{t} } \right) \\
 \nonumber \\
 = &\exp \left( \frac{\sigma + \chi(t) m_{j',j} - \beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s, x \right]}{-\sigma \beta^{t}} \right) \Bigg / \exp \left(\frac{\chi_{2j}(z,s,x,t)}{\sigma \beta^{t} } \right)
-\end{align}}
-Where the last line follows from substituting out the source $j$, date $t$ multiplier and properties of the $\exp$ function. The final step is to set $\chi_{2j}(z,s,x,t)$ source multiplier so that the migration probabilities sum to one. This implies that
+\end{align}}Where the last line follows from substituting out the source $j$, date $t$ multiplier and properties of the $\exp$ function. The final step is to set $\chi_{2j}(z,s,x,t)$ source multiplier so that the migration probabilities sum to one. This implies that
 {\small
 \begin{align}
 \exp \left(\frac{\chi_{2j}(s,x,t)}{\beta^{t} \sigma} \right) & = \sum_{j'} \exp \left( \frac{\sigma + \chi(t) m_{j',j} - \beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1) | z, s, x \right]}{-\sigma  } \right) \\
@@ -468,15 +470,14 @@ After canceling terms, we have that
 & \mu_{j'j}(z,s,x,t) =  \nonumber \\
 \nonumber \\
 &\exp \left(\frac{- u'(t) \ m_{j',j} + \beta\mathbb{E}\left[\chi_{3j'}(t+1)| z, s,x \right]}{\sigma} \right)  \Bigg / \sum_{j'} \exp \left( \frac{-u'(t)\ m_{j',j} + \beta\mathbb{E}\left[\chi_{3j'}(t+1)| z,s,x \right]}{\sigma} \right).
-\end{align}}The socially optimal migration rates take the familiar form associated with Type 1 extreme value shocks. And this can be separated into a source component (the denominator) and then destination $j'$ components (the numerator). And the destination components depends on the costs of migration today relative to the discounted, expected value of the multiplier $\mathbb{E}\left[\chi_{3j'}(t+1)|z, s,x \right]$ in location $j$. 
+\end{align}}The socially optimal migration rates take the familiar form associated with Type 1 extreme value shocks. And this can be separated into a source component (the denominator) and then destination $j'$ components (the numerator). And the destination components depends on the costs of migration today relative to the discounted, expected value of the multiplier $\mathbb{E}\left[\chi_{3j'}(t+1)|z, s,x \right]$ in location $j$. An interesting observation here is that migration is history independent|only the current cost and the future matters for how many people should move or not.
 
-
-Recap. We have solved to the migration probabilities that set ``stuff'' in (\ref{eq:stuff}) equal to zero. We need the whole term to be set to zero, so the approach is to find the value of the multiplier(s) $\chi_{3j'}(z, s',x', t+1)$ so that the ``other stuff'' in (\ref{eq:stuff}) is also equal to zero. Step by step we have:
+Recap and pause. We solved to the migration probabilities that set ``stuff'' in (\ref{eq:stuff}) equal to zero. We need the whole term to be set to zero, so the approach is to find the value of the multiplier(s) $\chi_{3j'}(z, s',x', t+1)$ so that the ``other stuff'' in (\ref{eq:stuff}) is also equal to zero. Step by step we have:
 {\small
 \begin{align}
 & \bigg \{ \ \mbox{other \ stuff} \bigg \} \frac{\partial \lambda_{j}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s, x,t)} =  \\
 \nonumber \\
-& \sum_{j}  \int\limits_{s} \int\limits_{x} \beta^{t+1} \bigg \{ \underbrace{u(c(z, s, x, t+1), x) + E[\ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'}] }_{u_{j}(z,s,x,t+1)}\bigg \}  \frac{\partial \lambda_{j}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s,x,t)} ds \ dx \ \ + \ \ \\
+& \sum_{j}  \int\limits_{s} \int\limits_{x} \beta^{t+1} \bigg \{ \underbrace{u(c_{j',j}(z, s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'}] }_{u_{j}(z,s,x,t+1)}\bigg \}  \frac{\partial \lambda_{j}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s,x,t)} ds \ dx \ \ + \ \ \\
 \nonumber \\
 & \sum_{j} \int\limits_{s} \int\limits_{x}  \chi(t+1) \Bigg \{ \underbrace{\frac{\partial Y(t+1)}{\partial \lambda_{j}(z, s, x, t+1)} - c(z,s,x,t+1) - \sum_{j'}  m_{j',j} \ \mu_{j',j}(z, s, x, t+1)}_{\kappa_j(z, s, x, t+1)} \Bigg \} \frac{\partial \lambda_{j}(z,s,x, t+1)}{\partial \mu_{j',j}(z,s,x,t)} ds \ dx\\
 \nonumber \\
@@ -484,7 +485,7 @@ Recap. We have solved to the migration probabilities that set ``stuff'' in (\ref
 \nonumber \\
 & - \beta^{t+1} \sum_{j} \int\limits_{s} \int\limits_{x} \chi_{3j}(z, s, x, t+1) \ \frac{\partial \lambda_{j}(z, s, x,t+1)}{\partial \mu_{j',j}(z,s,x,t)} ds \ dx  \\
 \nonumber \\
-& + \beta^{t+2}\sum_{j} \int\limits_{s}  \int\limits_{x} \bigg \{ \underbrace{ \sum_{j'}  \int\limits_{s'} \int\limits_{x'} \chi_{3j'}(z, s',x, t+2) \mu_{j',j}(z, s,x,t+1) \pi(s',s) \varphi(x',x, j) }_{\mathbb{E}\left[\chi_{3}(t+2) |z, s, x, j \right]} \bigg \}  \frac{\partial \lambda_{j}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s,x,t)} ds \ dx.
+& + \beta^{t+2}\sum_{j} \int\limits_{s}  \int\limits_{x} \bigg \{ \underbrace{ \sum_{j'}  \int\limits_{s'} \int\limits_{x'} \chi_{3j'}(z, s',x', t+2) \mu_{j',j}(z, s, x, t+1) \pi(s',s) \varphi(x',x, j) }_{\mathbb{E}\left[\chi_{3}(t+2) |z, s, x, j \right]} \bigg \}  \frac{\partial \lambda_{j}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s,x,t)} ds \ dx.
 \end{align}}
 If we put this all to together than we have the following:
 {\small
@@ -498,10 +499,10 @@ And the proposed solution is to set
 \chi_{3j}(z, s, x, t+1) =  u_{j}(z,s,x,t+1) +  u'(t+1) \kappa_j(z,s,x,t+1) + \beta \mathbb{E}\left[\chi_{3}(t+2) |z, s, x \right].
 \label{eq:chi3j-multiplier}
 \end{align}
-The multiplier $\chi_{3j}(z, s, x, t+1)$ takes on a recursive formulation where the multiplier equals utility, the $\kappa$ term (more on this below), and then the expected, discounted multiplier tomorrow taking into account all the different possible moving options (observe that our notion does not have a $j$ in the expectation above, so this denotes given a realized states, integrate over shocks and different location possibilities).  
+The multiplier $\chi_{3j}(z, s, x, t+1)$ takes on a recursive formulation where the multiplier equals utility, the $\kappa$ term (more on this below), and then the expected, discounted multiplier tomorrow taking into account all the different possible moving options (observe that our notion does not have a $j$ in the expectation above, so this denotes given a realized states, integrate over shocks and different location possibilities).
 
 
-A few details to arrive at Proposition 1.  First, notice that $\frac{\partial Y(t+1)}{\partial \lambda_{j}(z, s, x, t+1)} $ is simply the marginal product of labor in location $j$ multiplied by the relevant shock primitive, $s$ for rural. Then combining the recursive expression for the multiplier in (\ref{eq:chi3j-multiplier}), the definition of $\kappa_{j'}(z, s,x,t+1)$,  the migration probabilities, and consumption allocations we have Proposition 1:
+A few details to arrive at Proposition 1.  First, notice that $\frac{\partial Y(t+1)}{\partial \lambda_{j}(z, s, x, t+1)} $ is simply the marginal product of labor in location $j$ multiplied by the relevant idiosyncratic shock primitive, e.g. $s$ for rural area. Then combining the recursive expression for the multiplier in (\ref{eq:chi3j-multiplier}), the definition of $\kappa_{j'}(z, s,x,t+1)$,  the migration probabilities, and consumption allocations we have Proposition 1:
 
 \begin{proposition}[\textbf{Efficient Consumption and Migration}] \label{apx-prp:efficient} The consumption and migration rates that solving the Planners Problem in (\ref{eq:planner_problem}) are: Consumption allocations equate the marginal utility of consumption in all locations, productivity and experience states for each date $t$:
 {\small
@@ -526,36 +527,34 @@ with the multiplier $\chi_{3j'}(z, s, x, t+1)$ satisfying the following recursiv
 where
 {\small
 \begin{align}
-& \ \ \kappa_{j'}(z, s',x',t+1) = \mbox{\texttt{mpl}}_{j'}(z,s',t+1) - c(z, s',x',t+1) - \sum_{j''}  m_{j'',j'} \ \mu_{j'',j'}(z, s', x', t+1). \label{eq:kappa}
+& \ \ \kappa_{j'}(z, s',x',t+1) = \mbox{mpl}_{j'}(z,s',t+1) - c(z, s',x',t+1) - \sum_{j''}  m_{j'',j'} \ \mu_{j'',j'}(z, s', x', t+1). \label{eq:kappa}
 \end{align}}
 \end{proposition}
 
 
 \subsection{Algorithm for Computation}
 
-The basic idea is to use a ``value function iteration'' like approach given the structure above to compute the migration probabilities. Then given the migration probabilities, we can compute where people are, production, aggregate consumption, then check if markets clear or not and then update. Also, in all of this we look for a stationary equilibrium, so the $t$ state is dropped. Here are the details:
+The basic idea is to look for a stationary allocation and use a value function iteration like approach to compute the multipliers $\chi_{3j}(z, s, x)$. Given the multipliers, we can compute migration probabilities, where people are, production, aggregate consumption, then check if allocations are feasible or not and then update. Here are the details:
 \begin{enumerate}
-\item Guess consumption allocations, mpl's, and $\chi$'s. Given the solution above, the consumption allocations are those for experienced and non-experienced and monga and not monga. But because of the functional form on utility, non-experienced consumption is just a scalar of experienced consumption, so we only need an initial guess of size $2\times1$ vector. And then the $mpl$s are only equilibrium objects for the rural area in monga and not monga so an initial guess of $2\times1$.
+\item Guess consumption allocations, mpl's, and $\chi$'s. Given Proposition 1, the consumption allocations are those for experienced and non-experienced and monga and not monga. But because of the functional form on utility, non-experienced consumption is just a scalar of experienced consumption, so we only need an initial guess of size $2\times1$ vector. And then a guess for the $mpl$s are for the rural area in monga and not monga. This is required because we don't know ex-ante how many people / efficiency units are in the rural area or not which through the decreasing returns affects the $mpl$ in these areas.
 
-    The $\chi$'s then are just like a value function. A $\chi$ for each location, experience, shock state.
+    The $\chi_{3j}(z, s, x)$'s then are just like a value function. A $\chi_{3j}$ for each location, experience, shock state.
 
-\item Given the guessed $\chi$'s, compute the expected value of a transition to a new location, so $\mathbb{E}\left[\chi_{3j'}(t+1)| s,x \right]$. In words, this would be like what is the expected value of going to (staying) the rural area ($j'$) next period, given your current state $s$ and $x$.
+\item Take $\chi_{3j}$'s, compute the expected value of a transition to a new location, so $\mathbb{E}\left[\chi_{3j'}(t+1)| z, s, x \right]$. In words, this would be like what is the expected value of going the rural area ($j'$) next period, given your current state $z$, $s$, and $x$.
 
-\item Compute the migration probabilities using the expected values from $2.$ and marginal utility of consumption implied by $1.$
+\item Compute the migration probabilities using the expected values from $2.$ and marginal utility of consumption implied by the consumption guess in $1.$
 
-\item Update the $\chi$'s using (\ref{eq:dynamic_multiplier}) and (\ref{eq:kappa}) by computing all the objects on the right-hand side (given our guesses) and implying a new updated $\chi'$.
+\item Update the $\chi_{3j}$'s using (\ref{eq:dynamic_multiplier}) and (\ref{eq:kappa}) by computing all the objects on the right-hand side (given our guesses) and implying a new updated $\chi'$.
 
-A couple of details: remember that $u_{j'}(s,x,t+1)$ integrates out the preference shock. So this reflects expected utility given the migration probabilities for that location, it's the log sum thing. In words, it's like before I know where I'm going when in location $j'$, what is my expected utility. Second, $\mathbb{E}\left[\chi_{3}(t+2) | s,x \right]$ are the expected values for all realizations of the preference shock, so it is migration probabilities multiplied by $\mathbb{E}\left[\chi_{3j'}(t+1)| s,x \right]$. In words, this is saying, before I know where I'm going (my realization of the preference shock), what is my the expected value next period.
+A couple of details: $u_{j'}(z,s,x,t+1)$ integrates out the preference shock. So this reflects expected utility given the migration probabilities for that location,i.e., it's the log sum thing. Second, $\mathbb{E}\left[\chi_{3} | z, s, x \right]$ are the expected values for all realizations of the preference shock, i.e., where a household will go next period, in expectation. So it is migration probabilities multiplied by $\mathbb{E}\left[\chi_{3j'}| z,s,x \right]$.
 
-\item Given updated $\chi$', return to 2. and iterate until $\chi'$ and $\chi$ are close. This works well and different initial guesses go to the same place, etc.
+\item Given updated $\chi_{3j}$', return to 2. and iterate until $\chi_{3j}'$ and $\chi_{3j}$ are close. This works well, different initial guesses go to the same place, etc.
 
-\item Given the migration probability impled by the $\chi$'s, compute aggregate production, consumption and mpl's. Check if production is consistent with consumption and mpl's, if not update guess of consumption and mpl's and return to 1. The updating here was done with \texttt{fsolve} which works well.
+\item Given the migration probability impled by the $\chi_{3j}'$s, construct the stationary allocation, compute aggregate production, consumption and mpl's. Check if production is consistent with consumption and mpl's, if not update guess of consumption and mpl's and return to 1. Again, this process worked well, robust to different initial guesses, etc.
 \end{enumerate}
 
 
-
-
-
+\newpage
 
 \section{Alternative Calibrations}
 
@@ -565,37 +564,33 @@ A couple of details: remember that $u_{j'}(s,x,t+1)$ integrates out the preferen
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
 \caption{Targeted Moments in Data and Model with Different $R$ values \label{ta:alt_R}}
-\vspace{0.5cm}
 \begin{tabular}{l l c c c}
 \hline
 \hline
-Moments & Data  & \begin{tabular}[c]{@{}c@{}}Model\\ R=0.93\end{tabular} & \begin{tabular}[c]{@{}c@{}}Model\\ R=0.95\end{tabular} &\begin{tabular}[c]{@{}c@{}}Model\\ R=0.97\end{tabular} \\
+Moments & Data  & \begin{tabular}[c]{@{}c@{}}Model\\ Baseline \end{tabular} & \begin{tabular}[c]{@{}c@{}}Model\\ R=0.90\end{tabular} &\begin{tabular}[c]{@{}c@{}}Model\\ R=1.0\end{tabular} \\
 \hline
-Control: Variance of log consumption growth in rural & 0.19& 0.19 & 0.19  &0.19\\
-Control: Percent of rural households with no liquid assets & \phantom{0.}47& \phantom{0.}60 & \phantom{0.}48 & \phantom{0.}38\\
-Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}38 & \phantom{0.}36 & \phantom{0.}35\\
-Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}9 & \phantom{0.}10 & \phantom{0.}11\\
-Treatment: Seasonal migration relative to control & \phantom{0.}22 & \phantom{0.}20 & \phantom{0.}21 & \phantom{0.}21\\
-Treatment: Seasonal migration relative to control in year 2 &  \phantom{0.}9 & \phantom{0.}4 & \phantom{0.}4 & \phantom{0.}4 \\
-Treatment: Consumption of induced migrants (LATE)  &  \phantom{0.}30 & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}27 \\
- Control: Probability of repeat migration &  \phantom{0.}68 &  \phantom{0.}71 & \phantom{0.}70 & \phantom{0.}70 \\
+Control: Variance of log consumption growth in rural                & 0.19              & 0.19              & 0.19           &0.19\\
+Control: Percent of rural households with no liquid assets          & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}78 & \phantom{0.}23\\
+Control: Seasonal migrants                                          & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}39 & \phantom{0.}32\\
+Control: Consumption increase of migrants (OLS)                     & \phantom{0.}10    & \phantom{0.}10    & \phantom{0.}06 & \phantom{0.}12\\
+Treatment: Seasonal migration relative to control                   & \phantom{0.}22    & \phantom{0.}21    & \phantom{0.}20 & \phantom{0.}20\\
+Treatment: Seasonal migration relative to control in year 2         &  \phantom{0.}9    & \phantom{0.}5    & \phantom{0.}5 & \phantom{0.}5\\
+Treatment: Consumption of induced migrants (LATE)                   &  \phantom{0.}30   & \phantom{0.}29    & \phantom{0.}31 & \phantom{0.}26 \\
+Control: Probability of repeat migration                            &  \phantom{0.}68   & \phantom{0.}71    & \phantom{0.}72 & \phantom{0.}69 \\
 
 \hline
-Urban-Rural wage gap & 1.89  & 1.88  & 1.89 & 1.90  \\
-Percent in rural & \phantom{0.}62 & \phantom{0.}59 & \phantom{0.}60 &  \phantom{0.} 60 \\
-Variance of log wages in urban & 0.56 & 0.56  &  0.56 &      0.56      \\
-\hline
+Urban-Rural wage gap                                                & 1.89              & 1.89              & 1.87              & 1.93  \\
+Percent in rural                                                    & \phantom{0.}61    & \phantom{0.}60    & \phantom{0.}59    &  \phantom{0.} 62 \\
+Variance of log wages in urban                                      & 0.56              & 0.56              &  0.56             &      0.56      \\
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $R$. The estimated model has $R=0.95$. The model is not re-estimated in the cases of $R=0.93$ and $R=0.97.$}
+{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $R$.
+ The baseline model has $R=0.95$. The model is \textbf{not re-estimated} in the cases of $R=0.90$ and $R=1.0$.}
 }
 \end{center}
 \end{table}
 
-\newpage
-
-\section{Alternative Calibrations}
 
 \begin{table}[!htb]
 \small
@@ -604,35 +599,34 @@ Variance of log wages in urban & 0.56 & 0.56  &  0.56 &      0.56      \\
 \begin{center}
 \caption{Targeted Moments in Data and Model with Different $\beta$ values \label{ta:alt_beta}}
 
-\vspace{0.3cm}
-
 \begin{tabular}{l l c c c}
 \hline
 \hline
-Moments & Data  & \begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.93\end{tabular} & \begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.95\end{tabular} &\begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.97\end{tabular} \\
+Moments & Data  & \begin{tabular}[c]{@{}c@{}}Model\\ Baseline \end{tabular} & \begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.90\end{tabular} &\begin{tabular}[c]{@{}c@{}}Model\\ $\beta$=0.97\end{tabular} \\
 \hline
-Control: Variance of log consumption growth in rural & 0.19& 0.19  & 0.19  & 0.19 \\
-Control: Percent of rural households with no liquid assets & \phantom{0.}47& \phantom{0.}59 & \phantom{0.}48 & \phantom{0.}38\\
-Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}37 & \phantom{0.}36 & \phantom{0.}36\\
-Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}8 & \phantom{0.}10 & \phantom{0.}12\\
-Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}20 & \phantom{0.}21 & \phantom{0.}20\\
-Treatment: Seasonal migration relative to control in year 2 &  \phantom{0.}9 & \phantom{0.}4 & \phantom{0.}4 & \phantom{0.}4 \\
-Treatment: Consumption of induced migrants (LATE)  &  \phantom{0.}30 &\phantom{0.}29 & \phantom{0.}29 &  \phantom{0.}28 \\
-Control: Probability of repeat migration &  \phantom{0.}68 &  \phantom{0.}71 & \phantom{0.}70 & \phantom{0.}71 \\
+Control: Variance of log consumption growth in rural        & 0.19              & 0.19              & 0.19              & 0.19              \\
+Control: Percent of rural households with no liquid assets  & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}78    & \phantom{0.}38    \\
+Control: Seasonal migrants                                  & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}36    \\
+Control: Consumption increase of migrants (OLS)             & \phantom{0.}10    & \phantom{0.}10    & \phantom{0.}07    & \phantom{0.}11    \\
+Treatment: Seasonal migration relative to control           & \phantom{0.}22    & \phantom{0.}21    & \phantom{0.}21    & \phantom{0.}21    \\
+Treatment: Seasonal migration relative to control in year 2 &  \phantom{0.}9    & \phantom{0.}5    & \phantom{0.}5    & \phantom{0.}5    \\
+Treatment: Consumption of induced migrants (LATE)           &  \phantom{0.}30   & \phantom{0.}29    & \phantom{0.}30    & \phantom{0.}28   \\
+Control: Probability of repeat migration                    &  \phantom{0.}68   & \phantom{0.}71    & \phantom{0.}69    & \phantom{0.}71    \\
 \hline
-Urban-Rural wage gap & 1.89  & 1.90  & 1.89 &  1.87  \\
-Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}60 & \phantom{0.}59   \\
-Variance of log wages in urban & 0.56 &  0.56 &  0.56 &   0.56       \\
+Urban-Rural wage gap                                        & 1.89              & 1.89              & 1.93              &  1.88             \\
+Percent in rural                                            & \phantom{0.}61    & \phantom{0.}60    & \phantom{0.}62    & \phantom{0.}60    \\
+Variance of log wages in urban                              & 0.56              & 0.56              &  0.56             &   0.56             \\
 \hline
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $\beta=0.95$. The estimated model has $\beta=0.95$. The model is not re-estimated in the cases of $\beta=0.93$ and $\beta=0.97.$}
+{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $\beta$. The baseline model has $\beta=0.95$. The model is not re-estimated in the cases of $\beta=0.90$ and $\beta=0.97$.}
 }
 \end{center}
 \end{table}
 
 \newpage
+
 
 \begin{table}[!htb]
 \small
@@ -640,26 +634,24 @@ Variance of log wages in urban & 0.56 &  0.56 &  0.56 &   0.56       \\
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
 \caption{Targeted Moments in Data and Models with no $\bar{u}$ and $\rho=0$}
-
-\vspace{0.3cm}
-
-\begin{tabular}{l l l l l l}
+\begin{tabular}{l l c c c}
 \hline
 \hline
-Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\Full \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model\\ $\bar{u}=1$\end{tabular} &  \begin{tabular}[c]{@{}c@{}}Model\\ $\rho=0$\end{tabular}  \\
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\Baseline \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model\\ $\bar{u}=1$\end{tabular} &  \begin{tabular}[c]{@{}c@{}}Model\\ $\rho=0$\end{tabular}  \\
 \hline
-Control: Variance of log consumption growth in rural & 0.19 & 0.19 & 0.19 & 0.28\\
-Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48  & \phantom{0.}48  & \phantom{0.}2  \\
-Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}36& \phantom{0.}55& \phantom{0.}34  \\
-Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10 & \phantom{0.}-7& \phantom{0.}17\\
-Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21 & \phantom{0.}10 & \phantom{0.}22  \\
-Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& \phantom{0.}0& \phantom{0.}4  \\
-Treatment: Consumption of induced migrants (LATE)  & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}23  & \phantom{0.}21 \\
-Control: Probability of repeat migration &       \phantom{0.}68   &  \phantom{0.}70 &  \phantom{0.}56  &  \phantom{0.}71        \\
+Control: Variance of log consumption growth in rural            & 0.19              & 0.19              & 0.19              & 0.19            \\
+Control: Percent of rural households with no liquid assets      & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}47  \\
+Control: Seasonal migrants                                      & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}56    & \phantom{0.}36  \\
+Control: Consumption increase of migrants (OLS)                 & \phantom{0.}10    & \phantom{0.}10    & \phantom{0.}6    & \phantom{0.}14  \\
+Treatment: Seasonal migration relative to control               & \phantom{0.}22    & \phantom{0.}21    & \phantom{0.}12    & \phantom{0.}22  \\
+Treatment: Seasonal migration relative to control in year 2     & \phantom{0.}9     & \phantom{0.}5     & \phantom{0.}2    & \phantom{0.}2  \\
+Treatment: Consumption of induced migrants (LATE)               & \phantom{0.}30    & \phantom{0.}29    & \phantom{0.}26    & \phantom{0.}28  \\
+Control: Probability of repeat migration                        & \phantom{0.}68    & \phantom{0.}71    & \phantom{0.}55   & \phantom{0.}70  \\
 \hline
-Urban-Rural wage gap & 1.89  & 1.89 & 1.86& 1.88 \\
-Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}73  & \phantom{0.}57\\
-Variance of log wages in urban & 0.56  &  0.56  &  0.65 &  1.54        \\ \hline
+Urban-Rural wage gap                                            & 1.89              & 1.89              & 1.86              & 1.89 \\
+Percent in rural                                                & \phantom{0.}61    & \phantom{0.}60    & \phantom{0.}73    & \phantom{0.}59 \\
+Variance of log wages in urban                                  & 0.56              & 0.56              &  0.56             &   0.56             \\
+\hline
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
@@ -668,9 +660,7 @@ Variance of log wages in urban & 0.56  &  0.56  &  0.65 &  1.54        \\ \hline
 \end{center}
 \end{table}
 
-\newpage
-
-\begin{table}[t]
+\begin{table}[!htb]
 \setlength {\tabcolsep}{1.45mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
@@ -699,79 +689,43 @@ Variance of log wages in urban & 0.56  &  0.56  &  0.65 &  1.54        \\ \hline
 \end{center}
 \end{table}
 
+
 \newpage
+
+
 
 \begin{table}[!htb]
 \small
 \setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Targeted Moments in Data and Model with Subsistence}
-
-\vspace{0.3cm}
-
+\caption{Targeted Moments in Data and Model with Subsistence Consumption}
 \begin{tabular}{l c c c}
 \hline
 \hline
-& &  \multicolumn{2}{c}{Model} \\ \cline{3-4}
-Moments & Data &  \begin{tabular}[c]{@{}c@{}}Full \\Calibration \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Full Calibration \\ w/ Subsistence\end{tabular} \\
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\ Baseline  \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model \\ w/ Subsistence\end{tabular} \\
 \hline
-Control: Variance of log consumption growth in rural & 0.19 & 0.19 & 0.23 \\
-Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48  & \phantom{0.}0  \\
-Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}36& \phantom{0.}76  \\
-Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10 & \phantom{0.}5 \\
-Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21 & \phantom{0.}14 \\
-Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& \phantom{0.}4\\
-Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}46   \\
-Control: Probability of repeat migration &       \phantom{0.}68   &  \phantom{0.}70 &  \phantom{0.}80  \\
+Control: Variance of log consumption growth in rural            & 0.19              & 0.19              & 0.19              \\
+Control: Percent of rural households with no liquid assets      & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}47   \\
+Control: Seasonal migrants                                      & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}36   \\
+Control: Consumption increase of migrants (OLS)                 & \phantom{0.}10    & \phantom{0.}10    & \phantom{0.}10   \\
+Treatment: Seasonal migration relative to control               & \phantom{0.}22    & \phantom{0.}21    & \phantom{0.}21   \\
+Treatment: Seasonal migration relative to control in year 2     & \phantom{0.}9     & \phantom{0.}5     & \phantom{0.}04   \\
+Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30    & \phantom{0.}29    & \phantom{0.}30   \\
+Control: Probability of repeat migration                        & \phantom{0.}68    & \phantom{0.}71    &  \phantom{0.}70   \\
 \hline
-Urban-Rural wage gap & 1.89  & 1.89 & 1.66  \\
-Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}56  \\
-Variance of log wages in urban & 0.56  &  0.56  & 0.64           \\ \hline
+Urban-Rural wage gap                                            & 1.89              & 1.89              & 1.89             \\
+Percent in rural                                                & \phantom{0.}61    & \phantom{0.}60    & \phantom{0.}60   \\
+Variance of log wages in urban                                  & 0.56              & 0.56              & 0.64              \\
+\hline
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model. The final calibration reports the moments when a subsistence consumption constraint is added and set to equal 25 percent of average rural consumption in the lean season.}
+{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model. The final calibration reports the moments when a subsistence consumption constraint is added and set to equal 20 percent of average rural consumption.}
 }
 \end{center}
 \end{table}
 
-\newpage
-
-\begin{table}[h]
-\setlength {\tabcolsep}{1.45mm}
-\renewcommand{\arraystretch}{1.2}
-\begin{center}
-\caption{Welfare Effects of Migration Subsidies with Subsistence}
-
-\vspace{0.3cm}
-
-\begin{tabular}{c c c c c c c c c}
-\hline
-\hline
-& & \multicolumn{2}{c}{Benchmark Model} && \multicolumn{2}{c}{Subsistence} && \\
-\cmidrule(lr){3-4} \cmidrule(lr){6-7}
-& & \small Welfare  &\small Migr. Rate  && \small Welfare & \small Migr. Rate && \\
-\multirow{10}{*}{\rotatebox{90}{\small Income Decile}}
-&1  & 1.5 & 93 && 2.0 & 92  \\
-&2  & 0.6 & 76 && 1.0 & 82  \\
-&3  & 0.5 & 68 && 0.8 & 77  \\
-&4  & 0.3 & 57 && 0.6 & 71  \\
-&5  & 0.3 & 54 && 0.5 & 67  \\
-&6  & 0.2 & 51 && 0.4 & 61  \\
-&7  & 0.2 & 46 && 0.3 & 56  \\
-&8  & 0.2 & 42 && 0.3 & 53  \\
-&9  & 0.1 & 41 && 0.2 & 52  \\
-&10 & 0.1 & 38 && 0.3 & 45  \\
-\hline
-\multicolumn{2}{c}{\small Average} &0.4 & 57 && 0.6 & 65  \\
-\hline
-\end{tabular}
-\parbox[c]{6.0in}{%
-{\footnotesize  \vspace{0.5cm} Note: The table reports the (lifetime) consumption-equivalent welfare gains from the conditional migration transfers. The numbers in the table are the average percent increase in consumption each period that would make the households indifferent between the consumption increase and the transfers, and the seasonal migration rates, by declie of the rural income distribution. The first column is the benchmark model, and the second is a model with a subsistence constraint equal to 25 percent of average rural consumption in the lean season.}
-}
-\end{center}
-\end{table}
 
 \newpage
 
@@ -782,36 +736,34 @@ Variance of log wages in urban & 0.56  &  0.56  & 0.64           \\ \hline
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
 \caption{Targeted Moments in Data and Model and Migration Costs}
-\vspace{0.3cm}
 \begin{tabular}{l c c c}
 \hline
 \hline
-& &  \multicolumn{2}{c}{Model} \\ \cline{3-4}
-Moments & Data &  \begin{tabular}[c]{@{}c@{}}Full Cal \\ $m_p=2*m_t$\end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Full Cal \\ $m_p=m_t$\end{tabular} \\
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\ Baseline  \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model \\ $m_p=2*m_t$ \end{tabular} \\
 \hline
-Control: Variance of log consumption growth in rural & 0.19 & 0.19 & 0.18 \\
-Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48  & \phantom{0.}45  \\
-Control: Seasonal migrants& \phantom{0.}36& \phantom{0.}36& \phantom{0.}32  \\
-Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10 & \phantom{0.}11 \\
-Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21 & \phantom{0.}23 \\
-Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& \phantom{0.}4\\
-Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30 & \phantom{0.}29 & \phantom{0.}24   \\
-Control: Probability of repeat migration &       \phantom{0.}68   &  \phantom{0.}70 &  \phantom{0.}60  \\
+Control: Variance of log consumption growth in rural            & 0.19              & 0.19              & 0.19              \\
+Control: Percent of rural households with no liquid assets      & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}48   \\
+Control: Seasonal migrants                                      & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}38   \\
+Control: Consumption increase of migrants (OLS)                 & \phantom{0.}10    & \phantom{0.}10    & \phantom{0.}13   \\
+Treatment: Seasonal migration relative to control               & \phantom{0.}22    & \phantom{0.}21    & \phantom{0.}21   \\
+Treatment: Seasonal migration relative to control in year 2     & \phantom{0.}9     & \phantom{0.}5     & \phantom{0.}06   \\
+Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30    & \phantom{0.}29    & \phantom{0.}26   \\
+Control: Probability of repeat migration                        & \phantom{0.}68    & \phantom{0.}71    & \phantom{0.}69   \\
 \hline
-Urban-Rural wage gap & 1.89  & 1.89 & 1.79  \\
-Percent in rural & \phantom{0.}62 & \phantom{0.}60 & \phantom{0.}59  \\
-Variance of log wages in urban & 0.56  &  0.56  & 0.59           \\ \hline
+Urban-Rural wage gap                                            & 1.89              & 1.89              & 1.90             \\
+Percent in rural                                                & \phantom{0.}61    & \phantom{0.}60    & \phantom{0.}60   \\
+Variance of log wages in urban                                  & 0.56              & 0.56              & 0.56              \\
+\hline
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model in the benchmark calibration and under alternative assumptions about migration costs.}
+{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model.}
 }
 \end{center}
 \end{table}
 
-\newpage
 
-\begin{table}[t]
+\begin{table}[!htb]
 \setlength {\tabcolsep}{1.45mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}

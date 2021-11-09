@@ -46,12 +46,13 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('Basline Model')
 disp([obj])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load('appendix_cal_low_R.mat')
+load('../calibration/calibrated_baseline.mat')
+% This is just change R, not recalibrate 
 
-R = R;
+R = 0.90;
 beta = [];
 min_consumption = [];
 perm_movecost = [];
@@ -64,12 +65,13 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('Low R')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load('appendix_cal_high_R.mat')
+load('../calibration/calibrated_baseline.mat')
+% This is just change R, not recalibrate 
 
-R = R;
+R = 1.0;
 beta = [];
 min_consumption = [];
 perm_movecost = [];
@@ -82,13 +84,14 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('High R')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load('appendix_cal_high_beta.mat')
+load('../calibration/calibrated_baseline.mat')
+% This is just change beta, not recalibrate 
 
 R = [];
-beta = beta;
+beta = 0.97;
 min_consumption = [];
 perm_movecost = [];
 
@@ -101,13 +104,14 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(beta)
 disp('High beta')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load('appendix_cal_low_beta.mat')
+load('../calibration/calibrated_baseline.mat')
+% This is just change beta, not recalibrate 
 
 R = [];
-beta = beta;
+beta = 0.90;
 min_consumption = [];
 perm_movecost = [];
 
@@ -120,7 +124,7 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(beta)
 disp('Low beta')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('appendix_cal_subsistence.mat')
@@ -139,7 +143,7 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(min_consumption)
 disp('Subsistence')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('appendix_cal_subsistence_high.mat')
@@ -158,7 +162,7 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(min_consumption)
 disp('Subsistence High')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('appendix_cal_perm_movingcost.mat')
@@ -177,7 +181,7 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(perm_movecost)
 disp('Perm Moving Cost')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('appendix_fix_rho.mat')
@@ -194,7 +198,7 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('rho = 0')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('appendix_fix_ubar.mat')
@@ -212,5 +216,5 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('ubar = 1')
 disp([obj, obj_new])
-disp(model_moments(table_order)')
+disp(round(model_moments(table_order)',2))
 
