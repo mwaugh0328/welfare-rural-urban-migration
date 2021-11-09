@@ -370,7 +370,7 @@ The \textbf{Centralized Planner's Problem} is the following:
 \nonumber \\
 & \ \ \mbox{subject to} \ \ (\ref{eq:planner_value_production}) \ \ (\ref{eq:planner_income_side_gdp}) \ \ \mbox{and} \ \ (\ref{eq:planner_law_motion}) \ \ \mbox{and an inital condition} \ \ \lambda_j(z, s, x,0).
 \label{eq:planner_problem}
-\end{align}}Here the planners is choosing consumption allocations and migration probabilities for each state and date and these allocations must respect the production technology, feasibility, and the law of motion and an initial condition. Finally, note that the planner only considers allocations that depend on the current state, not the entire history. Given the Markov structure on the shocks, we suspect that this is of no consequence, e.g., the consumption allocation the history independence is clear. Given this problem, define the following allocation:
+\end{align}}Here the planners is choosing consumption allocations and migration probabilities for each state and date and these allocations must respect the production technology, feasibility, and the law of motion and an initial condition. Finally, note that the planner only considers allocations that depend on the current state, not the entire history. Given the Markov structure on the shocks, we suspect that this is of no consequence, e.g., the history independence of consumption allocation is clear. Given this problem in (\ref{eq:planner_problem}), define the following allocation:
 
 \textbf{A Stationary Centralized Planner Allocation.}  A Stationary Centralized Planner Allocation are time invariant policy functions $\{\ c_{j}(z, s, x, i),\ \mu_{j',j}(z, s, x, i) \ \}$, a probability distribution $\lambda_{j}(z, s, x, i)$, and positive real numbers $N_{j,i}$ for rural and urban areas and season $i$ where:
 \begin{itemize}
@@ -545,7 +545,7 @@ The basic idea is to look for a stationary allocation and use a value function i
 
 \item Update the $\chi_{3j}$'s using (\ref{eq:dynamic_multiplier}) and (\ref{eq:kappa}) by computing all the objects on the right-hand side (given our guesses) and implying a new updated $\chi'$.
 
-A couple of details: $u_{j'}(z,s,x,t+1)$ integrates out the preference shock. So this reflects expected utility given the migration probabilities for that location,i.e., it's the log sum thing. Second, $\mathbb{E}\left[\chi_{3} | z, s, x \right]$ are the expected values for all realizations of the preference shock, i.e., where a household will go next period, in expectation. So it is migration probabilities multiplied by $\mathbb{E}\left[\chi_{3j'}| z,s,x \right]$.
+A couple of details: $u_{j'}(z,s,x,t+1)$ integrates out the preference shock. So this reflects expected utility given the migration probabilities for that location,i.e., it's the log sum thing. Second, $\mathbb{E}\left[\chi_{3} | z, s, x \right]$ is the expected values across all possible destinations given states today. So it is migration probabilities multiplied by $\mathbb{E}\left[\chi_{3j'}| z,s,x \right]$.
 
 \item Given updated $\chi_{3j}$', return to 2. and iterate until $\chi_{3j}'$ and $\chi_{3j}$ are close. This works well, different initial guesses go to the same place, etc.
 
@@ -827,7 +827,7 @@ Control: Percent of rural households with no liquid assets      & \phantom{0.}47
 Control: Seasonal migrants                                      & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}40   \\
 Control: Consumption increase of migrants (OLS)                 & \phantom{0.}10    & \phantom{0.}10    & \phantom{0.}08   \\
 Treatment: Seasonal migration relative to control               & \phantom{0.}22    & \phantom{0.}21    & \phantom{0.}13   \\
-Treatment: Seasonal migration relative to control in year 2     & \phantom{0.}9     & \phantom{0.}5     & \phantom{0.}04   \\
+Treatment: Seasonal migration relative to control in year 2     & \phantom{0.}9     & \phantom{0.}5     & \phantom{0.}4   \\
 Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30    & \phantom{0.}29    & \phantom{0.}25   \\
 Control: Probability of repeat migration                        & \phantom{0.}68    & \phantom{0.}71    & \phantom{0.}69   \\
 \hline
@@ -847,7 +847,7 @@ Variance of log wages in urban                                  & 0.56          
 
 \section{Welfare Under Alternative Parameterizations}
 
-In this section we consider alternative parameterizations of the model that yield higher welfare gains from migration subsidies. The goal is to illustrate how our model allows for an interpretation of the experiments of Section 2 based on spatial misallocation, with credit constraints and migration risk driving migration outcomes. As we show below, such an interpretation would give rise to substantially larger welfare gains from migration subsidies than found in this paper, but at the cost of making counterfactual predictions about important aspects of the experimental data.
+In this section we consider alternative parameterizations of the model that yield higher welfare gains from migration subsidies. The goal is to illustrate how our model allows for an interpretation of the experiments of Section 2 with credit constraints and migration risk driving migration outcomes. As we show below, such an interpretation would give rise to substantially larger welfare gains from migration subsidies than found in this paper, but at the cost of making counterfactual predictions about important aspects of the experimental data.
 
 \begin{table}[h]
 \small
@@ -859,30 +859,30 @@ In this section we consider alternative parameterizations of the model that yiel
 \label{ta:welfare_alt}
  \vspace{0.3cm}
 \begin{tabular}{lccccc} \hline \hline
-                                                                    & \begin{tabular}[c]{@{}c@{}}Average \\ Welfare\\ Gains\end{tabular} & \begin{tabular}[c]{@{}c@{}}LATE\\ (Cons.)\end{tabular} & \begin{tabular}[c]{@{}c@{}}OLS\\ (Cons.)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Treatment \\ Effect\\ (Migration)\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Seasonal \\ Migration \\ Control\end{tabular}} \\ \hline
+& \begin{tabular}[c]{@{}c@{}}Average \\ Welfare\\ Gains\end{tabular} & \begin{tabular}[c]{@{}c@{}}LATE\\ (Cons.)\end{tabular} & \begin{tabular}[c]{@{}c@{}}OLS\\ (Cons.)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Treatment \\ Effect\\ (Migration)\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Seasonal \\ Migration \\ Control\end{tabular}} \\ \hline
  Data
   & - & 30 & 10 & 22& 36 \\
  Benchmark calibration
-  & 0.39 & 29 & 10 & 21 & 36 \\
+  & 0.44 & 29 & 10 & 21 & 36 \\
   %\addlinespace
 \vspace{0.1cm}  \ \ + Higher urban risk
- & 0.12 & 27 & 51 & 10  &  16\\
+ & 0.09 & 34 & 64 & 19  &  11\\
 \vspace{0.1cm}  \ \    + No migration disutility
- & 0.51 & 9 & 29 & 28 &  55 \\
+ & 0.53 & 9 & 29 & 29 &  48 \\
 \vspace{0.1cm}  \ \    + Higher urban TFP
- & 1.29 & 33 & 51 & 15 &  84 \\
+ & 1.53 & 38 & 51 & 21 &  78 \\
 \vspace{0.1cm}  \ \   + Higher migration cost
- & 1.98 & 16 & 34  & 62 &  36 \\
+ & 2.21 & 17 & 36  & 64 &  36 \\
 \hline \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.1cm} Note: This table reports the average welfare gains implied by the model, the LATE and OLS effects of migration on consumption, seasonal migration in the control group, and the treatment effect on migration implied by the model for each specific calibration. Row 1 shows the data. Row 2 is the benchmark calibration that results from the simulated method of moments. Row 3 (``+ Higher urban risk'') changes the parameter shaping the urban relative shock by setting $\gamma=1.5$. Row 4 (``+ No migration disutility'') further removes the disutility of migration by setting $\bar{u}=1$. Row 5 (``+ Higher urban TFP'') further doubles the level of urban TFP of 3 (instead of $A_u=1.5$). Row 6  (``+ Higher migration cost'') sets $p_T$ to be 50 percent of rural consumption so that the model matches seasonal migrant rates in the control group.}
+{\footnotesize  \vspace{0.1cm} Note: This table reports the average welfare gains implied by the model, the LATE and OLS effects of migration on consumption, seasonal migration in the control group, and the treatment effect on migration implied by the model for each specific calibration. Row 1 shows the data. Row 2 is the benchmark calibration that results from the simulated method of moments. Row 3 (``+ Higher urban risk'') changes the parameter shaping the urban relative shock by setting $\gamma=1.5$. Row 4 (``+ No migration disutility'') further removes the disutility of migration by setting $\bar{u}=1$. Row 5 (``+ Higher urban TFP'') further doubles the level of urban TFP of 3 (instead of $A_u=1.5$). Row 6  (``+ Higher migration cost'') sets $m_T$ so that the model matches seasonal migrant rates in the control group.}
 }
 \end{table}
 
 Table \ref{ta:welfare_alt} summarizes the model's welfare predictions under these alternatives. The first row reproduces the main experimental moments on which we will focus, and the second row reports the model's predictions for the same moments plus the average welfare gain from the migration transfers. The third row raises $\gamma$ from the estimated value of 0.57 up to 1.5, meaning that shocks are now relatively larger in the urban area. By itself this leads welfare gains to fall to 0.12 percent consumption equivalent, the OLS coefficient of consumption on migration to rise to a counterfactual 51 percent, and the treatment effect on migration to fall to a counterfactually low level of 10 percent. The fourth row sets $\bar{u}=1$, which means there is no disutility from migration. Welfare gains raise substantially to 0.51 percent, but the LATE falls to a counterfactually low level of 9 percent, and the migration rate in the control group rises to 55 percent, well above the data. Clearly though, the lower value of $\bar{u}$ is an important driver of the model's welfare gains. The fifth column doubles $A_u$, the urban productivity, to a value of 3. The welfare gains now increase further to 1.29 percent, while other moments remain counterfactual, in particular the seasonal migration rate, which is now an implausible 84 percent.
 
-To lower the migration rate back to a level similar to the data, the last row increases the migration cost up to $m=0.19,$ which is the value that matches the 36 percent migration rate in the control group again. This change also raises the amount of the migration transfer, by construction, since the migration subsidies are intended to cover the migration cost and actually induce migration. Under this parameterization, the welfare gains from the transfers rise to 1.98 percent, or five times what they are in the benchmark calibration. The source of the welfare gains now become relaxing credit constraints, which keep risk-averse migrants from reaching a much more productive urban area, in the spirit of the model of \citet{brch14}. Yet the data do not support such an interpretation. As one example, the LATE effect of consumption on migration is counterfactually lower than the OLS coefficient, pointing to inaccurate sorting patterns for migrants. As another example, the treatment effect of migration is far too large, pointing to the counterfactually large migration costs in this calibration of the model.
+To lower the migration rate back to a level similar to the data, the last row increases the migration cost to match the 36 percent migration rate in the control group again. This change also raises the amount of the migration transfer, by construction, since the migration subsidies are intended to cover the migration cost and actually induce migration. Under this parameterization, the welfare gains from the transfers rise to 1.98 percent, or five times what they are in the benchmark calibration. The source of the welfare gains now become relaxing credit constraints, which keep risk-averse migrants from reaching a much more productive urban area, in the spirit of the model of \citet{brch14}. Yet the data do not support such an interpretation. As one example, the LATE effect of consumption on migration is counterfactually lower than the OLS coefficient, pointing to inaccurate sorting patterns for migrants. As another example, the treatment effect of migration is far too large, pointing to the counterfactually large migration costs in this calibration of the model.
 
 \bibliography{./bib/migration_refs}
 
