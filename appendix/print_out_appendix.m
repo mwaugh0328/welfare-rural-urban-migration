@@ -218,3 +218,21 @@ disp('ubar = 1')
 disp([obj, obj_new])
 disp(round(model_moments(table_order)',2))
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+load('appendix_additive_cost.mat')
+R = [];
+beta = [];
+min_consumption = [];
+perm_movecost = [];
+
+
+obj = calibrate_additive_appendix(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,1);
+model_moments = calibrate_additive_appendix(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,3);
+
+disp('')
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+disp('Additive Migration Utility Cost')
+disp([obj, obj_new])
+disp(round(model_moments(table_order)',2))
+

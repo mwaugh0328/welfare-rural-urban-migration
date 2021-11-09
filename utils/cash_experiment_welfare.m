@@ -82,7 +82,7 @@ feasible_move_seasn = false(n_asset_states,n_asset_states,n_shocks);
 
 net_assets = R.*asset_grid' - asset_grid;
 
-cash_transfer = m_seasn;
+cash_transfer = params.cash_transfer;
 % This is where we would want to adjust to make the comparision to the
 % unconditional cash transfer. How did I come up with that number? I think
 % it's the budget neutral. But in compastion, need to make sure its full

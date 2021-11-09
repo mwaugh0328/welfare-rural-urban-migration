@@ -318,7 +318,7 @@ We focus on a utilitarian planner placing equal weight on households. Define the
 \end{align}
 Here social welfare is the average value of households utility across locations $j$, productivity states $z$ and $s$, experience $x$, and preference shocks $\nu$. The average is computed with respect to the measure of households $\lambda_{j}(z, s, x, \nu, t)$ with those shock states, experience levels, and preference shocks at date all dates $t$. Utility depends directly upon the consumption allocation $c_{j',j}(z, s, x, t)$, but also  directly on the location $j$ through the $\bar u$, and the idiosyncratic preference shock across moving options $j'$
 
-We cast the Planners Problem in terms of the planner choosing consumption allocations and migration probabilities. To cast the problem in terms of migration probabilities, we integrate out the preference shocks conditional on a set of migration probabilities for each household state. These migration probabilities prescribe an assignment of those households with the largest relative preference shock to migrate or not. So given set of states $j, z, s, x, t$, utility is
+We cast the Planners Problem in terms of the planner choosing consumption allocations and migration probabilities for each state and date. To cast the problem in terms of migration probabilities, we integrate out the preference shocks conditional on a set of migration probabilities for each household state. These migration probabilities prescribe an assignment of those households with the largest relative preference shock to migrate or not. So given set of states $j, z, s, x, t$, utility is
 \begin{align}
 u(c_{j',j}(z,s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'} ].
 \label{eq:utility-shocks}
@@ -370,8 +370,7 @@ The \textbf{Centralized Planner's Problem} is the following:
 \nonumber \\
 & \ \ \mbox{subject to} \ \ (\ref{eq:planner_value_production}) \ \ (\ref{eq:planner_income_side_gdp}) \ \ \mbox{and} \ \ (\ref{eq:planner_law_motion}) \ \ \mbox{and an inital condition} \ \ \lambda_j(z, s, x,0).
 \label{eq:planner_problem}
-\end{align}}
-Given this problem, define the following allocation:
+\end{align}}Here the planners is choosing consumption allocations and migration probabilities for each state and date and these allocations must respect the production technology, feasibility, and the law of motion and an initial condition. Finally, note that the planner only considers allocations that depend on the current state, not the entire history. Given the Markov structure on the shocks, we suspect that this is of no consequence, e.g., the consumption allocation the history independence is clear. Given this problem, define the following allocation:
 
 \textbf{A Stationary Centralized Planner Allocation.}  A Stationary Centralized Planner Allocation are time invariant policy functions $\{\ c_{j}(z, s, x, i),\ \mu_{j',j}(z, s, x, i) \ \}$, a probability distribution $\lambda_{j}(z, s, x, i)$, and positive real numbers $N_{j,i}$ for rural and urban areas and season $i$ where:
 \begin{itemize}
@@ -563,7 +562,7 @@ A couple of details: $u_{j'}(z,s,x,t+1)$ integrates out the preference shock. So
 \setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Targeted Moments in Data and Model with Different $R$ values \label{ta:alt_R}}
+\caption{Data and Model with Different $R$ values \label{ta:alt_R}}
 \begin{tabular}{l l c c c}
 \hline
 \hline
@@ -585,8 +584,8 @@ Variance of log wages in urban                                      & 0.56      
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $R$.
- The baseline model has $R=0.95$. The model is \textbf{not re-estimated} in the cases of $R=0.90$ and $R=1.0$.}
+{\footnotesize  \vspace{0.3cm} \textbf{Note:} The table reports the main moments of the paper for alternative values of $R$.
+ The baseline model has $R=0.95$. The model is not re-estimated in the cases of $R=0.90$ and $R=1.0$.}
 }
 \end{center}
 \end{table}
@@ -597,7 +596,7 @@ Variance of log wages in urban                                      & 0.56      
 \setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Targeted Moments in Data and Model with Different $\beta$ values \label{ta:alt_beta}}
+\caption{Data and Model with Different $\beta$ values \label{ta:alt_beta}}
 
 \begin{tabular}{l l c c c}
 \hline
@@ -620,7 +619,7 @@ Variance of log wages in urban                              & 0.56              
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the main moments of the paper for alternative values of $\beta$. The baseline model has $\beta=0.95$. The model is not re-estimated in the cases of $\beta=0.90$ and $\beta=0.97$.}
+{\footnotesize  \vspace{0.3cm} \textbf{Note:} The table reports the main moments of the paper for alternative values of $\beta$. The baseline model has $\beta=0.95$. The model is not re-estimated in the cases of $\beta=0.90$ and $\beta=0.97$.}
 }
 \end{center}
 \end{table}
@@ -633,7 +632,7 @@ Variance of log wages in urban                              & 0.56              
 \setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Targeted Moments in Data and Models with no $\bar{u}$ and $\rho=0$}
+\caption{Data and Models with no $\bar{u}$ and $\rho=0$}
 \begin{tabular}{l l c c c}
 \hline
 \hline
@@ -655,37 +654,32 @@ Variance of log wages in urban                                  & 0.56          
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model.}
+{\footnotesize  \vspace{0.3cm} \textbf{Note:} The table reports the moments targeted using simulated method of moments and their values in the data and in the model.}
 }
 \end{center}
 \end{table}
 
+
 \begin{table}[!htb]
-\setlength {\tabcolsep}{1.45mm}
+\setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Welfare Under Alternative Models with no $\bar{u}$ and $\rho=0$}
-
-\vspace{0.3cm}
-
+\caption{Welfare with no $\bar{u}$ and $\rho=0$}
 \begin{tabular}{c c c c c c c c c c c c}
 \hline
 \hline
-& & \multicolumn{2}{c}{Full Model} && \multicolumn{2}{c}{$\bar{u}=1$} && \multicolumn{2}{c}{$\rho=0$} && \\
+& & \multicolumn{2}{c}{Baseline Model} && \multicolumn{2}{c}{$\bar{u}=1$} && \multicolumn{2}{c}{$\rho=0$} && \\
 \cmidrule(lr){3-4} \cmidrule(lr){6-7}  \cmidrule(lr){9-10}
 & & \small Welfare  &\small Migr. Rate  && \small Welfare & \small Migr. Rate && \small Welfare & \small Migr. Rate && \\
-\multirow{5}{*}{\rotatebox{90}{\small Income Quintile}} & 1 & 1.0  & 85 && 1.5 & 87 && 1.3 & 64 \\
-                                                        & 2 & 0.4  & 62 && 0.7 & 74 && 0.8 & 61\\
-                                                        & 3 & 0.2  & 53 && 0.4 & 64 && 0.5 & 57 \\
-                                                        & 4 & 0.1  & 43 && 0.3 & 54 && 0.3 & 52 \\
-                                                        & 5 & 0.1  & 39 && 0.3 & 49 && 0.1 & 48 \\
+\multirow{5}{*}{\rotatebox{90}{\small Income Quintile}} & 1 & 1.17 & 85 && 1.45 & 79 && 0.75 & 84 \\
+                                                        & 2 & 0.45 & 62 && 0.82 & 73 && 0.37 & 67\\
+                                                        & 3 & 0.28 & 51 && 0.67 & 68 && 0.22 & 53 \\
+                                                        & 4 & 0.20 & 45 && 0.50 & 64 && 0.16 & 46 \\
+                                                        & 5 & 0.12 & 40 && 0.34 & 56 && 0.11 & 38 \\
 \hline
-\multicolumn{2}{c}{\small Average} &0.4   & 57 && 0.6 &  65 && 0.6 &  56  \\
+\multicolumn{2}{c}{\small Average} &0.44   & 57 && 0.75 &  68 && 0.32 &  58  \\
 \hline
 \end{tabular}
-\parbox[c]{6.0in}{%
-{\footnotesize  \vspace{0.5cm} Note: The table reports the (lifetime) consumption-equivalent welfare gains from the conditional migration transfers relative to an unconditional transfer program costing the same total amount and to a rural workfare program that costs the same amount. The numbers in the table are the average percent increase in consumption each period that would make the households indifferent between the consumption increase and the transfers, and the seasonal migration rates, by quintile of the rural income distribution.}
-}
 \end{center}
 \end{table}
 
@@ -699,7 +693,7 @@ Variance of log wages in urban                                  & 0.56          
 \setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Targeted Moments in Data and Model with Subsistence Consumption}
+\caption{Data and Model with Subsistence Consumption}
 \begin{tabular}{l c c c}
 \hline
 \hline
@@ -721,10 +715,35 @@ Variance of log wages in urban                                  & 0.56          
 \hline
 \end{tabular}
 \parbox[c]{6.5in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model. The final calibration reports the moments when a subsistence consumption constraint is added and set to equal 20 percent of average rural consumption.}
+{\footnotesize  \vspace{0.3cm} \textbf{Note:} The table reports the moments targeted using simulated method of moments and their values in the data and in the model. The final calibration reports the moments when a subsistence consumption requirement is added to preferences and set to equal 20 percent of average rural consumption.}
 }
 \end{center}
 \end{table}
+
+\begin{table}[!htb]
+\setlength {\tabcolsep}{2mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\caption{Welfare with Subsistence Consumption}
+\begin{tabular}{c c c c c c c c c}
+\hline
+\hline
+& & \multicolumn{2}{c}{Baseline Model} && \multicolumn{2}{c}{w/ Subsistence} && \\
+\cmidrule(lr){3-4} \cmidrule(lr){6-7}
+& & \small Welfare  &\small Migr. Rate  && \small Welfare & \small Migr. Rate && \\
+\multirow{5}{*}{\rotatebox{90}{\small Income Quintile}}
+&1  & 1.17 & 85 && 1.72 & 90  \\
+&2  & 0.45 & 62 && 0.53 & 63  \\
+&3  & 0.28 & 51 && 0.37 & 52  \\
+&4  & 0.20 & 45 && 0.23 & 44  \\
+&5  & 0.12 & 40 && 0.14 & 37 \\
+\hline
+\multicolumn{2}{c}{\small Average} &0.44 & 57 && 0.60 & 57  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
 
 
 \newpage
@@ -735,11 +754,11 @@ Variance of log wages in urban                                  & 0.56          
 \setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Targeted Moments in Data and Model and Migration Costs}
+\caption{Data and Model and Migration Costs}
 \begin{tabular}{l c c c}
 \hline
 \hline
-Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\ Baseline  \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model \\ $m_p=2*m_t$ \end{tabular} \\
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\ Baseline  \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model \\ $m_p = m_t$ \end{tabular} \\
 \hline
 Control: Variance of log consumption growth in rural            & 0.19              & 0.19              & 0.19              \\
 Control: Percent of rural households with no liquid assets      & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}48   \\
@@ -764,13 +783,10 @@ Variance of log wages in urban                                  & 0.56          
 
 
 \begin{table}[!htb]
-\setlength {\tabcolsep}{1.45mm}
+\setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Welfare Under Alternative Assumptions About Migration Costs}
-
-\vspace{0.5cm}
-
+\caption{Welfare with Different Migration Costs}
 \begin{tabular}{c c c c c c c c c}
 \hline
 \hline
@@ -778,63 +794,51 @@ Variance of log wages in urban                                  & 0.56          
 \cmidrule(lr){3-4} \cmidrule(lr){6-7}
 & & \small Welfare  &\small Migr. Rate  && \small Welfare & \small Migr. Rate && \\
 \multirow{5}{*}{\rotatebox{90}{\small Income Quintile}}
-&1  & 1.05 & 85 && 0.91 & 81  \\
-&2  & 0.40 & 62 && 0.36 & 60  \\
-&3  & 0.26 & 54 && 0.22 & 50  \\
-&4  & 0.16 & 43 && 0.15 & 43  \\
-&5  & 0.11 & 40 && 0.10 & 39 \\
+&1  & 1.17 & 85 && 0.95 & 77  \\
+&2  & 0.45 & 62 && 0.45 & 62  \\
+&3  & 0.28 & 51 && 0.29 & 55  \\
+&4  & 0.20 & 45 && 0.23 & 52  \\
+&5  & 0.12 & 40 && 0.15 & 48 \\
 \hline
-\multicolumn{2}{c}{\small Average} &0.39 & 57 && 0.35 & 55  \\
+\multicolumn{2}{c}{\small Average} &0.44 & 57 && 0.42 & 59  \\
 \hline
 \end{tabular}
-\parbox[c]{6.0in}{%
-{\footnotesize  \vspace{0.5cm} Note: The table reports the (lifetime) consumption-equivalent welfare gains from migration transfers by income quartile under alternative assumptions about migration costs.}
-}
 \end{center}
 \end{table}
 
 \newpage
 
-\begin{table}[t]
+
+\newpage
+
+\begin{table}[!htb]
 \small
-\setlength {\tabcolsep}{1.5mm}
+\setlength {\tabcolsep}{2mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Alternative Estimation with Additive Migration Disutility}
-\vspace{0.3cm}
-\begin{tabular}{l c c c c}
+\caption{Data and Model with Additive Migration Disutility}
+\begin{tabular}{l c c c}
 \hline
 \hline
-Moments & Data & Benchmark & Additive\\
+Moments & Data &  \begin{tabular}[c]{@{}c@{}}Model\\ Baseline  \end{tabular}  &  \begin{tabular}[c]{@{}c@{}}Model \\ Additive \end{tabular} \\
 \hline
-Control: Variance of rural log consumption growth & 0.19 & 0.19 & 0.19  \\
- & \footnotesize{(0.03)} & \\
-Control: Percent of rural households with no liquid assets & \phantom{0.}47 & \phantom{0.}48 & \phantom{0.}50  \\
- & \footnotesize{(1.13)} & \\
-Control: Seasonal migration rate & \phantom{0.}36& \phantom{0.}36& \phantom{0.}45  \\
- & \footnotesize{(2.64)} & \\
-Control: Consumption increase of migrants (OLS) & \phantom{0.}10 & \phantom{0.}10& \phantom{0.}5  \\
- & \footnotesize{(4.47)} & \\
- Control: Probability of repeat migration &       0.68   &  0.70 &  0.60      \\
-            & \footnotesize{(0.46)} & \\
-Treatment: Seasonal migration relative to control & \phantom{0.}22& \phantom{0.}21& \phantom{0.}30  \\
- & \footnotesize{(2.39)} & \\
-Treatment: Seasonal migration relative to control in year 2 & \phantom{0.}9 & \phantom{0.}4& -1  \\
- & \footnotesize{(2.44)} & \\
-Treatment: Consumption increase of induced migrants (LATE)  & \phantom{0.}30 & \phantom{0.}29& \phantom{0.}14\\
- & (9.67) & \\
+Control: Variance of log consumption growth in rural            & 0.19              & 0.19              & 0.19              \\
+Control: Percent of rural households with no liquid assets      & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}47   \\
+Control: Seasonal migrants                                      & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}40   \\
+Control: Consumption increase of migrants (OLS)                 & \phantom{0.}10    & \phantom{0.}10    & \phantom{0.}08   \\
+Treatment: Seasonal migration relative to control               & \phantom{0.}22    & \phantom{0.}21    & \phantom{0.}13   \\
+Treatment: Seasonal migration relative to control in year 2     & \phantom{0.}9     & \phantom{0.}5     & \phantom{0.}04   \\
+Treatment: Cons of induced migrants relative to control (LATE)  & \phantom{0.}30    & \phantom{0.}29    & \phantom{0.}25   \\
+Control: Probability of repeat migration                        & \phantom{0.}68    & \phantom{0.}71    & \phantom{0.}69   \\
 \hline
-Urban-Rural wage gap & 1.89  & 1.89 & 1.89  \\
- & \footnotesize{(0.18)} & \\
-Percent in rural area & \phantom{0.}62 & \phantom{0.}60 & 67  \\
- & \footnotesize{(1.36)} & \\
-Variance of log urban wages  & 0.56 &  0.56 & 0.56         \\
- & \footnotesize{(0.06)} & \\
+Urban-Rural wage gap                                            & 1.89              & 1.89              & 1.91             \\
+Percent in rural                                                & \phantom{0.}61    & \phantom{0.}60    & \phantom{0.}57   \\
+Variance of log wages in urban                                  & 0.56              & 0.56              & 0.56              \\
 \hline
 \hline
 \end{tabular}
-\parbox[c]{6.25in}{%
-{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data, in the baseline model, in the model with additive disutility, and the standard errors of the empirical moments.}
+\parbox[c]{6.5in}{%
+{\footnotesize  \vspace{0.3cm} Note: The table reports the moments targeted using simulated method of moments and their values in the data and in the model.}
 }
 \end{center}
 \end{table}
