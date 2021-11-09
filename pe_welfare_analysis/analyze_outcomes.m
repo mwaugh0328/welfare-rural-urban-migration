@@ -28,6 +28,8 @@ params.tax.rate = cal_params(15);
 params.tax.prog = cal_params(16);
 params.tax.location = 'all';
 
+params.cash_transfer = cal_params(18);
+
 params.alpha = cal_params(17);
 %Preferences
 params.sigma_nu_not = cal_params(9); %These are the logit shocks
