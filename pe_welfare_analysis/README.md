@@ -2,12 +2,12 @@
 
 This section describes basic computations to compute the welfare gains associated with one time transfers (conditional or unconditional) .
 
-### Basic Computations
+### Main Computations
 ---
 **Compute Model:** The most basic call starts inside the [``pe_welfare_analysis``](https://github.com/mwaugh0328/final_migration/tree/main/pe_welfare_analysis) folder. To perform the welfare analysis you:
 
 ```
->> load('calibrated_baseline.mat')
+>> load('..\calibration\calibrated_baseline.mat')
 
 >> analyze_outcomes(x1, [], [], [], [], [], 1)
 ```
@@ -74,6 +74,6 @@ The first table evaluates the welfare gains holding fixed the migration policy f
 
 What is in this folder.
 
-- ``analyze_outcomes.m`` main file to take parameter values, solve households problem, simulate and construct stationary distribution, and then construct moments in the model as they are in the data, computes welfare gains associated with one-time transfer, outputs ``.mat`` files to plot policy functions.
+- [``analyze_outcomes.m``](https://github.com/mwaugh0328/final_migration/blob/main/pe_welfare_analysis/analyze_outcomes.m) main file to take parameter values, solve households problem, simulate and construct stationary distribution, and then construct moments in the model as they are in the data, computes welfare gains associated with one-time transfer, outputs ``.mat`` files to plot policy functions.
 
-- ``preamble_welfare_analysis.m`` specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change.
+- [``preamble_welfare_analysis.m``](https://github.com/mwaugh0328/final_migration/blob/main/pe_welfare_analysis/preamble_welfare_analysis.m) specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change.
