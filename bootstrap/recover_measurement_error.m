@@ -20,7 +20,7 @@ var_log_wages_model = model_moments(3).^2;
 % compute_outcomes.m
 
 var_log_cons_growth_model = model_moments(11).^2;
-% model does everything in standard deviation, see line ~324 in
+% model does everything in standard deviation, see line ~399 in
 % compute_outcomes.m
 
 urban_wage_me = max(var_log_wages_data - var_log_wages_model, 0) ; 
