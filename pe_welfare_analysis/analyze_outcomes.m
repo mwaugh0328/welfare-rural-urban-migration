@@ -43,7 +43,7 @@ params.abar = cal_params(14); % The discount factor
 
 params.ubar = cal_params(5);   % ubar, disutility of being in urban area
 
-params.lambda = cal_params(6); % getting experince and losing it
+params.lambda = cal_params(6); % getting Experience and losing it
 
 params.pi_prob = cal_params(7);
 
@@ -410,10 +410,10 @@ targets = mean(moments, 1);
 
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('')
-disp('Policy : Welfare by Income Quintile: Welfare, Migration Rate, Z, Experience')
+disp('Migration Policy Function Fixed: Welfare by Income Quintile: Welfare, Migration Rate, Z, Experience')
 disp(round(100.*[mean([fix_policy_bin.welfare],2), mean([fix_policy_bin.migration],2), mean([fix_policy_bin.urban],2)./100,...
     mean([fix_policy_bin.expr],2)],2))
-disp('Averages: Welfare, Migration Rate, Experince')
+disp('Averages: Welfare, Migration Rate, Experience')
 disp(round(100.*[mean(fix_policy_avg,1)],2))
 
 
@@ -422,7 +422,7 @@ disp('')
 disp('PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z , Experience ')
 disp(round(100.*[mean([conditional_ticket_bin.welfare],2), mean([conditional_ticket_bin.migration],2), mean([conditional_ticket_bin.urban],2)./100,...
     mean([conditional_ticket_bin.expr],2)],2))
-disp('Averages: Welfare, Migration Rate, Experince')
+disp('Averages: Welfare, Migration Rate, Experience')
 disp(round(100.*[mean(conditional_ticket_avg,1)],2))
 
 % 

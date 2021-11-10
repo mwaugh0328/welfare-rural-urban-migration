@@ -1,6 +1,6 @@
 ### Calibration
 
-This section describes basic computations, the calibration approach, and then describes the computational elements behind the computation of the model. 
+This section describes basic computations, the calibration approach, and then describes the computational elements behind the computation of the model.
 
 ### Basic Computations
 ---
@@ -78,4 +78,4 @@ What is in this folder.
 
 - ``cal_simmulate_experiment.m`` designed to simulate the experiment just in the calibration folder. It's stripped down to run fast and compute only what we need for calibration.
 
-- ``compute_standard_errors.m`` and ``sd_calculation.m`` are new and old files to compute the jacobian and standard errors.  
+- ``compute_standard_errors.m`` and ``sd_calculation.m`` are new and old files to compute the jacobian and standard errors.  Deprecated, not relevant.
