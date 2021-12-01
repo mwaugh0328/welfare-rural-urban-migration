@@ -2,8 +2,10 @@
 
 This section describes basic computations, the calibration approach, and then the computational elements behind the computation of the model.
 
-### Basic Computations
 ---
+
+### Basic Computations
+
 **Compute Model:** The most basic call starts inside the [``calibration``](https://github.com/mwaugh0328/final_migration/tree/main/calibration) folder. To generate moments from the model
 
 ```
@@ -61,6 +63,8 @@ The ``calibrated_baseline.mat`` contains the final, calibrated parameter values 
 And then within it you can see how it works. It takes the moments then passes them and the parameter values [``calibrate_model.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/calibrate_model.m) which is just a wrapper file to run [``compute_outcomes.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/compute_outcomes.m) and then construct moments for reporting or passing to a minimizer.
 
 The baseline minimizer is ``fminsearchcon`` which is a constrained version of ``fminsearch``.  When this project first started, to get in the neighborhood we used the ``ga`` solver which is essentially a search of the entire parameter space in a smart way.
+
+---
 
 ### Accounting
 
