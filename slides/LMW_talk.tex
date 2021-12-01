@@ -241,7 +241,7 @@ Household-specific efficiency units of labor in each location:
 \smallskip
 \item $zs^\gamma$ in the urban area.
 \smallskip
-\item $\gamma$ is affecting relative returns and volatility to locating in different areas.
+\item $\gamma$ is affecting relative returns and volatility in different areas.
 \end{itemize}
 \end{frame}
 
@@ -453,7 +453,7 @@ Control: Seasonal migration rate &
 $\begin{array}{c}36\vspace{-.15cm}\\ \scriptstyle (2.64)\end{array}$ &
 $\begin{array}{c}36\vspace{-.15cm}\\ \scriptstyle \phantom{(2.64)}\end{array}$ &\\
 
- Control: Share of Repeat Migrants&
+ Control: Share of Repeat Migrants in year 2 &
 $\begin{array}{c}68\vspace{-.15cm}\\ \scriptstyle (0.46)\end{array}$ &
 $\begin{array}{c}70\vspace{-.15cm}\\ \scriptstyle \phantom{(0.46)}\end{array}$ & \\
 
@@ -565,22 +565,22 @@ Type-1 EV scale paremeter                   & $\begin{array}{c}0.13\vspace{-.1cm
 \textbf{1.} What happened in the experiment?
 \begin{itemize}
 \smallskip
-\item In bad states of the world, urban migration is relatively more beneficial $\Rightarrow$ migration is insurance. 
+\item In bad states of the world, urban migration is relatively more beneficial $\Rightarrow$ migration is insurance.
 \smallskip
-\item And negative selection (LATE $>$ OLS) in the data reveals this. 
+\item And negative selection (LATE $>$ OLS) in the data reveals this.
 \end{itemize}
 \bigskip
 \uncover<2>{\textbf{2.} What are the welfare gains from conditional migration subsidies?} \\
 \uncover<.>{
 \begin{itemize}
 \smallskip
-\item Gains because they target those who need transfers the most, even if tax financed.  
+\item Gains because they target those who need transfers the most, even if tax financed.
 \smallskip
 \end{itemize}
 \bigskip
 \textbf{3.} What is the socially optimal outcome? \\
 \begin{itemize}
-\item Directly provide insurance with \textbf{less} movement of households across locations. 
+\item Directly provide insurance with \textbf{less} movement of households across locations.
 \smallskip
 \end{itemize}}
 \end{frame}
@@ -646,7 +646,7 @@ All Households      & 0.93  			& 0.59 			& 0.63  \\
 Percent in Rural Area				   & 60 			& 60				&  66 \\
 Percent of Rural Seasonally Migrating		   & 31 			& 31				&  69 \\
 Percent of Rural with Access to Subsidy		   & 50 			& 50				&  72 \\
-Tax Rate (\% of labor income)		  		 & 0 			& 0.4				&  1.2 \\
+Tax Rate (\% of labor income)		  		 & 0 			& 0.40				&  1.20 \\
 %\multicolumn{2}{l}{\small Fraction w. Experience} &  &23 &&  &42&&   &  41\\
 \hline
 \end{tabular}
@@ -712,7 +712,7 @@ Migration probabilities  $\mu_{j'j}(z,s,x,t)$ satisfy:
 \vspace{0.25cm}
 {\small
 \begin{align}
-\exp \left(\frac{- u'(t) \ m_{j',j} + \beta \ \mathbb{E}_{s,x}\left[\chi_{3j'}(z,s,x, t+1)\right]}{\sigma} \right)  \Bigg / \sum_{j'} \exp \left( \frac{- u'(t)\ m_{j',j} + \beta \  \mathbb{E}_{s,x}\left[\chi_{3j'}(z,s,x, t+1) \right]}{\sigma} \right), \nonumber \\[.75em] \nonumber
+\exp \left(\frac{- u'(t) \ m_{j',j} + \beta \ \mathbb{E}_{s,x}\left[\chi_{3j'}(z,s,x, t+1)\right]}{\sigma_{\nu}} \right)  \Bigg / \sum_{j'} \exp \left( \frac{- u'(t)\ m_{j',j} + \beta \  \mathbb{E}_{s,x}\left[\chi_{3j'}(z,s,x, t+1) \right]}{\sigma_{\nu}} \right), \nonumber \\[.75em] \nonumber
 \end{align}
 }
 with the multipliers $\chi_{3j'}$ satisfying the following recursive relationship
@@ -763,7 +763,7 @@ plus the next periods discounted, expected future net social benefits.
 \renewcommand{\arraystretch}{1.40}
 \begin{center}
 \begin{tabular}{l c c c}
-\multicolumn{4}{l}{\textbf{Competitive Equilibrium vs Social Planner's Allocation}} \\
+\multicolumn{4}{l}{\textbf{Competitive Equilibrium vs The Social Planner's Allocation}} \\
 \hline
 \hline
 						& Competitive & Full Insurance & Full Insurance  \\
@@ -801,26 +801,20 @@ Rural-Urban Wage Gap				   & 1.88 			& 1.88				&  1.56 \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]{Conclusion\ldots}
-\textbf{1.} What happened in the experiment?
-\begin{itemize}
-\smallskip
-\item In bad states of the world, urban migration is relatively more beneficial $\Rightarrow$ migration is insurance.
-\smallskip
-\item And negative selection (LATE $>$ OLS) in the data reveals this.
-\end{itemize}
+\begin{frame}[t]{Final Thoughts}
+Big Question: Are people in the wrong place? \\
+\medskip
+The experiment suggest yes (we thought that for years). Plot twist: not really.\\
 \bigskip
-\textbf{2.} What are the welfare gains from conditional migration subsidies? \\
-\begin{itemize}
 \smallskip
-\item Gains because they target those who need transfers the most, even if tax financed.
-\smallskip
-\end{itemize}
+The experiment's results are symptomatic of market incompleteness and lack of insurance. Not that ``there are people who want to move but can't.''\\
 \bigskip
-\textbf{3.} What is the socially optimal outcome? \\
+Once you understand this pervious point, the normative implications follow:
 \begin{itemize}
-\item Directly provide insurance with \textbf{less} movement of households across locations.
 \smallskip
+\item Incentivizing migration provides welfare benefits because it ``tags'' vulnerable rural households and directs resources toward them.
+\smallskip
+\item But this is a second best intervention. From the planners perspective, the first best intervention is to directly provide insurance with less movement of households across locations.
 \end{itemize}
 \end{frame}
 
