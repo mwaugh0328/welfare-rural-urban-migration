@@ -41,7 +41,7 @@ disp('Aggregate Statistics')
 disp('')
 disp('Average Rural Population')
 disp(avg_rural)
-disp('Migrants, Control Group, Mushfiqs Sample')
+disp('Migrants, Mushfiqs Sample')
 disp(musfiq_migrants)
 disp('Migrants, Whole Population')
 disp(all_seasonal_migrants)
@@ -57,11 +57,17 @@ disp(mean(mushfiqs_sample(:,consumption)))
 if min(bin.welfare) < -10
     %I'm proably reporting the value function
     
-    disp('Control Group, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
+    disp('Mushfiqs Sample, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
     disp(([bin.welfare', 100.*bin.migration', 100.*bin.experince', 0.01.*bin.consumption']))
+    disp('Mushfiqs Sample, Average Welfare')
+    disp(mean(mushfiqs_sample(:,welfare)))
+    
 else
-    disp('Control Group, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
-    disp((100.*[bin.welfare', bin.migration', bin.experince', 0.01.*bin.consumption']))
+    disp('Mushfiqs Sample, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
+    disp(round((100.*[bin.welfare', bin.migration', bin.experince', 0.01.*bin.consumption']),2))
+    disp('Mushfiqs Sample, Average Welfare')
+    disp(round(100.*mean(mushfiqs_sample(:,welfare)),2))
+    
 end
 end
 
@@ -92,11 +98,11 @@ welfare_stats.urban = mean(data_panel(data_panel(:,live_rural)~=1, welfare));
 if welfare_stats.all < -10
     %I'm proably reporting the value function
     disp('Social Welfare: All, Rural, Urban')
-    disp([welfare_stats.all, welfare_stats.rural, welfare_stats.urban])
+    disp(round([welfare_stats.all, welfare_stats.rural, welfare_stats.urban],2))
 
 else
     disp('Social Welfare: All, Rural, Urban')
-    disp([welfare_stats.all, welfare_stats.rural, welfare_stats.urban])
+    disp(round(100.*[welfare_stats.all, welfare_stats.rural, welfare_stats.urban],2))
     
 end
     
@@ -139,11 +145,11 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('Accounting: HH Balance Sheet')
 disp('')
 disp('Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
-disp([accounting.all.monga.production, accounting.all.monga.income, accounting.all.monga.consumption, accounting.all.monga.movingcosts, ...
-    accounting.all.monga.fiscalcost, accounting.all.monga.tax, accounting.all.monga.net_asset])
+disp(round([accounting.all.monga.production, accounting.all.monga.income, accounting.all.monga.consumption, accounting.all.monga.movingcosts, ...
+    accounting.all.monga.fiscalcost, accounting.all.monga.tax, accounting.all.monga.net_asset],2))
 disp('Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
-disp([accounting.all.notmonga.production, accounting.all.notmonga.income, accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts,...
-    accounting.all.notmonga.fiscalcost, accounting.all.notmonga.tax, accounting.all.notmonga.net_asset])
+disp(round([accounting.all.notmonga.production, accounting.all.notmonga.income, accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts,...
+    accounting.all.notmonga.fiscalcost, accounting.all.notmonga.tax, accounting.all.notmonga.net_asset],2))
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -209,12 +215,12 @@ govbc = params.R.*(accounting.all.monga.tax - accounting.all.monga.fiscalcost) +
 if flag == 1
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('Production Side Accounting: Production, Consumption, Moving Costs')
-disp([(aggproduction.rural.monga + aggproduction.urban.monga), accounting.all.monga.consumption, accounting.all.monga.movingcosts])
-disp([(aggproduction.rural.notmonga + aggproduction.urban.notmonga), accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts])
+disp(round([(aggproduction.rural.monga + aggproduction.urban.monga), accounting.all.monga.consumption, accounting.all.monga.movingcosts],2))
+disp(round([(aggproduction.rural.notmonga + aggproduction.urban.notmonga), accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts],2))
 disp('Resource Constraint (Production Side): Monga, Non Monga')
-disp([rc_monga, rc_not_monga])
+disp(round([rc_monga, rc_not_monga],2))
 disp('Gov Budget Constraint')
-disp([govbc])
+disp(round([govbc],2))
 
 end
 

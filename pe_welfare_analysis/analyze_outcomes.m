@@ -406,6 +406,12 @@ end
 wages.monga = mean([wagestats.monga]);
 wages.notmonga = mean([wagestats.notmonga]);
 
+cd('..\ge_taxation')
+
+save wages.mat wages
+
+cd('..\pe_welfare_analysis')
+
 targets = mean(moments, 1);
 
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')

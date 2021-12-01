@@ -3,8 +3,11 @@ warning('off','stats:regress:RankDefDesignMat');
 
 addpath('../utils')
 
-load('../calibration/cal_baseline_s730.mat')
-load('../pe_welfare_analysis/wages.mat')
+load('../calibration/calibrated_baseline.mat')
+load('wages.mat')
+
+wages = [wages.monga, wages.notmonga];
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This code computes and presents the results from the GE reduction in
 % seasonal migraiton costs funded by a distrotionary tax on labor income.

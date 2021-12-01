@@ -175,7 +175,7 @@ if isempty(vft_fun)
         parfor xxx = 1:n_types 
         
         [assets(xxx), move(xxx), vfun(xxx), ce(xxx)] = ...
-            rural_urban_value(params, solve_types(xxx,:),[]);
+            rural_urban_value(params, solve_types(xxx,:),[],[]);
         
         end
     else
@@ -193,7 +193,7 @@ else
         parfor xxx = 1:n_types 
         
         [assets(xxx), move(xxx), vfun(xxx), ce(xxx)] = ...
-            rural_urban_value(params, solve_types(xxx,:), vft_fun(xxx));
+            rural_urban_value(params, solve_types(xxx,:), vft_fun(xxx),[]);
         
         end
     else

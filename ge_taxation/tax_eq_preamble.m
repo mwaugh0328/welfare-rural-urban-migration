@@ -14,7 +14,7 @@ function [cal_params, specs] = tax_eq_preamble(cal_params, specs, seed, R)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Then there are some pre-determined, hand calibrated values...
 
-% cal_params(10) = 0.08; % this is the moving cost. It was hand calibrated to 
+cal_params(10) = 0.0878; % this is the moving cost. It was hand calibrated to 
 % % deliver it being approx 10% of half yearly consumption. Did try internal
 % % calibration...does provide better fit actually.
 
