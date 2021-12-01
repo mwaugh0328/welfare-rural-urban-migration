@@ -7,11 +7,15 @@ This section describes basic computations, the calibration approach, and then th
 **Compute Model:** The most basic call starts inside the [``calibration``](https://github.com/mwaugh0328/final_migration/tree/main/calibration) folder. To generate moments from the model
 
 ```
+>> addpath('../utils')
+
 >> load('calibrated_baseline.mat')
+
+>> load('calibrated_valuefunction_guess.mat')
 
 >> compute_outcomes(x1, [], [], vguess, 1)
 ```
-Then it should compute everything and then spit out the moments. The output should look something like this (**note** this is from my fed computer which has R2018 and is different from the version with R2021)
+The first line adds the path to utility folder and the associated functions. Loads the calibrated parameters and then a good guess for the value function. Then it should compute everything and then spit out the moments. The output should look something like this (**note** this is from my fed computer which has R2018 and is different from the version with R2021)
 ```
 Wage Gap
     1.8893
