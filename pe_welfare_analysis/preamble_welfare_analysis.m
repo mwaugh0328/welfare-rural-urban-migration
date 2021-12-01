@@ -65,7 +65,7 @@ if isempty(specs)
     specs.follow_hh_expr = 11;  % number of time periods to follow a guy, historical was 11;
     specs.exp_index = [1,2,3,4,5,7,11]; % places to capture data (historical code was [1,2,3,4,5,7,11];
     
-    specs.Nmontecarlo = 30;
+    specs.Nmontecarlo = 5;
         
 end
 
