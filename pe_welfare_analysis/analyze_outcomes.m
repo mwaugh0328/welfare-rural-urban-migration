@@ -205,9 +205,16 @@ lowz_exp = flipud(move(4).rural_exp(:,seasont==1,1));
 
 cd('..\plotting')
 
+disp('-----------------------------------------------------------------------------------------------------')
+disp(datetime(now,'ConvertFrom','datenum'))
+disp(' ')
+ver
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
+
 disp('Saving policy functions in plotting folder...')
-disp('')
-disp('')
+disp(' ')
+disp(' ')
 
 %save movepolicy_ols_late.mat lowz medz lowz_exp
 save movepolicy.mat lowz medz lowz_exp
@@ -352,7 +359,16 @@ for nmc = 1:Nmontecarlo
     cash_data = data_panel_cash(rural_cntr,:,:);
     fix_data = data_panel_fix(rural_cntr,:,:);
     
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % asset stuff to match up with new table in ref response:
     
+    above_800taka = control_data(:,3,1) > params.m_season; % net out check in bonus 800 taka figure
+    above_1600taka = control_data(:,3,1) > 2.*params.m_season; % net out check in bonus 16000 taka figure
+    
+    asset_migration(nmc,:) = [  mean(control_data(~above_800taka,7,1)), mean(control_data(above_800taka,7,1)), ...
+                                mean(control_data(~above_1600taka,7,1)), mean(control_data(above_1600taka,7,1))];
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     [migration] = report_experiment(control_data, expermt_data, 'bus');
     
     frac_no_assets = 0.95*(sum(control_data(:,3,1) == params.asset_space(1)))/sum(rural_cntr)...
@@ -425,7 +441,7 @@ cd('..\pe_welfare_analysis')
 targets = mean(moments, 1);
 
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('')
+disp(' ')
 disp('Migration Policy Function Fixed: Welfare by Income Quintile: Welfare, Migration Rate, Z, Experience')
 disp(round(100.*[mean([fix_policy_bin.welfare],2), mean([fix_policy_bin.migration],2), mean([fix_policy_bin.urban],2)./100,...
     mean([fix_policy_bin.expr],2)],2))
@@ -436,7 +452,7 @@ disp(round(100.*[mean(fix_policy_all_rural,1)],2))
 
 
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('')
+disp(' ')
 disp('PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z , Experience ')
 disp(round(100.*[mean([conditional_ticket_bin.welfare],2), mean([conditional_ticket_bin.migration],2), mean([conditional_ticket_bin.urban],2)./100,...
     mean([conditional_ticket_bin.expr],2)],2))
@@ -451,7 +467,7 @@ disp(round(100.*[mean(conditional_ticket_all_rural,1)],2))
 % % The unconditional cash transfer
 % 
 % 
-disp('')
+disp(' ')
 disp('PE Unconditional Cash Transfer: Welfare and Migration by Income Quintile ')
 disp(round(100.*[mean([unconditional_cash_bin.welfare],2), mean([unconditional_cash_bin.migration],2),],2))
 disp('PE Unconditional Cash Transfer: Average Welfare Gain, Migration Rate')
@@ -460,7 +476,7 @@ disp(round(100.*[mean(unconditional_cash_avg,1)],2))
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-disp('')
+disp(' ')
 disp('')
 disp('Wage Gap')
 disp(mean(moments(:,1)))
@@ -476,6 +492,10 @@ disp('LATE Estimate')
 disp(mean(moments(:,8)))
 disp('LATE - OLS Estimate')
 disp(mean(moments(:,9)))
+disp('Migration Above 800 Taka, Below 800 Taka assets')
+disp(mean(asset_migration(:,[1,2])))
+disp('Migration Above 1600 Taka, Below 1600 Taka assets')
+disp(mean(asset_migration(:,[3,4]),1,'native','omitnan'))
 
 cd('..\plotting')
 

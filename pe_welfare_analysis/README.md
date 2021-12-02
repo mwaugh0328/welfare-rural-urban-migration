@@ -19,64 +19,101 @@ The five ``[]`` stand in for ``specs`` which is a structure defining grid, shock
 
 Then it should compute everything and then spit out the moments. The output should look something like this
 ```
+-----------------------------------------------------------------------------------------------------
+   02-Dec-2021 11:56:01
+
+
+-----------------------------------------------------------------------------------------------------
+MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
+MATLAB License Number: 618777
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19043)
+Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+-----------------------------------------------------------------------------------------------------
+MATLAB                                                Version 9.10        (R2021a)
+Curve Fitting Toolbox                                 Version 3.5.13      (R2021a)
+Econometrics Toolbox                                  Version 5.6         (R2021a)
+Financial Instruments Toolbox                         Version 3.2         (R2021a)
+Financial Toolbox                                     Version 6.1         (R2021a)
+GPU Coder                                             Version 2.1         (R2021a)
+Global Optimization Toolbox                           Version 4.5         (R2021a)
+MATLAB Coder                                          Version 5.2         (R2021a)
+MATLAB Compiler                                       Version 8.2         (R2021a)
+MATLAB Compiler SDK                                   Version 6.10        (R2021a)
+Optimization Toolbox                                  Version 9.1         (R2021a)
+Parallel Computing Toolbox                            Version 7.4         (R2021a)
+Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
+Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
+-----------------------------------------------------------------------------------------------------
+
 Saving policy functions in plotting folder...
 
+
+
 Migration Policy Function Fixed: Welfare by Income Quintile: Welfare, Migration Rate, Z, Experience
-    0.7600   47.5100    0.5500   24.8100
-    0.3100   38.2100    0.5500   23.5200
-    0.2000   32.8800    0.5600   24.5100
-    0.1500   31.3200    0.5600   25.4600
-    0.1000   31.3900    0.6000   34.9600
+    0.7700   48.3100    0.5500   24.9800
+    0.3100   38.0500    0.5500   23.9200
+    0.2000   33.5600    0.5600   24.4700
+    0.1500   31.1800    0.5600   25.3400
+    0.1000   30.9800    0.6000   34.9800
 
 Averages: Mushfiqs sample Welfare, Migration Rate, Experience
-    0.3000   36.2600   26.6500
+    0.3000   36.4200   26.7400
 
 Averages: All Rural, Welfare, Migration Rate
-    0.1500   30.5700
+    0.1500   30.5800
+
 
 PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z , Experience
-    1.1600   84.7600    0.5500   24.8100
-    0.4500   62.9300    0.5500   23.5200
-    0.2800   51.1800    0.5600   24.5100
-    0.2000   46.4400    0.5600   25.4600
-    0.1200   40.5400    0.6000   34.9600
+    1.1700   85.1600    0.5500   24.9800
+    0.4500   62.6500    0.5500   23.9200
+    0.2900   51.6700    0.5600   24.4700
+    0.2000   45.7800    0.5600   25.3400
+    0.1200   40.4100    0.6000   34.9800
 
 Averages: Mushfiqs sample Welfare, Migration Rate, Experience
-    0.4400   57.1700   26.6500
+    0.4400   57.1300   26.7400
 
 Averages: All Rural, Welfare, Migration Rate
-    0.2200   43.8700
+    0.2200   43.8600
+
 
 PE Unconditional Cash Transfer: Welfare and Migration by Income Quintile
-    1.0500   44.6100
-    0.5600   37.0300
-    0.4000   32.1000
-    0.3200   30.9000
-    0.2000   31.2100
+    1.0500   45.2500
+    0.5600   36.8400
+    0.4000   32.8700
+    0.3200   30.8500
+    0.2000   30.8200
 
 PE Unconditional Cash Transfer: Average Welfare Gain, Migration Rate
-    0.5100   35.1700
+    0.5100   35.3200
+
 
 Wage Gap
-    1.8907
+    1.8898
 
 Average Rural Population
-    0.5993
+    0.5991
 
 Fraction of Rural with No Assets
-    0.4724
+    0.4761
 
 Expr Elasticity: Year One, Two
-    0.2078    0.0499
+    0.2075    0.0474
 
 Control: Year One, Repeat Two
-    0.3639    0.2560
+    0.3638    0.2578
 
 LATE Estimate
-    0.2910
+    0.2924
 
 LATE - OLS Estimate
-    0.1966
+    0.2004
+
+Migration Above 800 Taka, Below 800 Taka assets
+    0.3682    0.3469
+
+Migration Above 1600 Taka, Below 1600 Taka assets
+    0.3669    0.2952
 ```
 
 The first line reports that the policy functions are being saved in the [plotting folder](https://github.com/mwaugh0328/final_migration/tree/main/plotting).
