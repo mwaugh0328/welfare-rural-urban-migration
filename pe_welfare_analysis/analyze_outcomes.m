@@ -445,9 +445,9 @@ disp(' ')
 disp('Migration Policy Function Fixed: Welfare by Income Quintile: Welfare, Migration Rate, Z, Experience')
 disp(round(100.*[mean([fix_policy_bin.welfare],2), mean([fix_policy_bin.migration],2), mean([fix_policy_bin.urban],2)./100,...
     mean([fix_policy_bin.expr],2)],2))
-disp('Averages: Mushfiqs sample Welfare, Migration Rate, Experience')
+disp('Averages, Mushfiqs sample: Welfare, Migration Rate, Experience')
 disp(round(100.*[mean(fix_policy_avg,1)],2))
-disp('Averages: All Rural, Welfare, Migration Rate')
+disp('Averages, All Rural: Welfare, Migration Rate')
 disp(round(100.*[mean(fix_policy_all_rural,1)],2))
 
 
@@ -456,9 +456,9 @@ disp(' ')
 disp('PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migration Rate, Z , Experience ')
 disp(round(100.*[mean([conditional_ticket_bin.welfare],2), mean([conditional_ticket_bin.migration],2), mean([conditional_ticket_bin.urban],2)./100,...
     mean([conditional_ticket_bin.expr],2)],2))
-disp('Averages: Mushfiqs sample Welfare, Migration Rate, Experience')
+disp('Averages, Mushfiqs sample: Welfare, Migration Rate, Experience')
 disp(round(100.*[mean(conditional_ticket_avg,1)],2))
-disp('Averages: All Rural, Welfare, Migration Rate')
+disp('Averages, All Rural: Welfare, Migration Rate')
 disp(round(100.*[mean(conditional_ticket_all_rural,1)],2))
 
 % 

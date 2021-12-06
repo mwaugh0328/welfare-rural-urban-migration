@@ -14,9 +14,12 @@ m = params.m;
 
 m_seasn = params.m_season;
 
-mtest = asset_space < params.means_test;
-% this is the mass of people that don't have to pay
-mtest_move_cost = m_seasn.*(~mtest)';
+mtest_move_cost = m_seasn.*(asset_space >= params.means_test)';
+% This is the ``means tested moving cost'' so your moving cost is zero if
+% you move.
+
+cash_transfer = m_seasn.*(asset_space < params.means_test_cash)';
+
 move_fiscal_cost = m_seasn - mtest_move_cost;
 
 lambda = params.lambda;
@@ -108,11 +111,14 @@ for xxx = 1:time_series
         % state, shock state, then the choice from above. 
         
         location(xxx+1) = location(xxx);
+        
+        fiscal_cost(xxx,1) = cash_transfer(asset_state);
                     
         if move_seasn(xxx,1) == 1
             location(xxx+1) = 2;
             move_cost(xxx,1) = mtest_move_cost(asset_state);
-            fiscal_cost(xxx,1) = move_fiscal_cost(asset_state);
+            fiscal_cost(xxx,1) = fiscal_cost(xxx,1) + move_fiscal_cost(asset_state);
+            
         elseif move(xxx,1) == 1
             location(xxx+1) = 5;
             move_cost(xxx,1) = m;            
@@ -158,6 +164,8 @@ for xxx = 1:time_series
         
         asset_state_p = assets_policy.rural_exp(asset_state,shock_states(xxx),choice);
         
+        fiscal_cost(xxx,1) = cash_transfer(asset_state);
+        
         location(xxx+1) = location(xxx);
         
         if expr_shock(xxx) < (1-pi_prob)
@@ -168,7 +176,7 @@ for xxx = 1:time_series
             if move_seasn(xxx,1) == 1 
                 location(xxx+1,1) = 2; %Non experinced season (you lost it)
                 move_cost(xxx,1) = mtest_move_cost(asset_state);
-                fiscal_cost(xxx,1) = move_fiscal_cost(asset_state);
+                fiscal_cost(xxx,1) = fiscal_cost(xxx,1) + move_fiscal_cost(asset_state);
                 
             elseif move(xxx,1) == 1
                 location(xxx+1) = 5; % non experinces perm moves (you lost it)
@@ -179,7 +187,7 @@ for xxx = 1:time_series
             if move_seasn(xxx,1) == 1 
                 location(xxx+1,1) = 4; % retain experince, season move
                 move_cost(xxx,1) = mtest_move_cost(asset_state);
-                fiscal_cost(xxx,1) = move_fiscal_cost(asset_state);
+                fiscal_cost(xxx,1) = fiscal_cost(xxx,1) + move_fiscal_cost(asset_state);
                 
             elseif move(xxx,1) == 1
                 location(xxx+1) = 6; % retain experince perm move.

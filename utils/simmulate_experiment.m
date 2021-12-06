@@ -136,8 +136,6 @@ if location(xxx) == 1 % in rural area
         move_seasn(xxx,1) = (choice == 2); % seasonal move if choice above is 2.
                     
         welfare(xxx,1) = cons_eqiv.rural_not(asset_state_at_expr,shock_states(xxx));
-        % NEED to THINK ABOUT THIS. This is expected value, not of just who
-        % move which will depend on shock. 
         
         labor_income(xxx,1) = z_rural.*r_shocks(shock_states(xxx));
         

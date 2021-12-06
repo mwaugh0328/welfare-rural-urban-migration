@@ -49,10 +49,10 @@ disp('Wage Gap')
 disp(wage_gap)
 disp('Fraction of Rural with Access to Migration Subsity')
 disp(asset_prct)
-disp('Experince, Control Group, Mushfiqs Sample')
-disp(avg_experince)
-disp('Consumption, Mushfiqs Sample')
-disp(mean(mushfiqs_sample(:,consumption)))
+% disp('Experince, Control Group, Mushfiqs Sample')
+% disp(avg_experince)
+% disp('Consumption, Mushfiqs Sample')
+% disp(mean(mushfiqs_sample(:,consumption)))
 
 if min(bin.welfare) < -10
     %I'm proably reporting the value function
@@ -221,6 +221,8 @@ disp('Resource Constraint (Production Side): Monga, Non Monga')
 disp(round([rc_monga, rc_not_monga],2))
 disp('Gov Budget Constraint')
 disp(round([govbc],2))
+disp('Tax rate in % on labor income')
+disp(round([100.*(1-params.tax.rate)],2))
 
 end
 

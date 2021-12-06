@@ -1,4 +1,4 @@
-function [big_panel, params, big_state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, cft_params)
+function [big_panel, params, big_state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, meanstest, meanstest_cash)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 time_series = specs.time_series; %100000;
 N_obs = specs.N_obs; %25000;
@@ -64,18 +64,30 @@ welfare = 11; experince = 12; fiscalcost = 13; tax = 14; production = 15;
 
 rural_not_monga = (big_panel(:,live_rural)==1 & big_panel(:,season)~=1);
 
-if ( isempty(cft_params) || cft_params == 0)
+if ( isempty(meanstest) || meanstest == 0)
     % if we have not specify, do this. Or if it's zero, then we are again 
     % just trying to replicate the original economy.
     
     params.means_test = (prctile(big_panel(rural_not_monga,3),55) + prctile(big_panel(rural_not_monga,3),45))./2;
     % This is so we can just replicate the old stuff...
 else
-    params.means_test = cft_params;
+    params.means_test = meanstest;
     % Here if we are doing the counterfactuall, we want the "same exact
     % guys", policies may change asset distribtuion, so this holds the
     % asset threshold at whatever it was chosen to be. 
 end
 
+if ( isempty(meanstest_cash) || meanstest_cash == 0)
+    % if we have not specify, do this. Or if it's zero, then we are again 
+    % just trying to replicate the original economy.
+    
+    params.means_test_cash = (prctile(big_panel(rural_not_monga,3),55) + prctile(big_panel(rural_not_monga,3),45))./2;
+    % This is so we can just replicate the old stuff...
+else
+    params.means_test_cash = meanstest_cash;
+    % Here if we are doing the counterfactuall, we want the "same exact
+    % guys", policies may change asset distribtuion, so this holds the
+    % asset threshold at whatever it was chosen to be. 
+end
 
 

@@ -15,7 +15,17 @@ wages = [wages.monga, wages.notmonga];
 % It does work a bit different since it alows for the policy fixing
 % allocations, so no behavioral response. This will become clearer below.
 
-
+disp('-----------------------------------------------------------------------------------------------------')
+disp(datetime(now,'ConvertFrom','datenum'))
+disp(' ')
+ver
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
+disp(' ')
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
+disp('Replicate Baseline')
+disp(' ')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % First is just to replicate the equillibrium of the calibrated economy.
 % The output here should look just like the results from say
@@ -27,6 +37,11 @@ wages = [wages.monga, wages.notmonga];
 
 [labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 1);
 
+disp(' ')
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
+disp('Permanent Migration Subsidy + Migration Policy Fixed ')
+disp(' ')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now let's add in the free money to move.
 
@@ -37,9 +52,9 @@ cft = params.means_test; % this is the means test, like in mushfiqu's world
 taxprog = 0.0;
 % The tax code can do progressivity.
 
-disp('Location of Taxation')
-disp(params.tax.location)
-disp('')
+% disp('Location of Taxation')
+% disp(params.tax.location)
+% disp(' ')
 
 policyfun.move = move;
 policyfun.assets = assets;
@@ -49,8 +64,16 @@ policyfun.assets = assets;
 % people eliglble should be the same as above...why? actions did not
 % change.
 
-compute_eq([wages, 1.0], x1, tfp, cft, vfun, taxprog, policyfun, 1)
+compute_eq([wages, 1.0], x1, tfp, cft, vfun, taxprog, policyfun, 1);
 
+disp(' ')
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
+disp('Permanent Migration Subsidy + Migration Policy Fixed + GE + Tax Financed')
+disp(' ')
+disp(' ')
+disp('Solve for wages and tax rate')
+disp(' ')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now we want to make sure we have the money to pay for things...so we are
 % going to find a tax rate that sets the government budget constraint
@@ -68,8 +91,16 @@ toc
 
 disp(wageseq)
 
-compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, policyfun, 1)
+compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, policyfun, 1);
 
+disp(' ')
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
+disp('Permanent Migration Subsidy + Endogenous Migration GE + Tax Financed')
+disp(' ')
+disp(' ')
+disp('Solve for wages and tax rate')
+disp(' ')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now we let everything change. Guys can change moving and asset choices,
 % the moving cost is financed, and rural labor markets clear
@@ -82,4 +113,4 @@ toc
 
 disp(wageseq)
 
-compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, [], 1)
+compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, [], 1);

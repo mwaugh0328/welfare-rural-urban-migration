@@ -91,18 +91,17 @@ utility_move_seasn = zeros(n_asset_states,n_asset_states,n_shocks);
 
 net_assets = R.*asset_grid' - asset_grid;
 
-mtest = asset_space < params.means_test;
-% this is the mass of people that don't have to pay
+mtest_move = m_seasn.*(asset_space >= params.means_test)';
+% This is the ``means tested moving cost'' so your moving cost is zero if
+% you move.
 
-
-mtest_move = m_seasn.*(~mtest)';
-% This is the ``means tested moving cost'' so you only get it if you are
-% poor enough. This shows up in the consumption set below, then this is the
-% moving cost
+cash_transfer = m_seasn.*(asset_space < params.means_test_cash)';
+% note this is targeted, only to rural, only for those below the means
+% test.
 
 for zzz = 1:n_shocks
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-    consumption = net_assets + labor_income_tax(z_rural.*shocks_rural(zzz), params.tax, 'rural') - abar;
+    consumption = net_assets + labor_income_tax(z_rural.*shocks_rural(zzz), params.tax, 'rural') - abar + cash_transfer;
     
     feasible_rural = consumption > 0;
     
@@ -111,7 +110,7 @@ for zzz = 1:n_shocks
     utility_rural(:,:,zzz) = utility_rural(:,:,zzz) + -1e10.*(~feasible_rural);
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-    consumption = net_assets + labor_income_tax(z_rural.*shocks_rural(zzz), params.tax, 'rural') - mtest_move - abar;
+    consumption = net_assets + labor_income_tax(z_rural.*shocks_rural(zzz), params.tax, 'rural') - mtest_move - abar + cash_transfer;
     
     feasible_move_seasn = consumption > 0;
     
@@ -128,7 +127,7 @@ for zzz = 1:n_shocks
     
     utility_urban(:,:,zzz) = utility_urban(:,:,zzz) + -1e10.*(~feasible_urban); 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    consumption = net_assets + labor_income_tax(z_rural.*shocks_rural(zzz), params.tax, 'rural') - m - abar;
+    consumption = net_assets + labor_income_tax(z_rural.*shocks_rural(zzz), params.tax, 'rural') - m - abar + cash_transfer;
     
     feasible_move_rural = consumption > 0;
     

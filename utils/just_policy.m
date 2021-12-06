@@ -1,5 +1,5 @@
 function [move, solve_types, assets, params, specs, vfun, ce] = just_policy...
-    (cal_params, wages, vft_fun, meanstest, tax, policyfun)
+    (cal_params, wages, vft_fun, meanstest, meanstest_cash, tax, policyfun)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [cal_params, specs] = tax_eq_preamble(cal_params, [], [], []);
@@ -141,9 +141,20 @@ solve_types = [params.rural_tfp.*types(:,1), types(:,2)];
 if isempty(meanstest) 
     
     params.means_test = 0;
+    
 else
     
     params.means_test = meanstest;
+
+end
+
+if isempty(meanstest_cash) 
+    
+    params.means_test_cash = 0;
+    
+else
+    
+    params.means_test_cash = meanstest_cash;
 
 end
 
