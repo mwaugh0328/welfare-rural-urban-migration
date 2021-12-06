@@ -6,7 +6,7 @@ This section describes basic computations to compute the welfare gains associate
 
 ### Main Computations
 
-**Compute Model:** The most basic call starts inside the [``pe_welfare_analysis``](https://github.com/mwaugh0328/final_migration/tree/main/pe_welfare_analysis) folder. To perform the welfare analysis you:
+**Compute Welfare Gains:** The most basic call starts inside the [``pe_welfare_analysis``](https://github.com/mwaugh0328/final_migration/tree/main/pe_welfare_analysis) folder. To perform the welfare analysis you:
 
 ```
 >> addpath('../utils')
