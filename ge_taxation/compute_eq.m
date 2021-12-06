@@ -1,4 +1,4 @@
-function [xxx] = compute_eq(wage_policy, cal, tfp, meanstest, meanstest_cash, vfun, taxprog, policyfun, flag)
+function [xxx] = compute_eq(wage_policy, cal, tfp, meanstest, meanstest_cash, vfun, taxprog, policyfun, transfer_type, flag)
 
 wages = wage_policy(1:2);
 taxrate = wage_policy(3);
@@ -15,7 +15,7 @@ tax = [taxrate, taxprog];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[labor, govbc] = ge_aggregate(params, data_panel,wages, tfp, flag);
+[labor, govbc] = ge_aggregate(params, data_panel,wages, tfp, transfer_type, flag);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

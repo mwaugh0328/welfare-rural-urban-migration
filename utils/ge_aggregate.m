@@ -1,4 +1,4 @@
-function [labor, govbc, tfp, wages, welfare_stats] = ge_aggregate(params,data_panel,wages,tfp,flag)
+function [labor, govbc, tfp, wages, welfare_stats] = ge_aggregate(params, data_panel, wages, tfp, transfer_type, flag)
 
 wage.monga = wages(1);
 wage.notmonga = wages(2);
@@ -20,9 +20,18 @@ rural_not_monga = rural(rural(:,season)~=1, :);
 all_seasonal_migrants = rural_not_monga(rural_not_monga(:,move_season) ==1, :);
 all_seasonal_migrants = length(all_seasonal_migrants)./length(rural_not_monga);
 
-mushfiqs_sample = rural_not_monga(rural_not_monga(:,assets)<= params.means_test,:);
+if isequal(transfer_type,'cash')
 
-asset_prct = sum(rural_not_monga(:,assets)< params.means_test)./length(rural_not_monga(:,assets));
+    mushfiqs_sample = rural_not_monga(rural_not_monga(:,assets)<= params.means_test_cash,:);
+
+    asset_prct = sum(rural_not_monga(:,assets)< params.means_test_cash)./length(rural_not_monga(:,assets));
+    
+else
+    
+    mushfiqs_sample = rural_not_monga(rural_not_monga(:,assets)<= params.means_test,:);
+
+    asset_prct = sum(rural_not_monga(:,assets)< params.means_test)./length(rural_not_monga(:,assets));
+end
 
 seasonal_migrants = mushfiqs_sample(mushfiqs_sample(:,move_season) ==1, :);
 avg_experince = sum(mushfiqs_sample(:, experince)==1)./length(mushfiqs_sample);

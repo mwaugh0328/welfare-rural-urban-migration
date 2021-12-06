@@ -35,7 +35,7 @@ disp(' ')
 
 [data_panel, params] = just_simmulate(params, move, solve_types, assets, specs, ce, [],[]);
 
-[labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 1);
+[labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 'baseline', 1);
 
 taxprog = 0.0;
 % The tax code can do progressivity.
@@ -43,7 +43,7 @@ taxprog = 0.0;
 disp(' ')
 disp('-----------------------------------------------------------------------------------------------------')
 disp(' ')
-disp('Permanent Migration Subsidy + Endogenous Migration GE + Tax Financed')
+disp('Permanent Unconditional Cash Transfer to Rural Poor + Endogenous Migration GE + Tax Financed')
 disp(' ')
 disp(' ')
 disp('Solve for wages and tax rate')
@@ -59,10 +59,10 @@ options = optimoptions('fsolve', 'Display','iter','MaxFunEvals',2000,'MaxIter',2
 guess = [wages, 1.0];
 
 tic
-[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, [], params.means_test_cash, [], taxprog,[], 0), guess,options);
+[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, [], params.means_test_cash, [], taxprog,[], 'cash', 0), guess,options);
 
 toc
 
 disp(wageseq)
 
-compute_eq([wageseq], x1, tfp, [], params.means_test_cash, vfun, taxprog, [], 1);
+compute_eq([wageseq], x1, tfp, [], params.means_test_cash, vfun, taxprog, [], 'cash', 1);

@@ -35,7 +35,7 @@ disp(' ')
 
 [data_panel, params] = just_simmulate(params, move, solve_types, assets, specs, ce, [],[]);
 
-[labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 1);
+[labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 'baseline', 1);
 
 taxprog = 0.0;
 % The tax code can do progressivity.
@@ -67,7 +67,7 @@ policyfun.assets = assets;
 % people eliglble should be the same as above...why? actions did not
 % change.
 
-compute_eq([wages, 1.0], x1, tfp, params.means_test, [], vfun, taxprog, policyfun, 1);
+compute_eq([wages, 1.0], x1, tfp, params.means_test, [], vfun, taxprog, policyfun, 'migration_transfer', 1);
 
 disp(' ')
 disp('-----------------------------------------------------------------------------------------------------')
@@ -89,12 +89,12 @@ options = optimoptions('fsolve', 'Display','iter','MaxFunEvals',2000,'MaxIter',2
 guess = [wages, 1.0];
 
 tic
-[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, params.means_test,[], [], taxprog, policyfun, 0), guess,options);
+[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, params.means_test,[], [], taxprog, policyfun, 'migration_transfer', 0), guess,options);
 toc
 
 disp(wageseq)
 
-compute_eq([wageseq], x1, tfp, params.means_test, [], vfun, taxprog, policyfun, 1);
+compute_eq([wageseq], x1, tfp, params.means_test, [], vfun, taxprog, policyfun, 'migration_transfer', 1);
 
 disp(' ')
 disp('-----------------------------------------------------------------------------------------------------')
@@ -111,9 +111,9 @@ disp(' ')
 guess = [wages, 1.0];
 
 tic
-[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, params.means_test, [], [], taxprog,[], 0), guess,options);
+[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, params.means_test, [], [], taxprog,[], 'migration_transfer', 0), guess,options);
 toc
 
 disp(wageseq)
 
-compute_eq([wageseq], x1, tfp, params.means_test,[], vfun, taxprog, [], 1);
+compute_eq([wageseq], x1, tfp, params.means_test,[], vfun, taxprog, [], 'migration_transfer', 1);
