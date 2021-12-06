@@ -31,11 +31,14 @@ disp(' ')
 % The output here should look just like the results from say
 % ``analyze_outcomes''
 
-[move, solve_types, assets, params, specs, vfun, ce] = just_policy(x1, wages, [], [], [], []);
+[move, solve_types, assets, params, specs, vfun, ce] = just_policy(x1, wages, [], [], [], [], []);
 
-[data_panel, params] = just_simmulate(params, move, solve_types, assets, specs, ce, []);
+[data_panel, params] = just_simmulate(params, move, solve_types, assets, specs, ce, [],[]);
 
 [labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 1);
+
+taxprog = 0.0;
+% The tax code can do progressivity.
 
 disp(' ')
 disp('-----------------------------------------------------------------------------------------------------')
@@ -45,7 +48,7 @@ disp(' ')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now let's add in the free money to move.
 
-cft = params.means_test; % this is the means test, like in mushfiqu's world
+params.means_test; % this is the means test, like in mushfiqu's world
 % only about 50 percent of the rural are eligble. We are keeping the number
 % fixed. 
 
@@ -64,12 +67,12 @@ policyfun.assets = assets;
 % people eliglble should be the same as above...why? actions did not
 % change.
 
-compute_eq([wages, 1.0], x1, tfp, cft, vfun, taxprog, policyfun, 1);
+compute_eq([wages, 1.0], x1, tfp, params.means_test, [], vfun, taxprog, policyfun, 1);
 
 disp(' ')
 disp('-----------------------------------------------------------------------------------------------------')
 disp(' ')
-disp('Permanent Migration Subsidy + Migration Policy Fixed + GE + Tax Financed')
+disp('Permanent Migration Subsidy + Migration Policy Fixed + Tax Financed')
 disp(' ')
 disp(' ')
 disp('Solve for wages and tax rate')
@@ -86,12 +89,12 @@ options = optimoptions('fsolve', 'Display','iter','MaxFunEvals',2000,'MaxIter',2
 guess = [wages, 1.0];
 
 tic
-[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, cft, [], taxprog, policyfun, 0), guess,options);
+[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, params.means_test,[], [], taxprog, policyfun, 0), guess,options);
 toc
 
 disp(wageseq)
 
-compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, policyfun, 1);
+compute_eq([wageseq], x1, tfp, params.means_test, [], vfun, taxprog, policyfun, 1);
 
 disp(' ')
 disp('-----------------------------------------------------------------------------------------------------')
@@ -108,9 +111,9 @@ disp(' ')
 guess = [wages, 1.0];
 
 tic
-[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, cft, [], taxprog,[], 0), guess,options);
+[wageseq, ~, ~] = fsolve(@(xxx) compute_eq((xxx), x1, tfp, params.means_test, [], [], taxprog,[], 0), guess,options);
 toc
 
 disp(wageseq)
 
-compute_eq([wageseq], x1, tfp, cft, vfun, taxprog, [], 1);
+compute_eq([wageseq], x1, tfp, params.means_test,[], vfun, taxprog, [], 1);

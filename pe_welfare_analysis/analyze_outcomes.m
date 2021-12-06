@@ -1,4 +1,4 @@
-function [targets, wages] = analyze_outcomes(cal_params, specs, wages, meanstest, vft_fun, R, flag)
+function [targets, wages] = analyze_outcomes(cal_params, specs, wages, meanstest, meanstest_cash, vft_fun, R, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is the driver file for the code which is consistent with RR2 paper at
 % Econometrica (late 2020-on).
@@ -154,6 +154,16 @@ if isempty(meanstest)
 else
     
     params.means_test = meanstest;
+
+end
+
+if isempty(meanstest_cash) 
+    
+    params.means_test_cash = 0;
+    
+else
+    
+    params.means_test_cash = meanstest_cash;
 
 end
 
