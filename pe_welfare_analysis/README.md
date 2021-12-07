@@ -20,7 +20,7 @@ The five ``[]`` stand in for ``specs`` which is a structure defining grid, shock
 Then it should compute everything and then spit out the moments. The output should look something like this
 ```
 -----------------------------------------------------------------------------------------------------
-   02-Dec-2021 11:56:01
+   06-Dec-2021 23:18:46
 
 
 -----------------------------------------------------------------------------------------------------
@@ -56,10 +56,10 @@ Migration Policy Function Fixed: Welfare by Income Quintile: Welfare, Migration 
     0.1500   31.1800    0.5600   25.3400
     0.1000   30.9800    0.6000   34.9800
 
-Averages: Mushfiqs sample Welfare, Migration Rate, Experience
+Averages, Mushfiqs sample: Welfare, Migration Rate, Experience
     0.3000   36.4200   26.7400
 
-Averages: All Rural, Welfare, Migration Rate
+Averages, All Rural: Welfare, Migration Rate
     0.1500   30.5800
 
 
@@ -70,10 +70,10 @@ PE Conditional Migration Transfer: Welfare by Income Quintile: Welfare, Migratio
     0.2000   45.7800    0.5600   25.3400
     0.1200   40.4100    0.6000   34.9800
 
-Averages: Mushfiqs sample Welfare, Migration Rate, Experience
+Averages, Mushfiqs sample: Welfare, Migration Rate, Experience
     0.4400   57.1300   26.7400
 
-Averages: All Rural, Welfare, Migration Rate
+Averages, All Rural: Welfare, Migration Rate
     0.2200   43.8600
 
 
@@ -109,11 +109,12 @@ LATE Estimate
 LATE - OLS Estimate
     0.2004
 
-Migration Above 800 Taka, Below 800 Taka assets
-    0.3682    0.3469
+Below Median Consumption: Migration Below 800 Taka assets, Above 800 Taka
+    0.4077    0.2779
 
-Migration Above 1600 Taka, Below 1600 Taka assets
-    0.3669    0.2952
+Above Median Consumption: Migration Below 800 Taka assets, Above 800 Taka
+    0.4091    0.3788
+
 ```
 
 The first line reports that the policy functions are being saved in the [plotting folder](https://github.com/mwaugh0328/final_migration/tree/main/plotting).

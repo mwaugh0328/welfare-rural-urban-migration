@@ -371,12 +371,16 @@ for nmc = 1:Nmontecarlo
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % asset stuff to match up with new table in ref response:
+    above_cons_above_800taka = (control_data(:,3,1) > params.m_season) & (control_data(:,2,1) > median(control_data(:,2,1))); % net out check in bonus 800 taka figure
+    below_cons_above_800taka = (control_data(:,3,1) > params.m_season) & (control_data(:,2,1) < median(control_data(:,2,1))); % net out check in bonus 800 taka figure
     
-    above_800taka = control_data(:,3,1) > params.m_season; % net out check in bonus 800 taka figure
-    above_1600taka = control_data(:,3,1) > 2.*params.m_season; % net out check in bonus 16000 taka figure
+    above_cons_below_800taka = (control_data(:,3,1) < params.m_season) & (control_data(:,2,1) > median(control_data(:,2,1))); % net out check in bonus 800 taka figure
+    below_cons_below_800taka = (control_data(:,3,1) < params.m_season) & (control_data(:,2,1) < median(control_data(:,2,1))); % net out check in bonus 800 taka figure
     
-    asset_migration(nmc,:) = [  mean(control_data(~above_800taka,7,1)), mean(control_data(above_800taka,7,1)), ...
-                                mean(control_data(~above_1600taka,7,1)), mean(control_data(above_1600taka,7,1))];
+    %above_1600taka = control_data(:,3,1) > 2.*params.m_season; % net out check in bonus 16000 taka figure
+    
+    asset_migration(nmc,:) = [ mean(control_data(below_cons_below_800taka,7,1)),  mean(control_data(below_cons_above_800taka,7,1)), ...
+                                mean(control_data(above_cons_below_800taka,7,1)),  mean(control_data(above_cons_above_800taka,7,1))];
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     [migration] = report_experiment(control_data, expermt_data, 'bus');
@@ -502,9 +506,9 @@ disp('LATE Estimate')
 disp(mean(moments(:,8)))
 disp('LATE - OLS Estimate')
 disp(mean(moments(:,9)))
-disp('Migration Above 800 Taka, Below 800 Taka assets')
-disp(mean(asset_migration(:,[1,2])))
-disp('Migration Above 1600 Taka, Below 1600 Taka assets')
+disp('Below Median Consumption: Migration Below 800 Taka assets, Above 800 Taka')
+disp(mean(asset_migration(:,[1,2]),1,'native','omitnan'))
+disp('Above Median Consumption: Migration Below 800 Taka assets, Above 800 Taka')
 disp(mean(asset_migration(:,[3,4]),1,'native','omitnan'))
 
 cd('..\plotting')
