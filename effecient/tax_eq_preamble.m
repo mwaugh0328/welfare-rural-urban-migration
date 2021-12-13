@@ -14,7 +14,7 @@ function [cal_params, specs] = tax_eq_preamble(cal_params, specs, seed, R)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Then there are some pre-determined, hand calibrated values...
 
-% cal_params(10) = 0.08; % this is the moving cost. It was hand calibrated to 
+cal_params(10) = 0.0878; % this is the moving cost. It was hand calibrated to 
 % % deliver it being approx 10% of half yearly consumption. Did try internal
 % % calibration...does provide better fit actually.
 
@@ -44,7 +44,6 @@ cal_params(17) = 0.845; % this is the extent of decreasing returns in rural area
                         % it was hand calibrated to mach the AKM experiment
                         % 0.845
                         
-cal_params(18) = 3; % how long to follow a household...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if isempty(specs)

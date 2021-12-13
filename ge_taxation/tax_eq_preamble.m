@@ -44,7 +44,6 @@ cal_params(17) = 0.845; % this is the extent of decreasing returns in rural area
                         % it was hand calibrated to mach the AKM experiment
                         % 0.845
                         
-cal_params(18) = 3; % how long to follow a household...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if isempty(specs)
