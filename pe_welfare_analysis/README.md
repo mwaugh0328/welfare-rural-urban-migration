@@ -11,9 +11,9 @@ This section describes basic computations to compute the welfare gains associate
 ```
 >> addpath('../utils')
 
->> load('..\calibration\calibrated_baseline.mat')
+>> load('../calibration/calibrated_baseline.mat')
 
->> analyze_outcomes(x1, [], [], [], [], [], 1)
+>> analyze_outcomes(x1, [], [], [], [], [], [], 1)
 ```
 The five ``[]`` stand in for ``specs`` which is a structure defining grid, shocks, etc. if it is not specified, then a default is set in the [``preamble_welfare_analysis.m``](https://github.com/mwaugh0328/final_migration/blob/main/pe_welfare_analysis/preamble_welfare_analysis.m), ``wages`` which are wages per efficiency unit if not specified it uses the ones in the default calibration, ``meanstest`` is a means test, ``vft_fun`` is a value function structure for which if specified welfare will be computed relative to this value, ``R`` is gross real interest rate, and a flag for output. Again, if none of this is specified, default values are used in the code.
 
