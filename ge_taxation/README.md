@@ -379,9 +379,9 @@ What is in this folder:
 
 - [``tax_eqs.m``](./tax_eq.m) main file to compute the welfare gains and associated statistics with a permanent, conditional migration transfer, financed by labor income taxes.
 
-- [``cash_transfer.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/cash_transfer.m) main file to compute the welfare gains and associated statistics with a permanent, unconditional cash transfer, financed by labor income taxes.
+- [``cash_transfer.m``](./cash_transfer.m) main file to compute the welfare gains and associated statistics with a permanent, unconditional cash transfer, financed by labor income taxes.
 
-- [``compute_eq.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/compute_eq.m) file to compute the economy given wages, tax policy (transfer type and tax rate). It calls files like [``just_policy.m``](https://github.com/mwaugh0328/final_migration/blob/main/utils/just_policy.m), [``just_simulate.m``](https://github.com/mwaugh0328/final_migration/blob/main/utils/just_simulate.m), [``ge_aggregate.m``](https://github.com/mwaugh0328/final_migration/blob/main/utils/ge_aggregate.m) in the [utility folder](https://github.com/mwaugh0328/final_migration/tree/main/utils).
+- [``compute_eq.m``](./compute_eq.m) file to compute the economy given wages, tax policy (transfer type and tax rate). It calls files like [``just_policy.m``](../utils/just_policy.m), [``just_simulate.m``](../utils/just_simulate.m), [``ge_aggregate.m``](../utils/ge_aggregate.m) in the [utility folder](../utils).
 
 - [``policy_valuefun.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/policy_valuefun.m) file that computes value functions holding fixed the households policy functions.
 
