@@ -18,7 +18,7 @@ Where the hyperlinks above should take you directly there
 
 ### Compute Welfare Gains from Conditional Migration Transfers
 
-The main call starts inside the [``ge_taxation``](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxation) folder. To perform the welfare analysis you:
+The main call starts inside the [``ge_taxation``](../ge_taxation) folder. To perform the welfare analysis you:
 
 ```
 >> tax_eq
@@ -383,6 +383,6 @@ What is in this folder:
 
 - [``compute_eq.m``](./compute_eq.m) file to compute the economy given wages, tax policy (transfer type and tax rate). It calls files like [``just_policy.m``](../utils/just_policy.m), [``just_simulate.m``](../utils/just_simulate.m), [``ge_aggregate.m``](../utils/ge_aggregate.m) in the [utility folder](../utils).
 
-- [``policy_valuefun.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/policy_valuefun.m) file that computes value functions holding fixed the households policy functions.
+- [``policy_valuefun.m``](./policy_valuefun.m) file that computes value functions holding fixed the households policy functions.
 
-- [``tax_eq_preamble.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/tax_eq_preamble.m) preamble file with similar structure to other preambles. Adjust gird or other things here.
+- [``tax_eq_preamble.m``](./tax_eq_preamble.m) preamble file with similar structure to other preambles. Adjust gird or other things here.
