@@ -14,7 +14,7 @@ Technology: The Case of Seasonal Migration in Bangladesh"](https://onlinelibrary
 ---
 The repository is organized with the following folders. The readme file within the folder describes how to execute code:
 
-- **[Calibration](../calibration)** contains the code to calibrate the model.
+- **[Calibration](../calibration/)** contains the code to calibrate the model.
 
 - **[Partial equilibrium welfare analysis](../pe_welfare_analysis)** This computes the welfare effects of the one-time transfer. In addition, it outputs results (policy functions, migration rates, etc.) that are plotted in the [plotting folder](../plotting).
 
