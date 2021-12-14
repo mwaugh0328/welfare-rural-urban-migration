@@ -1,0 +1,289 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red34\green139\blue34;\red160\green32\blue240;\red0\green0\blue255;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 Low delta is with a delta of 0.8\
+\
+otherwise:\
+\
+\pard\pardeftab720
+
+\f1\fs20 \cf2 %creates plots from Master_smallv2
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2 %load the data
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 clear \cf3 all\cf0 ;
+\fs24 \
+
+\fs20 clear \cf3 -global\cf0 ;
+\fs24 \
+
+\fs20  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 for\cf0  j = 1:30;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0     disp(j)
+\fs24 \
+
+\fs20         load(sprintf(\cf3 'Data/iteration_RA%1$d'\cf0 ,j));
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20     ppc = spline(parm.x,CV);
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20     p1_c(1) = parm.p1(1);
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20     \cf4 for\cf0  i = 2: length(parm.p1)
+\fs24 \
+
+\fs20         p1_c(i) = p1_c(i-1) +parm.p1(i);
+\fs24 \
+
+\fs20     \cf4 end
+\fs24 \cf0 \
+
+\fs20     
+\fs24 \
+
+\fs20     p1_c(i) =1;
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20     \cf4 for\cf0  z= 1:1000;
+\fs24 \
+
+\fs20         t=0;
+\fs24 \
+
+\fs20         xx(1) = min(parm.x);
+\fs24 \
+
+\fs20             yy(1) = min(parm.x);
+\fs24 \
+
+\fs20             xcount = 0;
+\fs24 \
+
+\fs20             \cf4 while\cf0  xcount <=cutpoint(j);
+\fs24 \
+
+\fs20                 t=t+1;
+\fs24 \
+
+\fs20                 shock = rand;
+\fs24 \
+
+\fs20                 index_shock = min(find(p1_c>shock));
+\fs24 \
+
+\fs20                 yy(t+1) = parm.s1(index_shock);
+\fs24 \
+
+\fs20                 cc(t) = ppval(ppc,xx(t));
+\fs24 \
+
+\fs20                 xx(t+1) = parm.R*(xx(t) -cc(t)) + yy(t+1);
+\fs24 \
+
+\fs20                 xcount = xx(t+1); \cf2 %this implies that you will migrate in the next period, so if period =10 ten you save for 10 periods and migrate in the 11th.
+\fs24 \cf0 \
+
+\fs20             \cf4 end
+\fs24 \cf0 \
+
+\fs20             periods(z) = t+1; \cf2 %you migrate in the t+1st period.
+\fs24 \cf0 \
+
+\fs20         clear \cf3 t\cf0  \cf3 xx\cf0  \cf3 yy\cf0  \cf3 cc\cf0  \cf3 xcount\cf0 ;
+\fs24 \
+
+\fs20     \cf4 end
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     \cf2 %count the portion of people that are still at home in any period.
+\fs24 \cf0 \
+
+\fs20     periods = sort(periods);
+\fs24 \
+
+\fs20     [C,IA,IC] = unique(periods, \cf3 'last'\cf0 );
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20     \cf4 for\cf0  i = 1:length(C);
+\fs24 \
+
+\fs20         departed(C(i)) = IA(i);
+\fs24 \
+
+\fs20     \cf4 end
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     \cf4 for\cf0  i=2:max(periods);
+\fs24 \
+
+\fs20         \cf4 if\cf0  departed(i) == 0;
+\fs24 \
+
+\fs20             departed(i) = departed(i-1);
+\fs24 \
+
+\fs20          \cf4 end\cf0  
+\fs24 \
+
+\fs20     \cf4 end
+\fs24 \cf0 \
+
+\fs20     
+\fs24 \
+
+\fs20     athome = length(periods) - departed;
+\fs24 \
+
+\fs20     prop_athome = athome/length(periods); \cf2 %proportion of people left at home.
+\fs24 \cf0 \
+
+\fs20     clear \cf3 periods\cf0  \cf3 departed\cf0  \cf3 C\cf0  \cf3 IA\cf0  \cf3 IC\cf0 ;
+\fs24 \
+
+\fs20     \cf4 if\cf0  j ==1;
+\fs24 \
+
+\fs20             Prop_athome(j,:) = prop_athome;
+\fs24 \
+
+\fs20         \cf4 elseif\cf0  size(Prop_athome,2) < length(prop_athome);
+\fs24 \
+
+\fs20             Prop_athome(:,length(prop_athome)) = 0;
+\fs24 \
+
+\fs20         \cf4 elseif\cf0  length(prop_athome) < size(Prop_athome,2);
+\fs24 \
+
+\fs20             prop_athome(size(Prop_athome,2)) = 0;
+\fs24 \
+
+\fs20         \cf4 end
+\fs24 \cf0 \
+
+\fs20         Prop_athome(j,:) = prop_athome;
+\fs24 \
+
+\fs20         Sigma(j) = parm.sigma;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 prop_left = Prop_athome; \cf2 %prop_left is a 3d array with first dimension for ra second for stdev and third for days.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2 %plots of migration probabilities
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 clear \cf3 figure\cf0 ;
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20 t=[1:1:length(prop_left(1,:))];
+\fs24 \
+
+\fs20 figure = figure();
+\fs24 \
+
+\fs20 plot(t,prop_left(1,:),t,prop_left(4,:),t,prop_left(8,:),t,prop_left(12,:),t,prop_left(16,:),t,prop_left(20,:),t,prop_left(24,:),t,prop_left(28,:),t,prop_left(30,:));
+\fs24 \
+
+\fs20 axis([2 20 0 1.005]);
+\fs24 \
+
+\fs20 hleg1 =  legend(\cf3 'RA:0.5'\cf0 ,\cf3 'RA:2'\cf0 ,\cf3 'RA:4'\cf0 ,\cf3 'RA:6'\cf0 ,\cf3 'RA:8'\cf0 ,\cf3 'RA:10'\cf0 ,\cf3 'RA: 12'\cf0 ,\cf3 'RA:14'\cf0 ,\cf3 'RA:16'\cf0 );
+\fs24 \
+
+\fs20 xlabel(\cf3 'Time Periods'\cf0 );
+\fs24 \
+
+\fs20 ylabel(\cf3 'Portion of Population Induceable'\cf0 );
+\fs24 \
+
+\fs20 title(sprintf(\cf3 'Portion of Population Induceable'\cf0 ));
+\fs24 \
+
+\fs20 print(figure,\cf3 '-dpdf'\cf0 ,sprintf(\cf3 'Figures/WithSavings_Induceable2.pdf'\cf0 ,i)); \cf2 %note that the title has to be set at the same time as sigma2
+\fs24 \cf0 \
+
+\fs20 clear \cf3 figure\cf0 ;
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20  
+\fs24 \
+\
+}

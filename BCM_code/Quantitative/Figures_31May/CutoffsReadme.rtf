@@ -1,0 +1,636 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red34\green139\blue34;\red160\green32\blue240;\red0\green0\blue255;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs20 \cf2 % Draws Value Functions for first revision of Monga paper for Econometrica.
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2 % Models buffer stock/ investment decision for monga paper.
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2 %   Strategy:  The value functoin is
+\fs24 \cf0 \
+
+\fs20 \cf2 %       V(x) = \\\{ max_\{c\} u(c) + \\beta E V(R(x-c) + y(s)) , \\pi_G G(x+m - F) + (1-\\pi_G) B (x-F)\\\}   
+\fs24 \cf0 \
+
+\fs20 \cf2 %
+\fs24 \cf0 \
+
+\fs20 \cf2 %   where:
+\fs24 \cf0 \
+
+\fs20 \cf2 %       
+\fs24 \cf0 \
+
+\fs20 \cf2 %       G(x) = \\max_\{c\} u(c) + \\beta E G(R(x-c -F + m) + y(s))
+\fs24 \cf0 \
+
+\fs20 \cf2 % and
+\fs24 \cf0 \
+
+\fs20 \cf2 %       B(x) = \\max_\{c\} u (c) + \\beta E B(R(x-c)+ y(s))
+\fs24 \cf0 \
+
+\fs20 \cf2 % 
+\fs24 \cf0 \
+
+\fs20 \cf2 %   Strategy is to compute G and B and then to simply plug them in.
+\fs24 \cf0 \
+
+\fs20 \cf2 %
+\fs24 \cf0 \
+
+\fs20 \cf2 %define the parameters
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 clearvars \cf3 -global
+\fs24 \cf0 \
+
+\fs20 clear
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 for\cf0  j = 1:40;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0  display(j);
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 global\cf0  sigma beta yl yh R ppG ppB ppV s1 p1 m F piG sub; 
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf2 % sigma: risk aversion
+\fs24 \cf0 \
+
+\fs20 \cf2 % beta: discount rate
+\fs24 \cf0 \
+
+\fs20 \cf2 % yl: lowest possible income 
+\fs24 \cf0 \
+
+\fs20 \cf2 % R: = gross return on savings
+\fs24 \cf0 \
+
+\fs20 \cf2 % ppg: is the value function in the good state (on a spline)
+\fs24 \cf0 \
+
+\fs20 \cf2 % ppb: is the value function in the bad state (on a spline)
+\fs24 \cf0 \
+
+\fs20 \cf2 % s1: set of labor income states
+\fs24 \cf0 \
+
+\fs20 \cf2 % p1: probabilities of labor income states
+\fs24 \cf0 \
+
+\fs20 \cf2 % m: is how much more you earn each period if you discover that you are
+\fs24 \cf0 \
+
+\fs20 \cf2 % good at migrating - it is a certain return
+\fs24 \cf0 \
+
+\fs20 \cf2 % pig: probability of realizing the good state
+\fs24 \cf0 \
+
+\fs20 \cf2 % F: is the cost of migrating
+\fs24 \cf0 \
+
+\fs20 \cf2 % we assume a nomrally distributed income process.
+\fs24 \cf0 \
+
+\fs20 \cf2 % xhat: mean of the labor income
+\fs24 \cf0 \
+
+\fs20 \cf2 % sigma2 : standard deviation of labor income
+\fs24 \cf0 \
+
+\fs20 \cf2 % states: number of states
+\fs24 \cf0 \
+
+\fs20 \cf2 %sub: subsistence requirement
+\fs24 \cf0 \
+
+\fs20 \cf2 % set the parameters: make sure beta*R <1 (recall this is a buffer stock model)
+\fs24 \cf0 \
+
+\fs20 \cf2 %lognormal: = 1 if we want a log normal distribution
+\fs24 \cf0 \
+
+\fs20 \cf2 %xgrid: how many points in the asset grid.
+\fs24 \cf0 \
+
+\fs20 \cf2 %UC: utility cost of migrating - this is very hard to define because it
+\fs24 \cf0 \
+
+\fs20 \cf2 %will depend, by in large on the utility function - we can try to define
+\fs24 \cf0 \
+
+\fs20 \cf2 %it as the solution to an equation?
+\fs24 \cf0 \
+
+\fs20 \cf2 % I : incentive size
+\fs24 \cf0 \
+
+\fs20 \cf2 %Cond: size of credit transfer - i.e. conditional on having a bad state.
+\fs24 \cf0 \
+
+\fs20 \cf2 %cash: the size of the cash bonus.
+\fs24 \cf0 \
+
+\fs20 \cf2 %truncate is teh point at whic the distribution is truncated.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0  
+\fs24 \
+
+\fs20 sigma=0.1+j*0.4; 
+\fs24 \
+
+\fs20 beta=.98;
+\fs24 \
+
+\fs20 R=1;
+\fs24 \
+
+\fs20 piG=0.5;
+\fs24 \
+
+\fs20 F=(1020)/4.5; 
+\fs24 \
+
+\fs20 m = 350-F; 
+\fs24 \
+
+\fs20 sub = 200;
+\fs24 \
+
+\fs20 xhat = 600;
+\fs24 \
+
+\fs20 sigma2 = 60;
+\fs24 \
+
+\fs20 states = 25;
+\fs24 \
+
+\fs20 truncate = 250;
+\fs24 \
+
+\fs20 epsilon = 1e-5;
+\fs24 \
+
+\fs20 lognormal = 0;
+\fs24 \
+
+\fs20 xgrid= 100; 
+\fs24 \
+
+\fs20 DollarCost = 0; \cf2 %dollar cost of the utility cost
+\fs24 \cf0 \
+
+\fs20 z=sym(\cf3 'z'\cf0 ,\cf3 'real'\cf0 );
+\fs24 \
+
+\fs20 UC = 0 \cf2 %solve((xhat + DollarCost)^(1-sigma)/(1-sigma) - z == (xhat)^(1-sigma)/(1-sigma), z); 
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf2 %UC = double(UC); 
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 I = 800/4;
+\fs24 \
+
+\fs20 Cond = 800/4; \cf2 %note that this should not be positive at the same time as I.
+\fs24 \cf0 \
+
+\fs20 Cash = 800/4; \cf2 % this also should never be positive at the same time as I and Cond.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2 %calculate states
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 if\cf0  lognormal == 1;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0     [s,p] = tauch_huss(log(xhat- sigma2^2/2), 0 , sigma2, states); \cf2 % note that when we do this we have to make sure tha thte lowest income is greater than zero.
+\fs24 \cf0 \
+
+\fs20     s1 = exp(s');
+\fs24 \
+
+\fs20     p1 = p(1,:)';
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 else
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0      [s,p] = tauch_huss(xhat, 0 , sigma2, states); \cf2 % note that when we do this we have to make sure tha thte lowest income is greater than zero.
+\fs24 \cf0 \
+
+\fs20       s1 = s'; 
+\fs24 \
+
+\fs20       p1 = p(1,:)';
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf2 %truncate the distribution
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 for\cf0  i=1:states;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0     \cf4 if\cf0  s1(i) >truncate;
+\fs24 \
+
+\fs20         s_check(i) = s1(i);
+\fs24 \
+
+\fs20     \cf4 elseif\cf0  s1(i) <= truncate;
+\fs24 \
+
+\fs20     s_check(i) = truncate;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 s1= s_check;
+\fs24 \
+
+\fs20 clear \cf3 s_check\cf0  \cf3 p_check\cf0 ; 
+\fs24 \
+
+\fs20  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf2 %create parameter space
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 parm.R = R;
+\fs24 \
+
+\fs20 parm.beta = beta;
+\fs24 \
+
+\fs20 parm.sigma = sigma;
+\fs24 \
+
+\fs20 parm.p = p1;
+\fs24 \
+
+\fs20 parm.s=s1;
+\fs24 \
+
+\fs20 parm.sub = sub;
+\fs24 \
+
+\fs20 parm.F = F;
+\fs24 \
+
+\fs20 parm.m=m;
+\fs24 \
+
+\fs20 parm.piG = piG;
+\fs24 \
+
+\fs20 parm.UC = UC;
+\fs24 \
+
+\fs20 parm.I = I;
+\fs24 \
+
+\fs20 parm.Cond = Cond; 
+\fs24 \
+
+\fs20 parm.Cash = Cash;
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20 ymean=s1*p1; \cf2 %for later use
+\fs24 \cf0 \
+
+\fs20 yl=min(s1); yh=max(s1);  \cf2 % to determine the bounds on teh asset grid
+\fs24 \cf0 \
+
+\fs20 xhigh= yh*3; xlow = min(s1); \cf2 %need to think about the upper bound ...
+\fs24 \cf0 \
+
+\fs20 x=(xlow : (xhigh - xlow)/(xgrid-1) :xhigh)';
+\fs24 \
+
+\fs20 parm.x = x;
+\fs24 \
+
+\fs20  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf2 % calculate the value function G
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 [G,c_G,ppc_G,ppG] = valuegv2(parm, x, epsilon, ymean,yl, xgrid);
+\fs24 \
+
+\fs20  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf2 % Calculate the value function B
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 [B,c_B,ppc_B,ppB] = valueb(parm, x, epsilon, ymean,yl, xgrid);
+\fs24 \
+
+\fs20  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf2 % Calculate the value function V
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 [V,c,ppc,ppV, V_no] = valuev(parm, x, epsilon, ymean,yl, xgrid, ppG, ppB, G, B);
+\fs24 \
+
+\fs20  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf2 % deermine whether migration takes place
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 ppV_no = spline(x,V_no);
+\fs24 \
+
+\fs20 M = ((parm.piG*ppval(ppG,x) + (1-parm.piG)*(ppval(ppB,x-parm.F))-parm.UC)  > V_no');
+\fs24 \
+
+\fs20  M_Incentive = ((parm.piG*ppval(ppG,x +parm.I) + (1-parm.piG)*(ppval(ppB,x-parm.F +parm.I))-parm.UC)  > V_no');
+\fs24 \
+
+\fs20  M_Credit = ((parm.piG*ppval(ppG,x) + (1-parm.piG)*(ppval(ppB,x-parm.F +parm.Cond))-parm.UC)  > V_no');
+\fs24 \
+
+\fs20  M_UCT = ((parm.piG*ppval(ppG,x+parm.Cash) + (1-parm.piG)*(ppval(ppB,x-parm.F +parm.Cash))-parm.UC)  > ppval(ppV_no,x+parm.Cash));
+\fs24 \
+
+\fs20  
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf2 % calculate the interpolated value of cash on hand for which migration
+\fs24 \cf0 \
+
+\fs20 \cf2 % takes place
+\fs24 \cf0 \
+
+\fs20 \cf2  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 if\cf0  isempty(find(M)) == 0; \cf2 %%% note that this may be problematic if the matrix is empty.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint(j) = (x(min(find(M)))); \cf2 %+ x(min(find(M))-1))/2;
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 elseif\cf0  min(M) ==0;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint(j) =0;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 else
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint(j) = max(x) + 10; \cf2 %% not sure where to put cutpoint if it is that you never go in the set of values of x.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+
+\fs20 \cf4 if\cf0  isempty(find(M_Incentive)) == 0; \cf2 %%% note that this may be problematic if the matrix is empty.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint_Incentive(j) = (x(min(find(M_Incentive)))); \cf2 %+ x(min(find(M))-1))/2;
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 elseif\cf0  min(M_Incentive) == 0;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0         cutpoint_Incentive(j) = 0;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 else
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint_Incentive(j) = max(x) + 10; \cf2 %% not sure where to put cutpoint if it is that you never go in the set of values of x.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+
+\fs20 \cf4 if\cf0  isempty(find(M_Credit)) == 0; \cf2 %%% note that this may be problematic if the matrix is empty.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint_Credit(j) = (x(min(find(M_Credit)))); \cf2 %+ x(min(find(M))-1))/2;
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 elseif\cf0  min(M_Credit) ==0;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint_Credit(j) = 0;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 else
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint_Credit(j) = max(x) + 10; \cf2 %% not sure where to put cutpoint if it is that you never go in the set of values of x.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+
+\fs20 \cf4 if\cf0  isempty(find(M_UCT)) == 0; \cf2 %%% note that this may be problematic if the matrix is empty.
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint_UCT(j) = (x(min(find(M_UCT)))); \cf2 %+ x(min(find(M))-1))/2;
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf4 elseif\cf0  min(M_UCT) == 0;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf0     cutpoint_UCT(j) = 0; \cf2 %% not sure where to put cutpoint if it is that you never go in the set of values of x.
+\fs24 \cf0 \
+
+\fs20     \cf4 else\cf0  
+\fs24 \
+
+\fs20     cutpoint_UCT(j) = max(x) + 10; 
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 RA(j) = sigma;
+\fs24 \
+\pard\pardeftab720
+
+\fs20 \cf4 end
+\fs24 \cf0 \
+
+\fs20 \cf4  
+\fs24 \cf0 \
+\pard\pardeftab720
+
+\fs20 \cf0 figure = figure();
+\fs24 \
+
+\fs20 plot(RA, cutpoint, RA, cutpoint_Incentive, RA, cutpoint_Credit, RA, cutpoint_UCT)
+\fs24 \
+
+\fs20 axis([2 15 3 9 ]);
+\fs24 \
+
+\fs20 hleg1 =  legend(\cf3 'Control'\cf0 ,\cf3 'Incentive'\cf0 ,\cf3 'Credit'\cf0 , \cf3 'UCT'\cf0 ) ; 
+\fs24 \
+
+\fs20 xlabel(\cf3 'Risk Aversion'\cf0 )
+\fs24 \
+
+\fs20 print(figure,\cf3 '-dpdf'\cf0 ,sprintf(\cf3 'Figures/Cutoffs.pdf'\cf0 ));
+\fs24 \
+
+\fs20 clear \cf3 figure\cf0 ;
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20  
+\fs24 \
+
+\fs20 save (sprintf(\cf3 'Data/Cutoffs_data'\cf0 ));
+\fs24 \
+\
+}
