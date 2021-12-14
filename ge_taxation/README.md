@@ -236,7 +236,7 @@ Tax rate in % on labor income
 
 ---
 
-### [Compute Welfare Gains from Unconditional Cash Transfer](cash_transfers)
+### Compute Welfare Gains from Unconditional Cash Transfer {#cash_transfers}
 
 This does the same type of analysis, but now the moving cost is given unconditionally to the rural poor, with rural poor being the same means test as for the migration transfer. To perform this you simply:
 ```
