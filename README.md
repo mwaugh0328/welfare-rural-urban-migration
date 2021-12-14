@@ -29,3 +29,7 @@ The repository is organized with the following folders. The readme file within t
 - **[Plotting](https://github.com/mwaugh0328/final_migration/tree/main/plotting)** jupyter notebooks that import MATLAB ``.mat`` files and plots them.
 
 - **[Figures](https://github.com/mwaugh0328/final_migration/tree/main/utils)** self explanatory. Should all be in `.png` and `.pdf` format.
+
+- **[BCM_code](https://github.com/mwaugh0328/final_migration/tree/main/BCM_code)** code from [Bryan, Chowdhury and Mobarak](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA10489)
+
+- **[BCM_econometrica_supplement_files](https://github.com/mwaugh0328/final_migration/tree/main/BCM_econometrica_supplement_files)** additional files from [Bryan, Chowdhury and Mobarak](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA10489)
