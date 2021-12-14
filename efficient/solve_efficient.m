@@ -93,4 +93,4 @@ disp(100.*(cons_eqiv_effecient.all -cons_eqiv.all))
 %
 % save movepolicy_effecient.mat lowz medz lowz_exp
 %
-% cd('..\effecient')
+% cd('..\efficient')
