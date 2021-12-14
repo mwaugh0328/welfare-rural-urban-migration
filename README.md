@@ -14,22 +14,22 @@ Technology: The Case of Seasonal Migration in Bangladesh"](https://onlinelibrary
 ---
 The repository is organized with the following folders. The readme file within the folder describes how to execute code:
 
-- **[Calibration](https://github.com/mwaugh0328/final_migration/tree/main/calibration)** contains the code to calibrate the model.
+- **[Calibration](../calibration)** contains the code to calibrate the model.
 
-- **[Partial equilibrium welfare analysis](https://github.com/mwaugh0328/final_migration/tree/main/pe_welfare_analysis)** This computes the welfare effects of the one-time transfer. In addition, it outputs results (policy functions, migration rates, etc.) that are plotted in the [plotting folder](https://github.com/mwaugh0328/final_migration/tree/main/plotting).
+- **[Partial equilibrium welfare analysis](../pe_welfare_analysis)** This computes the welfare effects of the one-time transfer. In addition, it outputs results (policy functions, migration rates, etc.) that are plotted in the [plotting folder](../plotting).
 
-- **[General equilibrium welfare analysis](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxation)** Computes the welfare effects of a permanent transfer financed by taxes and clears the rural labor market.
+- **[General equilibrium welfare analysis](../ge_taxation)** Computes the welfare effects of a permanent transfer financed by taxes and clears the rural labor market.
 
-- **[The efficient allocation](https://github.com/mwaugh0328/final_migration/tree/main/efficient)** Computes the solution to the planning problem.
+- **[The efficient allocation](../efficient)** Computes the solution to the planning problem.
 
-- **[Bootstrap](https://github.com/mwaugh0328/final_migration/tree/main/bootstrap)** computes bootstrap confidence intervals and montecarlo study to explore identification.
+- **[Bootstrap](../bootstrap)** computes bootstrap confidence intervals and montecarlo study to explore identification.
 
-- **[Utility functions](https://github.com/mwaugh0328/final_migration/tree/main/utils)** this folder contains functions that are used throughout all aspects of the code. A complete accounting is found in the readme file.  
+- **[Utility functions](../utils)** this folder contains functions that are used throughout all aspects of the code. A complete accounting is found in the readme file.  
 
-- **[Plotting](https://github.com/mwaugh0328/final_migration/tree/main/plotting)** jupyter notebooks that import MATLAB ``.mat`` files and plots them.
+- **[Plotting](../plotting)** jupyter notebooks that import MATLAB ``.mat`` files and plots them.
 
-- **[Figures](https://github.com/mwaugh0328/final_migration/tree/main/utils)** self explanatory. Should all be in `.png` and `.pdf` format.
+- **[Figures](../utils)** self explanatory. Should all be in `.png` and `.pdf` format.
 
-- **[BCM_code](https://github.com/mwaugh0328/final_migration/tree/main/BCM_code)** code from [Bryan, Chowdhury and Mobarak](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA10489)
+- **[BCM_code](../BCM_code)** code from Bryan, Chowdhury and Mobarak's ["Underinvestment in a Profitable Technology: The Case of Seasonal Migration in Bangladesh"](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA10489)
 
-- **[BCM_econometrica_supplement_files](https://github.com/mwaugh0328/final_migration/tree/main/BCM_econometrica_supplement_files)** additional files from [Bryan, Chowdhury and Mobarak](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA10489)
+- **[BCM_econometrica_supplement_files](../BCM_econometrica_supplement_files)** additional files from Bryan, Chowdhury and Mobarak's ["Underinvestment in a Profitable Technology: The Case of Seasonal Migration in Bangladesh"](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA10489)
