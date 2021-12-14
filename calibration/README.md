@@ -110,10 +110,10 @@ What is in this folder.
 
 - [``identification.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/identification.m) computes the dlog(moments) / dlog(paramters) table.
 
-- [``cal_rural_urban_simmulate.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/cal_rural_urban_simmulate.m) designed to simulate the economy. Stripped down to run fast and compute only what is needed for calibration.
+- [``cal_rural_urban_simulate.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/cal_rural_urban_simulate.m) designed to simulate the economy. Stripped down to run fast and compute only what is needed for calibration.
 
 - [``cal_experiment_driver.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/cal_experiment_driver.m) driver file to compute experiment many times given simulated sample paths from above. Calls the file below.
 
-- [``cal_simmulate_experiment.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/cal_simmulate_experiment.m) designed to simulate the experiment just in the calibration folder. It's stripped down to run fast and compute only what we need for calibration.
+- [``cal_simulate_experiment.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/cal_simulate_experiment.m) designed to simulate the experiment just in the calibration folder. It's stripped down to run fast and compute only what we need for calibration.
 
 - [``compute_standard_errors.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/compute_standard_errors.m) and [``sd_calculation.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/sd_calculation.m) Deprecated, not relevant. Files to compute the jacobian and standard errors.  
