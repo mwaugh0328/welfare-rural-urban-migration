@@ -12,15 +12,20 @@ Two different computations take place in this folder.
 
 2. The welfare gains from [conditional cash transfers](#compute-welfare-gains-from-unconditional-cash-transfer).
 
+Where the hyperlinks above should take you directly there
+
 ---
 
 ### Compute Welfare Gains from Conditional Migration Transfers
 
 The main call starts inside the [``ge_taxation``](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxation) folder. To perform the welfare analysis you:
+
 ```
 >> tax_eq
 ```
+
 which does several things.
+
   - First it replicates the baseline economy (some statistics may differ slightly relative to calibration or ``pe_welfare_analysis.m`` due to how sample's are constructed).
 
   - Second, it keeps policy functions fixed and performs the migration transfer.
@@ -239,9 +244,11 @@ Tax rate in % on labor income
 ### Compute Welfare Gains from Unconditional Cash Transfer
 
 This does the same type of analysis, but now the moving cost is given unconditionally to the rural poor, with rural poor being the same means test as for the migration transfer. To perform this you simply:
+
 ```
 > cash_transfer
 ```
+
 And it
 
 - replicates the baseline (and it should look like exactly above)
@@ -370,7 +377,7 @@ Tax rate in % on labor income
 
 What is in this folder:
 
-- [``tax_eqs.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/tax_eq.m) main file to compute the welfare gains and associated statistics with a permanent, conditional migration transfer, financed by labor income taxes.
+- [``tax_eqs.m``](./tax_eq.m) main file to compute the welfare gains and associated statistics with a permanent, conditional migration transfer, financed by labor income taxes.
 
 - [``cash_transfer.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/cash_transfer.m) main file to compute the welfare gains and associated statistics with a permanent, unconditional cash transfer, financed by labor income taxes.
 
