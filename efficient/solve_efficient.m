@@ -25,7 +25,7 @@ disp('Replicating the baseline economy...')
 % What this does is construct the policy functions and value functions
 % given the wage.
 
-[data_panel, params] = just_simmulate(params, move_de, solve_types, assets, specs, vfun, [],[]);
+[data_panel, params] = just_simulate(params, move_de, solve_types, assets, specs, vfun, [],[]);
 % this then simmulates the economy
 
 [labor, govbc, tfp, ~, welfare_decentralized] = ge_aggregate(params, data_panel, wage_de, [], 'baseline', 1);
