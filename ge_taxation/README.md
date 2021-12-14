@@ -8,9 +8,9 @@ This section describes basic computations to compute the welfare gains associate
 
 Two different computations take place in this folder.
 
-1. The welfare gains associated with [conditional migration transfers](#conditional_transfers).
+1. The welfare gains associated with [conditional migration transfers](conditional_transfers).
 
-2. The welfare gains from [conditional cash transfers](#cash_transfers).
+2. The welfare gains from [conditional cash transfers](cash_transfers).
 
 ---
 
