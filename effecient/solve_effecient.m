@@ -1,17 +1,17 @@
 clear
 
 %load('../pe_welfare_analysis/cal_ols_same.mat')
-load('../calibration/cal_baseline_s730.mat')
+load('../calibration/calibrated_baseline.mat')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Now let's run the main file, this creates the wages for the decentralized
 % equillibrium
 
-cd('..\pe_welfare_analysis')
+cd('../pe_welfare_analysis')
 
-[targets, wage] = analyze_outcomes(x1, [], [], [], [], [], 1);
+[targets, wage] = analyze_outcomes(x1, [], [], [], [], [], [], 1);
 
-cd('..\effecient')
+cd('../effecient')
 
 wage_de = [wage.monga, wage.notmonga];
 %These are teh wages in the decentralized equillibrium, then we are going
@@ -19,14 +19,15 @@ wage_de = [wage.monga, wage.notmonga];
 %primitive TFP. The move policy function below is used to construct a good
 %initial guess for the optimization and bounds on the problem.
 
-[move_de, solve_types, assets, params, specs, vfun, ce] = just_policy(x1, wage_de, [], [], [], []);
+[move_de, solve_types, assets, params, specs, vfun, ce] = just_policy(x1, wage_de, [], [], [], [], []);
 % What this does is construct the policy functions and value functions
 % given the wage.
 
-[data_panel, params] = just_simmulate(params, move_de, solve_types, assets, specs, vfun, []);
+[data_panel, params] = just_simmulate(params, move_de, solve_types, assets, specs, vfun, [],[]);
 % this then simmulates the economy
 
-[labor, govbc, tfp, ~, welfare_decentralized] = ge_aggregate(params, data_panel, wage_de, [], 1);
+[labor, govbc, tfp, ~, welfare_decentralized] = ge_aggregate(params, data_panel, wage_de, [], 'baseline', 1);
+
 % then aggregates.
 
 % The key here is the results should be exactly the same as the

@@ -38,8 +38,8 @@ parfor xxx = 1:ntypes
           params, [], consumption(xxx));
 end
 
+[data_panel, params, state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, [],[]);
 
-[data_panel, params, state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, []);
 
 params.means_test = 0; % need to call this bc. in the simmulation call it kicks back the means test
                        % which if not rest, it will simmulate as if it was
@@ -72,7 +72,7 @@ parfor xxx = 1:ntypes
           params, [], consumption(xxx));
 end
 
-[data_panel, params, state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, []);
+[data_panel, params, state_panel] = just_simmulate(params, move, solve_types, assets, specs, vfun, [],[]);
 
 params.means_test = 0;
 
