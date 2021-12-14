@@ -8,13 +8,13 @@ This section describes basic computations to compute the welfare gains associate
 
 Two different computations take place in this folder.
 
-1. The welfare gains associated with [conditional migration transfers](#conditional_transfers).
+1. The welfare gains associated with [conditional migration transfers](#compute-welfare-gains-from-conditional-migration-transfers).
 
 2. The welfare gains from [conditional cash transfers](#compute-welfare-gains-from-unconditional-cash-transfer).
 
 ---
 
-### [Compute Welfare Gains from Conditional Migration Transfers](conditional_transfers)
+### Compute Welfare Gains from Conditional Migration Transfers
 
 The main call starts inside the [``ge_taxation``](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxation) folder. To perform the welfare analysis you:
 ```
