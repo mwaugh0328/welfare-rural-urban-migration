@@ -20,7 +20,7 @@ The repository is organized with the following folders. The readme file within t
 
 - **[General equilibrium welfare analysis](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxation)** Computes the welfare effects of a permanent transfer financed by taxes and clears the rural labor market.
 
-- **[The efficient allocation](https://github.com/mwaugh0328/final_migration/tree/main/effecient)** Computes the solution to the planning problem.
+- **[The efficient allocation](https://github.com/mwaugh0328/final_migration/tree/main/efficient)** Computes the solution to the planning problem.
 
 - **[Bootstrap](https://github.com/mwaugh0328/final_migration/tree/main/bootstrap)** computes bootstrap confidence intervals and montecarlo study to explore identification.
 
