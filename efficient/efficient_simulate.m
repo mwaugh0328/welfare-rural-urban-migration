@@ -1,13 +1,16 @@
-function [data_panel, params, sim_panel] = effecient_simmulate(params, move_policy,...
-                cons_policy, solve_types, vfun, muc, sim_panel, position)
+function [data_panel, params, state_panel] = efficient_simulate(params, move_policy, cons_policy, solve_types, vfun, muc, seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_sims = 5000;
+
 time_series = 100000;
 N_obs = 50000;
 
 params.N_obs = N_obs;
 
-rng(03281978)
+if isempty(seed) 
+    rng(03281978)
+else
+    rng(03281978 + seed)
+end
 
 [~, shock_states_p] = hmmgenerate(time_series,params.trans_mat,ones(params.n_shocks));
 
@@ -41,23 +44,16 @@ end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if isempty(sim_panel)
+sim_panel = zeros(N_obs,11,params.n_types);
+states = zeros(N_obs,3,params.n_types); 
     
-    sim_panel = zeros(N_obs,11,params.n_types);   
-    
-    parfor xxx = 1:params.n_types 
+parfor xxx = 1:params.n_types 
 
-    [sim_panel(:,:,xxx), ~] = simmulate_effecient(cons_policy(xxx), move_policy(xxx), ...
+    [sim_panel(:,:,xxx), states(:,:,xxx)] = simulate_efficient(cons_policy(xxx), move_policy(xxx), ...
                     params, solve_types(xxx,:), params.trans_shocks, shock_states_p, pref_shocks(:,xxx), move_shocks(:,xxx), vfun(xxx), muc(xxx));
-                
-    % This is the same one as in baseline model
-    end
-else
-    
-    [sim_panel(:,:,position), ~] = simmulate_effecient(cons_policy(position), move_policy(position), ...
-                    params, solve_types(position,:), params.trans_shocks, shock_states_p, pref_shocks(:,position), move_shocks(:,position), vfun(position), muc(position));
 
 end
+    
     
 n_draws = floor(N_obs/max(N_obs*type_weights)); % this computes the number of draws.
 sample = min(n_draws.*round(N_obs*type_weights),N_obs); % Then the number of guys to pull.
@@ -69,9 +65,13 @@ for xxx = 1:params.n_types
         
     data_panel(s_count:e_count,:) = sim_panel(N_obs-(sample(xxx)-1):end,:,xxx);
     
+    state_panel(s_count:e_count,:) = [states(N_obs-(sample(xxx)-1):end,:,xxx), xxx.*ones(length(states(N_obs-(sample(xxx)-1):end,:,xxx)),1)];
+    
     s_count = e_count+1;
    
 end
+
+data_panel = [data_panel, zeros(length(data_panel),1)];
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % income = 1; consumption = 2; assets = 3; live_rural = 4; work_urban = 5;

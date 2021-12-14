@@ -1,4 +1,4 @@
-function [vfinal, muc, cons_eqiv] = effecient_valuefun(consumption, move, params, trans_mat, vcft)%#codegen
+function [vfinal, muc, cons_eqiv] = efficient_valuefun(consumption, move, params, trans_mat, vcft)%#codegen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The idea of this is to take policy functions, and directly compute the
 % value function. No Max. Setp 1 is to feed in optimal policy and get out

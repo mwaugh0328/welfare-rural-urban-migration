@@ -1,4 +1,4 @@
-function [social_welfare, rc, cfix, mpl] = effecient_aggregate(params,tfp,data_panel,flag)
+function [social_welfare, rc, cfix, mpl] = efficient_aggregate(params,tfp,data_panel,flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % This stuff is to figure out the correct scaling parameter.
@@ -34,10 +34,6 @@ disp('Average Rural Population')
 disp(avg_rural)
 disp('Seasonal Migrants')
 disp(migrants)
-disp('Experince')
-disp(avg_experince)
-
-
 % disp('Control Group, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
 % disp((100.*[bin.welfare', bin.migration', bin.experince', 0.01.*bin.consumption']))
 end

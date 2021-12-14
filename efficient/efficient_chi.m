@@ -1,4 +1,4 @@
-function [movepolicy, move] = effecient_chi(consumption, mplscale, params, perm_types)%#codegen
+function [movepolicy, move] = efficient_chi(consumption, mplscale, params, perm_types)%#codegen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The idea of this is to take policy functions, and directly compute the
 % value function. No Max. Setp 1 is to feed in optimal policy and get out

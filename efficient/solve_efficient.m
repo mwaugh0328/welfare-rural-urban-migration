@@ -1,23 +1,25 @@
 clear
 
-%load('../pe_welfare_analysis/cal_ols_same.mat')
+addpath('../utils')
 load('../calibration/calibrated_baseline.mat')
+load('../ge_taxation/wages.mat')
+
+wage_de = [wages.monga, wages.notmonga];
+
+disp('-----------------------------------------------------------------------------------------------------')
+disp(datetime(now,'ConvertFrom','datenum'))
+disp(' ')
+ver
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Now let's run the main file, this creates the wages for the decentralized
-% equillibrium
-
-cd('../pe_welfare_analysis')
-
-[targets, wage] = analyze_outcomes(x1, [], [], [], [], [], [], 1);
-
-cd('../effecient')
-
-wage_de = [wage.monga, wage.notmonga];
-%These are teh wages in the decentralized equillibrium, then we are going
-%to pass this through one last time to get policy functions and the
-%primitive TFP. The move policy function below is used to construct a good
-%initial guess for the optimization and bounds on the problem.
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+disp('')
+disp('')
+disp('Replicating the baseline economy...')
+%This set of code will replicate the baseline economy. If it does not, then
+%there is a problem some where.
 
 [move_de, solve_types, assets, params, specs, vfun, ce] = just_policy(x1, wage_de, [], [], [], [], []);
 % What this does is construct the policy functions and value functions
@@ -31,13 +33,13 @@ wage_de = [wage.monga, wage.notmonga];
 % then aggregates.
 
 % The key here is the results should be exactly the same as the
-% analyze_outcomes code. 
+% analyze_outcomes code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('')
 disp('')
-disp('Fix the allocation, but redistribute and equate muc across hh')
+disp('Fix the labor allocation, but redistribute and equate marginal utility of consumption across hh...')
 
 [~, fullinsruance_welfare] = compute_fullinsurance(assets, move_de, x1, tfp, params, specs, 1);
 
@@ -63,48 +65,32 @@ disp(100.*cons_eqiv.all)
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('')
 disp('')
-disp('Now compute the effecient allocation...')
+disp('Now compute the efficient allocation...')
 
-[social_welfare, move_policy] = compute_analytical_effecient(x1, tfp, []);
+[social_welfare, move_policy] = compute_analytical_efficient(x1, tfp, []);
 
 cons_eqiv_effecient.all = ((social_welfare.all ./ welfare_decentralized.all)).^(1./(1-params.pref_gamma)) - 1;
 cons_eqiv_effecient.fromfull = ((social_welfare.all ./ fullinsruance_welfare.all)).^(1./(1-params.pref_gamma)) - 1;
 
-disp("Welfare Gain in %: From Decentralized to Centralized/Effecient Allocaiton")
+disp("Welfare Gain in %: From Decentralized to Centralized/Efficient Allocation")
 disp(100.*cons_eqiv_effecient.all)
-disp("Welfare Gain in %: From Full Insurance to Centralized/Effecient Allocaiton")
+disp("Welfare Gain in %: From Full Insurance to Centralized/Efficient Allocation")
 disp(100.*(cons_eqiv_effecient.all -cons_eqiv.all))
 
 
 
 
 % cd('..\plotting')
-% 
+%
 % seasont = repmat([0,1],1,specs.n_trans_shocks);
-% 
+%
 % %save movepolicy_ols_late.mat lowz medz lowz_exp
-% 
+%
 % lowz = flipud(repmat(move_policy(4).rural_not(seasont == 1, 1)',[length(specs.asset_space),1]));
 % medz = flipud(repmat(move_policy(6).rural_not(seasont == 1, 1)',[length(specs.asset_space),1]));
 % lowz_exp = flipud(repmat(move_policy(6).rural_exp(seasont == 1, 1)',[length(specs.asset_space),1]));
-% 
-% 
+%
+%
 % save movepolicy_effecient.mat lowz medz lowz_exp
-% 
+%
 % cd('..\effecient')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

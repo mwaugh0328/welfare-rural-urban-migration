@@ -21,25 +21,25 @@ end
 
 if flag == 0.0
 
-    move = effecient_chi_policy(params, mplscale, consumption, solve_types);
+    move = efficient_chi_policy(params, mplscale, consumption, solve_types);
 
-    [data_panel, params, ~] = effecient_simmulate(params, move, consumption, solve_types, [], [], seed);
+    [data_panel, params, ~] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
 
-    [social_welfare, rc, ~, mpl] = effecient_aggregate(params,tfp, data_panel,flag);
+    [social_welfare, rc, ~, mpl] = efficient_aggregate(params,tfp, data_panel,flag);
     
     rc = [rc ; ( mpl.raw.rural.notmonga - mplscale.raw.rural.notmonga ); ( mpl.raw.rural.monga - mplscale.raw.rural.monga )];
     
 else
     
-    move = effecient_chi_policy(params, mplscale, consumption, solve_types);
+    move = efficient_chi_policy(params, mplscale, consumption, solve_types);
     
-    [vfun, muc] = effecient_policy(params, move, consumption);
+    [vfun, muc] = efficient_policy(params, move, consumption);
 
-    [data_panel, params, state_panel] = effecient_simmulate(params, move, consumption, solve_types, [], [], seed);
+    [data_panel, params, state_panel] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
     
-    [data_panel] = quick_sim_effecient(data_panel, state_panel, vfun, muc, consumption, params);
+    [data_panel] = quick_sim_efficient(data_panel, state_panel, vfun, muc, consumption, params);
 
-    [social_welfare, rc, ~, mpl] = effecient_aggregate(params,tfp, data_panel, flag);
+    [social_welfare, rc, ~, mpl] = efficient_aggregate(params, tfp, data_panel, flag);
     
     rc = [rc ; mpl.raw.rural.notmonga - mplscale.raw.rural.notmonga; mpl.raw.rural.monga - mplscale.raw.rural.monga];
 end

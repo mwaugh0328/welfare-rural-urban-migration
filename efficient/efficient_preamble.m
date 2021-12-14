@@ -1,4 +1,4 @@
-function [solve_types, params] = effecient_preamble(cal_params, tfp, specs) 
+function [solve_types, params] = efficient_preamble(cal_params, tfp, specs) 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if isempty(specs)

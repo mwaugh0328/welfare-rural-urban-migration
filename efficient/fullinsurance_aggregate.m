@@ -34,8 +34,8 @@ disp('Average Rural Population')
 disp(avg_rural)
 disp('Seasonal Migrants')
 disp(migrants)
-disp('Experince')
-disp(avg_experince)
+% disp('Experince')
+% disp(avg_experince)
 
 
 % disp('Control Group, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
