@@ -19,7 +19,7 @@ This section describes basic computations, the calibration approach, and then th
 ```
 The first line adds the path to utility folder and the associated functions. Loads the calibrated parameters and then a good guess for the value function.
 
-The two ``[]`` stand in for ``specs`` which is a structure defining grid, shocks, etc. if it is not specified, then a default is set in the [``preamble.m``](../preamble.m). The next ``[]`` stands in for the seed on the random number generator. Again if nothing is given a default seed is set in [``preamble.m``](../preamble.m). The  final value is a flag which can take on the value 0 and returns all moments across simulations, but displays no output. Or the flag 1 which displays the mean values across simulations.
+The two ``[]`` stand in for ``specs`` which is a structure defining grid, shocks, etc. if it is not specified, then a default is set in the [``preamble.m``](./preamble.m). The next ``[]`` stands in for the seed on the random number generator. Again if nothing is given a default seed is set in [``preamble.m``](./preamble.m). The  final value is a flag which can take on the value 0 and returns all moments across simulations, but displays no output. Or the flag 1 which displays the mean values across simulations.
 
 The ``calibrated_baseline.mat`` contains the final, calibrated parameter values reported in the paper as the array ``x1``. Stuff is ordered in the following way:
 
@@ -100,20 +100,20 @@ The baseline minimizer is ``fminsearchcon`` which is a constrained version of [`
 
 What is in this folder.
 
-- [``compute_outcomes.m``](../compute_outcomes.m) main file to take parameter values, solve households problem, simulate and construct stationary distribution, and then construct moments in the model as they are in the data.
+- [``compute_outcomes.m``](./compute_outcomes.m) main file to take parameter values, solve households problem, simulate and construct stationary distribution, and then construct moments in the model as they are in the data.
 
-- [``calibrate_model.m``](../calibrate_model.m) wrapper file that takes in moments and parameter values and returns output from model.
+- [``calibrate_model.m``](./calibrate_model.m) wrapper file that takes in moments and parameter values and returns output from model.
 
-- [``calibrate_baseline.m``](../calibrate_baseline.m) to implement the full calibration.
+- [``calibrate_baseline.m``](./calibrate_baseline.m) to implement the full calibration.
 
-- [``preamble.m``](../preamble.m) specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change. Not [``compute_outcomes.m``](../compute_outcomes.m) To speed up things, the main value to change is [``specs.Nmontecarlo``](https://github.com/mwaugh0328/final_migration/blob/bfafac24e1fcb9ee0ccd8122d412a053e69cc210/calibration/preamble.m#L68) which specifies how many simulations to perform on top of things. The baseline when the model is calibrated is 30. But as low as 5 seems ok.
+- [``preamble.m``](./preamble.m) specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change. Not [``compute_outcomes.m``](./compute_outcomes.m) To speed up things, the main value to change is [``specs.Nmontecarlo``](https://github.com/mwaugh0328/final_migration/blob/bfafac24e1fcb9ee0ccd8122d412a053e69cc210/calibration/preamble.m#L68) which specifies how many simulations to perform on top of things. The baseline when the model is calibrated is 30. But as low as 5 seems ok.
 
-- [``identification.m``](../identification.m) computes the dlog(moments) / dlog(paramters) table.
+- [``identification.m``](./identification.m) computes the dlog(moments) / dlog(paramters) table.
 
-- [``cal_rural_urban_simulate.m``](../cal_rural_urban_simulate.m) designed to simulate the economy. Stripped down to run fast and compute only what is needed for calibration.
+- [``cal_rural_urban_simulate.m``](./cal_rural_urban_simulate.m) designed to simulate the economy. Stripped down to run fast and compute only what is needed for calibration.
 
-- [``cal_experiment_driver.m``](../cal_experiment_driver.m) driver file to compute experiment many times given simulated sample paths from above. Calls the file below.
+- [``cal_experiment_driver.m``](./cal_experiment_driver.m) driver file to compute experiment many times given simulated sample paths from above. Calls the file below.
 
-- [``cal_simulate_experiment.m``](../cal_simulate_experiment.m) designed to simulate the experiment just in the calibration folder. It's stripped down to run fast and compute only what we need for calibration.
+- [``cal_simulate_experiment.m``](./cal_simulate_experiment.m) designed to simulate the experiment just in the calibration folder. It's stripped down to run fast and compute only what we need for calibration.
 
-- [``compute_standard_errors.m``](../compute_standard_errors.m) and [``sd_calculation.m``](../sd_calculation.m) Deprecated, not relevant. Files to compute the jacobian and standard errors.  
+- [``compute_standard_errors.m``](./compute_standard_errors.m) and [``sd_calculation.m``](./sd_calculation.m) Deprecated, not relevant. Files to compute the jacobian and standard errors.  
