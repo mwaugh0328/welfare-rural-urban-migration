@@ -4,9 +4,19 @@ This section describes basic computations to compute the welfare gains associate
 
 ---
 
-### Main Computations
+### Computations
 
-**Compute Welfare Gains from Conditional Migration Transfers:** The most basic call starts inside the [``ge_taxation``](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxations) folder. To perform the welfare analysis you:
+Two different computations take place in this folder.
+
+1. The welfare gains associated with [conditional migration transfers](#conditional_transfers).
+
+2. The welfare gains from [conditional cash transfers](#cash_transfers).
+
+---
+
+### [Compute Welfare Gains from Conditional Migration Transfers](#conditional_transfers)
+
+The main call starts inside the [``ge_taxation``](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxation) folder. To perform the welfare analysis you:
 ```
 >> tax_eq
 ```
@@ -226,7 +236,9 @@ Tax rate in % on labor income
 
 ---
 
-**Compute Welfare Gains from Unconditional Cash Transfer** This does the same type of analysis, but now the moving cost is given unconditionally to the rural poor, with rural poor being the same means test as for the migration transfer. To perform this you simply:
+### [Compute Welfare Gains from Unconditional Cash Transfer](#cash_transfers)
+
+This does the same type of analysis, but now the moving cost is given unconditionally to the rural poor, with rural poor being the same means test as for the migration transfer. To perform this you simply:
 ```
 > cash_transfer
 ```
