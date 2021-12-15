@@ -1,5 +1,9 @@
 ### General Equilibrium Welfare Analysis
 
+<p align="center">
+<img src="../figures/ge-tax-subsidies.png">
+</p>
+
 This section describes basic computations to compute the welfare gains associated with permanent transfers (conditional or unconditional) in general equilibrium.
 
 ---
