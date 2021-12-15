@@ -6,7 +6,7 @@ This section describes basic computations to compute the welfare gains associate
 
 ### Main Computations
 
-**Compute Welfare Gains:** The most basic call starts inside the [``pe_welfare_analysis``](https://github.com/mwaugh0328/final_migration/tree/main/pe_welfare_analysis) folder. To perform the welfare analysis you:
+**Compute Welfare Gains:** The most basic call starts inside the [``pe_welfare_analysis``](../pe_welfare_analysis) folder. To perform the welfare analysis you:
 
 ```
 >> addpath('../utils')
@@ -15,7 +15,7 @@ This section describes basic computations to compute the welfare gains associate
 
 >> analyze_outcomes(x1, [], [], [], [], [], [], 1)
 ```
-The five ``[]`` stand in for ``specs`` which is a structure defining grid, shocks, etc. if it is not specified, then a default is set in the [``preamble_welfare_analysis.m``](https://github.com/mwaugh0328/final_migration/blob/main/pe_welfare_analysis/preamble_welfare_analysis.m), ``wages`` which are wages per efficiency unit if not specified it uses the ones in the default calibration, ``meanstest`` is a means test, ``vft_fun`` is a value function structure for which if specified welfare will be computed relative to this value, ``R`` is gross real interest rate, and a flag for output. Again, if none of this is specified, default values are used in the code.
+The five ``[]`` stand in for ``specs`` which is a structure defining grid, shocks, etc. if it is not specified, then a default is set in the [``preamble_welfare_analysis.m``](./preamble_welfare_analysis.m), ``wages`` which are wages per efficiency unit if not specified it uses the ones in the default calibration, ``meanstest`` is a means test, ``vft_fun`` is a value function structure for which if specified welfare will be computed relative to this value, ``R`` is gross real interest rate, and a flag for output. Again, if none of this is specified, default values are used in the code.
 
 Then it should compute everything and then spit out the moments. The output should look something like this
 ```
@@ -117,7 +117,7 @@ Above Median Consumption: Migration Below 800 Taka assets, Above 800 Taka
 
 ```
 
-The first line reports that the policy functions are being saved in the [plotting folder](https://github.com/mwaugh0328/final_migration/tree/main/plotting).
+The first line reports that the policy functions are being saved in the [plotting folder](../plotting).
 
 The first table evaluates the welfare gains by income quintile, holding fixed the migration policy functions. So here, only people already planning on moving get the cash transfer. The averages compute, well, the averages for Mushfiq's sample and then the entire rural economy.
 
@@ -125,7 +125,7 @@ The second table then allows households to optimally adjust. Again averages for 
 
 The third table is the unconditional cash transfer, so people do not need to move. **IMPORTANT** the size of the cash transfer depending upon the question need to be modified in the [``preamble_welfare_analysis.m``](https://github.com/mwaugh0328/final_migration/blob/e33c12e76c7da2a210012d082578cbe9d368c965/pe_welfare_analysis/preamble_welfare_analysis.m#L47). The default is for welfare analysis where every household gets a transfer, but it is scaled down so the total outlay is exactly the same as in the conditional cash transfer. If one wants to compare to pure cash transfer, then delete the 0.56 part.
 
-The final numbers are the calibration targets and should more or less match up with the output from [``compute_outcomes.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/compute_outcomes.m) in the [calibration folder](https://github.com/mwaugh0328/final_migration/tree/main/calibration).
+The final numbers are the calibration targets and should more or less match up with the output from [``compute_outcomes.m``](../calibration/compute_outcomes.m) in the [calibration folder](../calibration).
 
 ---
 
@@ -133,6 +133,6 @@ The final numbers are the calibration targets and should more or less match up w
 
 What is in this folder.
 
-- [``analyze_outcomes.m``](https://github.com/mwaugh0328/final_migration/blob/main/pe_welfare_analysis/analyze_outcomes.m) main file to take parameter values, solve households problem, simulate and construct stationary distribution, and then construct moments in the model as they are in the data, computes welfare gains associated with one-time transfer, outputs ``.mat`` files to plot policy functions.
+- [``analyze_outcomes.m``](./analyze_outcomes.m) main file to take parameter values, solve households problem, simulate and construct stationary distribution, and then construct moments in the model as they are in the data, computes welfare gains associated with one-time transfer, outputs ``.mat`` files to plot policy functions.
 
-- [``preamble_welfare_analysis.m``](https://github.com/mwaugh0328/final_migration/blob/main/pe_welfare_analysis/preamble_welfare_analysis.m) specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change.
+- [``preamble_welfare_analysis.m``](./preamble_welfare_analysis.m) specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change.
