@@ -1,6 +1,6 @@
 ### Computing the Efficient Allocation
 
-This section describes basic computations to compute the efficient allocation.
+This section describes computations to compute the efficient allocation.
 
 ---
 
@@ -182,32 +182,11 @@ The second set of results then computes the full insurance benchmark. This is ex
 
 The third set of results are the aggregates and welfare gains from the efficient allocation. This is executed in [``compute_analytical_efficient.m``](./compute_analytical_efficient.m)
 
-12/15/2021  10:37 AM               763 compute_analytical_efficient.m
-12/15/2021  10:37 AM             2,809 compute_fullinsurance.m
-12/15/2021  10:37 AM             9,868 efficient_aggregate.m
-12/15/2021  10:37 AM            16,081 efficient_chi.m
-12/15/2021  10:37 AM               406 efficient_chi_policy.m
-12/15/2021  10:37 AM               621 efficient_policy.m
-12/15/2021  10:37 AM             4,162 efficient_preamble.m
-12/15/2021  10:37 AM             3,641 efficient_simulate.m
-12/15/2021  10:37 AM            13,970 efficient_valuefun.m
-12/15/2021  10:37 AM             9,641 fullinsurance_aggregate.m
-12/15/2021  10:37 AM             1,655 onestep.m
-12/15/2021  10:37 AM            17,247 policy_valuefun_fullinsurance.m
-12/15/2021  10:37 AM             3,111 preamble.m
-12/15/2021  10:37 AM             5,592 quick_sim.m
-12/15/2021  10:37 AM             5,592 quick_sim_efficient.m
-12/15/2021  10:37 AM             6,244
-12/15/2021  10:46 AM             9,483 README.md
-12/15/2021  10:37 AM            12,961 simulate_efficient.m
-12/15/2021  10:37 AM             4,163 solve_efficient.m
-12/15/2021  10:37 AM             3,061 tax_eq_preamble.m
-
 ---
 
 ### Accounting
 
-Several components are here. One is the [full insurance allocation.](#code-for-full-insurance) The other is the [efficient allocation.]((#code-for-efficient-allocation) The code that goes into each component is discussed in turn.
+Several components are here. One is the [full insurance allocation.](#code-for-full-insurance) The other is the [efficient allocation.](#code-for-efficient-allocation) The code that goes into each component is discussed in turn.
 
 - [``solve_efficient.m``](./solve_efficient.m) main driver file.
 
@@ -221,7 +200,7 @@ Several components are here. One is the [full insurance allocation.](#code-for-f
 
 - [``fullinsurance_aggregate.m``](./fullinsurance_aggregate.m) function to take panel of outcomes and aggregate and report statistics.
 
-- [``tax_eq_preamble.m``](./tax_eq_preamble.m) this unfortunatly is a hack to load the proper settings in the [``just_policy_fun.m``](../utils/just_policy_fun.m) function that is called. It then loads this local preamble. 
+- [``tax_eq_preamble.m``](./tax_eq_preamble.m) this unfortunatly is a hack to load the proper settings in the [``just_policy.m``](../utils/just_policy.m) function that is called. It then loads this local preamble.
 
 ---
 
