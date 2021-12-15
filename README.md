@@ -17,9 +17,11 @@ The repository is organized with the following folders. The readme file within t
 
 - **[Partial equilibrium welfare analysis](./pe_welfare_analysis)** This computes the welfare effects of the one-time transfer. In addition, it outputs results (policy functions, migration rates, etc.) that are plotted in the [plotting folder](../plotting).
 
-- **[General equilibrium welfare analysis](./ge_taxation)** Computes the welfare effects of a permanent transfer financed by taxes and clears the rural labor market.
+- **[General equilibrium welfare analysis](./ge_taxation)** Computes the welfare effects of a permanent migration transfer or cash transfer financed by taxes and clears the rural labor market.
 
 - **[The efficient allocation](./efficient)** Computes the solution to the planning problem.
+
+- **[Appendix](./appendix)** various checks and alternative parameterizations that appear in the appendix.
 
 - **[Bootstrap](./bootstrap)** computes bootstrap confidence intervals and montecarlo study to explore identification.
 
