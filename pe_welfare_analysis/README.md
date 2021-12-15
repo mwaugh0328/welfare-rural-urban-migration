@@ -136,3 +136,5 @@ What is in this folder.
 - [``analyze_outcomes.m``](./analyze_outcomes.m) main file to take parameter values, solve households problem, simulate and construct stationary distribution, and then construct moments in the model as they are in the data, computes welfare gains associated with one-time transfer, outputs ``.mat`` files to plot policy functions.
 
 - [``preamble_welfare_analysis.m``](./preamble_welfare_analysis.m) specifies the default parameter values and specifications on the asset grid, shock structure, number of simulations, the seed. If you want to change something about how stuff is computed, this is the file to change.
+
+- ``wages.mat`` matlab file containing implied wages per efficiency units in the rural area by season.

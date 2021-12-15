@@ -6,19 +6,22 @@ This section describes basic computations to compute the efficient allocation.
 
 ### Main Computation
 
-The most basic call starts inside the [``efficient``](https://github.com/mwaugh0328/final_migration/tree/main/efficient) folder. To perform the analysis you:
+The most basic call starts inside the [``efficient``](../efficient) folder. To perform the analysis you:
+
 ```
 >> solve_efficient
 ```
+
 which does several things.
 
   - First it replicates the baseline economy.
 
-  - Second, it keeps policy functions fixed and then redistributes output to equate the marginal utility of consumption across all households for all states, dates, and locations. This is the "full insurance" benchmark. Note that aggregates in this section should match up with baseline economy. The only difference is the allocation of consumption.
+  - Second, it keeps policy functions fixed and then redistributes output to equate the marginal utility of consumption across all households for all states, dates, and locations. This is the "full insurance" benchmark. Aggregates in this section should match up with baseline economy, the only difference is the allocation of consumption.
 
-  - Third, then solves for the efficient allocation which both (i) equates the marginal utility of consumption and (ii) optimally moves households across space.
+  - Third, it then solves for the efficient allocation accoring to Proposition 1 which both (i) equates the marginal utility of consumption and (ii) optimally moves households across space.
 
 The output should look something like this.
+
 ```
 -----------------------------------------------------------------------------------------------------
    14-Dec-2021 09:56:44
@@ -173,48 +176,75 @@ Welfare Gain in %: From Full Insurance to Centralized/Efficient Allocation
 
 ```
 
-The first set of results replicates the baseline economy. As mentioned above, if this is not matching up with expectations, then there is a problem somewhere.
+As mentioned above, the first set of results replicates the baseline economy. If this is not matching up with expectations, then there is a problem somewhere.
 
-The second set of results then computes the full insurance benchmark. This is executed in [``compute_fullinsurance``]()
+The second set of results then computes the full insurance benchmark. This is executed in [``compute_fullinsurance``](./compute_fullinsurance.m)
 
-The third table is the unconditional cash transfer, so people do not need to move. **IMPORTANT** the size of the cash transfer depending upon the question need to be modified in the [``preamble_welfare_analysis.m``](https://github.com/mwaugh0328/final_migration/blob/e33c12e76c7da2a210012d082578cbe9d368c965/pe_welfare_analysis/preamble_welfare_analysis.m#L47). The default is for welfare analysis where every household gets a transfer, but it is scaled down so the total outlay is exactly the same as in the conditional cash transfer. If one wants to compare to pure cash transfer, then delete the 0.56 part.
+The third set of results are the aggregates and welfare gains from the efficient allocation. This is executed in [``compute_analytical_efficient.m``](./compute_analytical_efficient.m)
 
-The final numbers are the calibration targets and should more or less match up with the output from [``compute_outcomes.m``](https://github.com/mwaugh0328/final_migration/blob/main/calibration/compute_outcomes.m) in the [calibration folder](https://github.com/mwaugh0328/final_migration/tree/main/calibration).
+12/15/2021  10:37 AM               763 compute_analytical_efficient.m
+12/15/2021  10:37 AM             2,809 compute_fullinsurance.m
+12/15/2021  10:37 AM             9,868 efficient_aggregate.m
+12/15/2021  10:37 AM            16,081 efficient_chi.m
+12/15/2021  10:37 AM               406 efficient_chi_policy.m
+12/15/2021  10:37 AM               621 efficient_policy.m
+12/15/2021  10:37 AM             4,162 efficient_preamble.m
+12/15/2021  10:37 AM             3,641 efficient_simulate.m
+12/15/2021  10:37 AM            13,970 efficient_valuefun.m
+12/15/2021  10:37 AM             9,641 fullinsurance_aggregate.m
+12/15/2021  10:37 AM             1,655 onestep.m
+12/15/2021  10:37 AM            17,247 policy_valuefun_fullinsurance.m
+12/15/2021  10:37 AM             3,111 preamble.m
+12/15/2021  10:37 AM             5,592 quick_sim.m
+12/15/2021  10:37 AM             5,592 quick_sim_efficient.m
+12/15/2021  10:37 AM             6,244
+12/15/2021  10:46 AM             9,483 README.md
+12/15/2021  10:37 AM            12,961 simulate_efficient.m
+12/15/2021  10:37 AM             4,163 solve_efficient.m
+12/15/2021  10:37 AM             3,061 tax_eq_preamble.m
 
 ---
 
 ### Accounting
 
-What is in this folder. There are several components here. One is the full insurance allocation. The other is the efficient allocation. The code that goes into each component is discussed in turn.
+Several components are here. One is the [full insurance allocation.](#code-for-full-insurance) The other is the [efficient allocation.]((#code-for-efficient-allocation) The code that goes into each component is discussed in turn.
 
-- [``compute_fullinsurance``]() computes the full insurance benchmark.
+- [``solve_efficient.m``](./solve_efficient.m) main driver file.
 
-- [`` policy_valuefun_fullinsurance``]() solves for the value function associated with full insurance, yet migration policy functions are used from the baseline economy, so the labor allocation resulting from this should be exactly the same as in the baseline economy.
+#### Code for full insurance
 
-- [``quick_sim_fullinsurance``]() function to take states from full simulation in [``just_simmulate``] and extract outcomes.
+- [``compute_fullinsurance.m``](./compute_fullinsurance.m) computes the full insurance benchmark.
 
-- [``fullinsurance_aggregate``]() function to take panel of outcomes and aggregate and report statistics.
+- [`` policy_valuefun_fullinsurance.m``](./policy_valuefun_fullinsurance.m) solves for the value function associated with full insurance, yet migration policy functions are used from the baseline economy, so the labor allocation resulting from this should be exactly the same as in the baseline economy.
+
+- [``quick_sim_fullinsurance.m``](./quick_sim_fullinsurance.m) function to take states from full simulation in [``just_simmulate``](../utils/just_simulate.m) and extract outcomes.
+
+- [``fullinsurance_aggregate.m``](./fullinsurance_aggregate.m) function to take panel of outcomes and aggregate and report statistics.
+
+- [``tax_eq_preamble.m``](./tax_eq_preamble.m) this unfortunatly is a hack to load the proper settings in the [``just_policy_fun.m``](../utils/just_policy_fun.m) function that is called. It then loads this local preamble. 
 
 ---
 
-- [``compute_analytical_efficient``]() main driver file that takes primitives and then computes the efficient allocation.
+#### Code for efficient allocation
 
-- [``efficient_preamble``]() preamble file to set things up.
+- [``compute_analytical_efficient.m``](./compute_analytical_efficient.m) main driver file that takes primitives and then computes the efficient allocation.
 
-- [``onestep``]() takes some guessed values for consumption by season and then mpl by season and computes the allocation.
+- [``efficient_preamble.m``](./efficient_preamble.m) preamble file to set things up.
 
-- [``efficient_chi_policy``]() wrapper file to construct the $\chi$ multipliers for each permanent productivity state.
+- [``onestep.m``](./onestep.m) takes some guessed values for consumption by season and then mpl by season and computes the allocation.
 
-- [``efficient_chi``]() this is where it takes the guessed marginal utility of consumption and marginal product of labor, guesses a $\chi$'s which given the recursive formulation maps into a new $\chi$, then simple value-function-like iteration is used until the $\chi$'s converge and the migration probabilities are recovered.
+- [``efficient_chi_policy.m``](./efficient_chi_policy.m) wrapper file to construct the $\chi$ multipliers for each permanent productivity state.
 
-- [``efficient_policy``]() wrapper file to take the migration probabilities and consumption allocation and then compute value functions for households of different states and the marginal utility of consumption.
+- [``efficient_chi.m``](./efficient_chi.m) this is where it takes the guessed marginal utility of consumption and marginal product of labor, guesses a $\chi$'s which given the recursive formulation maps into a new $\chi$, then value-function-like iteration is used until the $\chi$'s converge and the migration probabilities are recovered.
 
-- [``efficient_valuefun``]() computes value functions for households given optimal decision rules.
+- [``efficient_policy.m``](./efficient_policy.m) wrapper file to take the migration probabilities and consumption allocation and then compute value functions for households of different states and the marginal utility of consumption.
 
-- [``efficient_simulate``]() wrapper file to simulate and construct the allocation.
+- [``efficient_valuefun.m``](./efficient_valuefun.m) computes value functions for households given optimal decision rules.
 
-- [``simulate_efficient``]() core file to simulate the model.
+- [``efficient_simulate.m``](./efficient_simulate.m) wrapper file to simulate and construct the allocation.
 
-- [``quick_sim_efficient``]() quick simulation routine that takes states from ``efficient_simmulate`` and then returns outcomes.  
+- [``simulate_efficient.m``](./simulate_efficient.m) core file to simulate the model.
 
-- [``efficient_aggregate``]() file to aggregate from the simulation results.
+- [``quick_sim_efficient.m``](./quick_sim_efficient.m) quick simulation routine that takes states from [``efficient_simulate.m``](./efficient_simulate.m) and then returns outcomes.  
+
+- [``efficient_aggregate.m``](./efficient_aggregate.m) file to aggregate from the simulation results.
