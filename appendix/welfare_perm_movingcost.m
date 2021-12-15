@@ -9,6 +9,6 @@ disp('Alternative Permanent Moving Cost, PE-WELFARE ANALYSIS')
 % analyze_outcomes.m 
 % params.m = params.m_season; % This is the moving cost. 
 
-analyze_outcomes(x1, [], [], [], [], [], 1)
+analyze_outcomes(x1, [], [], [], [], [], [], 1)
 
 cd('../appendix')

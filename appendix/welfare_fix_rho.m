@@ -7,6 +7,6 @@ cd('../pe_welfare_analysis')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('FIX rho = 0, PE-WELFARE ANALYSIS')
 
-analyze_outcomes(x1, [], [], [], [], [], 1)
+analyze_outcomes(x1, [], [], [], [], [], [], 1)
 
 cd('../appendix')
