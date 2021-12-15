@@ -4,13 +4,28 @@ This section describes basic computations to compute the welfare gains associate
 
 ---
 
-### Main Computations
+### Computations
 
-**Compute Welfare Gains from Conditional Migration Transfers:** The most basic call starts inside the [``ge_taxation``](https://github.com/mwaugh0328/final_migration/tree/main/ge_taxations) folder. To perform the welfare analysis you:
+Two different computations take place in this folder.
+
+1. The welfare gains associated with [conditional migration transfers](#compute-welfare-gains-from-conditional-migration-transfers).
+
+2. The welfare gains from [conditional cash transfers](#compute-welfare-gains-from-unconditional-cash-transfer).
+
+Where the hyperlinks above should take you directly there
+
+---
+
+### Compute Welfare Gains from Conditional Migration Transfers
+
+The main call starts inside the [``ge_taxation``](../ge_taxation) folder. To perform the welfare analysis you:
+
 ```
 >> tax_eq
 ```
+
 which does several things.
+
   - First it replicates the baseline economy (some statistics may differ slightly relative to calibration or ``pe_welfare_analysis.m`` due to how sample's are constructed).
 
   - Second, it keeps policy functions fixed and performs the migration transfer.
@@ -226,10 +241,14 @@ Tax rate in % on labor income
 
 ---
 
-**Compute Welfare Gains from Unconditional Cash Transfer** This does the same type of analysis, but now the moving cost is given unconditionally to the rural poor, with rural poor being the same means test as for the migration transfer. To perform this you simply:
+### Compute Welfare Gains from Unconditional Cash Transfer
+
+This does the same type of analysis, but now the moving cost is given unconditionally to the rural poor, with rural poor being the same means test as for the migration transfer. To perform this you simply:
+
 ```
 > cash_transfer
 ```
+
 And it
 
 - replicates the baseline (and it should look like exactly above)
@@ -358,12 +377,12 @@ Tax rate in % on labor income
 
 What is in this folder:
 
-- [``tax_eqs.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/tax_eq.m) main file to compute the welfare gains and associated statistics with a permanent, conditional migration transfer, financed by labor income taxes.
+- [``tax_eqs.m``](./tax_eq.m) main file to compute the welfare gains and associated statistics with a permanent, conditional migration transfer, financed by labor income taxes.
 
-- [``cash_transfer.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/cash_transfer.m) main file to compute the welfare gains and associated statistics with a permanent, unconditional cash transfer, financed by labor income taxes.
+- [``cash_transfer.m``](./cash_transfer.m) main file to compute the welfare gains and associated statistics with a permanent, unconditional cash transfer, financed by labor income taxes.
 
-- [``compute_eq.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/compute_eq.m) file to compute the economy given wages, tax policy (transfer type and tax rate). It calls files like [``just_policy.m``](https://github.com/mwaugh0328/final_migration/blob/main/utils/just_policy.m), [``just_simmulate.m``](https://github.com/mwaugh0328/final_migration/blob/main/utils/just_simmulate.m), [``ge_aggregate.m``](https://github.com/mwaugh0328/final_migration/blob/main/utils/ge_aggregate.m) in the [utility folder](https://github.com/mwaugh0328/final_migration/tree/main/utils).
+- [``compute_eq.m``](./compute_eq.m) file to compute the economy given wages, tax policy (transfer type and tax rate). It calls files like [``just_policy.m``](../utils/just_policy.m), [``just_simulate.m``](../utils/just_simulate.m), [``ge_aggregate.m``](../utils/ge_aggregate.m) in the [utility folder](../utils).
 
-- [``policy_valuefun.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/policy_valuefun.m) file that computes value functions holding fixed the households policy functions.
+- [``policy_valuefun.m``](./policy_valuefun.m) file that computes value functions holding fixed the households policy functions.
 
-- [``tax_eq_preamble.m``](https://github.com/mwaugh0328/final_migration/blob/main/ge_taxation/tax_eq_preamble.m) preamble file with similar structure to other preambles. Adjust gird or other things here.
+- [``tax_eq_preamble.m``](./tax_eq_preamble.m) preamble file with similar structure to other preambles. Adjust gird or other things here.

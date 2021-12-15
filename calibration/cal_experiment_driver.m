@@ -31,7 +31,7 @@ for xxx = 1:Nsims
     m_shocks = move_shocks(index:index + (follow_hh_expr-1),1);
    
        
-    [panel_expr] = cal_simmulate_experiment(assets, move, assets_temp, move_temp, params, perm_type,...
+    [panel_expr] = cal_simulate_experiment(assets, move, assets_temp, move_temp, params, perm_type,...
     state_at_expr, shock_states, p_shocks, m_shocks);
 
     

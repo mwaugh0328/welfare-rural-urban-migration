@@ -11,7 +11,7 @@ tax = [taxrate, taxprog];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[data_panel, params] = just_simmulate(params, move, solve_types, assets, specs, ce, meanstest, meanstest_cash);
+[data_panel, params] = just_simulate(params, move, solve_types, assets, specs, ce, meanstest, meanstest_cash);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
