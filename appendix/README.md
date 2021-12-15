@@ -20,48 +20,256 @@ Then there are many files with the following naming convention:
 
 - ``appenix_*`` contains ``.mat`` with the resulting calibrated parameters. For example, ``appendix_cal_low_R.mat`` results from the calibration with an lower $R$.
 
-- ``calibrate_*`` are dirver files that implement the calibration under the given parameter restrictions. They call [``calibrate_model_appendix.m``](./calibrate_model_appendix.m) which is specifically setup to handel various permutations.
+- ``calibrate_*`` are dirver files that implement the calibration under the given parameter restrictions. They call [``calibrate_model_appendix.m``](./calibrate_model_appendix.m) which is specifically setup to handle various permutations.
 
-- ``welfare_*`` which computes the welfare gains associated with alternative parameterizations.
+- ``welfare_*`` which computes the welfare gains associated with alternative parameterizations. Note that in some of these files, you must manually go into [``preamble_welfare_analysis.m ``](../pe_welfare_analysis/preamble_welfare_analysis.m ) and implement the correct parameter settings. Instructions are in the files. **TO DO** fix this to auto run. 
 
 ---
 
-Below is a complete accounting of what is in my directory.
+Below is what the output from [``print_out_appendix.m``](./print_out_appendix.m) should look like.
 
 ```
-11/08/2021  05:37 PM               304 appendix_additive_cost.mat
-11/08/2021  05:37 PM               834 appendix_batch_file.m
-11/08/2021  05:37 PM               356 appendix_cal_high_beta.mat
-11/08/2021  05:37 PM               347 appendix_cal_high_R.mat
-11/08/2021  05:37 PM               355 appendix_cal_low_beta.mat
-11/08/2021  05:37 PM               352 appendix_cal_low_R.mat
-11/08/2021  05:37 PM               368 appendix_cal_perm_movingcost.mat
-11/08/2021  05:37 PM               346 appendix_cal_subsistence.mat
-11/08/2021  05:37 PM               369 appendix_cal_subsistence_high.mat
-11/08/2021  05:37 PM               297 appendix_fix_rho.mat
-11/08/2021  05:37 PM               297 appendix_fix_ubar.mat
-11/18/2021  06:29 PM             2,317 calibrate_additive.m
-11/08/2021  05:37 PM             2,450 calibrate_additive_appendix.m
-11/08/2021  05:37 PM             2,489 calibrate_fix_rho.m
-11/08/2021  05:37 PM             2,261 calibrate_fix_rho_wrap.m
-11/08/2021  05:37 PM             2,489 calibrate_fix_ubar.m
-11/08/2021  05:37 PM             2,265 calibrate_fix_ubar_wrap.m
-11/08/2021  05:37 PM             2,283 calibrate_highR.m
-11/08/2021  05:37 PM             2,288 calibrate_high_beta.m
-11/08/2021  05:37 PM             2,281 calibrate_lowR.m
-11/08/2021  05:37 PM             2,287 calibrate_low_beta.m
-11/08/2021  05:37 PM             2,447 calibrate_model_appendix.m
-11/08/2021  05:37 PM             2,307 calibrate_perm_movingcost.m
-11/08/2021  05:37 PM             2,291 calibrate_subsistence.m
-11/08/2021  05:37 PM             2,312 calibrate_subsistence_high.m
-11/08/2021  05:37 PM            17,831 compute_outcomes_additive.m
-11/08/2021  05:37 PM            17,813 compute_outcomes_appendix.m
-11/08/2021  05:37 PM             3,317 preamble_appendix.m
-11/18/2021  06:29 PM             8,593 print_out_appendix.m
-12/15/2021  11:51 AM             1,566 README.md
-11/18/2021  06:29 PM             1,022 welfare_alt_params.m
-11/18/2021  06:29 PM               286 welfare_fix_rho.m
-11/18/2021  06:29 PM               288 welfare_fix_ubar.m
-11/18/2021  06:29 PM               416 welfare_perm_movingcost.m
-11/18/2021  06:29 PM               383 welfare_subsistence.m
+-----------------------------------------------------------------------------------------------------
+   15-Dec-2021 12:22:35
+
+
+-----------------------------------------------------------------------------------------------------
+MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
+MATLAB License Number: 618777
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19043)
+Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+-----------------------------------------------------------------------------------------------------
+MATLAB                                                Version 9.10        (R2021a)
+Curve Fitting Toolbox                                 Version 3.5.13      (R2021a)
+Econometrics Toolbox                                  Version 5.6         (R2021a)
+Financial Instruments Toolbox                         Version 3.2         (R2021a)
+Financial Toolbox                                     Version 6.1         (R2021a)
+GPU Coder                                             Version 2.1         (R2021a)
+Global Optimization Toolbox                           Version 4.5         (R2021a)
+MATLAB Coder                                          Version 5.2         (R2021a)
+MATLAB Compiler                                       Version 8.2         (R2021a)
+MATLAB Compiler SDK                                   Version 6.10        (R2021a)
+Optimization Toolbox                                  Version 9.1         (R2021a)
+Parallel Computing Toolbox                            Version 7.4         (R2021a)
+Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
+Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
+-----------------------------------------------------------------------------------------------------
+
+Elapsed time is 13.277473 seconds.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Baseline Model
+    0.0024
+
+    0.1800
+    0.4700
+    0.3700
+    0.1000
+    0.2100
+    0.0500
+    0.2900
+    0.7100
+    1.8900
+    0.6000
+    0.6600
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Low R, just change R, not recalibrate
+Objective function: current, baseline
+    0.1026    0.0024
+
+Moments
+    0.1800
+    0.7800
+    0.3900
+    0.0600
+    0.2000
+    0.0500
+    0.3000
+    0.7100
+    1.8700
+    0.5900
+    0.6600
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+High R, just change R, not recalibrate
+Objective function: current, baseline
+    0.0660    0.0024
+
+Moments
+    0.1700
+    0.2300
+    0.3200
+    0.1200
+    0.2000
+    0.0400
+    0.2600
+    0.6900
+    1.9300
+    0.6200
+    0.6700
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.9700
+
+High beta, just change beta, not recalibrate
+Objective function: current, baseline
+    0.0114    0.0024
+
+Moments
+    0.1800
+    0.3800
+    0.3600
+    0.1100
+    0.2100
+    0.0500
+    0.2800
+    0.7100
+    1.8800
+    0.6000
+    0.6600
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.9000
+
+Low beta, just change beta, not recalibrate
+Objective function: current, baseline
+    0.1041    0.0024
+
+Moments
+    0.1900
+    0.7900
+    0.3700
+    0.0700
+    0.2100
+    0.0500
+    0.3000
+    0.7000
+    1.9300
+    0.6200
+    0.6600
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.0878
+
+Subsistence, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0032    0.0032    0.0024
+
+Moments
+    0.1600
+    0.4700
+    0.3600
+    0.0900
+    0.2000
+    0.0400
+    0.3100
+    0.7000
+    1.8900
+    0.6000
+    0.6200
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.1756
+
+Subsistence High, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0029    0.0029    0.0024
+
+Moments
+    0.1400
+    0.4700
+    0.3700
+    0.1000
+    0.2100
+    0.0400
+    0.3000
+    0.7000
+    1.8900
+    0.6000
+    0.5900
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.0878
+
+Perm Moving Cost, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0047    0.0047    0.0024
+
+Moments
+    0.1800
+    0.4800
+    0.3800
+    0.1300
+    0.2200
+    0.0600
+    0.2600
+    0.6900
+    1.9000
+    0.6000
+    0.7000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rho = 0, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0075    0.0075    0.0024
+
+Moments
+    0.1400
+    0.4700
+    0.3600
+    0.1400
+    0.2100
+    0.0300
+    0.2800
+    0.7000
+    1.8900
+    0.5900
+    0.5400
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ubar = 1, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0794    0.0794    0.0024
+
+Moments
+    0.2100
+    0.4700
+    0.5600
+    0.0600
+    0.1300
+    0.0200
+    0.2500
+    0.5500
+    1.9100
+    0.6500
+    0.7600
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Additive Migration Utility Cost, recalibrate
+Objective fucntion: current, as calibrated, baseline
+    0.0171    0.0171    0.0024
+
+Moments
+    0.2000
+    0.4700
+    0.3900
+    0.0800
+    0.1300
+    0.0400
+    0.2500
+    0.6800
+    1.9100
+    0.5700
+    0.7300
 ```

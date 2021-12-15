@@ -31,6 +31,7 @@ params.tax.prog = cal_params(16);
 params.tax.location = 'all';
 
 params.means_test = 0;
+params.means_test_cash = 0;
 %Preferences
 params.sigma_nu_not = cal_params(9); %These are the logit shocks
 params.sigma_nu_exp = cal_params(9);
@@ -214,7 +215,7 @@ for nmc = 1:Nmontecarlo
     
     parfor xxx = 1:n_types 
 
-            [sim_panel(:,:,xxx), states_panel(:,:,xxx)] = cal_rural_urban_simmulate(...
+            [sim_panel(:,:,xxx), states_panel(:,:,xxx)] = cal_rural_urban_simulate(...
                 assets(xxx), move(xxx), params, solve_types(xxx,:), shock_states_p,...
                 pref_shocks(:,xxx), move_shocks(:,xxx));
 

@@ -1,11 +1,19 @@
-
 clc
+clear
+
 table_order = [11,4,5,9,6,7,8,10,1,2,3];
 
 addpath('../utils')
 addpath('../calibration')
 
 load('../calibration/calibrated_valuefunction_guess.mat')
+
+disp('-----------------------------------------------------------------------------------------------------')
+disp(datetime(now,'ConvertFrom','datenum'))
+disp(' ')
+ver
+disp('-----------------------------------------------------------------------------------------------------')
+disp(' ')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % these are the baseline moments:
@@ -38,14 +46,14 @@ beta = [];
 min_consumption = [];
 perm_movecost = [];
 
-obj = calibrate_model_appendix(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,1);
+tic, obj_baseline = calibrate_model_appendix(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,1);, toc
 model_moments = calibrate_model_appendix(x1, [], [], [], R, beta, min_consumption, perm_movecost, vguess,3);
 
 disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('Basline Model')
-disp([obj])
+disp('Baseline Model')
+disp([obj_baseline])
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,8 +71,10 @@ model_moments = calibrate_model_appendix(x1, [], [], [], R, beta, min_consumptio
 disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('Low R')
-disp([obj, obj_new])
+disp('Low R, just change R, not recalibrate ')
+disp('Objective function: current, baseline') 
+disp([obj, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -82,8 +92,10 @@ model_moments = calibrate_model_appendix(x1, [], [], [], R, beta, min_consumptio
 disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('High R')
-disp([obj, obj_new])
+disp('High R, just change R, not recalibrate ')
+disp('Objective function: current, baseline') 
+disp([obj, obj_baseline])
+disp('Moments')  
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -102,8 +114,10 @@ disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp(beta)
-disp('High beta')
-disp([obj, obj_new])
+disp('High beta, just change beta, not recalibrate ')
+disp('Objective function: current, baseline') 
+disp([obj, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -122,8 +136,10 @@ disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp(beta)
-disp('Low beta')
-disp([obj, obj_new])
+disp('Low beta, just change beta, not recalibrate ')
+disp('Objective function: current, baseline') 
+disp([obj, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -141,8 +157,10 @@ disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp(min_consumption)
-disp('Subsistence')
-disp([obj, obj_new])
+disp('Subsistence, recalibrate')
+disp('Objective function: current, as calibrated, baseline') 
+disp([obj, obj_new, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,8 +178,10 @@ disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp(min_consumption)
-disp('Subsistence High')
-disp([obj, obj_new])
+disp('Subsistence High, recalibrate')
+disp('Objective function: current, as calibrated, baseline') 
+disp([obj, obj_new, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,8 +199,10 @@ disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp(perm_movecost)
-disp('Perm Moving Cost')
-disp([obj, obj_new])
+disp('Perm Moving Cost, recalibrate')
+disp('Objective function: current, as calibrated, baseline') 
+disp([obj, obj_new, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -196,8 +218,10 @@ model_moments = calibrate_fix_rho(x1, [], [], [], R, beta, min_consumption, perm
 disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('rho = 0')
-disp([obj, obj_new])
+disp('rho = 0, recalibrate')
+disp('Objective function: current, as calibrated, baseline') 
+disp([obj, obj_new, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -214,8 +238,10 @@ model_moments = calibrate_fix_ubar(x1, [], [], [], R, beta, min_consumption, per
 disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('ubar = 1')
-disp([obj, obj_new])
+disp('ubar = 1, recalibrate')
+disp('Objective function: current, as calibrated, baseline') 
+disp([obj, obj_new, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -232,7 +258,9 @@ model_moments = calibrate_additive_appendix(x1, moments, [], [], R, beta, min_co
 disp('')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('Additive Migration Utility Cost')
-disp([obj, obj_new])
+disp('Additive Migration Utility Cost, recalibrate')
+disp('Objective function: current, as calibrated, baseline') 
+disp([obj, obj_new, obj_baseline])
+disp('Moments') 
 disp(round(model_moments(table_order)',2))
 
