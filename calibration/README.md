@@ -1,5 +1,10 @@
 ### Calibration
 
+<p align="center">
+<img src="../figures/table-2-calibration.png">
+</p>
+
+
 This section describes basic computations, the calibration approach, and then the computational elements behind the computation of the model.
 
 ---
