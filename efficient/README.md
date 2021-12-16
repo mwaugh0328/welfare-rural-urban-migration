@@ -1,5 +1,11 @@
 ### Computing the Efficient Allocation
 
+
+<p align="center">
+<img src="../figures/ce_vs_planner.png">
+</p>
+
+
 This section describes computations to compute the efficient allocation.
 
 ---

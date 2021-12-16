@@ -11,7 +11,7 @@ This section describes the code that goes into computing various checks and alte
 
 - [``calibrate_model_appendix.m``](./calibrate_model_appendix.m) is the wrapper file to take in paramters and then return moments or objective function.
 
-- [``compute_outcomes_additive.m``](./compute_outcomes_additive.m) specifically designed for additive utility cost. Calls [``rural_urban_value_additive.m``](../utils/rural_urban_value_additive.m) which specifically solves for the hh problem with the additive utility cost.
+- [``compute_outcomes_additive.m``](./compute_outcomes_additive.m) specifically designed for additive utility cost. Calls [``rural_urban_value_additive.m``](../utils/rural_urban_value_additive.m) which solves for the hh problem with the additive utility cost.
 
 - [``preamble_appendix.m``](./preamble_appendix.m) preamble specifically designed for the appendix.
 
@@ -20,9 +20,9 @@ Then there are many files with the following naming convention:
 
 - ``appenix_*`` contains ``.mat`` with the resulting calibrated parameters. For example, ``appendix_cal_low_R.mat`` results from the calibration with an lower $R$.
 
-- ``calibrate_*`` are dirver files that implement the calibration under the given parameter restrictions. They call [``calibrate_model_appendix.m``](./calibrate_model_appendix.m) which is specifically setup to handle various permutations.
+- ``calibrate_*`` are dirver files that implement the calibration under the given parameter restrictions. They call [``calibrate_model_appendix.m``](./calibrate_model_appendix.m) which is setup to handle various permutations.
 
-- ``welfare_*`` which computes the welfare gains associated with alternative parameterizations. Note that in some of these files, you must manually go into [``preamble_welfare_analysis.m ``](../pe_welfare_analysis/preamble_welfare_analysis.m ) and implement the correct parameter settings. Instructions are in the files. **TO DO** fix this to auto run. 
+- ``welfare_*`` computes the welfare gains associated with alternative parameterizations. **Note** that in some of these files, you must manually go into [``preamble_welfare_analysis.m ``](../pe_welfare_analysis/preamble_welfare_analysis.m ) and implement the correct parameter settings. Instructions are in the files. 
 
 ---
 
