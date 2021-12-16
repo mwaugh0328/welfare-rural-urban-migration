@@ -1,7 +1,7 @@
 ### Partial Equilibrium Welfare Analysis
 
 <p align="center">
-<img src="../figures/pe-welfare.png">
+<img src="../figures/pe_welfare.png">
 </p>
 
 This section describes basic computations to compute the welfare gains associated with one time transfers (conditional or unconditional) .
