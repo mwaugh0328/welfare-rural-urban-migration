@@ -363,6 +363,7 @@ for nmc = 1:Nmontecarlo
         
     rural_cntr = data_panel_cntr(:,4,1)==1 & data_panel_expr(:,13,1)==1;
     all_rural = data_panel_cntr(:,4,1)==1;
+    all_rural_not_exp = data_panel_cntr(:,4,1)==1 & data_panel_expr(:,13,1)~=1;
 
     control_data = data_panel_cntr(rural_cntr,:,:);
     expermt_data = data_panel_expr(rural_cntr,:,:);
@@ -422,7 +423,7 @@ for nmc = 1:Nmontecarlo
     conditional_ticket_avg(nmc,:) = [mean(expermt_data(:,10,1)),mean(expermt_data(:,7,1)),mean(expr_prd)];
     
     conditional_ticket_all_rural(nmc,:) = [mean(data_panel_expr(all_rural,10,1)),...
-                                            0.5.*mean(data_panel_cntr(all_rural,7,1)) + 0.5.*mean(expermt_data(:,7,1))];
+                                            0.5.*mean(data_panel_cntr(all_rural_not_exp,7,1)) + 0.5.*mean(expermt_data(:,7,1))];
 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -436,7 +437,7 @@ for nmc = 1:Nmontecarlo
     unconditional_cash_avg(nmc,:) = [mean(cash_data(:,10,1)),mean(cash_data(:,7,1))];
     
     unconditional_cash_all(nmc,:) = [mean(data_panel_cash(all_rural,10,1)),...
-                                            0.5.*mean(data_panel_cntr(all_rural,7,1)) + 0.5.*mean(cash_data(:,7,1))];
+                                            0.5.*mean(data_panel_cntr(all_rural_not_exp,7,1)) + 0.5.*mean(cash_data(:,7,1))];
         
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

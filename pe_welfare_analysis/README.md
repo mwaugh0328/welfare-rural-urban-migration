@@ -20,7 +20,7 @@ The five ``[]`` stand in for ``specs`` which is a structure defining grid, shock
 Then it should compute everything and then spit out the moments. The output should look something like this
 ```
 -----------------------------------------------------------------------------------------------------
-   16-Dec-2021 10:12:41
+   16-Dec-2021 10:39:32
 
 
 -----------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ Averages, Mushfiqs sample: Welfare, Migration Rate, Experience
     0.4400   57.1300   26.7400
 
 Averages, All Rural: Welfare, Migration Rate
-    0.2200   43.8600
+    0.2200   40.9400
 
 
 PE Unconditional Cash Transfer: Welfare and Migration by Income Quintile
@@ -88,7 +88,7 @@ PE Unconditional Cash Transfer: Average Welfare Gain, Migration Rate
     0.5100   35.3200
 
 Averages, All Rural: Welfare, Migration Rate
-    0.2500   32.9500
+    0.2500   30.0300
 
 
 Wage Gap
