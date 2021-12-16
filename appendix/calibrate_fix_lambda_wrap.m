@@ -38,18 +38,21 @@ moments = [aggregate_moments, experiment_hybrid];
 load('../calibration/calibrated_baseline.mat')
 load('../calibration/calibrated_valuefunction_guess.mat')
 
-x1(2) = []; % take out theta, will be set to 10
+x1(6) = []; % take out lambda, will be set to 10
 
 opts = optimset('Display','iter','UseParallel',true,'MaxFunEvals',300,'TolFun',10^-3,'TolX',10^-3);
 
-ObjectiveFunction = @(xxx) calibrate_fix_theta((xxx), moments, [], [], R, beta, min_consumption, perm_movecost,  vguess,1);
+ObjectiveFunction = @(xxx) calibrate_fix_lambda((xxx), moments, [], [], R, beta, min_consumption, perm_movecost,  vguess,1);
 
-UB = [5.25, 5.70, 0.95, 1.9, 0.85, 0.85, 5.50, 1.00];
-LB = [0.25, 1.00, 0.05, 1.0, 0.15, 0.15, 0.15, 0.01];
+UB = [5.25, 0.60, 5.70, 0.95, 1.9, 0.85, 5.50, 1.00];
+LB = [0.25, 0.40, 1.00, 0.05, 1.0, 0.15, 0.15, 0.01];
+
+% UB = [2.25, 0.60, 1.70, 0.95, 1.9, 0.85, 0.85, 1.50, 0.30];
+% LB = [0.75, 0.40, 1.20, 0.25, 1.0, 0.15, 0.15, 0.15, 0.01];
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-obj_old = calibrate_fix_theta(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,1);
+obj_old = calibrate_fix_lambda(x1, moments, [], [], R, beta, min_consumption, perm_movecost, vguess,1);
 
 disp(obj_old)
 
@@ -59,7 +62,7 @@ for xxx = 1:5
 
     x1_new = fminsearchcon(ObjectiveFunction, x1, LB, UB,[],[],[],opts);
 
-    obj_new = calibrate_fix_theta(x1_new, moments, [], [], R, beta, min_consumption, perm_movecost,  vguess,1);
+    obj_new = calibrate_fix_lambda(x1_new, moments, [], [], R, beta, min_consumption, perm_movecost,  vguess,1);
     
     disp(obj_old)
     disp(obj_new)
@@ -70,7 +73,7 @@ if obj_new < obj_old
     
     x1 = x1_new;
     
-    save appendix_fix_theta x1 obj_new
+    save appendix_fix_lambda x1 obj_new
     
 end
     
