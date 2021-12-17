@@ -12,7 +12,12 @@ function theta = calibrate_fix_lambda(cal_params,moments,specs, seed, R, beta, m
 % 9: Logit shocks
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-cal_params = [cal_params(1:5), 0.05 , cal_params(6:end)];
+cal_params = [cal_params(1:5), 0.95 , cal_params(6:end)];
+% so lambda is setup so 1-lambda is prob of getting experince
+
+
+%value_fun = bsxfun(@plus, (utility_urban(:,:,zzz).*ubar) ,...
+%        (lambda.*expected_value_rural_not + (1-lambda).*expected_value_rural_exp));
 
 model_moments = compute_outcomes_appendix(cal_params, specs, seed, R, beta, min_consumption, perm_movecost, vguess, 0);
 

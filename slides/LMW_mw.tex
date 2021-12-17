@@ -734,6 +734,9 @@ Control: Probability of repeat migration & 0.0 & 0.2 & 0.2 & \textbf{-0.9} & -0.
 \end{table}
 
 
+
+
+
 %Control: Variance of log consumption growth in rural            & 0.19              & 0.19              & 0.19              \\
 %Control: Percent of rural households with no liquid assets      & \phantom{0.}47    & \phantom{0.}47    & \phantom{0.}48   \\
 %Control: Seasonal migrants                                      & \phantom{0.}36    & \phantom{0.}36    & \phantom{0.}38   \\
@@ -765,6 +768,7 @@ The parameters $\gamma$ and $\sigma$ have the largest impact on the OLS return t
 The parameter $\sigma_{\nu}$, which governs the variance of the migration taste shocks, has a modest impact on most of the moments. The largest effect is on the probability of repeat migration in the control group, followed by the treatment effect on repeat migration. The intuition is that when taste shocks tend to be larger in absolute value, they play a more substantial role in determining migration decisions in each period.
 
 Another way of illustrating how the model is identified comes from re-estimating the model under specific parameter restrictions. This approach prevents the model from matching the targeted moments as well as the benchmark estimation, since the model has fewer degrees of freedom once parameters are restricted ex-ante. The value comes from seeing exactly how the model fails once particular parameters are restricted.
+
 \begin{table}[t]
 \small
 \setlength {\tabcolsep}{1.0mm}
@@ -773,25 +777,26 @@ Another way of illustrating how the model is identified comes from re-estimating
 \textbf{\caption{Model Moments When Model Is Restimated under Parameter Restrictions \label{ta:alt_est_2}}}
 \vspace{0.3cm}
 
-\begin{tabular}{c c c c c c c}
-\multicolumn{6}{c}{\textbf{\normalsize }}\\
+\begin{tabular}{l c c c c c c c}
+\multicolumn{7}{c}{\textbf{\normalsize }}\\
 \hline
 \hline
-Moments & Data & Baseline & $\theta = \infty$ & $\bar u = 1$ & $\lambda = 0$  & $\gamma = 1$ \\
-\textbf{Control}\\
-Migration                                                        & 36    & 32    & 48 & 29  & 37 &  26 \\
-Repeat Migration, year 2                               & 25    & 25    & 31 & 27  & 25   &  25 \\
-Repeat Migration, year 4                               & 16    & 18    & 16 & 25  & 18   &  23 \\
-Consumption gain, migrants (OLS)               & 10    & 10    & 51 & 2 & 10 & 20 \\
-\hline
-\textbf{Experiment}\\
-Migration                                   & 22    & 20    & 31 & 10 & 16 & 18 \\
-Migration, year 2                           & 9     & 6     & 0 & 0 & 0 & 6 \\
-Consumption gain, induced migrants (LATE)   & 30    & 30    & 20 & 6 & 30 & 30 \\
-\hline
-\textbf{Aggregate}\\
-Urban-Rural wage gap                                    & 1.80  & 1.80 & 1.80 & 1.80 & 1.80 &  1.80 \\
-Percentage in rural                                        & 63 & 63 & 57  & 89  & 92 & 58 \\
+Moments & Data & Baseline  & $\theta = \infty$ & $\bar u = 1$ & $\lambda = 0$  & $\rho = 0$ & $\gamma = 1$ \\
+\textbf{\underline{Control}}\\
+Percentage with no liquid assets                                & 47    & 47    & 46    & 47    & --  & 47  & 46 \\
+Migration                                                       & 36    & 36    & 55    & 56    & --  & 36  & 45 \\
+Consumption gain, migrants (OLS)                                & 10    & 10    & 18    & 6     & --  & 14  & 24 \\
+Control: Repeat migration rate                                  & 68    & 71    & 56    & 55    & --  & 70  & 66 \\
+\hline                                                                                                    
+\textbf{\underline{Experiment}}\\                                                                                     
+Migration                                                       & 22    & 21    & 16    & 13    & --  & 21  & 20 \\
+Migration, year 2                                               & 9     & 5     & 2     & 2     & --  & 3   & 4 \\
+Consumption gain, induced migrants (LATE)                       & 30    & 29    & 24    & 25    & --  & 28  & 29 \\
+Selection in consumption gain, (LATE - OLS)                     & 20    & 20    & 6     & 19    & --  & 14  & 5 \\
+\hline                                                                                                    
+\textbf{\underline{Aggregate}}\\                                                                                      
+Urban-Rural wage gap                                            & 1.89  & 1.89  & 1.89  & 1.91  & --  & 1.89  &  1.90 \\
+Percentage in rural                                             & 62    & 60    & 61    & 65    & --  & 59  & 62 \\
 \hline
 
 \end{tabular}
@@ -799,6 +804,18 @@ Percentage in rural                                        & 63 & 63 & 57  & 89 
 \parbox[c]{6.75in}{\vspace{0.1cm}
 {\footnotesize  Note: The table reports the values of eight moments of the model when the model is re-estimated under restrictions on model parameters. The first column contains the moments in the data, and the second contains the moments from the estimated model. The remaining columns present the model's moments when estimated to match the same moments but assuming that one particular parameter is restricted ex-ante. Specifically, these columns focus on the cases when $\theta = \infty$, meaning no permanent worker heterogeneity; when $\bar u = 1$, meaning no migration disutility; when  $\lambda = 0$, meaning no chance of retaining migration experience; and when $\gamma = 1$, meaning transitory shocks are equally volatile in both regions.}}
 \end{table}
+
+
+
+
+
+
+
+
+
+
+
+
 
 Table \ref{ta:alt_est_2} presents the best fit of the targeted moments under four specific parameter restrictions. The first two columns reproduce the targeted moments from the data and the estimates from the baseline model. The third column illustrates the model's best fit taking $\theta \rightarrow \infty$ as a numerical limit, implying that heterogeneity across workers is negligible. In this case the model struggles to match the migration rate of 36 percent in the control group, predicting 48 percent instead. The model also over-predicts repeat migration patterns somewhat. The main failure of the model under this restriction is that the OLS return to consumption is far too high at 51 percent, and the LATE of migration on consumption is too low at 20 percent. This is consistent with the discussions above about Table \ref{ta:elast}, which highlighted migration rates in the control group and returns to migration as helping identify the extent of worker heterogeneity in the model.
 
