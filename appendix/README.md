@@ -1,7 +1,7 @@
 ### Appendix
 
 <p align="center">
-<img src="./figures/alt-param-restrictions.png">
+<img src="../figures/alt-param-restrictions.png">
 </p>
 
 This section describes the code that goes into computing various checks and alternative calibrations of the model.
