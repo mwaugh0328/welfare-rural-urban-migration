@@ -1,4 +1,4 @@
-### [The Welfare Effects of Encouraging Rural-Urban Migration](http://www.waugheconomics.com/uploads/2/2/5/6/22563786/LMW.pdf)
+### [The Welfare Effects of Encouraging Rural-Urban Migration](http://www.waugheconomics.com/uploads/2/2/5/6/22563786/lmw.pdf)
 
 <p align="center">
 <img src="./figures/migration_policy_low_z_both.png">
@@ -6,7 +6,7 @@
 
 ---
 
-This repository contains code to reproduce results from the paper ["The Welfare Effects of Encouraging Rural-Urban Migration"](http://www.waugheconomics.com/uploads/2/2/5/6/22563786/LMW.pdf).
+This repository contains code to reproduce results from the paper ["The Welfare Effects of Encouraging Rural-Urban Migration"](http://www.waugheconomics.com/uploads/2/2/5/6/22563786/lmw.pdf).
 
 **Software Requirements:** Most of this code is in MATLAB and requires the Parallel Computing Toolbox (for computation of the model). Plotting is performed via python. Data analysis is in STATA.
 
