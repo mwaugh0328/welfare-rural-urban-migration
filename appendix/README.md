@@ -1,5 +1,9 @@
 ### Appendix
 
+<p align="center">
+<img src="./figures/alt-param-restrictions.png">
+</p>
+
 This section describes the code that goes into computing various checks and alternative calibrations of the model.
 
 ---
@@ -22,7 +26,7 @@ Then there are many files with the following naming convention:
 
 - ``calibrate_*`` are dirver files that implement the calibration under the given parameter restrictions. They call [``calibrate_model_appendix.m``](./calibrate_model_appendix.m) which is setup to handle various permutations.
 
-- ``welfare_*`` computes the welfare gains associated with alternative parameterizations. **Note** that in some of these files, you must manually go into [``preamble_welfare_analysis.m ``](../pe_welfare_analysis/preamble_welfare_analysis.m ) and implement the correct parameter settings. Instructions are in the files. 
+- ``welfare_*`` computes the welfare gains associated with alternative parameterizations. **Note** that in some of these files, you must manually go into [``preamble_welfare_analysis.m ``](../pe_welfare_analysis/preamble_welfare_analysis.m ) and implement the correct parameter settings. Instructions are in the files.
 
 ---
 
