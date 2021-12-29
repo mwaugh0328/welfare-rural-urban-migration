@@ -4,9 +4,11 @@
 <img src="../figures/alt-param-restrictions.png">
 </p>
 
-This section describes the code that goes into computing various checks and alternative calibrations of the model.
+This section describes the code that goes into computing Table 6 of the paper and then various checks and alternative calibrations of the model.
 
 ---
+
+- [``print_out_param_restriction.m``](./print_out_param_restriction.m) will print out different results when various parameters are restricted to take specific values. Used to create Table 6 in main body of paper.
 
 - [``print_out_appendix.m``](./print_out_appendix.m) will print out all the different results.
 
@@ -29,6 +31,144 @@ Then there are many files with the following naming convention:
 - ``welfare_*`` computes the welfare gains associated with alternative parameterizations. **Note** that in some of these files, you must manually go into [``preamble_welfare_analysis.m ``](../pe_welfare_analysis/preamble_welfare_analysis.m ) and implement the correct parameter settings. Instructions are in the files.
 
 ---
+
+### Table 6 computations
+
+Below is what the output from [``print_out_param_restriction.m``](./print_out_param_restriction.m) should look like.
+
+```
+-----------------------------------------------------------------------------------------------------
+   29-Dec-2021 09:16:25
+
+
+-----------------------------------------------------------------------------------------------------
+MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
+MATLAB License Number: 618777
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19043)
+Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+-----------------------------------------------------------------------------------------------------
+MATLAB                                                Version 9.10        (R2021a)
+Curve Fitting Toolbox                                 Version 3.5.13      (R2021a)
+Econometrics Toolbox                                  Version 5.6         (R2021a)
+Financial Instruments Toolbox                         Version 3.2         (R2021a)
+Financial Toolbox                                     Version 6.1         (R2021a)
+GPU Coder                                             Version 2.1         (R2021a)
+Global Optimization Toolbox                           Version 4.5         (R2021a)
+MATLAB Coder                                          Version 5.2         (R2021a)
+MATLAB Compiler                                       Version 8.2         (R2021a)
+MATLAB Compiler SDK                                   Version 6.10        (R2021a)
+Optimization Toolbox                                  Version 9.1         (R2021a)
+Parallel Computing Toolbox                            Version 7.4         (R2021a)
+Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
+Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
+-----------------------------------------------------------------------------------------------------
+
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 24).
+Elapsed time is 36.070338 seconds.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Baseline Model
+    0.0024
+
+    0.4700
+    0.3700
+    0.1000
+    0.7100
+    0.2100
+    0.0500
+    0.2900
+    1.8900
+    0.6000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rho = 0, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0075    0.0075    0.0024
+
+Moments
+    0.4700
+    0.3600
+    0.1400
+    0.7000
+    0.2100
+    0.0300
+    0.2800
+    1.8900
+    0.5900
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ubar = 1, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0794    0.0794    0.0024
+
+Moments
+    0.4700
+    0.5600
+    0.0600
+    0.5500
+    0.1300
+    0.0200
+    0.2500
+    1.9100
+    0.6500
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+lambda = 0, recalibrate
+Objective function: current, as calibrated, baseline
+    0.2451    0.0036    0.0024
+
+Moments
+    0.4900
+    0.1700
+    0.1100
+    0.4000
+    0.2200
+         0
+    0.3100
+    2.2300
+    0.5900
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+1/theta = 0, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0751    0.0751    0.0024
+
+Moments
+    0.4600
+    0.5500
+    0.1800
+    0.5600
+    0.1600
+    0.0200
+    0.2400
+    1.8900
+    0.6100
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+gamma = 1, recalibrate
+Objective function: current, as calibrated, baseline
+    0.0315    0.0315    0.0024
+
+Moments
+    0.4600
+    0.4500
+    0.2400
+    0.6600
+    0.2000
+    0.0400
+    0.2900
+    1.9000
+    0.6200
+```
+---
+
+### Appendix Computations
 
 Below is what the output from [``print_out_appendix.m``](./print_out_appendix.m) should look like.
 
