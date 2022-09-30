@@ -344,6 +344,30 @@ where
 \end{align}}
 \end{proposition}
 
+\section{Computation}
+
+This walks through how to solve things:
+\begin{itemize}
+\item The first step is a guess of consumption and the common component (wage per efficiency unit) if you will of the marginal product of labor. As I explain below (and as in the previous algorithm), we only need to guess two consumption levels and then two $mpl$s. Unlike the previous algorithm, the initial guess of the two consumption levels are specific to a permanent type|say the lowest type of $z$. But then the idea is to use (\ref{appendix-eq:foc_planner2}) and unwind the implied consumption levels for all other $z$'s so that Pareto weight adjusted muc's are equated across households. 
+    
+\item Some more details. So $c_{j}(1, s, x, m)$ and $c_{j}(1, s, x, nm)$  are the initial guesses where the $1$ is standing in for the lowest guy. 
+
+From here we know that for given experience, $c_{j}(1, s, x, m)$ fills in for all different transitory shocks $s$, all locations. Then from the specification on utility, we know that
+\begin{align}
+c_{j}(1, s, x', m)  = \left( \frac{1}{\bar u} \times c_{j}(1, s, x', m)^{-\gamma} \right)^{\frac{-1}{\gamma}}
+\end{align}
+where $x'$ would be the inexperienced state. Do the same for the non-monga season. Now we have assigned consumption to all guys (across locations, transitory shocks, experience levels, seasons) within a permanent state $z$. 
+    
+\item Now to infer what consumption must be for the next guys...so we have that 
+\begin{align}
+c_{j}(2, s, x, m) = \left( \frac{\psi(1)}{\psi(2)} \times  c_{j}(1, s, x, m) \right)^{\frac{-1}{\gamma}}
+\end{align}
+and this relationship holds for every $s$ but in moreover can be vectored where for each $s,x,m$ combination of consumption, we use the relationship above to inver the level of consumption for $z'$ given the consumption level of $z$ for the given $s,x,m$ combination. This the process works iteratively for each different $z$ level. 
+
+
+
+\end{itemize}
+
 \newpage
 
 \bibliography{./bib/migration_refs}
