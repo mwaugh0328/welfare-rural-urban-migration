@@ -12,7 +12,7 @@ options = optimoptions('fsolve', 'Display','iter','MaxFunEvals',50,'MaxIter',20,
 'TolX',1e-8,'Algorithm','trust-region-reflective','FiniteDifferenceType','central',...
 'FiniteDifferenceStepSize', 10^-3);
 
-guess = [1.0; 1.3; 0.90; 0.90];
+guess = [2.5; 2.5; 0.90; 0.90];
 
 tic
 [cons, ~, ~] = fsolve(@(xxx) onestep(xxx, weights, params, tfp, solve_types, seed, 0), guess,options);

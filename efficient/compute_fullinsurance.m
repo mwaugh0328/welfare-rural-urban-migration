@@ -1,4 +1,4 @@
-function [objective, social_welfare] = compute_fullinsurance(assets, move, cal, tfp, params, specs, flag)
+function [objective, social_welfare] = compute_fullinsurance(assets, move, cal, tfp, weights, params, specs, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 nshocks = specs.n_trans_shocks;
 ntypes = specs.n_perm_shocks;
@@ -38,7 +38,7 @@ parfor xxx = 1:ntypes
           params, [], consumption(xxx));
 end
 
-[data_panel, params, state_panel] = just_simulate(params, move, solve_types, assets, specs, vfun, [],[]);
+[data_panel, params, state_panel] = just_simulate(params, move, solve_types, assets, specs, weights, vfun, [],[]);
 
 
 params.means_test = 0; % need to call this bc. in the simmulation call it kicks back the means test
@@ -72,7 +72,7 @@ parfor xxx = 1:ntypes
           params, [], consumption(xxx));
 end
 
-[data_panel, params, state_panel] = just_simulate(params, move, solve_types, assets, specs, vfun, [],[]);
+[data_panel, params, state_panel] = just_simulate(params, move, solve_types, assets, specs, weights, vfun, [],[]);
 
 params.means_test = 0;
 

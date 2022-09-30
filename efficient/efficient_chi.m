@@ -125,7 +125,7 @@ for zzz = 1:n_shocks
 
 end
 
-chi_rural_not = (zeros(n_shocks,1));
+chi_rural_not = -10.*(ones(n_shocks,1));
 move.rural_not = (1./3).*(ones(n_shocks,3));
 
 chi_rural_exp = chi_rural_not;
@@ -366,7 +366,7 @@ for iter = 1:n_iterations
     urban_old = norm(old_chi_urban_old - chi_urban_old,Inf);
     
 %    disp([rural_not,rural_exp,urban_new,urban_old])
-%    disp(iter)
+%disp(iter)
 %     
     if rural_not && ...
        rural_exp  && ...     
@@ -374,7 +374,7 @@ for iter = 1:n_iterations
        urban_old < tol
 %         disp('value function converged')
 %         disp(toc)
-         
+%         disp([chi_urban_old])
         break
     end
  
