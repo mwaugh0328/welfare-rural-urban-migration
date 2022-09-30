@@ -1,22 +1,41 @@
-function [rc, social_welfare, move] = onestep(cons_mpl, params, tfp, solve_types, seed, flag)
+function [rc, social_welfare, move] = onestep(cons_mpl, weights, params, tfp, solve_types, seed, flag)
+% now the setup for pareto weight version is where the consumption part is
+% for for the lowest z and by experince.
 
-consfix = cons_mpl(1:2);
-mplscale.raw.rural.notmonga = cons_mpl(3);
+cons_low = cons_mpl(1:2); % lowest guy consumption
+
+mplscale.raw.rural.notmonga = cons_mpl(3); % no change on mpl
 mplscale.raw.rural.monga = cons_mpl(4);
 
-cexp = repmat(consfix, params.n_shocks/2,1);
+cexp = repmat(cons_low, params.n_shocks/2,1); % experince by trans shock
 
-cnotexp = ((1./params.ubar).*(cexp).^(-2)).^(-1./2);
+cnotexp = ((1./params.ubar).*(cexp).^(-2)).^(-1./2); % non-experince by trans shock
 
 for xxx = 1:params.n_perm_shocks
+    % assign the consumption level by permanent shock
     
     consumption(xxx).rural_not = cexp;
+    
     consumption(xxx).rural_exp = cexp;
+    
     consumption(xxx).seasn_not = cnotexp;
+    
     consumption(xxx).seasn_exp = cexp;
+    
     consumption(xxx).urban_new = cnotexp;
+    
     consumption(xxx).urban_old = cexp;
     
+    % Now update the cexp and cnotexp reflectin the pareto weights
+    
+    if xxx < params.n_perm_shocks
+        
+        cexp = ( (weights(xxx) ./ weights(xxx+1) ).*cexp.^(-2) ).^(-1 ./ 2);
+        
+        cnotexp = ( (weights(xxx) ./ weights(xxx+1) ).*cnotexp.^(-2) ).^(-1 ./ 2);
+        
+    end
+          
 end 
 
 if flag == 0.0
