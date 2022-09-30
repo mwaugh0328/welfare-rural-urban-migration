@@ -39,24 +39,35 @@ for xxx = 1:params.n_perm_shocks
 end 
 
 if flag == 0.0
+    % this is about the part to solve for dynamic multiplier, compute
+    % allocation and then check if resource constraint is met or not.
+    % here (?) nothing needs to be adjusted re. weights.
 
+    % computes the move policy, per the notes, pareto weights do not enter
+    % only need consumption.
     move = efficient_chi_policy(params, mplscale, consumption, solve_types);
 
+    % then simmulate...again here no need to pass the weights through
     [data_panel, params, ~] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
 
-    [social_welfare, rc, ~, mpl] = efficient_aggregate(params,tfp, data_panel,flag);
+    % this is the place where weights may be required, but not here since
+    % the focus on allocations
+    [~, rc, ~, mpl] = efficient_aggregate(params,tfp, data_panel,flag);
     
     rc = [rc ; ( mpl.raw.rural.notmonga - mplscale.raw.rural.notmonga ); ( mpl.raw.rural.monga - mplscale.raw.rural.monga )];
     
 else
-    
+    % same as above
     move = efficient_chi_policy(params, mplscale, consumption, solve_types);
     
+    % pull out value fun and muc
     [vfun, muc] = efficient_policy(params, move, consumption);
-
+    
+    % simmulate, not sure why some historical reason, but vfun and muc are
+    % not here, do no need to put in the weights.
     [data_panel, params, state_panel] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
     
-    [data_panel] = quick_sim_efficient(data_panel, state_panel, vfun, muc, consumption, params);
+    [data_panel] = quick_sim_efficient(data_panel, state_panel, weights, vfun, muc, consumption, params);
 
     [social_welfare, rc, ~, mpl] = efficient_aggregate(params, tfp, data_panel, flag);
     

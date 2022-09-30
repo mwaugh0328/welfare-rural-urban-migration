@@ -1,4 +1,4 @@
-function [data_panel] = quick_sim_efficient(data_panel, state_panel, vfun, muc, cons_policy, params)
+function [data_panel] = quick_sim_efficient(data_panel, state_panel, weights, vfun, muc, cons_policy, params)
 
 consumption = 1; live_rural = 2; work_urban = 3; move = 4;
 move_season  = 5; movingcosts = 6; season = 7; welfare = 8; experince = 9; production = 10;

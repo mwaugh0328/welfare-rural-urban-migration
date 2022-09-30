@@ -1,5 +1,7 @@
 function [data_panel, params, state_panel] = efficient_simulate(params, move_policy, cons_policy, solve_types, vfun, muc, seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% simmulates stuff so aggregates can be constructed...
+% if vfun or muc are empty, then the panel just has zeros in the place.
 
 time_series = 100000;
 N_obs = 50000;
