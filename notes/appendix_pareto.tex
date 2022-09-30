@@ -1,0 +1,355 @@
+\documentclass[12pt,pdftex]{article}
+\usepackage[pdftex]{graphicx,color}
+\usepackage{setspace,palatino,multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{lscape}
+%\usepackage{subfigure}
+\usepackage{threeparttable}
+\usepackage{natbib}
+\bibliographystyle{ecta}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\usepackage{xcolor}
+\usepackage{rotating}
+
+\definecolor{nblue}{RGB}{0,0,128}
+
+\usepackage[pdftex,colorlinks=true, bookmarks=false,
+pdfstartview={XYZ null null 0.65},
+pdftitle={},
+pdfauthor={ Michael E. Waugh},
+pdfkeywords={},
+colorlinks=true,linkcolor=darkgray,citecolor=darkgray,urlcolor=darkgray,
+breaklinks]{hyperref}
+
+\newcounter{saveeqni}%
+\newcounter{saveeqn01i}%
+\newcommand{\alpheqni}{\setcounter{saveeqni}{\value{section}}%
+%\setcounter{saveeqn01i}{\value{subsectioni}}%
+\renewcommand{\theequation}
+    {\alph{saveeqni}\mbox{.\arabic{equation}}}}%
+\newcommand{\reseteqni}{\setcounter{equation}{\value{saveeqni}}%
+\renewcommand{\theequation}{\arabic{equation}}}%
+
+\newtheorem{as}{Assumption}
+\newtheorem{reg}{Regularity Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corr}{Corollary}
+\newtheorem{df}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prp}{Proposition}
+\newtheorem{rmk}{Remark}
+\newenvironment{prf}{{\bf Proof}}{\hfill { }}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator*{\plim}{plim}
+\DeclareMathOperator*{\umax}{max}
+
+\special{papersize=8.5in,11in}
+\onehalfspacing
+\setlength{\parindent}{0.1em}
+\setlength{\parskip}{.09in}
+\textwidth15.75cm
+\evensidemargin 1.5in
+\oddsidemargin 1.5in
+\topmargin 8.5cm
+\textheight 10in
+\hyphenation{over-lapping}
+
+\titleformat{\section}{\color{black}\large\bf}{\color{black}{\thesection.}}{.25cm}{}
+\titleformat{\subsection}{\color{black}\normalsize\bf}{\thesubsection.}{.5em}{}
+\titleformat{\subsubsection}{\color{black}\normalsize\bf}{\thesubsubsection.}{.5em}{}
+
+\titlespacing{\section}{0pt}{*1.5}{*.5}
+\titlespacing{\subsection}{0pt}{*1.5}{*.5}
+\titlespacing{\subsubsection}{0pt}{*1.5}{*.5}
+
+\def\thesection{\arabic{section}}
+\def\thesubsection{\arabic{section}.\arabic{subsection}}
+\def\thesubsubsection{\arabic{section}.\arabic{subsection}.\Alph{subsubsection}}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\renewcommand{\arraystretch}{1.1}
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+\begin{onehalfspacing}
+\newpage
+
+\section{The Centralized Equilibrium}
+
+\subsection{Overview and the ``want''}
+
+The want is to provide answers to (i) how would a planner allocate households across space (ii) and what are the gains from this allocation. And then the answer to these questions would help answer our original ``want'' which is about spatial misallocation.
+
+The key issue confronting us is that the change in the allocation conflates distributional issues (how the pie is divided up) and pure efficiency issues (did the pie get larger). This issue, even in the simplest \citet{aiya94} framework, is not trivial as several papers (\citet*{bhandari2021efficiency}, \citet{davila2022welfare}) are struggling with this problem (and have raised concerns about older approaches like \citet{benabou2002tax} and \citet{floden2001effectiveness}). \citet{berger2022minimum} is more question centred, but they face the same problem with the minimum wage havering both distributional and pure efficiency issues at play and then the question is how to separate them.
+
+My read of stuff is that there is no silver bullet. Here is a pragmatic plan:
+\begin{itemize}
+\item Resolve the Planners problem with a more general, but still restricted set of Pareto Weights. So, we allow for Pareto weights $\psi(z)$ which will naturally restricts how much risk sharing there is across households that differ in permanent ability. Having it be indexed by only one state is easily parameterized and then controlled. More complicated indexing, like $\psi(z,s,x)$, is not obvious how to parameterize it (though one could do the Negishi-like weights).
+
+    What I do not think is feasible is a Pareto weight that is indexed by the moving shock as I suspect this would mess up the overall strategy regarding how the planners problem is solved.
+
+\item On the computer things would proceed in the following way:
+\begin{enumerate}
+\item Parameterize this so that $\psi(z) = \exp(\alpha\times z)$ and then the weights are appropriately normalized. This is what the \citet{bhandari2021efficiency} paper did and as mentioned above with a scalar situation it's clear how to deal with stuff. Notice that when $\alpha = 0$ this nests our current weights. And when $\alpha < 0$ it puts more weight on low $z$ households and the opposite puts more weight on high $z$ households.
+
+\item Vary the weights and then use the \citet{bhandari2021efficiency} decomposition to pull out the efficiency part. The issue with \citet{davila2022welfare} is that (i) it's less transparent and (ii) not suited for larger changes. Where as \citet{bhandari2021efficiency} is only an approximation.
+
+\item The other weight that is worth considering are Negishi-like weights. The idea is to (i) find weights that rationalize the distribution of marginal utility (by $z$) in the decentralized allocation and then (ii) hold those weights and evaluate the allocation that the Planner would chose given the weights from (i). So it's like ``hold fixed the distributional concerns'' and see what happens. This is the approach that is used in \citet{berger2022minimum}. \citet{beraja2022inefficient} do something similar. Also, in conversations with Simon, the claim is this should be essentially what \citet{davila2022welfare} advocates for.
+\end{enumerate}
+\item In a sense, we were trying to address this. That's why we had (i) hold migration fix and redistribute (so size of pie is fixed) and then (ii) let migration adjust (now pie changes). With that said, with alternative Pareto weights this decomposition or even \citet{bhandari2021efficiency} will differ.
+\end{itemize}
+
+\subsection{The Social Welfare Function}
+
+We focus on a planner with Pareto weights $\psi(z)$ that vary with the permanent productivity of an individual. The idea here is to (potentially) restrict how much risk sharing there is across households that differ in permanent ability, while having the planner treat households with the same $z$ identically and in a utilitarian manner. The case of $\psi(z) = 1$ corresponds with the traditional utilitarian planner that we explored in previous version of the Planning problem. The social welfare function is
+\begin{align}
+\mathcal{W^{SP}} = \sum_{t=0}^{\infty} \sum_{j'} \sum_{j} \int\limits_{z} \int\limits_{s} \int\limits_{x} \int\limits_{\nu} \beta^{t} \ \psi(z) \ u_{j',j}(c_{j}(z, s, x, t), x, \nu) \lambda_{j}(z, s, x, \nu, t) d\nu \ dx \ ds \ dz.
+\label{appendix-eq:sp-social_welfare}
+\end{align}
+Here social welfare is the weighted, average value of households utility across locations $j$ and going to location $j'$,  productivity states $z$ and $s$, experience $x$, and preference shocks $\nu$. The average is computed with respect to the Pareto weights $\psi(z)$, the measure of households $\lambda_{j}(z, s, x, \nu, t)$ with those shock states, experience levels, and preference shocks at date all dates $t$. Utility depends directly upon the consumption allocation $c_{j}(z, s, x, t)$, but also directly on the location $j$ through the $\bar u$, and the idiosyncratic preference shock across moving options $j'$.
+
+We cast the Planners Problem in terms of the planner choosing consumption allocations and migration probabilities for each state and date. To cast the problem in terms of migration probabilities, we integrate out the preference shocks conditional on a set of migration probabilities for each household state. These migration probabilities prescribe an assignment of those households with the largest relative preference shock to migrate or not. So given set of states $j, z, s, x, t$, utility is
+\begin{align}
+u(c_{j}(z,s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'} ].
+\label{appendix-eq:utility-shocks}
+\end{align}
+where $\mu_{j',j}(z,s,x,t)$ is the migration probability going from location $j$ to location $j'$ and then $E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'} ]$ is the expected value of the preference shock conditional on the migration probabilities. So, for example, if the Planner dictates that all people migrate from location $j$ to location $j'$, then this value is the unconditional mean of a Type 1 extreme value shock. Now we can re-write the social welfare function as
+\begin{align}
+\sum_{t=0}^{\infty}\sum_{j} \int\limits_{z} \int\limits_{s} \int\limits_{x} \beta^{t} \ \psi(z) \bigg \{ u(c_{j}(z, s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z, s,x,t)\big\}_{j'}] \bigg \} \lambda_{j}(z, s, x, t) dx \ ds \ dz.
+\label{appendix-eq:sp-social_welfare2}
+\end{align}
+
+\subsubsection{The Law of Motion and Feasibility}
+
+The Planning Problem maximizes (\ref{appendix-eq:sp-social_welfare2}) subject to the law of motion describing how the population evolves across states and locations and then how many resources the are available, i.e., feasibility. We describe each of these aspects of the environment below.
+
+\textbf{Law of Motion.} The law of motion describing how the measure of households evolves across states and locations is
+\begin{align}
+\lambda_{j}(z, s', x', t+1)  & =  \int\limits_{s} \int\limits_{x}  \mu_{j,j}(z, s,x,t)\pi(s',s) \varphi(x',x, j) \lambda_{j}(z, s, x, t)  dx \ ds   \  \label{appendix-eq:planner_law_motion} \\
+& +  \sum_{j' \neq j} \int\limits_{s} \int\limits_{x} \mu_{j,j'}(z, s,x,t) \pi(s',s) \varphi(x',x, j') \lambda_{j'}(z, s, x, t)  dx \ ds. \nonumber
+\end{align}
+This equation says, given the current distribution $\lambda_{j'}(z, s, x, t)$ in location $j'$, the measure of households $\lambda_{j}(z, s', x', t+1)$ reflects the migration probabilities of households in each location $j'$ into $j$, how their productivity evolves over time ($\pi's$), and how their experience $\varphi(x',x, j)$ evolves.
+
+\textbf{Labor Supply, Aggregate Production, and the Resource Constraint.} Given a distribution of households, the effective labor units in the urban and rural area are
+\begin{align}
+N_{u,t} =& \sum_{j = [\mbox{\tiny urban}, \mbox{\tiny seas}]}\int\limits_{z} \int\limits_{s} \int\limits_{x} \  z s^{\gamma} \ \lambda_j(z, s, x, t) \ dx \ ds \ dz, \nonumber
+\\
+\nonumber \\
+N_{r,t} =& \int\limits_{z} \int\limits_{s} \int\limits_{x} \ s \ \lambda_{\mbox{\tiny rural}}(z, s, x, t)\ dx \ ds \ dz \ .
+\label{appendix-eq:planner_labor_supply}
+\end{align}
+with the urban area includes the seasonal and permanent urban workforce. Aggregate production of the final good is
+\begin{align}
+Y_t = A_u N_{u,t} + A_{r,t} \left(N_{r,t} \right)^{\phi}.
+\label{appendix-eq:planner_value_production}
+\end{align}
+Combining the amount of resources available in (\ref{appendix-eq:planner_value_production}) with the consumption and moving decisions we have the following resource constraint:
+\begin{align}
+Y_t\  \geq \ & \sum_{j} \int\limits_{z} \int\limits_{s} \int\limits_{x} c_{j}(z, s, x, t) \lambda_{j}(z, s, x, t) \ dx \ ds \ dz  \nonumber \\
+& \ \ \ \ +  \ \  \sum_{j}\sum_{j'} \int\limits_{z} \int\limits_{s} \int\limits_{x}  m_{j',j} \ \mu_{j',j}(z,s, x, t) \lambda_{j}(z, s, x, t) \ dx \ ds \ dz.
+\label{appendix-eq:planner_income_side_gdp}
+\end{align}
+which says that production must be greater than or equal to consumption which is the first term on the righthand side of (\ref{appendix-eq:planner_income_side_gdp}) and the moving costs associated with the migration of households across locations which is the second term on the righthand side. Here we compactly sum across all $j'$ and $j$ location pairs and reminding ourselves that the moving cost for staying in a location is zero, i.e., $m_{j,j} = 0$.
+
+\subsubsection{The Social Planners Problem}
+
+The \textbf{Social Planner's Problem} is the following:
+{\small
+\begin{align}
+& \max\limits_{c_{j},\ \mu_{j',j}} \ \sum_{t=0}^{\infty}\sum_{j} \int\limits_{s} \int\limits_{x} \beta^{t} \psi(z) \bigg \{ u(c_{j}(z, s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'}]  \bigg \} \lambda_{j}(z, s, x, t) \ dx \ ds \ dz \ \ \nonumber \\
+\nonumber \\
+& \ \ \mbox{subject to} \ \ (\ref{appendix-eq:planner_value_production}) \ \ (\ref{appendix-eq:planner_income_side_gdp}) \ \ \mbox{and} \ \ (\ref{appendix-eq:planner_law_motion}) \ \ \mbox{and an inital condition} \ \ \lambda_j(z, s, x,0).
+\label{appendix-eq:planner_problem}
+\end{align}}Here the planner is choosing consumption allocations and migration probabilities for each state and date and these allocations must respect the production technology, feasibility, and the law of motion and an initial condition. Finally, note that the planner only considers allocations that depend on the current state, not the entire history. Given the Markov structure on the shocks, we suspect that this is of no consequence, e.g., the history independence of consumption allocation is clear. Given this problem in (\ref{appendix-eq:planner_problem}), define the following allocation:
+
+\textbf{A Stationary Social Planner Allocation.}  A Stationary Social Planner Allocation are time invariant policy functions $\{\ c_{j}(z, s, x, i),\ \mu_{j',j}(z, s, x, i) \ \}$, a probability distribution $\lambda_{j}(z, s, x, i)$, and positive real numbers $N_{j,i}$ for rural and urban areas and season $i$ where:
+\begin{itemize}
+\item[i] The policy functions solve the Social Planner's Problem in (\ref{appendix-eq:planner_problem});
+\item[ii] The probability distribution $\lambda_{j}(z, s, x, i)$ associated with $\{\ \mu_{j',j}(z, s, x, i), \ \pi(s',s), \ \varphi(x',x, j), \ \phi(\nu) \ \}$ is a stationary distribution;
+\item[iii] Effective labor units in the rural and urban areas satisfy (\ref{appendix-eq:planner_labor_supply}).
+\end{itemize}
+
+\subsubsection{Solution to the Social Planner's Problem}
+
+The approach to solving the planning problem proceeds in the following way. First, we formulate the problem in (\ref{appendix-eq:planner_problem}) using Lagrangian methods under the assumption that these methods are usable. Second, we then derive the necessary first order conditions associated the planner's consumption allocation and migration probabilities.
+
+We express the \textbf{Social Planner's Problem} as:
+{\small
+\begin{align}
+& \mathcal{L}  =   \sum_{t=0}^{\infty}\sum_{j} \int\limits_{z} \int\limits_{s} \int\limits_{x} \beta^{t} \psi(z) \bigg \{ u(c_{j}(z, s, x, t), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'}] \bigg \} \lambda_{j}(z, s, x, t) \ dx \ ds \ dz \label{appendix-eq:planner_L} \\
+\nonumber \\
+ & \ + \ \sum_{t=0}^{\infty} \chi(t) \bigg \{ Y_t - \sum_{j}\int\limits_{z} \int\limits_{s} \int\limits_{x} \left[ c_{j}(z, s, x, t)  +  \sum_{j'}  m_{j',j} \ \mu_{j',j}(z, s, x, t)\right] \lambda_{j}(z, s, x, t) \ dx \ ds \ dz \bigg \} \nonumber \\
+\nonumber  \\
+& \ + \ \sum_{t=0}^{\infty} \sum_{j} \int\limits_{z} \int\limits_{s} \int\limits_{x} \chi_{2j}(z, s, x, t) \bigg \{1 - \sum_{j'} \mu_{j',j}(z, s, x,t) \bigg \} \lambda_{j}(z, s, x, t) \ dx \ ds \ dz \nonumber \\
+\nonumber \\
+& \ - \ \sum_{t=0}^{\infty} \sum_{j} \int\limits_{z} \int\limits_{s'} \int\limits_{x'} \beta^{t+1} \psi(z) \chi_{3j}(z, s', x', t+1) \bigg \{\lambda_{j}(z, s', x', t+1) \ \ - \nonumber \\
+\nonumber \\
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+ \sum_{j'}  \int\limits_{s} \int\limits_{x} \mu_{j,j'}(z,s,x,t) \pi(s',s) \varphi(x',x, j') \lambda_{j'}(z,s, x, t) \ dx  \ ds  \bigg \} \ dx'  \ ds' \ dz \nonumber
+\end{align}}where the first term is the social welfare function and then several constraints with the associated multipliers. Each contraint/multiplier are:
+\begin{enumerate}
+\item $\chi(t)$ is the Lagrange multiplier on the resource constraint.
+
+\item $\chi_{2j}(z, s, x, t)$ are multipliers on the constraint that the destination migration probabilities leaving source $j$ must sum to one.
+
+\item $\chi_{3j}(z, s', x', t+1)$ are multipliers on the law of motion for the probability distribution, that is migration flows into $j$ from all $j'$ must equal the probability mass in $j$ at date $t+1$. On this last multiplier, we do the following that will ease the algebra below: scale the multiplier $\chi_{3j}(z, s', x', t+1)$ by $-\beta^{t+1}$ and the Pareto weight $\psi(z)$. This does not change the problem, but is only a scaling trick to see things quicker in the algebra below.
+\end{enumerate}
+\textbf{Consumption Allocations.} Taking the first order condition of (\ref{appendix-eq:planner_L}) with respect to consumption gives:
+\begin{align}
+\beta^{t} \psi(z) u'(c_{j}(z, s, x, t), x) = \chi(t) \ \ \ \forall \ j, j', \ s, \ x, \ \mbox{and} \ t.
+\label{appendix-eq:foc_planner}
+\end{align}
+which says set the weighted, marginal utility of consumption for every location, productivity state, and experience state equal its marginal cost at each date. This condition has several implications. First, in a time-invariant, stationary allocation, for a given permanent productivity state $z$, in each season $i$:
+\begin{align}
+u'(c_{j}(z, s, x, i), x) & = \ u'(c_{\tilde{j}}(z, s', x', i), x')  \ \forall \ j, \ s, \ x, \label{appendix-eq:foc_planner2} \\
+\nonumber \\
+& = u'(z,i) \nonumber
+\end{align}
+so that marginal utility is equated within each season across households of permanent type $z$. What this implies is that ``luck'' or a persons history that led to a particular location, shock state $s$, or preference state $x$ does not matter and consumption is equalized with those of the same $z$. Now across households of different $z$ types, we have the condition that
+\begin{align}
+\frac{u'(z,i)}{u'(z',i)} = \frac{\psi(z')}{\psi(z)}
+\end{align}
+so that the ratio of the marginal utility of consumption is inversely proportional to the Pareto weights. In the Utilitarian case, this condition implies that the marginal utility of consumption is the same across households.
+
+One subtlety here is the distinction between the marginal utility of consumption and the level consumption. This disconnect arises because of how a household's experience status and location affect its marginal utility of consumption. For example, compare the marginal utility of a rural household versus a seasonal migrant with the same states and does not have experience
+\begin{align}
+c_{\mbox{\tiny rura1}}(z, s, x, i)^{-\alpha} = c_{\mbox{\tiny seas}}(z, s, x, i)^{-\alpha}\bar u.
+\end{align}
+But because the disutility of migration affects the marginal utility of consumption for non-experienced migrants, this implies that
+\begin{align}
+c_{\mbox{\tiny rura1}}(z, s, x, i) < c_{\mbox{\tiny seas}}(z, s, x, i)
+\end{align}
+so that\textbf{ non-experienced migrants must be compensated for migrating} to equate the marginal utility of consumption across households.
+
+\textbf{Migration Probabilities.} First, let us take stock of the challenge here. The key issue is that when deriving the first order conditions, the planner understands that (i) he can change utility today because the migration probabilities affect the value of the preference shocks that are felt and (ii) he has control of the distribution $\lambda$ next period via the migration probabilities chosen today. Thus, via the chain rule there are two effects. The effect arising from a change in the migration rate given the distribution of households today. And then a the effect from how the distribution changes \textbf{tomorrow} because of the change in migration today. So:
+\begin{align}
+\bigg \{ \frac{\partial  \Upsilon_1 }{\partial \mu_{j',j}(z, s, x, t)} \bigg \}\lambda_{j}(z, s, x, t) + \sum_{j'} \bigg \{ \ \Upsilon_2 \ \bigg \} \frac{\partial \lambda_{j'}(z, s, x,  t+1)}{\partial \mu_{j',j}(z, s, x, t)} = 0
+\label{appendix-eq:stuff}
+\end{align}
+where $\Upsilon_1$ and $\Upsilon_2$ are collections of terms. And the overall strategy is to find a solution that sets things on the inside of the brackets (for $\frac{\partial \Upsilon_1}{\partial \mu}$ and $\Upsilon_2$ ) equal to zero.
+
+This is the first $\frac{\partial \Upsilon_1}{\partial \mu}$ component, holding fixed the distribution:
+{\small
+\begin{align}
+\bigg \{\frac{\partial \Upsilon_1}{\partial \mu_{j',j}(z, s,x, t)} \bigg \}\lambda_{j}(z, s, x, t) &= \Bigg \{ \  \beta^{t} \psi(z) \frac{\partial E[\ \nu \ | \ \ \big\{\mu_{j',j}(z,s,x,t)\big\}_{j'}]}{\partial \mu_{j',j}(z,s,x,t)} - \chi(t) m_{j',j} \nonumber \\
+\nonumber \\
+& - \chi_{2j}(z,s,x,t)  + \psi(z) \beta^{t+1}\underbrace{\int_{s'}\int_{x'}\chi_{3j'}(z,s',x',t+1) \pi(s',s) \varphi(x',x, j)}_{\psi(z) \beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s, x \right]} \ \Bigg  \} \lambda_{j}(z,s,x,t)
+\label{appendix-eq:first_stuff_foc}
+\end{align}}Focusing on the right-hand side of the equation, the first term is how the expected value of the preference shocks change in that location. As the planner moves households more or less, the planner is affecting utility via the preference shock. The next the next term is the cost of moving evaluated at the social cost of those resources, i.e. $\chi(t)$. The next two terms reflect a source multiplier $\chi_{2j}(s,t)$ and a discounted, Pareto weighted, destination multiplier $\psi(z)\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s, x \right]$. This last term integrates across all future shock and experience states for a particular destination $j'$, conditional on a households current state. As we show below, this represents the \textbf{expected} social value of the destination $j'$.
+
+Let's set the term inside the brackets of (\ref{appendix-eq:first_stuff_foc}) equal to zero by solving out for the migration rates as a function of the multipliers. The Type 1 extreme value assumption on the shocks implies that
+\begin{align}
+E[\ \nu \ | \ \mu_{j',j}(z,s,x,t)] = -\sigma \sum_{j'}\mu_{j'j}(z,s,x,t) \log \left(\mu_{j'j}(z,s,x,t)\right)
+\end{align}
+and then its derivative with respect to the migration rate is:
+\begin{align}
+\frac{\partial E[\ \nu \ | \ \mu_{j',j}(z,s,x,t)]}{\partial \mu_{j',j}(s,x,t)} = -\sigma \log \left(\mu_{j'j}(z,s,x,t)\right) - \sigma
+\end{align}
+and with the proposed strategy to set things in the brackets equal to zero implies that
+{\small
+\begin{align}
+&-\sigma  \beta^{t} \psi(z)  \log \left(\mu_{j'j}(z,s,x,t)\right)  =  \beta^{t} \psi(z) \sigma + \chi(t) m_{j',j} + \chi_{2j}(z,s,x,t) - \psi(z)\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)| z, s, x \right] \nonumber\\
+\nonumber \\
+&\mu_{j'j}(z,s,x,t) = \exp \left( \frac{\beta^{t} \psi(z) \sigma + \chi(t) m_{j',j} + \chi_{2j}(z,s,x,t) - \psi(z)\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s,x \right]}{-\sigma \beta^{t} \psi(z) } \right)  \\
+\nonumber \\
+&= \exp \left( \frac{\sigma \beta^{t} \psi(z) + \chi(t) m_{j',j} - \psi(z)\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)|z, s, x \right]}{-\sigma \beta^{t} \psi(z) } \right) \Bigg / \exp \left(\frac{\chi_{2j}(z,s,x,t)}{\sigma \beta^{t} \psi(z) } \right) \nonumber
+\end{align}}Where the last line follows from substituting out the source $j$, date $t$ multiplier and properties of the $\exp$ function. The final step is to set $\chi_{2j}(z,s,x,t)$ source multiplier so that the migration probabilities sum to one. This implies that
+{\small
+\begin{align}
+&\exp \left(\frac{\chi_{2j}(s,x,t)}{\sigma \beta^{t} \psi(z)} \right)  = \sum_{j'} \exp \left( \frac{\sigma \beta^{t} \psi(z) + \chi(t) m_{j',j} - \psi(z)\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1) | z, s, x \right]}{-\sigma \beta^{t} \psi(z)  } \right) \\
+\nonumber \\
+& \Rightarrow \ \ \ \chi_{2j}(s,t) = \sigma \log  \Bigg \{  \sum_{j'} \exp \left( \frac{\sigma \beta^{t} \psi(z) + \chi(t) m_{j',j} - \psi(z)\beta^{t+1}\mathbb{E}\left[\chi_{3j'}(t+1)| z, s, x \right]}{-\sigma \beta^{t} \psi(z) } \right) \Bigg \}.
+\end{align}}And so the source multiplier takes the log-sum form that arises in discrete choice settings with Type 1 extreme value shocks. That is it reflects something like the ex-ante value of being in that location. After canceling terms, we have that
+{\small
+\begin{align}
+& \mu_{j'j}(z,s,x,t) =   \\
+\nonumber \\
+&\exp \left(\frac{- u'(z, t)  \ m_{j'j} + \beta\mathbb{E}\left[\chi_{3j'}(t+1)| z, s,x \right]}{\sigma } \right)  \Bigg / \sum_{j'} \exp \left( \frac{-u'(z, t) \ m_{j'j} + \beta\mathbb{E}\left[\chi_{3j'}(t+1)| z,s,x \right]}{\sigma } \right). \nonumber
+\end{align}}The socially optimal migration rates take the familiar form associated with Type 1 extreme value shocks. And this can be separated into a source component (the denominator) and then destination $j'$ components (the numerator). And the destination components depends on the costs of migration today relative to the discounted, expected value of the multiplier $\mathbb{E}\left[\chi_{3j'}(t+1)|z, s,x \right]$ in location $j'$. Some observations
+\begin{itemize}
+\item Here migration is history independent|only the current cost and the future matters for how many people should move or not. Where as in the decentralized equilibrium, the past matters.
+
+\item A second observation is that when Pareto weights are Utilitarian, then $u'(z, t) = u'(t)$ and this formula collapses to our original expression.
+
+\item It's also worth noting how the Pareto weights do not directly show up in this expression. So there is a sense in which distributional concerns do not matter. However, there is a sense in which they do because they affect the implied social cost of moving that agent through $u'(z, t)$ and as discussed below they affect the future social benefits again through how consumption is allocated across households.
+\end{itemize}
+Recapping: we have solved for the migration probabilities that set $\frac{\partial \Upsilon_1}{\partial \mu}$ in (\ref{appendix-eq:stuff}) equal to zero. We need the whole term to be set to zero, so the next step is to find the value of the multiplier(s) $\chi_{3j'}(z, s',x', t+1)$ so that $\Upsilon_2$ in (\ref{appendix-eq:stuff}) is also equal to zero.
+Step by step we have:
+{\small
+\begin{align}
+& \sum_{j'} \bigg \{ \ \Upsilon_2 \bigg \} \frac{\partial \lambda_{j'}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s, x,t)} =  \\
+\nonumber \\
+& \sum_{j'}  \int\limits_{s} \int\limits_{x} \psi(z) \beta^{t+1} \bigg \{ \underbrace{u(c_{j',j}(z, s, x, t+1), x) + E[ \ \nu \ | \ \big\{\mu_{j',j}(z,s,x,t+1)\big\}_{j'}] }_{u_{j}(z,s,x,t+1)}\bigg \}  \frac{\partial \lambda_{j'}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s,x,t)} dx \ ds \ \ + \ \ \\
+\nonumber \\
+& \sum_{j'} \int\limits_{s} \int\limits_{x}  \chi(t+1) \Bigg \{ \underbrace{\frac{\partial Y_{t+1}}{\partial \lambda_{j'}(z, s, x, t+1)} - c_{j'}(z,s,x,t+1) - \sum_{j''}  m_{j'',j'} \ \mu_{j'',j'}(z, s, x, t+1)}_{\kappa_{j'}(z, s, x, t+1)} \Bigg \} \frac{\partial \lambda_{j'}(z,s,x, t+1)}{\partial \mu_{j',j}(z,s,x,t)} dx \ ds\\
+\nonumber \\
+& + \underbrace{\sum_{j'} \int\limits_{s} \int\limits_{x} \chi_{2j'}(z, s, x, t+1) \bigg \{1 - \sum_{j''} \mu_{j'',j'}(z, s,x,t+1) \bigg \} \frac{\partial \lambda_{j'}(z,s,x, t+1)}{\partial \mu_{j',j}(z,s,x,t)} dx \ ds }_{ = 0} \\
+\nonumber \\
+& - \psi(z) \beta^{t+1} \sum_{j'} \int\limits_{s} \int\limits_{x} \chi_{3j'}(z, s, x, t+1) \ \frac{\partial \lambda_{j'}(z, s, x,t+1)}{\partial \mu_{j',j}(z,s,x,t)} dx \ ds  \\
+\nonumber \\
+& + \psi(z) \beta^{t+2}\sum_{j'} \int\limits_{s}  \int\limits_{x} \bigg \{ \underbrace{ \sum_{j''}  \int\limits_{s'} \int\limits_{x'} \chi_{3j''}(z, s',x', t+2) \mu_{j'',j'}(z, s, x, t+1) \pi(s',s) \varphi(x',x, j') dx' \ ds' }_{\mathbb{E}\left[\chi_{3}(t+2) |z, s, x, j' \right]} \bigg \}  \frac{\partial \lambda_{j'}(z, s, x, t+1)}{\partial \mu_{j',j}(z, s,x,t)} dx \ ds.
+\end{align}}
+If we put this all to together than we have the following:
+{\small
+\begin{align}
+\sum_{j}  \int\limits_{s} \int\limits_{x} &\bigg \{ \psi(z) \beta^{t+1} u_{j'}(z,s,x,t+1) + \chi(t+1) \kappa_{j'}(z,s,x,t+1) \ \ - \ \ \\
+\nonumber \\
+&\psi(z)\beta^{t+1}\chi_{3j'}(z,s,x, t+1) + \psi(z)\beta^{t+2}\mathbb{E}\left[\chi_{3}(t+2) | z,s,x \right] \bigg \} \frac{\partial \lambda_{j}(z,s,x,t+1)}{\partial \mu_{j',j}(z,s,x,t)} dx \ ds = 0.
+\end{align}}
+And the proposed solution is to set
+\begin{align}
+\chi_{3j'}(z, s, x, t+1) =  u_{j'}(z,s,x,t+1) +   u'(z,t+1) \kappa_{j'}(z,s,x,t+1) +  \beta \mathbb{E}\left[\chi_{3}(t+2) |z, s, x \right].
+\label{appendix-eq:chi3j-multiplier}
+\end{align}
+where I substituted in the for the multiplier $\chi(t+1)$ and then the Pareto weights and discount factors in the previous expression cancel. The multiplier $\chi_{3j}(z, s, x, t+1)$ takes on a recursive formulation where the multiplier equals utility, the $\kappa$ term (more on this below), and then the expected, discounted multiplier tomorrow taking into account all the different possible moving options. Observe that our notion does not have a $j$ in the expectation above, so this denotes given a realized states, integrate over shocks and different location possibilities.
+
+Again, this expression collapses to the same expression as under the Utilitarian Planner. So, when the Pareto weights are Utilitarian, then $u'(z, t) = u'(t)$ and this is what we were working with previously. Now what matters is the marginal utility of the $z$-type agent in evaluating the net social benefits (the $\kappa$ term) of having a household in location $j$.
+
+
+Finally, notice that $\frac{\partial Y(t+1)}{\partial \lambda_{j}(z, s, x, t+1)} $ is simply the marginal product of labor in location $j$ multiplied by the relevant idiosyncratic shock primitive, e.g. $s$ for rural area. Then combining the recursive expression for the multiplier in (\ref{appendix-eq:chi3j-multiplier}), the definition of $\kappa_{j'}(z, s,x,t+1)$,  the migration probabilities, and consumption allocations we have Proposition 1:
+
+\begin{proposition}[\textbf{Efficient Consumption and Migration}] \label{apx-prp:efficient} The consumption and migration rates solving the Social Planner Problem in (\ref{appendix-eq:planner_problem}) are: Consumption allocations equate the marginal utility of consumption in all locations, productivity and experience states for each date $t$:
+{\small
+\begin{align}
+u'(z, t) \ = \ & u'(c_{j}(z, s, x, t)) = u'(c_{\tilde{j}}(z, s', x', t)) \ \ \ \forall \ j, \ s, \ x, \\
+\label{appendix-eq:foc_planner2}
+\nonumber \\
+\mbox{and} \ \ \ \ \ \ &\frac{u'(z, t)}{u'(z',t)} = \frac{\psi(z')}{\psi(z)} \ \ \ \forall \ z, \ z'.
+\end{align}
+}
+Migration probabilities satisfy
+{\footnotesize
+\begin{align}
+& \mu_{j'j}(z,s,x,t)  = \nonumber \\
+\nonumber \\
+& \exp \left(\frac{- u'(z,t) \ m_{j',j} + \beta \ \mathbb{E}\left[\chi_{3j'}(t+1)| z,s,x\right]}{\sigma} \right)  \Bigg / \sum_{j'} \exp \left( \frac{- u'(z, t)\ m_{j',j} + \beta \  \mathbb{E}\left[\chi_{3j'}(t+1)|z,s,x ) \right]}{\sigma} \right), \label{appendix-eq:migration_prob}
+\end{align}
+}
+with the multiplier $\chi_{3j'}(z, s, x, t+1)$ satisfying the following recursive relationship
+{\small
+\begin{align}
+& \ \ \chi_{3j'}(z, s, x, t+1) =  u_{j'}(z, s, x, t+1) +  u'(z, t+1) \kappa_{j'}(z, s,x,t+1) + \beta \mathbb{E}\left[\chi_{3}(t+2)|z, s, x  \right], \label{appendix-eq:dynamic_multiplier}
+\end{align}}
+where
+{\small
+\begin{align}
+& \ \ \kappa_{j'}(z, s',x',t+1) = \mbox{mpl}_{j'}(z,s',t+1) - c_{j'}(z, s',x',t+1) - \sum_{j''}  m_{j'',j'} \ \mu_{j'',j'}(z, s', x', t+1). \label{appendix-eq:kappa}
+\end{align}}
+\end{proposition}
+
+\newpage
+
+\bibliography{./bib/migration_refs}
+
+
+
+
+\end{onehalfspacing}
+\end{document}  
