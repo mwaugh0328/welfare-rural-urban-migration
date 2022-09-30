@@ -1,4 +1,4 @@
-function [big_panel, params, big_state_panel] = just_simulate(params, move, solve_types, assets, specs, vfun, meanstest, meanstest_cash)
+function [big_panel, params, big_state_panel] = just_simulate(params, move, solve_types, assets, specs, weights, vfun, meanstest, meanstest_cash)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 time_series = specs.time_series; %100000;
 N_obs = specs.N_obs; %25000;
@@ -9,6 +9,12 @@ big_panel = [];
 big_state_panel = [];
 
 [~,type_weights] = pareto_approx(specs.n_perm_shocks, 1./params.perm_shock_u_std);
+
+if isempty(weights)
+    
+    weights = ones(specs.n_perm_shocks,1);
+    
+end
 
 
 for nmc = 1:specs.Nmontecarlo
@@ -30,7 +36,8 @@ for nmc = 1:specs.Nmontecarlo
 
     [sim_panel(:,:,xxx), states(:,:,xxx)] = rural_urban_simulate(...
                                 assets(xxx), move(xxx), params, solve_types(xxx,:), shock_states_p,...
-                                pref_shocks(:,xxx), move_shocks(:,xxx), vfun(xxx));
+                                pref_shocks(:,xxx), move_shocks(:,xxx), structfun(@(f) weights(xxx)*f, vfun(xxx),'uni',0));
+
 
     end
     

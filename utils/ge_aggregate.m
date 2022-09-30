@@ -1,4 +1,4 @@
-function [labor, govbc, tfp, wages, welfare_stats] = ge_aggregate(params, data_panel, wages, tfp, transfer_type, flag)
+function [labor, govbc, tfp, wages, welfare_stats] = ge_aggregate(params, data_panel, wages, tfp, transfer_type, flag, vfun_flag)
 
 wage.monga = wages(1);
 wage.notmonga = wages(2);
@@ -63,12 +63,12 @@ disp(asset_prct)
 % disp('Consumption, Mushfiqs Sample')
 % disp(mean(mushfiqs_sample(:,consumption)))
 
-if min(bin.welfare) < -10
+if vfun_flag == 1
     %I'm proably reporting the value function
     
 %     disp('Mushfiqs Sample, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
 %     disp(([bin.welfare', 100.*bin.migration', 100.*bin.experince', 0.01.*bin.consumption']))
-    disp('Mushfiqs Sample, Average Welfare (% ce variation)')
+    disp('Mushfiqs Sample, Average Welfare')
     disp(mean(mushfiqs_sample(:,welfare)))
     
 else
@@ -104,9 +104,9 @@ welfare_stats.all = mean(data_panel(:, welfare));
 welfare_stats.rural = mean(data_panel(data_panel(:,live_rural)==1, welfare));
 welfare_stats.urban = mean(data_panel(data_panel(:,live_rural)~=1, welfare));
 
-if welfare_stats.all < -10
+if vfun_flag == 1
     %I'm proably reporting the value function
-    disp('Social Welfare (% ce variation): All, Rural, Urban')
+    disp('Social Welfare: All, Rural, Urban')
     disp(round([welfare_stats.all, welfare_stats.rural, welfare_stats.urban],2))
 
 else

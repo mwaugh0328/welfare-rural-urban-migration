@@ -6,48 +6,50 @@ maringal_utility = 11; ubar_cost = 12;
 
 %[location, season, shock_states']
 
+weights = repmat(weights',params.n_shocks,1); % get this to conform with stuff below
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 cons_policy_rural_not = reshape([cons_policy(:).rural_not],params.n_shocks,params.n_perm_shocks);
 
-vfun_rural_not = reshape([vfun(:).rural_not],params.n_shocks,params.n_perm_shocks);
+vfun_rural_not = weights.*reshape([vfun(:).rural_not],params.n_shocks,params.n_perm_shocks);
 
-muc_rural_not= reshape([muc(:).rural_not],params.n_shocks,params.n_perm_shocks);
+muc_rural_not= weights.*reshape([muc(:).rural_not],params.n_shocks,params.n_perm_shocks);
 
 
 cons_policy_rural_exp = reshape([cons_policy(:).rural_exp],params.n_shocks,params.n_perm_shocks);
 
-vfun_rural_exp = reshape([vfun(:).rural_exp],params.n_shocks,params.n_perm_shocks);
+vfun_rural_exp = weights.*reshape([vfun(:).rural_exp],params.n_shocks,params.n_perm_shocks);
 
-muc_rural_exp= reshape([muc(:).rural_exp],params.n_shocks,params.n_perm_shocks);
+muc_rural_exp= weights.*reshape([muc(:).rural_exp],params.n_shocks,params.n_perm_shocks);
 
 
 cons_policy_seasn_not = reshape([cons_policy(:).seasn_not],params.n_shocks,params.n_perm_shocks);
 
-vfun_seasn_not = reshape([vfun(:).seasn_not],params.n_shocks,params.n_perm_shocks);
+vfun_seasn_not = weights.*reshape([vfun(:).seasn_not],params.n_shocks,params.n_perm_shocks);
 
-muc_seasn_not= reshape([muc(:).seasn_not],params.n_shocks,params.n_perm_shocks);
+muc_seasn_not= weights.*reshape([muc(:).seasn_not],params.n_shocks,params.n_perm_shocks);
 
 
 cons_policy_seasn_exp = reshape([cons_policy(:).seasn_exp],params.n_shocks,params.n_perm_shocks);
 
-vfun_seasn_exp = reshape([vfun(:).seasn_exp],params.n_shocks,params.n_perm_shocks);
+vfun_seasn_exp = weights.*reshape([vfun(:).seasn_exp],params.n_shocks,params.n_perm_shocks);
 
-muc_seasn_exp= reshape([muc(:).seasn_exp],params.n_shocks,params.n_perm_shocks);
+muc_seasn_exp= weights.*reshape([muc(:).seasn_exp],params.n_shocks,params.n_perm_shocks);
 
 
 cons_policy_urban_new= reshape([cons_policy(:).urban_new],params.n_shocks,params.n_perm_shocks);
 
-vfun_urban_new = reshape([vfun(:).urban_new],params.n_shocks,params.n_perm_shocks);
+vfun_urban_new = weights.*reshape([vfun(:).urban_new],params.n_shocks,params.n_perm_shocks);
 
-muc_urban_new= reshape([muc(:).urban_new],params.n_shocks,params.n_perm_shocks);
+muc_urban_new= weights.*reshape([muc(:).urban_new],params.n_shocks,params.n_perm_shocks);
 
 
 cons_policy_urban_old = reshape([cons_policy(:).urban_old],params.n_shocks,params.n_perm_shocks);
 
-vfun_urban_old = reshape([vfun(:).urban_old],params.n_shocks,params.n_perm_shocks);
+vfun_urban_old = weights.*reshape([vfun(:).urban_old],params.n_shocks,params.n_perm_shocks);
 
-muc_urban_old= reshape([muc(:).urban_old],params.n_shocks,params.n_perm_shocks);
+muc_urban_old= weights.*reshape([muc(:).urban_old],params.n_shocks,params.n_perm_shocks);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 location_loc = 1;

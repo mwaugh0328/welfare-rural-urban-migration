@@ -1,9 +1,9 @@
-function [social_welfare, move] = compute_analytical_efficient(cal, tfp, seed)
+function [social_welfare, move] = compute_analytical_efficient(cal, tfp, weights, seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [solve_types, params] = efficient_preamble(cal, tfp, []); 
 
-[weights] = make_weights(0, solve_types);
+%[weights] = make_weights(0, solve_types);
 
 % mplscale.raw.rural.notmonga = 1.0;
 % mplscale.raw.rural.monga  = 1.0;

@@ -25,10 +25,12 @@ disp('Replicating the baseline economy...')
 % What this does is construct the policy functions and value functions
 % given the wage.
 
-[data_panel, params] = just_simulate(params, move_de, solve_types, assets, specs, vfun, [],[]);
+[weights] = make_weights(0, solve_types);
+
+[data_panel, params] = just_simulate(params, move_de, solve_types, assets, specs, weights, vfun, [],[]);
 % this then simmulates the economy
 
-[labor, govbc, tfp, ~, welfare_decentralized] = ge_aggregate(params, data_panel, wage_de, [], 'baseline', 1);
+[labor, govbc, tfp, ~, welfare_decentralized] = ge_aggregate(params, data_panel, wage_de, [], 'baseline', 1, 1);
 
 % then aggregates.
 
@@ -67,7 +69,7 @@ disp('')
 disp('')
 disp('Now compute the efficient allocation...')
 
-[social_welfare, move_policy] = compute_analytical_efficient(x1, tfp, []);
+[social_welfare, move_policy] = compute_analytical_efficient(x1, tfp, weights, []);
 
 cons_eqiv_effecient.all = ((social_welfare.all ./ welfare_decentralized.all)).^(1./(1-params.pref_gamma)) - 1;
 cons_eqiv_effecient.fromfull = ((social_welfare.all ./ fullinsruance_welfare.all)).^(1./(1-params.pref_gamma)) - 1;
