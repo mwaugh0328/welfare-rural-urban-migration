@@ -1,4 +1,4 @@
-function [rc, social_welfare, move] = onestep(cons_mpl, weights, params, tfp, solve_types, seed, flag)
+function [rc, social_welfare, move] = onestep(cons_mpl, weights, params, specs, tfp, solve_types, flag)
 % now the setup for pareto weight version is where the consumption part is
 % for for the lowest z and by experince.
 
@@ -51,7 +51,7 @@ if flag == 0.0
     move = efficient_chi_policy(params, mplscale, consumption, solve_types);
 
     % then simmulate...again here no need to pass the weights through
-    [data_panel, params, ~] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
+    [data_panel, params, ~] = efficient_simulate(params, specs, move, consumption, solve_types, [], []);
 
     % no need to pass weights through here bc only physical allocations 
     % are computed/needed
@@ -67,7 +67,7 @@ else
     [vfun, muc] = efficient_policy(params, move, consumption);
     
     % simmulate, not sure why some historical reason, 
-    [data_panel, params, state_panel] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
+    [data_panel, params, state_panel] = efficient_simulate(params, specs, move, consumption, solve_types, [], []);
     
     % this is where teh weights are needed, so the muc's are converted to
     % weights*muc and value_fun's are converted to weightes*value_fun

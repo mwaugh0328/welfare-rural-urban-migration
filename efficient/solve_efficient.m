@@ -72,7 +72,7 @@ disp('')
 disp('')
 disp('Now compute the efficient allocation...')
 
-[social_welfare, move_policy] = compute_analytical_efficient(x1, tfp, weights, []);
+[social_welfare, move_policy] = compute_analytical_efficient(x1, specs, tfp, weights);
 
 cons_eqiv_effecient.all = ((social_welfare.all ./ welfare_decentralized.all)).^(1./(1-params.pref_gamma)) - 1;
 % cons_eqiv_effecient.fromfull = ((social_welfare.all ./ fullinsruance_welfare.all)).^(1./(1-params.pref_gamma)) - 1;

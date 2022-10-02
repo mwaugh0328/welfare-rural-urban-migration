@@ -18,3 +18,5 @@ tic
 toc
 
 [rc, social_welfare] = onestep_fullinsurance(cons, assets, move, tfp, weights, params, solve_types, specs, 1.0);
+
+%disp(specs)

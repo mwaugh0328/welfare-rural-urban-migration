@@ -20,14 +20,6 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[zurban , ~] = pareto_approx(specs.n_perm_shocks, 1./params.perm_shock_u_std);
-
-types = [ones(specs.n_perm_shocks,1), zurban];
-
-solve_types = [params.rural_tfp.*types(:,1), types(:,2)];
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 parfor xxx = 1:specs.n_perm_shocks 
       [~, ~, vfun(xxx), muc(xxx)] = policy_valuefun_fullinsurance(assets(xxx), move(xxx),...
           params, [], consumption(xxx));
