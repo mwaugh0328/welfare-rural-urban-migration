@@ -13,7 +13,7 @@ ver
 disp('-----------------------------------------------------------------------------------------------------')
 disp(' ')
 
-pareto_alpha = -0.00;
+pareto_alpha = 0.5;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -47,7 +47,7 @@ disp('Replicating the baseline economy...')
 % disp('')
 % disp('Fix the labor allocation, but redistribute and equate marginal utility of consumption across hh...')
 % 
-[~, fullinsruance_welfare] = compute_fullinsurance(assets, move_de, x1, tfp, weights, params, specs, 1);
+[fullinsruance_welfare] = compute_fullinsurance(assets, move_de, tfp, weights, params, specs);
 
 % 
 cons_eqiv.all = ((fullinsruance_welfare.all ./ welfare_decentralized.all)).^(1./(1-params.pref_gamma)) - 1;
@@ -58,8 +58,8 @@ cons_eqiv.all = ((fullinsruance_welfare.all ./ welfare_decentralized.all)).^(1./
 
 % you could also compute, take this compared to a rural guy, what would he
 % get in expectation if living in the effecient world or urban.
-cons_eqiv.rural = ((fullinsruance_welfare.all ./ welfare_decentralized.rural)).^(1./(1-params.pref_gamma)) - 1;
-cons_eqiv.urban = ((fullinsruance_welfare.all ./ welfare_decentralized.urban)).^(1./(1-params.pref_gamma)) - 1;
+% cons_eqiv.rural = ((fullinsruance_welfare.all ./ welfare_decentralized.rural)).^(1./(1-params.pref_gamma)) - 1;
+% cons_eqiv.urban = ((fullinsruance_welfare.all ./ welfare_decentralized.urban)).^(1./(1-params.pref_gamma)) - 1;
 %
 
 disp("Al, Welfare Gain in %: From Decentralized to Full Insurance, Fixed Allocation")
@@ -79,8 +79,8 @@ cons_eqiv_effecient.all = ((social_welfare.all ./ welfare_decentralized.all)).^(
 
 disp("Welfare Gain in %: From Decentralized to Centralized/Efficient Allocation")
 disp(100.*cons_eqiv_effecient.all)
-% disp("Welfare Gain in %: From Full Insurance to Centralized/Efficient Allocation")
-% disp(100.*(cons_eqiv_effecient.all -cons_eqiv.all))
+disp("Welfare Gain in %: From Full Insurance to Centralized/Efficient Allocation")
+disp(100.*(cons_eqiv_effecient.all -cons_eqiv.all))
 
 
 
