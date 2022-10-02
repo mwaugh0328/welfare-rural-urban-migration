@@ -2,14 +2,14 @@ function [rc, social_welfare, move] = onestep(cons_mpl, weights, params, tfp, so
 % now the setup for pareto weight version is where the consumption part is
 % for for the lowest z and by experince.
 
-cons_low = cons_mpl(1:2); % lowest guy consumption
+cons_low = cons_mpl(1:2); % lowest guy consumption, experince, by season
 
 mplscale.raw.rural.notmonga = cons_mpl(3); % no change on mpl
 mplscale.raw.rural.monga = cons_mpl(4);
 
-cexp = repmat(cons_low, params.n_shocks/2,1); % experince by trans shock
+cexp = repmat(cons_low, params.n_shocks/2,1); % by trans shock
 
-cnotexp = ((1./params.ubar).*(cexp).^(-2)).^(-1./2); % non-experince by trans shock
+cnotexp = ((1./params.ubar).*(cexp).^(-params.pref_gamma)).^(-1./params.pref_gamma); % non-experince by trans shock
 
 for xxx = 1:params.n_perm_shocks
     % assign the consumption level by permanent shock
@@ -30,9 +30,12 @@ for xxx = 1:params.n_perm_shocks
     
     if xxx < params.n_perm_shocks
         
-        cexp = ( (weights(xxx) ./ weights(xxx+1) ).*cexp.^(-2) ).^(-1 ./ 2);
+        cexp = ( (weights(xxx) ./ weights(xxx+1) ).*cexp.^(-params.pref_gamma) ).^(-1 ./ params.pref_gamma);
         
-        cnotexp = ( (weights(xxx) ./ weights(xxx+1) ).*cnotexp.^(-2) ).^(-1 ./ 2);
+        cnotexp = ( (weights(xxx) ./ weights(xxx+1) ).*cnotexp.^(-params.pref_gamma) ).^(-1 ./ params.pref_gamma);
+        
+        % the check on this is that the standard deviation of weight*muc in
+        % cross section should be zero.
         
     end
           
@@ -50,9 +53,9 @@ if flag == 0.0
     % then simmulate...again here no need to pass the weights through
     [data_panel, params, ~] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
 
-    % this is the place where weights may be required, but not here since
-    % the focus on allocations
-    [~, rc, ~, mpl] = efficient_aggregate(params,tfp, data_panel,flag);
+    % no need to pass weights through here bc only physical allocations 
+    % are computed/needed
+    [~, rc, ~, mpl] = efficient_aggregate(params,tfp, data_panel, flag);
     
     rc = [rc ; ( mpl.raw.rural.notmonga - mplscale.raw.rural.notmonga ); ( mpl.raw.rural.monga - mplscale.raw.rural.monga )];
     
@@ -63,10 +66,11 @@ else
     % pull out value fun and muc
     [vfun, muc] = efficient_policy(params, move, consumption);
     
-    % simmulate, not sure why some historical reason, but vfun and muc are
-    % not here, do no need to put in the weights.
+    % simmulate, not sure why some historical reason, 
     [data_panel, params, state_panel] = efficient_simulate(params, move, consumption, solve_types, [], [], seed);
     
+    % this is where teh weights are needed, so the muc's are converted to
+    % weights*muc and value_fun's are converted to weightes*value_fun
     [data_panel] = quick_sim_efficient(data_panel, state_panel, weights, vfun, muc, consumption, params);
 
     [social_welfare, rc, ~, mpl] = efficient_aggregate(params, tfp, data_panel, flag);

@@ -22,7 +22,7 @@ move_shocks = rand(time_series,params.n_perm_shocks);
 
 % states_panel = zeros(N_obs,4,params.n_types);
 
-[~,type_weights] = pareto_approx(params.n_perm_shocks, 1./params.perm_shock_u_std);
+[~, type_weights] = pareto_approx(params.n_perm_shocks, 1./params.perm_shock_u_std);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if isempty(vfun) 

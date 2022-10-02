@@ -9,7 +9,7 @@ sigma_nu_exp = params.sigma_nu_exp;
 
 sigma_nu_not = params.sigma_nu_not;
 
-beta = params.beta; m = params.m; gamma = 2; abar = params.abar;
+beta = params.beta; m = params.m; gamma = params.pref_gamma; abar = params.abar;
 
 ubar = params.ubar; lambda = params.lambda; pi_prob = params.pi_prob;
 
@@ -49,9 +49,11 @@ for zzz = 1:n_shocks
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
     
     utility.rural_not(zzz,1) = A.*(consumption.rural_not(zzz)).^(1-gamma);
+    
     muc.rural_not(zzz,1) = (consumption.rural_not(zzz)).^(-gamma);
     
     utility.rural_exp(zzz,1) = A.*(consumption.rural_exp(zzz)).^(1-gamma);
+    
     muc.rural_exp(zzz,1) = (consumption.rural_exp(zzz)).^(-gamma);
     
     utility.seasn_not(zzz,1) = ubar.*A.*(consumption.seasn_not(zzz)).^(1-gamma);
@@ -134,9 +136,7 @@ for iter = 1:n_iterations
 % This is the value of being in the rural area...
 
     v_stay_rural_not = bsxfun(@plus,utility.rural_not(zzz),expected_value_rural_not);
-    
-
-        
+           
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               NON-EXPERIENCED
 % This is the value of being being a seasonal migrant...
@@ -151,12 +151,6 @@ for iter = 1:n_iterations
      
     v_seasn_not(zzz,1) = bsxfun(@plus, utility.seasn_not(zzz) ,...
         (lambda.*expected_value_rural_not + (1-lambda).*expected_value_rural_exp));
-    
-%     %[v_seasn_not, policy_assets_seasn_not(:,zzz)] = max(value_fun,[],2);
-%     
-%     idx = sub2ind(size(value_fun), (1:n_asset_states)', assets.seasn_not(:,zzz));
-%     
-%     v_seasn_not = value_fun(idx);
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               NON-EXPERIENCED
@@ -189,11 +183,7 @@ for iter = 1:n_iterations
 
     v_seasn_exp(zzz,1) = bsxfun(@plus, utility.seasn_exp(zzz) , expected_value_rural_exp);
 
-%     %[v_seasn_exp, policy_assets_seasn_exp(:,zzz)] = max(value_fun,[],2);
-%     
-%     idx = sub2ind(size(value_fun), (1:n_asset_states)', assets.seasn_exp(:,zzz));
-%     
-%     v_seasn_exp = value_fun(idx);
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               EXPERIENCED
 % Compute value of moving...here I get the expected value of being in the
@@ -203,12 +193,6 @@ for iter = 1:n_iterations
     v_move_rural_exp = bsxfun(@plus, utility.rural_exp(zzz) , ...
         pi_prob.*expected_value_urban_old + (1-pi_prob).*expected_value_urban_new);
    
-%     %[v_move_rural_exp, p_asset_move_rural_exp] = max(value_fun,[],2);
-%     
-%     idx = sub2ind(size(value_fun), (1:n_asset_states)', assets.rural_exp(:,zzz,3));
-%     
-%     v_move_rural_exp = value_fun(idx);
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               URBAN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -224,8 +208,6 @@ for iter = 1:n_iterations
 % the ubar is not preseant. 
 
     v_stay_urban_old = bsxfun(@plus, utility.urban_old(zzz) , expected_value_urban_old );
-
-
                
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Again, here I get the expected value of being in the rural area, becuase
@@ -239,7 +221,6 @@ for iter = 1:n_iterations
 
     v_move_urban_new = bsxfun(@plus, utility.urban_new(zzz), expected_value_rural_not);
            
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Compute value functions...
