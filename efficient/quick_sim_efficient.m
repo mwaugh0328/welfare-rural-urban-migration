@@ -9,6 +9,9 @@ maringal_utility = 11; ubar_cost = 12;
 weights = repmat(weights',params.n_shocks,1); % get this to conform with stuff below
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE how this stuff takes the value funs and muc and correctly weights it
+% according to the specified Pareto Weights, in the welfare and muc entry
+% of data panel we have weights*vfun and weights*muc
 
 cons_policy_rural_not = reshape([cons_policy(:).rural_not],params.n_shocks,params.n_perm_shocks);
 

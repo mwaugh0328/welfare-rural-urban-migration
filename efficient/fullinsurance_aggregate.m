@@ -78,6 +78,7 @@ if flag == 1
     disp([social_welfare.all, social_welfare.rural, social_welfare.urban])
     disp('Standard Deviation of Marginal Utility')
     disp([std_maringal_u.monga, std_maringal_u.notmonga])
+    
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -165,6 +166,7 @@ iwage.urban = sum(urban(:,production)./number_workers)./(length(urban)./number_w
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 if flag == 1
+    
 disp('Implied Wage Gap')
 disp(iwage.urban./iwage.rural)      
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')

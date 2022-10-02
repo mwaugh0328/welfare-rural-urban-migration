@@ -11,6 +11,7 @@ big_state_panel = [];
 [~,type_weights] = pareto_approx(specs.n_perm_shocks, 1./params.perm_shock_u_std);
 
 if isempty(weights)
+    % if the weights is empry, then just set to one like in our old economy
     
     weights = ones(specs.n_perm_shocks,1);
     
@@ -37,6 +38,11 @@ for nmc = 1:specs.Nmontecarlo
     [sim_panel(:,:,xxx), states(:,:,xxx)] = rural_urban_simulate(...
                                 assets(xxx), move(xxx), params, solve_types(xxx,:), shock_states_p,...
                                 pref_shocks(:,xxx), move_shocks(:,xxx), structfun(@(f) weights(xxx)*f, vfun(xxx),'uni',0));
+                            
+                            % note the structfun...since vfun is a
+                            % structure, for vfun(xxx), is multiplies all
+                            % value functions (rural exp, urban, etc.) by
+                            % the scalar
 
 
     end
