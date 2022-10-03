@@ -13,7 +13,7 @@ ver
 disp('-----------------------------------------------------------------------------------------------------')
 disp(' ')
 
-pareto_alpha = -0.65;
+pareto_alpha = 0.65;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -49,18 +49,7 @@ disp('Replicating the baseline economy...')
 % 
 [fullinsruance_welfare] = compute_fullinsurance(assets, move_de, tfp, weights, params, specs);
 
-% 
 cons_eqiv.all = ((fullinsruance_welfare.all ./ welfare_decentralized.all)).^(1./(1-params.pref_gamma)) - 1;
-% This is just the standard thing. Think of guys behind the vale, so social
-% welfare in the effecient allocation relative to decentralized. This is
-% what each should recive (expost paths and outcomes may be different) but
-% this is again a behind the vale calcuation.
-
-% you could also compute, take this compared to a rural guy, what would he
-% get in expectation if living in the effecient world or urban.
-% cons_eqiv.rural = ((fullinsruance_welfare.all ./ welfare_decentralized.rural)).^(1./(1-params.pref_gamma)) - 1;
-% cons_eqiv.urban = ((fullinsruance_welfare.all ./ welfare_decentralized.urban)).^(1./(1-params.pref_gamma)) - 1;
-%
 
 disp("Al, Welfare Gain in %: From Decentralized to Full Insurance, Fixed Allocation")
 disp(100.*cons_eqiv.all)

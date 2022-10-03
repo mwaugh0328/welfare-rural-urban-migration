@@ -100,7 +100,11 @@ number_workers = sum(labor_units.rural.monga) + sum(labor_units.urban.monga);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if flag == 1
+    
 welfare_stats.all = mean(data_panel(:, welfare));
+
+welfare_stats.bigC = mean(data_panel(:,consumption));
+
 welfare_stats.rural = mean(data_panel(data_panel(:,live_rural)==1, welfare));
 welfare_stats.urban = mean(data_panel(data_panel(:,live_rural)~=1, welfare));
 
@@ -120,7 +124,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 location = {'rural'; 'urban';'all'};
 acct_measure = {'production','income', 'consumption','movingcosts', 'fiscalcost', 'tax', 'net_asset','welfare'};
-acct_measure_var = [production, income, consumption,movingcosts, fiscalcost, tax, net_asset, welfare];
+acct_measure_var = [production, income, consumption, movingcosts, fiscalcost, tax, net_asset, welfare];
 season_lbl = {'monga', 'notmonga'};
 
 for xxx = 1:length(location)
@@ -150,15 +154,15 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if flag == 1
-% disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-% disp('Accounting: HH Balance Sheet')
-% disp('')
-% disp('Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
-% disp(round([accounting.all.monga.production, accounting.all.monga.income, accounting.all.monga.consumption, accounting.all.monga.movingcosts, ...
-%     accounting.all.monga.fiscalcost, accounting.all.monga.tax, accounting.all.monga.net_asset],2))
-% disp('Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
-% disp(round([accounting.all.notmonga.production, accounting.all.notmonga.income, accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts,...
-%     accounting.all.notmonga.fiscalcost, accounting.all.notmonga.tax, accounting.all.notmonga.net_asset],2))
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+disp('Accounting: HH Balance Sheet')
+disp('')
+disp('Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
+disp(round([accounting.all.monga.production, accounting.all.monga.income, accounting.all.monga.consumption, accounting.all.monga.movingcosts, ...
+    accounting.all.monga.fiscalcost, accounting.all.monga.tax, accounting.all.monga.net_asset],2))
+disp('Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
+disp(round([accounting.all.notmonga.production, accounting.all.notmonga.income, accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts,...
+    accounting.all.notmonga.fiscalcost, accounting.all.notmonga.tax, accounting.all.notmonga.net_asset],2))
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

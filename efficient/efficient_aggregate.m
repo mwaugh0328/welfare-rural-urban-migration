@@ -62,7 +62,11 @@ number_workers = sum(labor_units.rural.monga) + sum(labor_units.urban.monga);
 % outside of monga, number of guys in total...
 
 social_welfare.all = mean(data_panel(:, welfare));
+
+social_welfare.bigC = mean(data_panel(:, consumption));
+
 social_welfare.rural = mean(data_panel(data_panel(:,live_rural)==1, welfare));
+
 social_welfare.urban  = mean(data_panel(data_panel(:,live_rural)~=1, welfare));
 
 std_maringal_u.monga = std(data_panel(data_panel(:,season)==1, maringal_utility));

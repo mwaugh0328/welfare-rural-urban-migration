@@ -66,7 +66,11 @@ number_workers = sum(labor_units.rural.monga) + sum(labor_units.urban.monga);
 % outside of monga, number of guys in total...
 
 social_welfare.all = mean(data_panel(:, welfare));
+
+social_welfare.bigC = mean(data_panel(:, consumption));
+
 social_welfare.rural = mean(data_panel(data_panel(:,live_rural)==1, welfare));
+
 social_welfare.urban  = mean(data_panel(data_panel(:,live_rural)~=1, welfare));
 
 std_maringal_u.monga = std(data_panel(data_panel(:,season)==1, maringal_utility));
@@ -168,14 +172,20 @@ iwage.urban = sum(urban(:,production)./number_workers)./(length(urban)./number_w
 if flag == 1
     
 disp('Implied Wage Gap')
-disp(iwage.urban./iwage.rural)      
-disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('Accounting')
-disp('')
-disp('Monga: Production, Consumption, Moving Costs, Utility Cost')
-disp([(aggproduction.rural.monga + aggproduction.urban.monga), accounting.all.monga.consumption, accounting.all.monga.movingcosts, accounting.all.monga.ubarcost ])
-disp('Not Monga: Production, Consumption, Moving Costs, Utility Costs')
-disp([(aggproduction.rural.notmonga + aggproduction.urban.notmonga), accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts, accounting.all.notmonga.ubarcost])
+disp(iwage.urban./iwage.rural)
+
+% disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+% disp('Accounting')
+% disp('')
+% disp('Monga: Production, Consumption, Moving Costs, Utility Cost')
+% disp([(aggproduction.rural.monga + aggproduction.urban.monga), accounting.all.monga.consumption, accounting.all.monga.movingcosts, accounting.all.monga.ubarcost ])
+% disp('Not Monga: Production, Consumption, Moving Costs, Utility Costs')
+% disp([(aggproduction.rural.notmonga + aggproduction.urban.notmonga), accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts, accounting.all.notmonga.ubarcost])
+
+% Note because of how land rents are treated, production here will not
+% match up with production in decentralized eq need to multiply ad
+% production by 1/params.alpha to make consistent.
+
 disp('Resource Constraint: Monga, Non Monga')
 disp([resource_constriant.monga, resource_constriant.notmonga])
 
