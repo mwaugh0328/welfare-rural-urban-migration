@@ -121,17 +121,17 @@ labor.supply.monga = sum((1./(params.rural_tfp.*params.seasonal_factor)).*data_p
 
 labor.supply.notmonga = sum((1./(params.rural_tfp.*(1./params.seasonal_factor))).*data_panel(labor_units.rural.notmonga,production))./number_workers;
 
-%aggproduction.rural.monga = params.alpha.*tfp.monga.*params.rural_tfp.*(labor.supply.monga).^(params.alpha);
+aggproduction.rural.monga = params.alpha.*tfp.monga.*params.rural_tfp.*(labor.supply.monga).^(params.alpha);
 
-aggproduction.rural.monga = tfp.monga.*params.rural_tfp.*(labor.supply.monga).^(params.alpha); %rents kept now
+%aggproduction.rural.monga = tfp.monga.*params.rural_tfp.*(labor.supply.monga).^(params.alpha); %rents kept now
 % Now given labor supply, just plug into the production function, with the
 % factor share alpha in front. This is the absentee landlord model, so land
 % rents are off some place, not redistributed. 
 
 mpl.rural.monga = params.alpha.*tfp.monga.*params.rural_tfp.*(labor.supply.monga).^(params.alpha-1);
 
-%aggproduction.rural.notmonga = params.alpha.*tfp.notmonga.*params.rural_tfp.*(labor.supply.notmonga).^(params.alpha);
-aggproduction.rural.notmonga = tfp.notmonga.*params.rural_tfp.*(labor.supply.notmonga).^(params.alpha); %rents kept now
+aggproduction.rural.notmonga = params.alpha.*tfp.notmonga.*params.rural_tfp.*(labor.supply.notmonga).^(params.alpha);
+%aggproduction.rural.notmonga = tfp.notmonga.*params.rural_tfp.*(labor.supply.notmonga).^(params.alpha); %rents kept now
 
 % same deal here.
 
@@ -175,12 +175,12 @@ disp('Implied Wage Gap')
 disp(iwage.urban./iwage.rural)
 
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-% disp('Accounting')
-% disp('')
-% disp('Monga: Production, Consumption, Moving Costs, Utility Cost')
-% disp([(aggproduction.rural.monga + aggproduction.urban.monga), accounting.all.monga.consumption, accounting.all.monga.movingcosts, accounting.all.monga.ubarcost ])
-% disp('Not Monga: Production, Consumption, Moving Costs, Utility Costs')
-% disp([(aggproduction.rural.notmonga + aggproduction.urban.notmonga), accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts, accounting.all.notmonga.ubarcost])
+disp('Accounting')
+disp('')
+disp('Monga: Production, Consumption, Moving Costs, Utility Cost')
+disp([(aggproduction.rural.monga + aggproduction.urban.monga), accounting.all.monga.consumption, accounting.all.monga.movingcosts, accounting.all.monga.ubarcost ])
+disp('Not Monga: Production, Consumption, Moving Costs, Utility Costs')
+disp([(aggproduction.rural.notmonga + aggproduction.urban.notmonga), accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts, accounting.all.notmonga.ubarcost])
 
 % Note because of how land rents are treated, production here will not
 % match up with production in decentralized eq need to multiply ad

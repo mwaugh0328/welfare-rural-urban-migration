@@ -203,6 +203,13 @@ aggproduction.urban.monga = sum(data_panel(labor_units.urban.monga,production)).
 
 aggproduction.urban.notmonga = sum(data_panel(labor_units.urban.notmonga,production))./number_workers;
 
+rents_monga = (1 - params.alpha).*tfp.monga.*params.rural_tfp.*(labor.supply.monga).^(params.alpha);
+
+rents_not_monga = (1 - params.alpha).*params.alpha.*tfp.notmonga.*params.rural_tfp.*(labor.supply.notmonga).^(params.alpha);
+
+
+welfare_stats.bigC_rents = mean(data_panel(:,consumption)) + rents_monga + rents_not_monga - ( accounting.all.notmonga.net_asset  + accounting.all.monga.net_asset);
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 urban = data_panel(data_panel(:,live_rural)~=1, :);
 rural_not_monga_work_rural = rural((rural(:,season)~=1 & rural(:,work_urban)~=1), :);
