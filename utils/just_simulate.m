@@ -1,4 +1,4 @@
-function [big_panel, params, big_state_panel, cshare] = just_simulate(params, move, solve_types, assets, specs, weights, vfun, meanstest, meanstest_cash)
+function [big_panel, params, big_state_panel] = just_simulate(params, move, solve_types, assets, specs, weights, vfun, meanstest, meanstest_cash)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 time_series = specs.time_series; %100000;
 N_obs = specs.N_obs; %25000;
@@ -8,7 +8,7 @@ params.N_obs = N_obs;
 big_panel = [];
 big_state_panel = [];
 
-cshare = zeros(specs.n_perm_shocks, specs.Nmontecarlo);
+%cshare = zeros(specs.n_perm_shocks, specs.Nmontecarlo);
 
 [~,type_weights] = pareto_approx(specs.n_perm_shocks, 1./params.perm_shock_u_std);
 
@@ -62,7 +62,7 @@ for nmc = 1:specs.Nmontecarlo
     % this last value entry in the row indicates the permenant type of the
     % person in the panel. 
     
-        cshare(xxx, nmc) = mean(sim_panel(:,2,xxx));
+        %cshare(xxx, nmc) = mean(sim_panel(:,2,xxx));
     
         s_count = e_count+1;
    
