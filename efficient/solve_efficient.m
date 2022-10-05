@@ -13,7 +13,7 @@ ver
 disp('-----------------------------------------------------------------------------------------------------')
 disp(' ')
 
-pareto_alpha = -0.00;
+pareto_alpha = -0.65;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -55,7 +55,6 @@ cons_eqiv.all = ((fullinsruance_welfare.all ./ welfare_decentralized.all)).^(1./
 disp("Al, Welfare Gain in %: From Decentralized to Full Insurance, Fixed Allocation")
 disp(100.*cons_eqiv.all)
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 disp('')
@@ -71,6 +70,10 @@ disp("Welfare Gain in %: From Decentralized to Centralized/Efficient Allocation"
 disp(100.*cons_eqiv_effecient.all)
 disp("Welfare Gain in %: From Full Insurance to Centralized/Efficient Allocation")
 disp(100.*(cons_eqiv_effecient.all -cons_eqiv.all))
+disp("Gain in Aggregate Consumption")
+disp(100.*(social_welfare.bigC ./ fullinsruance_welfare.bigC - 1))
+
+
 
 
 

@@ -379,19 +379,20 @@ and this relationship holds for every $s$ but in moreover can be vectored where 
 
 \vspace{0.3cm}
 
-\begin{tabular}{l c c c c c}
+\begin{tabular}{l c c c c c c}
 \hline
 \hline
 & \multicolumn{3}{c}{Welfare Gains} & & \\
-Pareto Weight ($\alpha_z$)		& Migration Fixed  & Migration Endogenous & $\Delta$ & Rural Share & Seasonal Migration \\
-\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4} \cmidrule(lr){5-5} \cmidrule(lr){6-6}
-$-0.65$ (high $z$, \textbf{more} weight)     & $32.7$  & $34.0 $  & $1.3$ & $54.6$& $28.5$\\
-$-0.50$                                      & $35.5$  & $36.9$ & $1.4$ & $54.3$& $27.7$\\
-$-0.25$                                      & $40.7$  & $42.3$ & $1.6$ & $53.9$ & $27.0$\\
-$\phantom{-}0.00$ (\textbf{baseline})        & $46.6$  & $48.5$ & $1.9$ & $53.6$ & $26.8$\\
-$\phantom{-}0.25$                            &  $53.2$ & $55.3$ & $2.1$ & $53.4$ & $26.9$\\
-$\phantom{-}0.50$                            & 60.3  & $62.7$ & $2.4$ & $53.2$ & $27.5$\\
-$\phantom{-}0.65$ (high $z$, \textbf{less} weight) &64.9 & $67.5$ & $2.6$ & $53.2$ & $27.8$\\
+Pareto Weight ($\alpha_z$)		& Migration Fixed  & Benchmark & $\Delta$ & Rural Share & Seasonal Migration & $\% \Delta$ C\\
+\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4} \cmidrule(lr){5-5} \cmidrule(lr){6-6} \cmidrule(lr){7-7}
+$-1.0$ (high $z$, \textbf{more} weight)     & $27.3$  & $28.4 $  & $1.2$ & $55.4$& $31.6$ & $\phantom{-}0.01$\\
+$-0.65$                                     &64.9 & $67.5$ & $2.6$ & $53.2$ & $27.8$& $-0.08$\\
+$-0.50$                                      & $35.5$  & $36.9$ & $1.4$ & $54.3$& $27.7$ & $-0.12$\\
+$-0.25$                                      & $40.7$  & $42.3$ & $1.6$ & $53.9$ & $27.0$& $-0.19$\\
+$\phantom{-}0.00$ (\textbf{baseline})        & $46.6$  & $48.5$ & $1.9$ & $53.6$ & $26.8$& $-0.25$\\
+$\phantom{-}0.25$                            &  $53.2$ & $55.3$ & $2.1$ & $53.4$ & $26.9$& $-0.31$\\
+$\phantom{-}0.50$                            & 60.3  & $62.7$ & $2.4$ & $53.2$ & $27.5$ & $-0.38$\\
+$\phantom{-}0.65$ (high $z$, \textbf{less} weight) &64.9 & $67.5$ & $2.6$ & $53.2$ & $27.8$ & $-0.42$\\
 \hline
 \end{tabular}
 \parbox[c]{6.9in}{%
@@ -416,13 +417,18 @@ I changed things slightly with the $1/z$ part rather than $z$, as there were som
 
 \item A second thing to notice is that the implied share of rural households or seasonal migration barely changed. So in a sense, our conclusion that the planner would want \textbf{less} migration, \textbf{more} urban households, is pretty robust to how the planner is weighting different households.
 
-\item The harder thing to sort out is the incremental gain from migration. Recall, what we were doing is (i) fix migration and redistribute (so the size of the pie is fixed) and then (ii) let the size of the pie adjust.
+\item The harder thing to sort out is the incremental gain from migration. Recall, what we were doing is (i) fix migration and redistribute (so the size of the pie is fixed) and then (ii) let the size of the pie adjust. The second column ``Part from $\Delta$ Migration'' reports this. The number for the baseline of $1.9$ means that the welfare gains increased by 1.9 percentage points relative to the allocation where migration was fixed. And this seems to be increasing as more weight is put on poor guys. 
 
-    The second column ``Part from $\Delta$ Migration'' reports this. The number for the baseline of $1.9$ means that the welfare gains increased by 1.9 percentage points relative to the allocation where migration was fixed.
+\item The other thing to notice is the final column with the change in aggregate consumption (which is the change from the consumption in the baseline vs. the efficient allocation).  It does not move much in the baseline case, less than a quarter of a percent. In fact it is negative. Yet, welfare increases by almost 2 percent when migration changes.
 
-    The interesting observation is the contribution at the extremes, migration matters more. The middle is the low point. Why? I'm not sure, don't have a great story for this.
+    Then notice that as more weight is put on the low $z$ guys, the planner is giving up aggregate consumption, yet getting larger welfare gains. So the shuffling around of people is mattering far more in utils. And then the opposite is occurring when
+    
+\item What is going on here? The planner is doing several things. One is the risk sharing part. But the other is to make the pie as big as possible but do so in utils, not consumption. This is relevant because of the ubar. So the planner might face a tradeoff between making aggregate consumption large, versus making utility large because the planner moves people in a way to avoid ubar. So what...
 
-\item Still need to do the decomposition. I'm wondering what really is the difference from our exercise about (keep pie fixed, let pie expand) vs. other decompositions. In a sense, I would call the gains in the second column the efficiency gains from improved migration
+\item This is why I think the gains from migration decline as the weights get loaded on high $z$ guys. High $z$ guys are never moving, they are in the urban area, don't face ubar. So when welfare is tilted towards those guys, ubar does not matter. Then when the weights get loaded on the low z guys. This tradeoff becomes more salient. So the gains from getting this trade off right become more important. And that's why the gains from migration are larger, when the weights on low z guys are larger. 
+
+\item This connects with the Anmol decomposition. Their ``efficiency'' part is essentially, did aggregate consumption go up or down, then converted to utils. Period. It does not reflect the discussion above. I would call the stuff above efficiency, because the planner is moving people around to deliver the most amount of utils as efficiently as possible. So did the number of potential utils increase? Migration does this by changing preferences (through the ubar) and consumption.
+    
 \end{itemize}
 \newpage
 
