@@ -13,7 +13,7 @@ ver
 disp('-----------------------------------------------------------------------------------------------------')
 disp(' ')
 
-pareto_alpha = -0.65;
+pareto_alpha = -0.00;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -28,7 +28,6 @@ disp('Replicating the baseline economy...')
 % given the wage.
 
 [weights] = make_weights(pareto_alpha, solve_types)
-
 
 [data_panel, params, ~] = just_simulate(params, move_de, solve_types, assets, specs, weights, vfun, [],[]);
 % here we need to pass the Pareto Weights in so we correctly compute social
