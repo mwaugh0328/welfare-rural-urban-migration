@@ -10,7 +10,6 @@ function [cal_params, specs] = tax_eq_preamble(cal_params, specs, seed, R)
 % 7: Losing it. 
 % 8: Gamma parameter in shock process
 % 9: Logit shocks
-% 10: Seasonal migration cost
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Then there are some pre-determined, hand calibrated values...
 
