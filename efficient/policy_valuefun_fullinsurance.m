@@ -1,10 +1,7 @@
 function [assets, move, vfinal, muc] = policy_valuefun_fullinsurance(assets, move, params, vcft, consumption)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The idea of this is to take policy functions, and directly compute the
-% value function. No Max. So the idea is to feed in optimal policy and get out
-% known value function. 
-% What this allows us to do is to fix policy, but change
-% enviorment and track how welfare changes (holding policy fixed).
+% value function.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 sigma_nu_exp = params.sigma_nu_exp;
