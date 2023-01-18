@@ -31,8 +31,166 @@ which does several things.
 The output should look something like this.
 
 ```
+-----------------------------------------------------------------------------------------------------
+   17-Jan-2023 22:33:31
+
+ 
+-----------------------------------------------------------------------------------------------------
+MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
+MATLAB License Number: 618777
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19045)
+Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+-----------------------------------------------------------------------------------------------------
+MATLAB                                                Version 9.10        (R2021a)
+Curve Fitting Toolbox                                 Version 3.5.13      (R2021a)
+Econometrics Toolbox                                  Version 5.6         (R2021a)
+Financial Instruments Toolbox                         Version 3.2         (R2021a)
+Financial Toolbox                                     Version 6.1         (R2021a)
+GPU Coder                                             Version 2.1         (R2021a)
+Global Optimization Toolbox                           Version 4.5         (R2021a)
+MATLAB Coder                                          Version 5.2         (R2021a)
+MATLAB Compiler                                       Version 8.2         (R2021a)
+MATLAB Compiler SDK                                   Version 6.10        (R2021a)
+Optimization Toolbox                                  Version 9.1         (R2021a)
+Parallel Computing Toolbox                            Version 7.4         (R2021a)
+Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
+Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
+-----------------------------------------------------------------------------------------------------
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Replicating the baseline economy...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Aggregate Statistics
+Average Rural Population
+    0.5987
+
+Migrants, Mushfiqs Sample
+    0.3647
+
+Migrants, Whole Population
+    0.3067
+
+Wage Gap
+    1.8923
+
+Fraction of Rural with Access to Migration Subsidy
+    0.4975
+
+Mushfiqs Sample, Average Welfare
+   -1.3587
+
+Social Welfare: All, Rural, Urban
+   -1.0800   -1.2900   -0.7700
+
+Gov Budget Constraint
+     0
+
+Tax rate in % on labor income
+     0
 
 
+                                         Norm of      First-order 
+ Iteration  Func-count     f(x)          step          optimality
+     0          5        0.235563                         0.478
+     1         10     6.22104e-23       0.483999        7.8e-12      
+
+Equation solved.
+
+fsolve completed because the vector of function values is near zero
+as measured by the value of the function tolerance, and
+the problem appears regular as measured by the gradient.
+
+<stopping criteria details>
+Elapsed time is 135.281898 seconds.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Aggregate Statistics
+Average Rural Population
+    0.5987
+
+Seasonal Migrants
+    0.3067
+
+Social Welfare: All, Rural, Urban
+   -0.7382   -0.7404   -0.7350
+
+Standard Deviation of Marginal Utility
+   1.0e-15 *
+
+    0.6106    0.0312
+
+Implied Wage Gap
+    1.8923
+
+Accounting
+Monga: Production, Consumption, Moving Costs, Utility Cost
+    0.9500    0.9445    0.0056    0.0292
+
+Not Monga: Production, Consumption, Moving Costs, Utility Costs
+    1.5010    1.4793    0.0217    0.0027
+
+Resource Constraint: Monga, Non Monga
+   1.0e-11 *
+
+   -0.1254    0.7787
+
+Al, Welfare Gain in %: From Decentralized to Full Insurance, Fixed Allocation
+   46.5935
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Now compute the efficient allocation...
+
+                                         Norm of      First-order 
+ Iteration  Func-count     f(x)          step          optimality
+     0          9         4.53024                          2.03
+     1         18       0.0172834        1.87004          0.154      
+     2         27     0.000133247      0.0780257         0.0114      
+     3         36        1.52e-07      0.0073141       0.000423      
+     4         45     1.03748e-10    0.000295335       1.12e-05      
+
+Equation solved, inaccuracy possible.
+
+fsolve stopped because the vector of function values is near zero, as measured by the value
+of the function tolerance. However, the last step was ineffective.
+
+<stopping criteria details>
+Elapsed time is 239.841492 seconds.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Aggregate Statistics
+Average Rural Population
+    0.5365
+
+Seasonal Migrants
+    0.2681
+
+Social Welfare: All, Rural, Urban
+   -0.7290   -0.7266   -0.7318
+
+Standard Deviation of Marginal Utility
+   1.0e-14 *
+
+    0.1062    0.0368
+
+Implied Wage Gap
+    1.7043
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Accounting
+Monga: Production, Consumption, Moving Costs, Utility Costs
+    0.9604    0.9517    0.0088    0.0286
+
+Not Monga: Production, Consumption, Moving Costs, Utility Costs
+    1.4883    1.4661    0.0222    0.0055
+
+Resource Constraint: Monga, Non Monga
+   1.0e-05 *
+
+    0.7327   -0.5546
+
+Welfare Gain in %: From Decentralized to Centralized/Efficient Allocation
+   48.4504
+
+Welfare Gain in %: From Full Insurance to Centralized/Efficient Allocation
+    1.8568
 
 ```
 
