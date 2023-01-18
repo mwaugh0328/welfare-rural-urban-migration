@@ -1,7 +1,7 @@
 function [big_panel, params, big_state_panel] = just_simulate(params, move, solve_types, assets, specs, weights, vfun, meanstest, meanstest_cash)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-time_series = specs.time_series; %100000;
-N_obs = specs.N_obs; %25000;
+time_series = specs.time_series; 
+N_obs = specs.N_obs;
 
 params.N_obs = N_obs;
 

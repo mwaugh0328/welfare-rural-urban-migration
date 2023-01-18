@@ -363,12 +363,6 @@ for iter = 1:n_iterations
     %defined...then the seleciton is just on the best. IT handles
     %situations where the best might not be feasible. 
     
-%     problem = isinf(v_prime_rural_not(:,zzz)); 
-%     if sum(problem) > 0
-%         %disp('yes')
-%     v_prime_rural_not(problem,zzz) = max([ v_stay_rural_not(problem) , v_move_seasn_not(problem) , v_move_rural_not(problem)],[],2) ;
-%     end
-
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % See discussion above.
     
@@ -380,13 +374,7 @@ for iter = 1:n_iterations
     
     v_prime_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp) + vfoo;
     
-%     problem = isinf(v_prime_rural_exp(:,zzz));
-%     
-%     if sum(problem) > 0        
-%         %disp('yes')
-%         v_prime_rural_exp(problem,zzz) = max([ v_stay_rural_exp(problem) , v_move_seasn_exp(problem) , v_move_rural_exp(problem)],[],2) ;
-%     end     
-    
+     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % See discussion above.
     
@@ -398,13 +386,7 @@ for iter = 1:n_iterations
     
     v_prime_urban_new(:,zzz) = sigma_nu_not.*log(pi_denom_urban_new) + vfoo;
     
-%     problem = isinf(v_prime_urban_new(:,zzz));
-%     
-%     if sum(problem) > 0        
-%         %disp('yes')
-%       [v_prime_urban_new(problem,zzz), ~] = max([ v_stay_urban_new(problem) , v_move_urban_new(problem)],[],2) ;
-%     end
-    
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % See discussion above.
     
@@ -415,14 +397,7 @@ for iter = 1:n_iterations
     pi_denom_urban_old = sum(pi_urban_old, 2);
     
     v_prime_urban_old(:,zzz) = sigma_nu_exp.*log(pi_denom_urban_old) + vfoo;
-    
-%     problem = isinf(v_prime_urban_old(:,zzz));
-    
-%     if sum(problem) > 0        
-%         %disp('yes')
-%       [v_prime_urban_old(problem,zzz), ~] = max([ v_stay_urban_old(problem) , v_move_urban_old(problem)],[],2) ;
-%     end     
-    
+        
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % update the vaule function within the itteration. This is super
     % powerfull in speeding stuff up...
@@ -648,23 +623,6 @@ for zzz = 1:n_shocks
     
     policy_move_rural_not(:,zzz,:) = cumsum(pi_rural_not./pi_denom_rural_not, 2, 'omitnan');
     
-%     pi_rural_not = exp([v_stay_rural_not, v_move_seasn_not, v_move_rural_not]./sigma_nu_not);
-%         
-%     pi_denom_rural_not = sum(pi_rural_not,2);
-%     
-%     v_prime_rural_not(:,zzz) = sigma_nu_not.*log(pi_denom_rural_not);
-%     
-%     problem = isinf(v_prime_rural_not(:,zzz));
-%     
-%     if sum(problem) > 0
-%         %disp('yes')
-%         [v_prime_rural_not(problem,zzz), policy] = max([ v_stay_rural_not(problem) , v_move_seasn_not(problem) , v_move_rural_not(problem)],[],2) ;
-%     
-%       pi_rural_not(problem,policy) = 1;
-%      
-%       pi_denom_rural_not = sum(pi_rural_not,2);
-%     end
-
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     vfoo = max([v_stay_rural_exp, v_move_seasn_exp, v_move_rural_exp], [], 2);
@@ -683,16 +641,7 @@ for zzz = 1:n_shocks
 %     
 %     v_prime_rural_exp(:,zzz) = sigma_nu_exp.*log(pi_denom_rural_exp);
 %     
-%     problem = isinf(v_prime_rural_exp(:,zzz));
-%     
-%     if sum(problem) > 0        
-%         %disp('yes')
-%       [v_prime_rural_exp(problem,zzz), policy] = max([ v_stay_rural_exp(problem) , v_move_seasn_exp(problem) , v_move_rural_exp(problem)],[],2) ;
-%     
-%       pi_rural_exp(problem,policy) = 1;
-%      
-%       pi_denom_rural_exp = sum(pi_rural_exp,2);
-%     end
+
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
@@ -714,16 +663,7 @@ for zzz = 1:n_shocks
 %     
 %     v_prime_urban_new(:,zzz) = sigma_nu_not.*log(pi_denom_urban_new);
 %     
-%     problem = isinf(v_prime_urban_new(:,zzz));
-%     
-%     if sum(problem) > 0        
-%         %disp('yes')
-%       [v_prime_urban_new(problem,zzz), policy] = max([ v_stay_urban_new(problem) , v_move_urban_new(problem)],[],2) ;
-%     
-%       pi_urban_new(problem,policy) = 1;
-%      
-%       pi_denom_urban_new = sum(pi_urban_new,2);
-%     end
+
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
@@ -745,16 +685,6 @@ for zzz = 1:n_shocks
 %     
 %     v_prime_urban_old(:,zzz) = sigma_nu_exp.*log(pi_denom_urban_old);
 %     
-%     problem = isinf(v_prime_urban_old(:,zzz));
-%     
-%     if sum(problem) > 0        
-%         %disp('yes')
-%       [v_prime_urban_old(problem,zzz), policy] = max([ v_stay_urban_old(problem) , v_move_urban_old(problem)],[],2) ;
-%     
-%       pi_urban_old(problem,policy) = 1;
-%      
-%       pi_denom_urban_old = sum(pi_urban_old,2);
-%     end
 %     
 %     policy_move_urban_old(:,zzz,:) = cumsum(pi_urban_old./pi_denom_urban_old,2);
         
