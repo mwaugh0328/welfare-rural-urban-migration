@@ -16,7 +16,7 @@ aggregate_moments = [1.89, 0.61, 0.625, 0.47];
 %%% Description:
 % (1) Wage gap
 % (2) The rural share
-% (3) The urban variance... note that this is position number 3 (see below)
+% (3) The urban standard deviation
 % (4) Fraction with no liquid assets
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,16 +1,15 @@
 function [cal_params, specs] = preamble_appendix(cal_params, specs, seed, R, beta, min_consumption)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % cal_params should have the following order
-% 1: standard Deviation of shocks (todo, veryfy its stand dev or variance)
+% 1: standard Deviation of shocks 
 % 2: Pareto shape parameter for permenant ability in the urban area.
 % 3: Urban TFP
 % 4: Persistance of transitory shocks
 % 5: Ubar, disutility of being in urban area
 % 6: Getting experince 
-% 7: Losing it. (TO DO, veryify the 6 and 7 is correct rel. paper)
+% 7: Losing it 
 % 8: Gamma parameter in shock process
 % 9: Logit shocks
-% 10: Seasonal migration cost
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Then there are some pre-determined, hand calibrated values...
 

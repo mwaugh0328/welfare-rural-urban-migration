@@ -1,13 +1,13 @@
 function theta = calibrate_fix_rho(cal_params,moments,specs, seed, R, beta, min_consumption, perm_movecost, vguess, flag)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % cal_params should have the following order
-% 1: standard Deviation of shocks (todo, veryfy its stand dev or variance)
+% 1: standard Deviation of shocks 
 % 2: Pareto shape parameter for permenant ability in the urban area.
 % 3: Urban TFP
 % 4: Persistance of transitory shocks THIS IS FIXED = 0
 % 5: Ubar, disutility of being in urban area 
 % 6: Getting experince 
-% 7: Losing it. (TO DO, veryify the 6 and 7 is correct rel. paper)
+% 7: Losing it
 % 8: Gamma parameter in shock process 
 % 9: Logit shocks
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,11 +15,6 @@ function theta = calibrate_fix_rho(cal_params,moments,specs, seed, R, beta, min_
 cal_params = [cal_params(1:3), 0.0 , cal_params(4:end)];
 
 model_moments = compute_outcomes_appendix(cal_params, specs, seed, R, beta, min_consumption, perm_movecost, vguess, 0);
-
-% Note there is currently an inconsistency between the numbers in the table
-% and what I have here. 0.40 corresponds with a variance of 0.16, note 0.18
-% which is what is in my slides. To edit: onece we have a consistent
-% number, we should change code so we work in only variances or stds.
 
 % Also note how this is working, in ``compute_outcomes'' we do not include
 % measurment error in the out put moments. The idea is that since it is
