@@ -8,7 +8,6 @@ else
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Now everything below is just organization till around like 150 or so...
 params.rural_options = 3;
 params.urban_options = 2;
 
@@ -55,11 +54,11 @@ params.m_season = cal_params(10); % This is the bus ticket
 
 params.m = 2*params.m_season; % This is the moving cost. 
 
-gamma_urban = cal_params(8); % Gamma parameter (set to 1?)
+gamma_urban = cal_params(8); % Gamma parameter 
 
 % Number of permenant and transitory types. 
-params.n_perm_shocks = specs.n_perm_shocks; %36; %48
-params.n_tran_shocks = specs.n_trans_shocks; %15; %30
+params.n_perm_shocks = specs.n_perm_shocks; 
+params.n_tran_shocks = specs.n_trans_shocks; 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % This first sets up the transitory shocks. 

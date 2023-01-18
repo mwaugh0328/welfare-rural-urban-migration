@@ -5,7 +5,6 @@ weights = exp( alpha_z .* (1./solve_types(:, 2))); % on urban productivity
 weights = weights ./ sum(weights);
 
 % these are the weights that would come from consumption shares
-
 % weights = [ 0.0287
 %     0.0288
 %     0.0289

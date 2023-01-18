@@ -44,7 +44,7 @@ end
 if flag == 0.0
     % this is about the part to solve for dynamic multiplier, compute
     % allocation and then check if resource constraint is met or not.
-    % here (?) nothing needs to be adjusted re. weights.
+    % here nothing needs to be adjusted re. weights.
 
     % computes the move policy, per the notes, pareto weights do not enter
     % only need consumption.

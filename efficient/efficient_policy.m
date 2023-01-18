@@ -1,4 +1,4 @@
-function [vfun, muc, solve_types, params] = efficient_policy(params,move, consumption)
+function [vfun, muc, solve_types, params] = efficient_policy(params, move, consumption)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

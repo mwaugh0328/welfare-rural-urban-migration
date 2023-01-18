@@ -1,10 +1,7 @@
 function [movepolicy, move] = efficient_chi(consumption, mplscale, params, perm_types)%#codegen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The idea of this is to take policy functions, and directly compute the
-% value function. No Max. Setp 1 is to feed in optimal policy and get out
-% known value function. Step 2 is it allows us to fix policy, but change
-% enviorment
-
+% used to construct moving policy and value functions for effecient
+% allocation
 
 sigma = params.sigma_nu_not;
 
@@ -150,11 +147,6 @@ move.urban_old = move.urban_new;
 % old_chi_urban_exp = zeros(n_shocks,1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Commence value function itteration.
 % tic 
 for iter = 1:n_iterations
     
