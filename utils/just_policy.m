@@ -5,7 +5,7 @@ function [move, solve_types, assets, params, specs, vfun, ce] = just_policy...
 [cal_params, specs] = tax_eq_preamble(cal_params, [], [], []);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Now everything below is just organization till around like 150 or so...
+
 params.rural_options = 3;
 params.urban_options = 2;
 
