@@ -33,9 +33,9 @@ disp(' ')
 
 [move, solve_types, assets, params, specs, vfun, ce] = just_policy(x1, wages, [], [], [], [], []);
 
-[data_panel, params] = just_simulate(params, move, solve_types, assets, specs, ce, [],[]);
+[data_panel, params] = just_simulate(params, move, solve_types, assets, specs, [], ce, [],[]);
 
-[labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 'baseline', 1);
+[labor, govbc, tfp] = ge_aggregate(params, data_panel, wages, [], 'baseline', 1, 0);
 
 taxprog = 0.0;
 % The tax code can do progressivity.

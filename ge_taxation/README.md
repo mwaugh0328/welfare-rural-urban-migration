@@ -42,13 +42,13 @@ The output should look something like this.
 
 ```
 -----------------------------------------------------------------------------------------------------
-   06-Dec-2021 15:45:50
+   17-Jan-2023 21:13:20
 
-
+ 
 -----------------------------------------------------------------------------------------------------
 MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
 MATLAB License Number: 618777
-Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19043)
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19045)
 Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
 -----------------------------------------------------------------------------------------------------
 MATLAB                                                Version 9.10        (R2021a)
@@ -66,12 +66,12 @@ Parallel Computing Toolbox                            Version 7.4         (R2021
 Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
 Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
 -----------------------------------------------------------------------------------------------------
-
-
+ 
+ 
 -----------------------------------------------------------------------------------------------------
-
+ 
 Replicate Baseline
-
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Aggregate Statistics
 Average Rural Population
@@ -95,17 +95,25 @@ Mushfiqs Sample, Average Welfare (% ce variation)
 Social Welfare (% ce variation): All, Rural, Urban
      0     0     0
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Accounting: HH Balance Sheet
+Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position
+    0.9200    0.9200    1.1100    0.0100         0         0    0.1900
+
+Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position
+    1.3700    1.3700    1.1100    0.0200         0         0   -0.2300
+
 Gov Budget Constraint
      0
 
 Tax rate in % on labor income
      0
 
-
+ 
 -----------------------------------------------------------------------------------------------------
-
-Permanent Migration Subsidy + Migration Policy Fixed
-
+ 
+Permanent Migration Subsidy + Migration Policy Fixed 
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Aggregate Statistics
 Average Rural Population
@@ -129,22 +137,30 @@ Mushfiqs Sample, Average Welfare (% ce variation)
 Social Welfare (% ce variation): All, Rural, Urban
     1.0300    1.6200    0.1500
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Accounting: HH Balance Sheet
+Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position
+    0.9200    0.9200    1.1100    0.0100         0         0    0.1900
+
+Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position
+    1.3700    1.3700    1.1200    0.0100    0.0100         0   -0.2300
+
 Gov Budget Constraint
    -0.0100
 
 Tax rate in % on labor income
      0
 
-
+ 
 -----------------------------------------------------------------------------------------------------
-
+ 
 Permanent Migration Subsidy + Migration Policy Fixed + Tax Financed
-
-
+ 
+ 
 Solve for wages and tax rate
+ 
 
-
-                                         Norm of      First-order
+                                         Norm of      First-order 
  Iteration  Func-count     f(x)          step          optimality
      0          7     9.43063e-05                        0.0218
      1         14     1.35196e-28     0.00432904       6.55e-14      
@@ -156,7 +172,7 @@ as measured by the value of the function tolerance, and
 the problem appears regular as measured by the gradient.
 
 <stopping criteria details>
-Elapsed time is 795.212953 seconds.
+Elapsed time is 765.104395 seconds.
     0.5500    1.8182    0.9957
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -188,16 +204,16 @@ Gov Budget Constraint
 Tax rate in % on labor income
     0.4300
 
-
+ 
 -----------------------------------------------------------------------------------------------------
-
+ 
 Permanent Migration Subsidy + Endogenous Migration GE + Tax Financed
-
-
+ 
+ 
 Solve for wages and tax rate
+ 
 
-
-                                         Norm of      First-order
+                                         Norm of      First-order 
  Iteration  Func-count     f(x)          step          optimality
      0          7       0.0182023                         0.784
      1         14     8.54369e-05      0.0293198         0.0509      
@@ -210,7 +226,7 @@ fsolve stopped because the vector of function values is near zero, as measured b
 of the function tolerance. However, the last step was ineffective.
 
 <stopping criteria details>
-Elapsed time is 1155.844387 seconds.
+Elapsed time is 1314.140547 seconds.
     0.5700    1.8002    0.9868
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -241,6 +257,7 @@ Gov Budget Constraint
 
 Tax rate in % on labor income
     1.3200
+
 ```
 
 ---
@@ -261,13 +278,13 @@ And it
 
 ```
 -----------------------------------------------------------------------------------------------------
-   06-Dec-2021 16:24:54
+   17-Jan-2023 21:56:41
 
-
+ 
 -----------------------------------------------------------------------------------------------------
 MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
 MATLAB License Number: 618777
-Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19043)
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19045)
 Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
 -----------------------------------------------------------------------------------------------------
 MATLAB                                                Version 9.10        (R2021a)
@@ -285,12 +302,12 @@ Parallel Computing Toolbox                            Version 7.4         (R2021
 Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
 Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
 -----------------------------------------------------------------------------------------------------
-
-
+ 
+ 
 -----------------------------------------------------------------------------------------------------
-
+ 
 Replicate Baseline
-
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Aggregate Statistics
 Average Rural Population
@@ -320,16 +337,16 @@ Gov Budget Constraint
 Tax rate in % on labor income
      0
 
-
+ 
 -----------------------------------------------------------------------------------------------------
-
+ 
 Permanent Unconditional Cash Transfer to Rural Poor + Endogenous Migration GE + Tax Financed
-
-
+ 
+ 
 Solve for wages and tax rate
+ 
 
-
-                                         Norm of      First-order
+                                         Norm of      First-order 
  Iteration  Func-count     f(x)          step          optimality
      0          7       0.0168699                         0.594
      1         14     6.89508e-05      0.0417787         0.0635      
@@ -342,7 +359,7 @@ fsolve stopped because the vector of function values is near zero, as measured b
 of the function tolerance. However, the last step was ineffective.
 
 <stopping criteria details>
-Elapsed time is 1120.752180 seconds.
+Elapsed time is 1138.445926 seconds.
     0.5361    1.7997    0.9657
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

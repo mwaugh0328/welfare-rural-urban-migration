@@ -8,7 +8,7 @@ function [movepolicy, move] = efficient_chi(consumption, mplscale, params, perm_
 
 sigma = params.sigma_nu_not;
 
-beta = params.beta; m = params.m; gamma = 2; abar = params.abar;
+beta = params.beta; m = params.m; gamma = params.pref_gamma; abar = params.abar;
 
 ubar = params.ubar; lambda = params.lambda; pi_prob = params.pi_prob;
 
@@ -81,7 +81,7 @@ for zzz = 1:n_shocks
     % note that this is not the full kappa in notes. only the part that can
     % be pre-computed, key one needs to subtract off the moving cost index.
     
-    % IMPORTAN...the mpl part is not quite correct when alpha < 1 and 
+    % IMPORTAN...the mpl part is not quite correct when alpha < 1 AND 
     % when rents are thrown away. Otherwise, alpha = 1 or rents
     % redistributed then this works.
     
@@ -125,7 +125,7 @@ for zzz = 1:n_shocks
 
 end
 
-chi_rural_not = (zeros(n_shocks,1));
+chi_rural_not = -10.*(ones(n_shocks,1));
 move.rural_not = (1./3).*(ones(n_shocks,3));
 
 chi_rural_exp = chi_rural_not;
@@ -192,8 +192,6 @@ for iter = 1:n_iterations
     move.rural_not(zzz,:) = mu_rural_not ./ sum(mu_rural_not , 2); % these are the probabilities of moving...
     
     EV_chi_rural_not = sum(move.rural_not(zzz,:).*[EV_chi_rural_not_stay, EV_chi_rural_not_seasn, EV_chi_rural_not_urban] , 2);
-    % this is the part I'm not super clear about. bc we preintegrate out
-    % prefrence shock, but still need to compute when situation we go into
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Seasonal Movers, non-experinced
@@ -214,14 +212,10 @@ for iter = 1:n_iterations
     EV_chi_rural_exp_stay = pi_prob.*beta.*(trans_mat(zzz,:)*chi_rural_exp) + (1-pi_prob).*beta.*(trans_mat(zzz,:)*chi_rural_not);
     % these guys may loose it, need to take this into account
 
-    %EV_chi_rural_exp_seasn = beta.*(trans_mat(zzz,:)*chi_seasn_exp);
     EV_chi_rural_exp_seasn = pi_prob.*beta.*(trans_mat(zzz,:)*chi_seasn_exp) + (1-pi_prob).*beta.*(trans_mat(zzz,:)*chi_seasn_not);
     
-    %EV_chi_rural_exp_urban = beta.*(trans_mat(zzz,:)*chi_urban_old);
     EV_chi_rural_exp_urban = pi_prob.*beta.*(trans_mat(zzz,:)*chi_urban_old) + (1-pi_prob).*beta.*(trans_mat(zzz,:)*chi_urban_new);
-    % what I was missing here was that if you move season or urban, your
-    % experince might not be there...
-    
+   
     %these next steps then compute the moving probabilities
     
     mu_rural_exp = exp( (-muc.rural_exp(zzz).*rural_move_cost + [EV_chi_rural_exp_stay, EV_chi_rural_exp_seasn, EV_chi_rural_exp_urban])./sigma);
@@ -366,7 +360,7 @@ for iter = 1:n_iterations
     urban_old = norm(old_chi_urban_old - chi_urban_old,Inf);
     
 %    disp([rural_not,rural_exp,urban_new,urban_old])
-%    disp(iter)
+%disp(iter)
 %     
     if rural_not && ...
        rural_exp  && ...     
@@ -374,7 +368,7 @@ for iter = 1:n_iterations
        urban_old < tol
 %         disp('value function converged')
 %         disp(toc)
-         
+%         disp([chi_urban_old])
         break
     end
  

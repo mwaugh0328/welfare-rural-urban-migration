@@ -2,7 +2,7 @@
 
 
 <p align="center">
-<img src="../figures/ce_vs_planner.png">
+<img src="../figures/ce_vs_planner_v2.png">
 </p>
 
 
@@ -26,57 +26,61 @@ which does several things.
 
   - Third, it then solves for the efficient allocation accoring to Proposition 1 which both (i) equates the marginal utility of consumption and (ii) optimally moves households across space.
 
+  - In the driver file there is a parameter ``pareto_alpha`` for which one can control the Pareto weights by permanent type; when set equall to zero the weights are equall, when negative more weight is put on higher ability types and vice versa.  
+
 The output should look something like this.
 
 ```
 -----------------------------------------------------------------------------------------------------
-   14-Dec-2021 09:56:44
+   17-Jan-2023 22:33:31
 
-
+ 
 -----------------------------------------------------------------------------------------------------
-MATLAB Version: 9.4.0.813654 (R2018a)
-MATLAB License Number: 13347
-Operating System: Microsoft Windows 10 Pro for Workstations Version 10.0 (Build 19042)
-Java Version: Java 1.8.0_144-b01 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
+MATLAB License Number: 618777
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19045)
+Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
 -----------------------------------------------------------------------------------------------------
-MATLAB                                                Version 9.4         (R2018a)
-Control System Toolbox                                Version 10.4        (R2018a)
-Curve Fitting Toolbox                                 Version 3.5.7       (R2018a)
-Econometrics Toolbox                                  Version 5.0         (R2018a)
-Financial Instruments Toolbox                         Version 2.7         (R2018a)
-Financial Toolbox                                     Version 5.11        (R2018a)
-Global Optimization Toolbox                           Version 3.4.4       (R2018a)
-Optimization Toolbox                                  Version 8.1         (R2018a)
-Parallel Computing Toolbox                            Version 6.12        (R2018a)
-Signal Processing Toolbox                             Version 8.0         (R2018a)
-Statistics and Machine Learning Toolbox               Version 11.3        (R2018a)
-Symbolic Math Toolbox                                 Version 8.1         (R2018a)
+MATLAB                                                Version 9.10        (R2021a)
+Curve Fitting Toolbox                                 Version 3.5.13      (R2021a)
+Econometrics Toolbox                                  Version 5.6         (R2021a)
+Financial Instruments Toolbox                         Version 3.2         (R2021a)
+Financial Toolbox                                     Version 6.1         (R2021a)
+GPU Coder                                             Version 2.1         (R2021a)
+Global Optimization Toolbox                           Version 4.5         (R2021a)
+MATLAB Coder                                          Version 5.2         (R2021a)
+MATLAB Compiler                                       Version 8.2         (R2021a)
+MATLAB Compiler SDK                                   Version 6.10        (R2021a)
+Optimization Toolbox                                  Version 9.1         (R2021a)
+Parallel Computing Toolbox                            Version 7.4         (R2021a)
+Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
+Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
 -----------------------------------------------------------------------------------------------------
-
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Replicating the baseline economy...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Aggregate Statistics
 Average Rural Population
-    0.5978
+    0.5987
 
 Migrants, Mushfiqs Sample
-    0.3651
+    0.3647
 
 Migrants, Whole Population
-    0.3048
+    0.3067
 
 Wage Gap
-    1.8835
+    1.8923
 
 Fraction of Rural with Access to Migration Subsidy
-    0.4961
+    0.4975
 
-Mushfiqs Sample, Average Welfare (% ce variation)
-  -32.6178
+Mushfiqs Sample, Average Welfare
+   -1.3587
 
-Social Welfare (% ce variation): All, Rural, Urban
-  -25.9700  -30.9900  -18.5100
+Social Welfare: All, Rural, Urban
+   -1.0800   -1.2900   -0.7700
 
 Gov Budget Constraint
      0
@@ -84,101 +88,109 @@ Gov Budget Constraint
 Tax rate in % on labor income
      0
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Fix the labor allocation, but redistribute and equate marginal utility of consumption across hh...
+
+                                         Norm of      First-order 
+ Iteration  Func-count     f(x)          step          optimality
+     0          5        0.235563                         0.478
+     1         10     6.22104e-23       0.483999        7.8e-12      
+
+Equation solved.
+
+fsolve completed because the vector of function values is near zero
+as measured by the value of the function tolerance, and
+the problem appears regular as measured by the gradient.
+
+<stopping criteria details>
+Elapsed time is 135.281898 seconds.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Aggregate Statistics
 Average Rural Population
-    0.5978
+    0.5987
 
 Seasonal Migrants
-    0.3048
-
-Experince
-    0.2434
+    0.3067
 
 Social Welfare: All, Rural, Urban
-  -17.7287  -17.7814  -17.6505
+   -0.7382   -0.7404   -0.7350
 
 Standard Deviation of Marginal Utility
-   1.0e-13 *
+   1.0e-15 *
 
-    0.1887    0.4346
+    0.6106    0.0312
 
 Implied Wage Gap
-    1.8835
+    1.8923
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Accounting
 Monga: Production, Consumption, Moving Costs, Utility Cost
-    0.9478    0.9423    0.0056    0.0288
+    0.9500    0.9445    0.0056    0.0292
 
 Not Monga: Production, Consumption, Moving Costs, Utility Costs
-    1.5030    1.4814    0.0216    0.0027
+    1.5010    1.4793    0.0217    0.0027
 
 Resource Constraint: Monga, Non Monga
    1.0e-11 *
 
-    0.0651    0.1543
+   -0.1254    0.7787
 
 Al, Welfare Gain in %: From Decentralized to Full Insurance, Fixed Allocation
-   46.4918
+   46.5935
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Now compute the efficient allocation...
 
-                                         Norm of      First-order
+                                         Norm of      First-order 
  Iteration  Func-count     f(x)          step          optimality
-     0          9       0.0459826                         0.209
-     1         18     9.69047e-06       0.202449        0.00352      
-     2         27     8.32301e-09       0.002891       0.000102      
-     3         36     3.17639e-10     6.6785e-05       1.92e-05      
+     0          9         4.53024                          2.03
+     1         18       0.0172834        1.87004          0.154      
+     2         27     0.000133247      0.0780257         0.0114      
+     3         36        1.52e-07      0.0073141       0.000423      
+     4         45     1.03748e-10    0.000295335       1.12e-05      
 
 Equation solved, inaccuracy possible.
 
-The vector of function values is near zero, as measured by the default value
+fsolve stopped because the vector of function values is near zero, as measured by the value
 of the function tolerance. However, the last step was ineffective.
 
 <stopping criteria details>
-
-Elapsed time is 58.661386 seconds.
+Elapsed time is 239.841492 seconds.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Aggregate Statistics
 Average Rural Population
-    0.5337
+    0.5365
 
 Seasonal Migrants
-    0.2658
+    0.2681
 
 Social Welfare: All, Rural, Urban
-  -17.5409  -17.4844  -17.6056
+   -0.7290   -0.7266   -0.7318
 
 Standard Deviation of Marginal Utility
-   1.0e-13 *
+   1.0e-14 *
 
-    0.6573    0.7328
+    0.1062    0.0368
 
 Implied Wage Gap
-    1.6950
+    1.7043
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Accounting
 Monga: Production, Consumption, Moving Costs, Utility Costs
-    0.9557    0.9472    0.0085    0.0280
+    0.9604    0.9517    0.0088    0.0286
 
 Not Monga: Production, Consumption, Moving Costs, Utility Costs
-    1.4883    1.4665    0.0218    0.0054
+    1.4883    1.4661    0.0222    0.0055
 
 Resource Constraint: Monga, Non Monga
-   1.0e-04 *
+   1.0e-05 *
 
-    0.0510    0.1557
+    0.7327   -0.5546
 
 Welfare Gain in %: From Decentralized to Centralized/Efficient Allocation
-   48.0603
+   48.4504
 
 Welfare Gain in %: From Full Insurance to Centralized/Efficient Allocation
-    1.5685
+    1.8568
 
 ```
 

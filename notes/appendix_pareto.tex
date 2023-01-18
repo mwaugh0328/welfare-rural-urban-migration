@@ -348,26 +348,88 @@ where
 
 This walks through how to solve things:
 \begin{itemize}
-\item The first step is a guess of consumption and the common component (wage per efficiency unit) if you will of the marginal product of labor. As I explain below (and as in the previous algorithm), we only need to guess two consumption levels and then two $mpl$s. Unlike the previous algorithm, the initial guess of the two consumption levels are specific to a permanent type|say the lowest type of $z$. But then the idea is to use (\ref{appendix-eq:foc_planner2}) and unwind the implied consumption levels for all other $z$'s so that Pareto weight adjusted muc's are equated across households. 
-    
-\item Some more details. So $c_{j}(1, s, x, m)$ and $c_{j}(1, s, x, nm)$  are the initial guesses where the $1$ is standing in for the lowest guy. 
+\item The first step is a guess of consumption and the common component (wage per efficiency unit) if you will of the marginal product of labor. As I explain below (and as in the previous algorithm), we only need to guess two consumption levels and then two $mpl$s. Unlike the previous algorithm, the initial guess of the two consumption levels are specific to a permanent type|say the lowest type of $z$. But then the idea is to use (\ref{appendix-eq:foc_planner2}) and unwind the implied consumption levels for all other $z$'s so that Pareto weight adjusted muc's are equated across households.
+
+\item Some more details. So $c_{j}(1, s, x, m)$ and $c_{j}(1, s, x, nm)$  are the initial guesses where the $1$ is standing in for the lowest guy.
 
 From here we know that for given experience, $c_{j}(1, s, x, m)$ fills in for all different transitory shocks $s$, all locations. Then from the specification on utility, we know that
 \begin{align}
 c_{j}(1, s, x', m)  = \left( \frac{1}{\bar u} \times c_{j}(1, s, x', m)^{-\gamma} \right)^{\frac{-1}{\gamma}}
 \end{align}
-where $x'$ would be the inexperienced state. Do the same for the non-monga season. Now we have assigned consumption to all guys (across locations, transitory shocks, experience levels, seasons) within a permanent state $z$. 
-    
-\item Now to infer what consumption must be for the next guys...so we have that 
+where $x'$ would be the inexperienced state. Do the same for the non-monga season. Now we have assigned consumption to all guys (across locations, transitory shocks, experience levels, seasons) within a permanent state $z$.
+
+\item Now to infer what consumption must be for the next guys...so we have that
 \begin{align}
 c_{j}(2, s, x, m) = \left( \frac{\psi(1)}{\psi(2)} \times  c_{j}(1, s, x, m) \right)^{\frac{-1}{\gamma}}
 \end{align}
-and this relationship holds for every $s$ but in moreover can be vectored where for each $s,x,m$ combination of consumption, we use the relationship above to inver the level of consumption for $z'$ given the consumption level of $z$ for the given $s,x,m$ combination. This the process works iteratively for each different $z$ level. 
+and this relationship holds for every $s$ but in moreover can be vectored where for each $s,x,m$ combination of consumption, we use the relationship above to inver the level of consumption for $z'$ given the consumption level of $z$ for the given $s,x,m$ combination. This the process works iteratively for each different $z$ level.
 
-
+\item Now here is the thing, once the level of consumption is sorted out, the old algorithm does not need to be changed as the Pareto weights do not directly appear anywhere,
 
 \end{itemize}
 
+\newpage
+
+\begin{table}[h]
+\small
+\setlength {\tabcolsep}{1.25mm}
+\renewcommand{\arraystretch}{2.5}
+\begin{center}
+\textbf{\caption{Alternative Pareto Weights}\label{ta:welfare_planner}}
+
+\vspace{0.3cm}
+
+\begin{tabular}{l c c c c c c}
+\hline
+\hline
+& \multicolumn{3}{c}{Welfare Gains} & & \\
+Pareto Weight ($\alpha_z$)		& Migration Fixed  & Benchmark & $\Delta$ & Rural Share & Seasonal Migration & $\% \Delta$ C\\
+\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4} \cmidrule(lr){5-5} \cmidrule(lr){6-6} \cmidrule(lr){7-7}
+$-1.0$ (high $z$, \textbf{more} weight)     & $27.3$  & $28.4 $  & $1.2$ & $55.4$& $31.6$ & $\phantom{-}0.01$\\
+$-0.65$                                     &64.9 & $67.5$ & $2.6$ & $53.2$ & $27.8$& $-0.08$\\
+$-0.50$                                      & $35.5$  & $36.9$ & $1.4$ & $54.3$& $27.7$ & $-0.12$\\
+$-0.25$                                      & $40.7$  & $42.3$ & $1.6$ & $53.9$ & $27.0$& $-0.19$\\
+$\phantom{-}0.00$ (\textbf{baseline})        & $46.6$  & $48.5$ & $1.9$ & $53.6$ & $26.8$& $-0.25$\\
+$\phantom{-}0.25$                            &  $53.2$ & $55.3$ & $2.1$ & $53.4$ & $26.9$& $-0.31$\\
+$\phantom{-}0.50$                            & 60.3  & $62.7$ & $2.4$ & $53.2$ & $27.5$ & $-0.38$\\
+$\phantom{-}0.65$ (high $z$, \textbf{less} weight) &64.9 & $67.5$ & $2.6$ & $53.2$ & $27.8$ & $-0.42$\\
+\hline
+\end{tabular}
+\parbox[c]{6.9in}{%
+{\footnotesize  \vspace{0.1cm} }
+}
+\end{center}
+\end{table}
+
+Some commentary
+\begin{itemize}
+\item First the baseline changed a tiny bit. The way things were simulated and then averaged over in the planning problem was made consistent with the rest of the paper (it previously was not). So this is why the main numbers are a bit different. I also verified stuff that as we increase the number of simulations we are getting the same number, so all good.
+
+\item Recall the proposal was to parameterize the weights something like this:
+\begin{align}
+\psi(z) = \exp(\alpha_z \times (1/z) )
+\end{align}
+I changed things slightly with the $1/z$ part rather than $z$, as there were some computational issues when the weights got too large on the high $z$ guys. By doing $1/z$, this allowed me to cover different scenarios better. Then $\alpha_z$ controls the relative weights across $z$. In the table above, I demarcated this so when $\alpha_z$ is negative, it puts relatively more weight on high $z$ (who are also probably urban guys).
+
+\item Quantitatively, what the span is actually doing is this: when it's -0.50, the top $z$ guy gets about 2.5 times the weight relative to the lowest $z$ guy. And about the same but flipped with $\alpha_z$ is 0.50, so bottom guys get about 2.5 times more weight than top guys.
+
+\item One thing to notice is the overall level of welfare gains is increasing the more weight is put on the bottom guys. Makes intuitive sense as this means that as $\alpha_z$ increases, the planner is putting increasing amount of weight on the poor, high marginal utility guys and, thus, the gains are larger.
+
+\item A second thing to notice is that the implied share of rural households or seasonal migration barely changed. So in a sense, our conclusion that the planner would want \textbf{less} migration, \textbf{more} urban households, is pretty robust to how the planner is weighting different households.
+
+\item The harder thing to sort out is the incremental gain from migration. Recall, what we were doing is (i) fix migration and redistribute (so the size of the pie is fixed) and then (ii) let the size of the pie adjust. The second column ``Part from $\Delta$ Migration'' reports this. The number for the baseline of $1.9$ means that the welfare gains increased by 1.9 percentage points relative to the allocation where migration was fixed. And this seems to be increasing as more weight is put on poor guys. 
+
+\item The other thing to notice is the final column with the change in aggregate consumption (which is the change from the consumption in the baseline vs. the efficient allocation).  It does not move much in the baseline case, less than a quarter of a percent. In fact it is negative. Yet, welfare increases by almost 2 percent when migration changes.
+
+    Then notice that as more weight is put on the low $z$ guys, the planner is giving up aggregate consumption, yet getting larger welfare gains. So the shuffling around of people is mattering far more in utils. And then the opposite is occurring when
+    
+\item What is going on here? The planner is doing several things. One is the risk sharing part. But the other is to make the pie as big as possible but do so in utils, not consumption. This is relevant because of the ubar. So the planner might face a tradeoff between making aggregate consumption large, versus making utility large because the planner moves people in a way to avoid ubar. So what...
+
+\item This is why I think the gains from migration decline as the weights get loaded on high $z$ guys. High $z$ guys are never moving, they are in the urban area, don't face ubar. So when welfare is tilted towards those guys, ubar does not matter. Then when the weights get loaded on the low z guys. This tradeoff becomes more salient. So the gains from getting this trade off right become more important. And that's why the gains from migration are larger, when the weights on low z guys are larger. 
+
+\item This connects with the Anmol decomposition. Their ``efficiency'' part is essentially, did aggregate consumption go up or down, then converted to utils. Period. It does not reflect the discussion above. I would call the stuff above efficiency, because the planner is moving people around to deliver the most amount of utils as efficiently as possible. So did the number of potential utils increase? Migration does this by changing preferences (through the ubar) and consumption.
+    
+\end{itemize}
 \newpage
 
 \bibliography{./bib/migration_refs}

@@ -1,4 +1,4 @@
-function [labor, govbc, tfp, wages, welfare_stats] = ge_aggregate(params, data_panel, wages, tfp, transfer_type, flag)
+function [labor, govbc, tfp, wages, welfare_stats] = ge_aggregate(params, data_panel, wages, tfp, transfer_type, flag, vfun_flag)
 
 wage.monga = wages(1);
 wage.notmonga = wages(2);
@@ -63,12 +63,12 @@ disp(asset_prct)
 % disp('Consumption, Mushfiqs Sample')
 % disp(mean(mushfiqs_sample(:,consumption)))
 
-if min(bin.welfare) < -10
+if vfun_flag == 1
     %I'm proably reporting the value function
     
 %     disp('Mushfiqs Sample, Welfare by Income Quintile: Welfare, Migration Rate, Experience, Consumption')
 %     disp(([bin.welfare', 100.*bin.migration', 100.*bin.experince', 0.01.*bin.consumption']))
-    disp('Mushfiqs Sample, Average Welfare (% ce variation)')
+    disp('Mushfiqs Sample, Average Welfare')
     disp(mean(mushfiqs_sample(:,welfare)))
     
 else
@@ -100,13 +100,17 @@ number_workers = sum(labor_units.rural.monga) + sum(labor_units.urban.monga);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if flag == 1
+    
 welfare_stats.all = mean(data_panel(:, welfare));
+
+welfare_stats.bigC = mean(data_panel(:,consumption));
+
 welfare_stats.rural = mean(data_panel(data_panel(:,live_rural)==1, welfare));
 welfare_stats.urban = mean(data_panel(data_panel(:,live_rural)~=1, welfare));
 
-if welfare_stats.all < -10
+if vfun_flag == 1
     %I'm proably reporting the value function
-    disp('Social Welfare (% ce variation): All, Rural, Urban')
+    disp('Social Welfare: All, Rural, Urban')
     disp(round([welfare_stats.all, welfare_stats.rural, welfare_stats.urban],2))
 
 else
@@ -120,7 +124,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 location = {'rural'; 'urban';'all'};
 acct_measure = {'production','income', 'consumption','movingcosts', 'fiscalcost', 'tax', 'net_asset','welfare'};
-acct_measure_var = [production, income, consumption,movingcosts, fiscalcost, tax, net_asset, welfare];
+acct_measure_var = [production, income, consumption, movingcosts, fiscalcost, tax, net_asset, welfare];
 season_lbl = {'monga', 'notmonga'};
 
 for xxx = 1:length(location)
@@ -149,7 +153,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-if flag == 1
+% if flag == 1
 % disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 % disp('Accounting: HH Balance Sheet')
 % disp('')
@@ -159,7 +163,7 @@ if flag == 1
 % disp('Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
 % disp(round([accounting.all.notmonga.production, accounting.all.notmonga.income, accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts,...
 %     accounting.all.notmonga.fiscalcost, accounting.all.notmonga.tax, accounting.all.notmonga.net_asset],2))
-end
+% end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -198,6 +202,13 @@ mpl.rural.notmonga = params.alpha.*tfp.notmonga.*params.rural_tfp.*(labor.supply
 aggproduction.urban.monga = sum(data_panel(labor_units.urban.monga,production))./number_workers;
 
 aggproduction.urban.notmonga = sum(data_panel(labor_units.urban.notmonga,production))./number_workers;
+
+rents_monga = (1 - params.alpha).*tfp.monga.*params.rural_tfp.*(labor.supply.monga).^(params.alpha);
+
+rents_not_monga = (1 - params.alpha).*params.alpha.*tfp.notmonga.*params.rural_tfp.*(labor.supply.notmonga).^(params.alpha);
+
+
+welfare_stats.bigC_rents = mean(data_panel(:,consumption)) + rents_monga + rents_not_monga - ( accounting.all.notmonga.net_asset  + accounting.all.monga.net_asset);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 urban = data_panel(data_panel(:,live_rural)~=1, :);
