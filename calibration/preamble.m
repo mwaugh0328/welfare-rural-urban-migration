@@ -10,7 +10,6 @@ function [cal_params, specs] = preamble(cal_params, specs, seed, R)
 % 7: Losing it. (TO DO, veryify the 6 and 7 is correct rel. paper)
 % 8: Gamma parameter in shock process
 % 9: Logit shocks
-% 10: Seasonal migration cost
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Then there are some pre-determined, hand calibrated values...
 
