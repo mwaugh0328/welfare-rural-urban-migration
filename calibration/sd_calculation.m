@@ -1,3 +1,7 @@
+
+% DEPRECATED
+
+
 %Standard Errors Calculation and Elasticity Matrix for LMW 2019 ECMA  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Here is the code that generates the standard errors and the elasticity matrix. 
@@ -17,7 +21,7 @@
 % order_moments: 
 % 1- Wage gap
 % 2- The rural share
-% 3- The urban variance... note that this is position number 3 (see below)
+% 3- The urban standard deviation... note that this is position number 3 (see below)
 % 4- Fraction with no liquid assets
 % 5- seasonal migration in control
 % 6- increase in r1 (22 percent)

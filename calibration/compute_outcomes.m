@@ -419,18 +419,15 @@ for nmc = 1:Nmontecarlo
 
 % (1) Wage gap
 % (2) The rural share
-% (3) The urban variance... note that this is position number 3 (see below)
+% (3) The standard deviation of urban income
 % (4) Fraction with no liquid assets
 % (5) seasonal migration in control
 % (6) increase in r1 (22 percent)
 % (7) increase in r2 (9.2 percent)
 % (8) LATE estiamte
-% (9) LATE - OLS estimate
+% (9) OLS estimate
 % (10) Control repeat migration rate 
-% (12) Standard deviation of consumption growth. 
-
-
-% (11) moving cost / average consumption params.m_season./mean(AVG_C)
+% (11) Standard deviation of consumption growth. 
 
     moments(nmc,:)  = [aggregate_moments, experiment_moments] ;
 
