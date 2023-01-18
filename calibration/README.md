@@ -42,13 +42,14 @@ The ``calibrated_baseline.mat`` contains the final, calibrated parameter values 
 Then it should compute everything and then spit out the moments. The output should look something like this with the MATLAB version and details reported.
 
 ```
-02-Dec-2021 08:41:43
+-----------------------------------------------------------------------------------------------------
+   17-Jan-2023 22:21:40
 
-
+ 
 -----------------------------------------------------------------------------------------------------
 MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
 MATLAB License Number: 618777
-Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19043)
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19045)
 Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
 -----------------------------------------------------------------------------------------------------
 MATLAB                                                Version 9.10        (R2021a)
@@ -66,27 +67,27 @@ Parallel Computing Toolbox                            Version 7.4         (R2021
 Partial Differential Equation Toolbox                 Version 3.6         (R2021a)
 Statistics and Machine Learning Toolbox               Version 12.1        (R2021a)
 -----------------------------------------------------------------------------------------------------
-
+ 
 Wage Gap
- 1.8893
+    1.8893
 
 Average Rural Population
- 0.6001
+    0.6001
 
 Fraction of Rural with No Assets
- 0.4696
+    0.4696
 
 Expr Elasticity: Year One, Two
- 0.2072    0.0484
+    0.2072    0.0484
 
 Control: Year One, Repeat Two
- 0.3628    0.7064
+    0.3628    0.7064
 
 LATE Estimate
- 0.2912
+    0.2912
 
 OLS Estimate
- 0.0947
+    0.0947
 ```
 
 ---
