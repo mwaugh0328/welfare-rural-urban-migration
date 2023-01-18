@@ -24,13 +24,13 @@ The five ``[]`` stand in for ``specs`` which is a structure defining grid, shock
 Then it should compute everything and then spit out the moments. The output should look something like this
 ```
 -----------------------------------------------------------------------------------------------------
-   16-Dec-2021 10:39:32
+   17-Jan-2023 21:06:02
 
 
 -----------------------------------------------------------------------------------------------------
 MATLAB Version: 9.10.0.1739362 (R2021a) Update 5
 MATLAB License Number: 618777
-Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19043)
+Operating System: Microsoft Windows 10 Pro Version 10.0 (Build 19045)
 Java Version: Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
 -----------------------------------------------------------------------------------------------------
 MATLAB                                                Version 9.10        (R2021a)

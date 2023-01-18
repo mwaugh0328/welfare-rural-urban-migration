@@ -153,17 +153,17 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-if flag == 1
-disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-disp('Accounting: HH Balance Sheet')
-disp('')
-disp('Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
-disp(round([accounting.all.monga.production, accounting.all.monga.income, accounting.all.monga.consumption, accounting.all.monga.movingcosts, ...
-    accounting.all.monga.fiscalcost, accounting.all.monga.tax, accounting.all.monga.net_asset],2))
-disp('Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
-disp(round([accounting.all.notmonga.production, accounting.all.notmonga.income, accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts,...
-    accounting.all.notmonga.fiscalcost, accounting.all.notmonga.tax, accounting.all.notmonga.net_asset],2))
-end
+% if flag == 1
+% disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+% disp('Accounting: HH Balance Sheet')
+% disp('')
+% disp('Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
+% disp(round([accounting.all.monga.production, accounting.all.monga.income, accounting.all.monga.consumption, accounting.all.monga.movingcosts, ...
+%     accounting.all.monga.fiscalcost, accounting.all.monga.tax, accounting.all.monga.net_asset],2))
+% disp('Not Monga: Production, After Tax Income, Consumption, Moving Costs, Gov Cost, Tax Collected, Net Asset Position')
+% disp(round([accounting.all.notmonga.production, accounting.all.notmonga.income, accounting.all.notmonga.consumption, accounting.all.notmonga.movingcosts,...
+%     accounting.all.notmonga.fiscalcost, accounting.all.notmonga.tax, accounting.all.notmonga.net_asset],2))
+% end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
