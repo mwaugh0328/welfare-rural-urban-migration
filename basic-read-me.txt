@@ -1,0 +1,14 @@
+This is a basic read me file for "The Welfare Effects of Encouraging Rural-Urban Migration" 
+
+The best way to work with this is to visit the online code repository at:
+
+https://github.com/mwaugh0328/welfare-rural-urban-migration
+
+which has everything in this folder with interactive README.md files.
+
+To work with this locally, the README.md files provide an overview of each folder.
+
+.md files are "markdown" format and Visual Studio is one way to view them (at text editor will work too)
+
+
+
