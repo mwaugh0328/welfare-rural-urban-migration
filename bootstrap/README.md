@@ -1,5 +1,7 @@
 ### Bootstrap
 
+---
+
 This section describes code in the folder. It uses code from [calibration](../calibration) and the [utils](../utils) folder.
 
 **IMPORTANT I** Before running ``calibrate_montecarlo.m`` or ``run_montecarlo.m`` set the number of simulations to do within the calibration routine. So set ``specs.Nmontecarlo`` in the [``preamble.m``](https://github.com/mwaugh0328/welfare-rural-urban-migration/blob/6875e6c7be55c4aa9dc1d770c34affb31a8182dd/calibration/preamble.m#L68) file in the calibration folder. I set it to 5. I think it's ok for this.
@@ -10,4 +12,6 @@ This section describes code in the folder. It uses code from [calibration](../ca
 
 - [``run_montecarlo.m``](run_montecarlo.m) Essentially a loop on ``calibrate_montecarlo.m`` over the set of simulated moments. So for each iteration, grab moments, calibrate, record values and then do it again. Saves results each iteration.
 
-- [``bootstrapped_moments_LMW.mat``](bootstrapped_moments_LMW.mat) are the bootstraped empirical moments from the data that we reestimate our model on that we use to construct bootstrapped standard errors for our parameter estimates. This is the empirical analog to what our ``create_fake_data.m`` is doing that we used to test this procedure. 
+- [``bootstrapped_moments_LMW.mat``](bootstrapped_moments_LMW.mat) are the bootstrapped empirical moments from the data that we reestimate our model on that we use to construct bootstrapped standard errors for our parameter estimates. This is the empirical analog to what our ``create_fake_data.m`` is doing that we used to test this procedure. 
+
+- [``LMW_Bootstraps_FINAL.xlsx``](LMW_Bootstraps_FINAL.xlsx) are the final bootstrapped parameter estimates. 
