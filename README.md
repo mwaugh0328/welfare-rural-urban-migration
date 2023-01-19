@@ -21,6 +21,8 @@ The repository is organized with the following folders. The readme file within t
 
 - **[The efficient allocation](./efficient)** Computes the solution to the planning problem.
 
+- **[Empirical moments](./empirical-moments)**  Programs and data needed to replicate the data tables: Table 4, Table 5, Table A9 and Table C1.
+
 - **[Appendix](./appendix)** various checks and alternative parameterizations that appear in the appendix.
 
 - **[Bootstrap](./bootstrap)** computes bootstrap confidence intervals and montecarlo study to explore identification.
